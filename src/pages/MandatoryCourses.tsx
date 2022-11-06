@@ -39,7 +39,7 @@ export default function MandatoryCourses() {
                 <td>Grundläggande</td>
               </tr>
             </tbody>
-          </table>  
+          </table>
         </div>
       </div>
     </div>
