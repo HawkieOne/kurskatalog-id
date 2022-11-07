@@ -3,13 +3,11 @@ import React from 'react'
 export default function ExamBuilder() {
   return (
     <div>
-      {/* Drawer */}
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-row justify-between">
           <label htmlFor="my-drawer" className="btn btn-accent drawer-button">Open drawer</label>
 
-          {/* Center content */}
           <div className='flex flex-col p-4 gap-3 items-center'>
             <h1>Examenbyggare</h1>
             <div className='flex flex-row justify-center items-center gap-3'>
@@ -44,7 +42,6 @@ export default function ExamBuilder() {
             </div>
           </div>
 
-          {/* Side panel */}
           <div className='flex flex-col gap-6 p-4'>
             <div className="form-control w-full max-w-xs">
               <label className="label">
@@ -54,10 +51,10 @@ export default function ExamBuilder() {
             </div>
 
             <div className="form-control">
-              <h2>Använd preset</h2>
+              <h2>Använd förinställning</h2>
               <div className="input-group">
                 <select className="select select-accent select-bordered">
-                  <option disabled selected>Välj preset</option>
+                  <option disabled selected>Välj förinställning</option>
                   <option>Civilingenjör 5 år</option>
                   <option>3 år</option>
                 </select>
