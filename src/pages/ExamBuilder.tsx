@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function ExamBuilder() {
   return (
-    <div className=''>
+    <div>
       {/* Drawer */}
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
