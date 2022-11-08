@@ -42,7 +42,7 @@ export default function MandatoryCourses() {
       "code": "5TF061",
       "link": "www.gooogle.com",
       "letter": "www.google.com"
-    }, 
+    },
   ]
 
   return (
