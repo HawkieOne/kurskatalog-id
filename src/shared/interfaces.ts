@@ -1,18 +1,18 @@
+import CourseCard from "../components/course/Course";
+
 export type TextVariant = "text-md" | "text-xl" | "text-2xl" | "text-3xl";
 export type TitleVariant = "text-2xl" | "text-4xl";
 export interface TextVariantObject {
-    small: TextVariant;
-    medium: TextVariant;
-    large: TextVariant;
-    xl: TextVariant;
+  small: TextVariant;
+  medium: TextVariant;
+  large: TextVariant;
+  xl: TextVariant;
 }
 
 export interface TitleVariantObject {
     small: TitleVariant;
     large: TitleVariant;
 }
-
-export type AllowedColors = "text-black" | "text-white" | "text-pink" | "text-onyx" | "text-cream";
 
 export interface Course {
     name: string;
@@ -28,4 +28,26 @@ export interface Course {
     letter: string;
     period: number;
     rating: number;
+    
+export type AllowedColors =
+  | "text-black"
+  | "text-white"
+  | "text-pink"
+  | "text-onyx"
+  | "text-cream";
+
+
+export const ItemTypes = {
+  COURSE: "course",
+};
+
+export interface Preset {
+    years: Year[];
+}
+
+export interface Year {
+    firstPeriod: Course;
+    secondPeriod: Course;
+    thirdPeriod: Course;
+    fourthPeriod: Course;
 }
