@@ -9,23 +9,22 @@ interface StatsProps {
 export default function Stats ({ course } : StatsProps) {
   return (
     <div className="stats bg-cream text-onyx">
-        <Stat 
+        <Stat
             label="Studietakt"
             value={course.pace}
         />
-        <Stat 
+        <Stat
             label="Poäng"
             value={course.points}
         />
-        <Stat 
+        <Stat
             label="Kurskod"
             value={course.code}
         />
-        <Stat 
+        <Stat
             label="Läsperiod"
             value={course.period}
         />
     </div>
   );
 }
-
