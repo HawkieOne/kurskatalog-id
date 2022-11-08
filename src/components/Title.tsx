@@ -6,7 +6,7 @@ interface TitleProps {
 
 export default function Title({ children } : TitleProps) {
   return (
-    <h1 className="text-4xl">
+    <h1 className="text-4xl text-onyx">
         {children}
     </h1>
   )
