@@ -9,7 +9,7 @@ export default function PresetChooser({ onChange } : PresetChooserProps) {
     <div className="form-control">
       <h2>Använd förinställning</h2>
       <div className="input-group text-onyx">
-        <select className="select select-accent select-bordered bg-white border-pink 
+        <select className="select select-accent select-bordered bg-white border-pink
                            outline-pink" onChange={onChange}>
           <option disabled selected>
             Välj förinställning
