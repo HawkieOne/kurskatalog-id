@@ -1,4 +1,4 @@
-import { TextVariantObject } from "./interfaces";
+import { TextVariantObject, TitleVariantObject } from "./interfaces";
 
 export const TextVariant: TextVariantObject = {
     small: "text-md",
@@ -6,3 +6,10 @@ export const TextVariant: TextVariantObject = {
     large: "text-2xl",
     xl: "text-3xl",
 }
+
+export const TitleVariant: TitleVariantObject = {
+    small: "text-2xl",
+    large: "text-4xl",
+}
+
+export const maxRating = 5;
