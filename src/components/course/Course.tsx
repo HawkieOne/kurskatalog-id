@@ -23,7 +23,7 @@ export default function CourseCard({ course }: CourseProps) {
         {showDetails && (
           <div className="flex flex-col text-onyx text-md space-y-8 px-4 pb-4">
             <Stats course={course} />
-            <Text size={TextVariant.small}>{course.description}</Text>
+            <Text>{course.description}</Text>
             <div className="card-actions justify-end">
               <button className="btn btn-primary bg-pink hover:bg-onyx border-none">
                 Läs mer och se recensioner
