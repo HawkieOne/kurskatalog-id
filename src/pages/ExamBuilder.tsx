@@ -6,6 +6,7 @@ import PresetChooser from "../components/builder/PresetChooser";
 import Progress from "../components/builder/Progress";
 import Year from "../components/builder/Year";
 import Title from "../components/Title";
+import { TitleVariant } from "../shared/constants";
 import { Preset } from "../shared/interfaces";
 
 export default function ExamBuilder() {
@@ -38,7 +39,7 @@ export default function ExamBuilder() {
           </label>
 
           <div className="flex flex-col p-4 gap-3 items-center">
-            <Title>Examenbyggare</Title>
+            <Title size={TitleVariant.large} >Examenbyggare</Title>
             <DndProvider backend={HTML5Backend}>
               {Array.from(Array(years).keys()).map((_, index) => (
                 <Year year={index + 1} key={index} />
