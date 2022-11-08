@@ -26,7 +26,7 @@ export default function ExamBuilder() {
   const onPresetChosen = () => {
     console.log("PRESET CHANGED");
   };
-  
+
   const years = 5;
   return (
     <div className="bg-white p-4">
@@ -47,7 +47,7 @@ export default function ExamBuilder() {
           </div>
 
           <div className="flex flex-col gap-6 p-4">
-          
+
             <FileInput onUpload={onFileUpload} />
 
             <PresetChooser onChange={onPresetChosen} />
