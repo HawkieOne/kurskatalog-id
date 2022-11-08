@@ -8,14 +8,14 @@ interface RatingProps {
 export default function Rating({ rating }: RatingProps) {
     const starsFull = Math.floor(rating);
     const starsHalf = rating - starsFull;
-    const emptyStars = Math.floor(maxRating - rating); 
+    const emptyStars = Math.floor(maxRating - rating);
   return (
     <div className="flex space-x-2 text-pink">
         {Array.from(Array(starsFull).keys()).map((_, index) => (
             <BsStarFill size="1.25em" key={index}/>
         ))}
         {starsHalf > 0 && (
-            <BsStarHalf size="1.25em" /> 
+            <BsStarHalf size="1.25em" />
         )}
         {Array.from(Array(emptyStars).keys()).map((_, index) => (
             <BsStar size="1.25em" key={index}/>
