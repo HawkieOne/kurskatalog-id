@@ -2,11 +2,11 @@ import React from 'react'
 
 export default function ExamBuilder() {
   return (
-    <div>
+    <div className="bg-cream">
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-row justify-between">
-          <label htmlFor="my-drawer" className="btn btn-accent drawer-button">Open drawer</label>
+          <label htmlFor="my-drawer" className="btn btn-accent drawer-button">Visa kurser</label>
 
           <div className='flex flex-col p-4 gap-3 items-center'>
             <h1>Examenbyggare</h1>
@@ -87,7 +87,7 @@ export default function ExamBuilder() {
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+          <ul className="menu p-4 w-80 bg-cream text-base-content">
             <li><a>Sidebar Item 1</a></li>
             <li><a>Sidebar Item 2</a></li>
           </ul>
