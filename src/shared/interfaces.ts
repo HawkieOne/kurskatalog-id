@@ -25,6 +25,7 @@ export const ItemTypes = {
 };
 
 export interface Preset {
+    name: string;
     years: Year[];
 }
 
