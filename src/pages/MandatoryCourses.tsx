@@ -9,11 +9,11 @@ export default function MandatoryCourses() {
     <div className='h-full bg-white flex flex-col items-center'>
       <div className='w-1/2 text-center'>
         <div className='p-4'>
-          <Title size={TitleVariant.large}>Matematik</Title>
+          <Title>Matematik</Title>
           <Table courses={courses} />
         </div>
         <div className='p-4'>
-          <Title size={TitleVariant.large}>Datavetenskap</Title>
+          <Title>Datavetenskap</Title>
           <Table courses={courses} />
         </div>
       </div>

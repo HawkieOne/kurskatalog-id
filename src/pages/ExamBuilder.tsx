@@ -39,7 +39,7 @@ export default function ExamBuilder() {
           </label>
 
           <div className="flex flex-col p-4 gap-3 items-center">
-            <Title size={TitleVariant.large} >Examenbyggare</Title>
+            <Title>Examenbyggare</Title>
             <DndProvider backend={HTML5Backend}>
               {Array.from(Array(years).keys()).map((_, index) => (
                 <Year year={index + 1} key={index} />

@@ -12,7 +12,7 @@ export default function Home() {
     <main className="h-full flex flex-col justify-between bg-white">
       <div className="h-full flex flex-col justify-evenly items-center">
       <div className="w-3/5 flex flex-col items-center space-y-4 px-4">
-        <Title size={TitleVariant.large}>Kurskatalog</Title>
+        <Title>Kurskatalog</Title>
         <Text size={TextVariant.medium}>
           Vi på Interaktion & Design har ett stort urval av kurser att välja
           bland. Och med många valfria poäng att fylla kan det vara svårt att

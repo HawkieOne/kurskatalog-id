@@ -10,7 +10,7 @@ export default function Stat({ label, value }: StatProps) {
   return (
     <div className="stat">
       <div className="stat-title">
-        <Text size={TextVariant.small}>{label}</Text>
+        <Text>{label}</Text>
       </div>
       <div className="stat-value">
         <Text size={TextVariant.xl}>{value}</Text>
