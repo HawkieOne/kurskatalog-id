@@ -7,6 +7,7 @@ module.exports = {
         pink: "#F55065",
         onyx: "#1F2937",
         cream: "#FDF2E7",
+        creamDark: "#FBE5CF",
       },
     },
   },
