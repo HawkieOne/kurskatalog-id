@@ -22,3 +22,7 @@ export interface Course {
     link: string;
     letter: string;
 }
+
+export const ItemTypes = {
+    COURSE: "course"
+  }
