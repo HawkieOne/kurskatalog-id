@@ -7,7 +7,7 @@ import Progress from "../components/builder/Progress";
 import Year from "../components/builder/Year";
 import Title from "../components/Title";
 import { TitleVariant } from "../shared/constants";
-import { Preset } from "../shared/interfaces";
+import { Preset, Year as YearType } from "../shared/interfaces";
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
@@ -15,17 +15,27 @@ export default function ExamBuilder() {
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0);
     if (file?.name.endsWith("json")) {
-      // READ FILE
-      // sdjsjfjsf
-      const cpyPresets = presets.slice();
-      cpyPresets.push(/*PUSH READ FILE*/);
-      setPresets(cpyPresets);
+      const fileReader = new FileReader();
+      fileReader.readAsText(file, "UTF-8");
+      fileReader.onload = e => {
+        if(e.target?.result) {
+          const data = JSON.parse(e.target.result as string) as YearType[];
+          const preset = {
+            name: file.name,
+            years: data
+          }
+          const cpyPresets = presets.slice();
+          cpyPresets.push(preset);
+          setPresets(cpyPresets);
+        }
+      }
     }
-    console.log(e.target.files);
   };
 
-  const onPresetChosen = () => {
-    console.log("PRESET CHANGED");
+  console.log(presets)
+
+  const onPresetChosen = (e: ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.currentTarget.value);
   };
 
   const years = 5;
@@ -50,7 +60,7 @@ export default function ExamBuilder() {
           <div className="flex flex-col gap-6 p-4">
             <FileInput onUpload={onFileUpload} />
 
-            <PresetChooser onChange={onPresetChosen} />
+            <PresetChooser onChange={onPresetChosen} presets={presets} />
 
             <div className="collapse collapse-arrow rounded-box">
               <input type="checkbox" className="peer" />
