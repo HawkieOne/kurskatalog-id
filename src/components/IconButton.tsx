@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { TextVariant } from "../shared/constants";
 import Text from "./Text";
 
 interface IconButtonProps {
@@ -11,11 +12,11 @@ interface IconButtonProps {
 
 export default function IconButton({ icon, text, size, to }: IconButtonProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md">
+    <div className="bg-cream rounded-lg shadow-md group hover:outline hover:outline-pink">
       {size === "small" && (
         <div className="p-2">
           {icon}
-          {text && <Text>{text}</Text>}
+          {text && <Text size={TextVariant.medium}>{text}</Text>}
         </div>
       )}
       {size === "medium" && (
@@ -27,10 +28,12 @@ export default function IconButton({ icon, text, size, to }: IconButtonProps) {
       {size === "large" && (
         <Link
           to={to}
-          className="h-48 w-48 p-2 flex flex-col justify-evenly items-center"
+          className="h-64 w-64 p-2 flex flex-col justify-evenly items-center"
         >
-          {icon}
-          {text && <Text>{text}</Text>}
+          <div className="text-pink group-hover:text-onyx">
+            {icon}
+          </div>
+          {text && <Text size={TextVariant.large}>{text}</Text>}
         </Link>
       )}
     </div>
