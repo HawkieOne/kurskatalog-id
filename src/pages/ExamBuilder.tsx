@@ -1,13 +1,32 @@
-import React from "react";
-import Text from "../components/Text";
-import Title from "../components/Title";
-import { TextVariant } from "../shared/constants";
-import { AiOutlineClose } from "react-icons/ai";
-import Year from "../components/builder/Year";
+import { ChangeEvent, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import FileInput from "../components/builder/FileInput";
+import PresetChooser from "../components/builder/PresetChooser";
+import Progress from "../components/builder/Progress";
+import Year from "../components/builder/Year";
+import Title from "../components/Title";
+import { Preset } from "../shared/interfaces";
 
 export default function ExamBuilder() {
+  const [presets, setPresets] = useState<Preset[]>([]);
+
+  const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.item(0);
+    if (file?.name.endsWith("json")) {
+      // READ FILE
+      // sdjsjfjsf
+      const cpyPresets = presets.slice();
+      cpyPresets.push(/*PUSH READ FILE*/);
+      setPresets(cpyPresets);
+    }
+    console.log(e.target.files);
+  };
+
+  const onPresetChosen = () => {
+    console.log("PRESET CHANGED");
+  };
+  
   const years = 5;
   return (
     <div className="bg-white p-4">
@@ -28,29 +47,10 @@ export default function ExamBuilder() {
           </div>
 
           <div className="flex flex-col gap-6 p-4">
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
-                <span className="label-text">Upload file</span>
-              </label>
-              <input
-                type="file"
-                className="file-input file-input-bordered w-full max-w-xs"
-              />
-            </div>
+          
+            <FileInput onUpload={onFileUpload} />
 
-            <div className="form-control">
-              <h2>Använd förinställning</h2>
-              <div className="input-group">
-                <select className="select select-accent select-bordered">
-                  <option disabled selected>
-                    Välj förinställning
-                  </option>
-                  <option>Civilingenjör 5 år</option>
-                  <option>3 år</option>
-                </select>
-                <button className="btn">Använd</button>
-              </div>
-            </div>
+            <PresetChooser onChange={onPresetChosen} />
 
             <div className="collapse collapse-arrow rounded-box">
               <input type="checkbox" className="peer" />
@@ -62,20 +62,12 @@ export default function ExamBuilder() {
               </div>
             </div>
 
-            <div className="flex flex-col">
-              <h3>Kurser valda</h3>
-              <progress
-                className="progress progress-accent w-56"
-                value="40"
-                max="100"
-              ></progress>
-              <h4 className="self-center">33%</h4>
-            </div>
+            <Progress max={100} value={40} />
 
-            <div className="btn-group">
-              <button className="btn btn-accent">Spara som</button>
-              <button className="btn">Skriv ut</button>
-            </div>
+            <button className="btn btn-accent">Spara förinställning</button>
+
+            <button className="btn btn-accent">Skriv ut</button>
+
           </div>
         </div>
         <div className="drawer-side">
