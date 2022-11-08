@@ -1,7 +1,7 @@
-import React from "react";
+import { ChangeEvent, useState } from "react";
 
 interface PresetChooserProps {
-    onChange: () => void;
+    onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function PresetChooser({ onChange } : PresetChooserProps) {
@@ -11,10 +11,6 @@ export default function PresetChooser({ onChange } : PresetChooserProps) {
       <div className="input-group text-onyx">
         <select className="select select-accent select-bordered bg-white border-pink
                            outline-pink" onChange={onChange}>
-          <option disabled selected>
-            Välj förinställning
-          </option>
-          // SHOULD COME FROM PRESETS
           <option>Civilingenjör 5 år</option>
           <option>3 år</option>
         </select>
