@@ -28,7 +28,7 @@ export interface Course {
     letter: string;
     period: number;
     rating: number;
-    
+
 export type AllowedColors =
   | "text-black"
   | "text-white"
