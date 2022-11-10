@@ -22,7 +22,7 @@ export default function IconButton({
   bgColor,
   hoverBgColor,
   textColor,
-  
+
 }: IconButtonProps) {
 
   return (
