@@ -27,15 +27,16 @@ for course in courses:
     try:
         course_info = soup.find("div", class_="kurstillfalle")
         groups = course_info.find_all("div", class_="group")
-        period = soup.find(
-            "div", class_="terminskarusell").find_all("span")[1].text
+        period = soup.find("div", class_="terminskarusell").find_all("span")[1].text
         group_elements = groups[0].find_all("div")
         startDate, endDate, location, language, pace = [
-            e.text.strip() for e in group_elements]
+            e.text.strip() for e in group_elements
+        ]
         pace = pace.split(",")[1].strip()
         pace = pace.replace("%", "")
         prerequisite = course_info.find(
-            "span", class_="tillfalle-kort-utfallning").text.strip()
+            "span", class_="tillfalle-kort-utfallning"
+        ).text.strip()
         description = soup.find(id="om").parent.find("p").text
     except:
         groupFound = False
@@ -64,7 +65,7 @@ for course in courses:
             "startDate": startDate,
             "endDate": endDate,
             "location": location,
-            "code": course_code
+            "code": course_code,
         }
     else:
         dictionary = {
@@ -72,7 +73,7 @@ for course in courses:
             "points": points,
             "link": URL,
             "level": level,
-            "code": course_code
+            "code": course_code,
         }
 
     json_object = json.dumps(dictionary, indent=4)
