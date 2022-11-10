@@ -276,3 +276,9 @@ export const courses = [
     "rating": 0
 }
   ];
+
+export const templates = [
+  Templates.id,
+  Templates.empty,
+  Templates.upload
+]
