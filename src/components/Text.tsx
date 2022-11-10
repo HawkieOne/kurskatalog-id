@@ -1,11 +1,11 @@
 import React from 'react'
-import { AllowedColors, TextVariant } from '../shared/interfaces';
+import { AllowedTextColors, TextVariant } from '../shared/interfaces';
 
 interface TextProps {
     children: React.ReactNode;
     size?: TextVariant;
-    color?: AllowedColors;
-    hoverColor?: AllowedColors;
+    color?: AllowedTextColors;
+    hoverColor?: AllowedTextColors;
 }
 
 export default function Text({ children, size, color, hoverColor } : TextProps) {
