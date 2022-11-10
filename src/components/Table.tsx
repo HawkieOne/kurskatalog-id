@@ -26,7 +26,7 @@ export default function Table({ courses }: CourseProps) {
                             <td className='bg-cream border-none'>{course.pace}%</td>
                             <td className='bg-cream border-none'>{course.startDate}</td>
                             <td className='bg-cream border-none'>{course.points}hp</td>
-                            <td className='bg-cream border-none'>{course.studyForm}</td>
+                            <td className='bg-cream border-none'>{course.level}</td>
                         </tr>
                     ))}
                 </tbody>
