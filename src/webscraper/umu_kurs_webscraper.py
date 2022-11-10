@@ -1,9 +1,11 @@
-import requests
-import bs4
 import json
 import sys
 from pathlib import Path
+
+import bs4
+import requests
 from bs4 import BeautifulSoup
+
 
 def extract_text(data):
     text = []
@@ -11,6 +13,7 @@ def extract_text(data):
         if isinstance(x, bs4.element.NavigableString):
             text.append(x.strip())
     return " ".join(text).strip()
+
 
 with open(sys.argv[1]) as file:
     courses = [line.rstrip() for line in file]
@@ -22,15 +25,19 @@ for course in courses:
 
     groupFound = True
 
-    try :
+    try:
         course_info = soup.find("div", class_="kurstillfalle")
         groups = course_info.find_all("div", class_="group")
-        period = soup.find("div", class_="terminskarusell").find_all("span")[1].text
+        period = soup.find("div",
+                           class_="terminskarusell").find_all("span")[1].text
         group_elements = groups[0].find_all("div")
-        startDate, endDate, location, language, pace = [e.text.strip() for e in group_elements]
+        startDate, endDate, location, language, pace = [
+            e.text.strip() for e in group_elements
+        ]
         pace = pace.split(",")[1].strip()
         pace = pace.replace("%", "")
-        prerequisite = course_info.find("span", class_="tillfalle-kort-utfallning").text.strip()
+        prerequisite = course_info.find(
+            "span", class_="tillfalle-kort-utfallning").text.strip()
         description = soup.find(id="om").parent.find("p").text
     except:
         groupFound = False
@@ -46,7 +53,7 @@ for course in courses:
     level = extract_text(soup.find("div", class_="niva").find("p"))
 
     dictionary = {}
-    if groupFound: 
+    if groupFound:
         dictionary = {
             "name": name,
             "points": points,
@@ -59,7 +66,7 @@ for course in courses:
             "startDate": startDate,
             "endDate": endDate,
             "location": location,
-            "code": course_code
+            "code": course_code,
         }
     else:
         dictionary = {
@@ -67,7 +74,7 @@ for course in courses:
             "points": points,
             "link": URL,
             "level": level,
-            "code": course_code
+            "code": course_code,
         }
 
     json_object = json.dumps(dictionary, indent=4)
