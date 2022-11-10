@@ -44,9 +44,9 @@ export interface Course {
     code: string;
     description?: string;
     pace?: number;
-    startDate?: number;
-    endDate?: number;
-    prerequisite?: String;
+    startDate?: string;
+    endDate?: string;
+    prerequisite?: string;
     location?: string;
     period?: String;
     rating?: number;
