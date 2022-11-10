@@ -13,12 +13,21 @@ export interface TitleVariantObject {
   large: TitleVariant;
 }
 
-export type AllowedColors =
+export type AllowedTextColors =
   | "text-black"
   | "text-white"
   | "text-pink"
   | "text-onyx"
-  | "text-cream";
+  | "text-cream"
+  | "text-creamDark";
+
+  export type AllowedBgColors =
+  | "bg-black"
+  | "bg-white"
+  | "bg-pink"
+  | "bg-onyx"
+  | "bg-cream"
+  | "bg-creamDark";
 
 export const ItemTypes = {
   COURSE: "course",

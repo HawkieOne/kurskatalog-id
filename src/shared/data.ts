@@ -1,3 +1,5 @@
+import { Templates } from "./constants";
+
 export const courses = [
     {
       name: "Interaktionsteknik",
@@ -79,3 +81,9 @@ export const courses = [
       rating: 5
     },
   ];
+
+export const templates = [
+  Templates.id,
+  Templates.empty,
+  Templates.upload
+]
