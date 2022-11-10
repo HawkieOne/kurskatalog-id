@@ -28,15 +28,16 @@ for course in courses:
     try:
         course_info = soup.find("div", class_="kurstillfalle")
         groups = course_info.find_all("div", class_="group")
-        period = soup.find(
-            "div", class_="terminskarusell").find_all("span")[1].text
+        period = soup.find("div", class_="terminskarusell").find_all("span")[1].text
         group_elements = groups[0].find_all("div")
         startDate, endDate, location, language, pace = [
-            e.text.strip() for e in group_elements]
+            e.text.strip() for e in group_elements
+        ]
         pace = pace.split(",")[1].strip()
         pace = int(pace.replace("%", ""))
         prerequisite = course_info.find(
-            "span", class_="tillfalle-kort-utfallning").text.strip()
+            "span", class_="tillfalle-kort-utfallning"
+        ).text.strip()
         description = soup.find(id="om").parent.find("p").text
     except:
         groupFound = False
@@ -50,7 +51,7 @@ for course in courses:
     course_code = extract_text(soup.find("div", class_="kod").find("p"))
     subject = " ".join(re.findall("[a-zA-Z]+", course_code))
     points = extract_text(soup.find("div", class_="poang").find("p"))
-    points = float(points.replace(',', '.'))
+    points = float(points.replace(",", "."))
     level = extract_text(soup.find("div", class_="niva").find("p"))
 
     dictionary = {}
@@ -69,7 +70,7 @@ for course in courses:
             "location": location,
             "code": course_code,
             "subject": subject,
-            "rating": 0
+            "rating": 0,
         }
     else:
         dictionary = {
@@ -79,7 +80,7 @@ for course in courses:
             "level": level,
             "code": course_code,
             "subject": subject,
-            "rating": 0
+            "rating": 0,
         }
 
     json_object = json.dumps(dictionary, indent=4)
