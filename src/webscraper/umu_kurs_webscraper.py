@@ -1,9 +1,10 @@
-import requests
-import bs4
 import json
-import sys
 import re
+import sys
 from pathlib import Path
+
+import bs4
+import requests
 from bs4 import BeautifulSoup
 
 
