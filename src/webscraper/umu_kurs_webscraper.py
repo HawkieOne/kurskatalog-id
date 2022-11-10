@@ -35,6 +35,7 @@ for course in courses:
             e.text.strip() for e in group_elements
         ]
         pace = pace.split(",")[1].strip()
+        pace = pace.replace("%", "")
         prerequisite = course_info.find(
             "span", class_="tillfalle-kort-utfallning").text.strip()
         description = soup.find(id="om").parent.find("p").text
