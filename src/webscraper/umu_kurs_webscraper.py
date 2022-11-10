@@ -29,7 +29,8 @@ for course in courses:
     try:
         course_info = soup.find("div", class_="kurstillfalle")
         groups = course_info.find_all("div", class_="group")
-        period = soup.find("div", class_="terminskarusell").find_all("span")[1].text
+        period = soup.find("div",
+                           class_="terminskarusell").find_all("span")[1].text
         group_elements = groups[0].find_all("div")
         startDate, endDate, location, language, pace = [
             e.text.strip() for e in group_elements
@@ -37,8 +38,7 @@ for course in courses:
         pace = pace.split(",")[1].strip()
         pace = int(pace.replace("%", ""))
         prerequisite = course_info.find(
-            "span", class_="tillfalle-kort-utfallning"
-        ).text.strip()
+            "span", class_="tillfalle-kort-utfallning").text.strip()
         description = soup.find(id="om").parent.find("p").text
     except:
         groupFound = False
