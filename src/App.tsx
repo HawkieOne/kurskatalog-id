@@ -1,6 +1,4 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Course from "./components/course/Course";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Courses from "./pages/Courses";
 import ExamBuilder from "./pages/ExamBuilder";

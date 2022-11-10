@@ -13,3 +13,10 @@ export const TitleVariant: TitleVariantObject = {
 }
 
 export const maxRating = 5;
+
+export const Templates = {
+    id: "ID",
+    custom: "Anpassad mall",
+    empty: "Tom mall",
+    upload: "Ladda upp mall"
+}

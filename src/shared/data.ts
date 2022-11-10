@@ -1,3 +1,5 @@
+import { Templates } from "./constants";
+
 export const courses = [
   {
     "name": "Interaktionsteknik och design",
