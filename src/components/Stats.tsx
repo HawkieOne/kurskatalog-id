@@ -18,7 +18,7 @@ export default function Stats({ course }: StatsProps) {
                 label="Poäng"
                 value={course.points}
             />
-            {course.period && <Stat
+            {course.period && <Stat 
                 label="Kurskod"
                 value={course.code}
             />}

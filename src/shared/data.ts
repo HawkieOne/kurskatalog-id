@@ -5,9 +5,10 @@ export const courses = [
     "link": "https://www.umu.se/utbildning/kurser/interaktionsteknik-och-design/",
     "level": "Grundniv\u00e5",
     "code": "5TF020",
+    "subject": "TF",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Programmeringsteknik med C och Matlab",
     "points": 7.5,
     "pace": 100,
@@ -20,9 +21,10 @@ export const courses = [
     "endDate": "31 oktober 2022",
     "location": "Ume\u00e5",
     "code": "5DV157",
+    "subject": "DV",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Envariabelanalys 1",
     "points": 7.5,
     "pace": 100,
@@ -35,9 +37,10 @@ export const courses = [
     "endDate": "1 december 2022",
     "location": "Ume\u00e5",
     "code": "5MA197",
+    "subject": "MA",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Envariabelanalys 2",
     "points": 7.5,
     "pace": 100,
@@ -50,17 +53,19 @@ export const courses = [
     "endDate": "15 januari 2023",
     "location": "Ume\u00e5",
     "code": "6MA046",
+    "subject": "MA",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Interaktionsteknik, kommunikation och medier",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/interaktionsteknik-kommunikation-och-medier/",
     "level": "Grundniv\u00e5",
     "code": "5EL279",
+    "subject": "EL",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Datastrukturer och algoritmer (C)",
     "points": 7.5,
     "pace": 50,
@@ -73,9 +78,10 @@ export const courses = [
     "endDate": "21 mars 2023",
     "location": "Ume\u00e5",
     "code": "5DV149",
+    "subject": "DV",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Projektledning 1",
     "points": 7.5,
     "pace": 50,
@@ -88,17 +94,19 @@ export const courses = [
     "endDate": "31 oktober 2022",
     "location": "Ume\u00e5",
     "code": "5EL223",
+    "subject": "EL",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Objektorienterad programmeringsmetodik",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/objektorienterad-programmeringsmetodik/",
     "level": "Grundniv\u00e5",
     "code": "5DV133",
+    "subject": "DV",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Linj\u00e4r algebra",
     "points": 7.5,
     "pace": 50,
@@ -111,9 +119,10 @@ export const courses = [
     "endDate": "31 oktober 2022",
     "location": "Ume\u00e5",
     "code": "6MA036",
+    "subject": "MA",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Datakommunikation och internet",
     "points": 7.5,
     "pace": 50,
@@ -126,25 +135,28 @@ export const courses = [
     "endDate": "31 oktober 2022",
     "location": "Ume\u00e5",
     "code": "5DV212",
+    "subject": "DV",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Psykets Arkitektur f\u00f6r Interaktion och Design",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/psykets-arkitektur-for-interaktion-och-design/",
     "level": "Grundniv\u00e5",
     "code": "2PS030",
+    "subject": "PS",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Statistik f\u00f6r teknologer",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/statistik-for-teknologer2/",
     "level": "Grundniv\u00e5",
     "code": "5MS069",
+    "subject": "MS",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Webbteknik f\u00f6r ingenj\u00f6rer",
     "points": 7.5,
     "pace": 50,
@@ -157,33 +169,37 @@ export const courses = [
     "endDate": "21 mars 2023",
     "location": "Ortsoberoende",
     "code": "5TF019",
+    "subject": "TF",
     "rating": 0
-},
-{
+  },
+  {
     "name": "H\u00e5llbar utveckling f\u00f6r ingenj\u00f6rer",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/hallbar-utveckling-for-ingenjorer/",
     "level": "Grundniv\u00e5",
     "code": "5TF080",
+    "subject": "TF",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Design f\u00f6r anv\u00e4ndarupplevelse",
     "points": 15.0,
     "link": "https://www.umu.se/utbildning/kurser/design-for-anvandarupplevelse3/",
     "level": "Grundniv\u00e5",
     "code": "5ID219",
+    "subject": "ID",
     "rating": 0
-},
-{
+  },
+  {
     "name": "M\u00e4nniska-datorinteraktion med inriktning mot kognition och design",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/manniska-datorinteraktion-med-inriktning-mot-kognition-och-design/",
     "level": "Grundniv\u00e5",
     "code": "5DV045",
+    "subject": "DV",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Artificiell intelligens - grunderna",
     "points": 7.5,
     "pace": 50,
@@ -196,9 +212,10 @@ export const courses = [
     "endDate": "31 oktober 2022",
     "location": "Ume\u00e5",
     "code": "5DV124",
+    "subject": "DV",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Databasteknik och webbaserade system",
     "points": 7.5,
     "pace": 50,
@@ -211,9 +228,10 @@ export const courses = [
     "endDate": "31 oktober 2022",
     "location": "Ortsoberoende",
     "code": "5TF048",
+    "subject": "TF",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Grundl\u00e4ggande signalbehandling av media",
     "points": 7.5,
     "pace": 50,
@@ -226,9 +244,10 @@ export const courses = [
     "endDate": "21 mars 2023",
     "location": "Ume\u00e5",
     "code": "5EL265",
+    "subject": "EL",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Design och tj\u00e4nsteutveckling f\u00f6r Internet of Things",
     "points": 7.5,
     "pace": 50,
@@ -241,9 +260,10 @@ export const courses = [
     "endDate": "21 mars 2023",
     "location": "Ume\u00e5",
     "code": "5EL266",
+    "subject": "EL",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Produktutveckling i medieteknik med metoden \"Design-Build-Test\"",
     "points": 7.5,
     "pace": 25,
@@ -256,9 +276,10 @@ export const courses = [
     "endDate": "4 juni 2023",
     "location": "Ume\u00e5",
     "code": "5TF073",
+    "subject": "TF",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Applikationsutveckling f\u00f6r internet",
     "points": 7.5,
     "pace": 50,
@@ -271,6 +292,7 @@ export const courses = [
     "endDate": "15 januari 2023",
     "location": "Ortsoberoende",
     "code": "5TF042",
+    "subject": "TF",
     "rating": 0
-}
-  ];
+  }
+];
