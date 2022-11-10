@@ -1,3 +1,5 @@
+import { Templates } from "./constants";
+
 export const courses = [
   {
     "name": "Interaktionsteknik och design",
@@ -294,5 +296,12 @@ export const courses = [
     "code": "5TF042",
     "subject": "TF",
     "rating": 0
+
   }
 ];
+
+export const templates = [
+  Templates.id,
+  Templates.empty,
+  Templates.upload
+]

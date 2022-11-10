@@ -1,16 +1,17 @@
 import { ChangeEvent, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { useLocation } from "react-router-dom";
 import FileInput from "../components/builder/FileInput";
 import PresetChooser from "../components/builder/PresetChooser";
 import Progress from "../components/builder/Progress";
 import Year from "../components/builder/Year";
 import Title from "../components/Title";
-import { TitleVariant } from "../shared/constants";
 import { Preset, Year as YearType } from "../shared/interfaces";
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
+  const { state } = useLocation();
 
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0);
@@ -31,8 +32,6 @@ export default function ExamBuilder() {
       }
     }
   };
-
-  console.log(presets)
 
   const onPresetChosen = (e: ChangeEvent<HTMLSelectElement>) => {
     console.log(e.currentTarget.value);

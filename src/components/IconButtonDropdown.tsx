@@ -1,64 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { TextVariant } from "../shared/constants";
 import { AllowedBgColors, AllowedTextColors } from "../shared/interfaces";
+import Dropdown from "./Dropdown";
 import Text from "./Text";
 
 interface IconButtonProps {
   icon: React.ReactNode;
   text?: string;
   size: "small" | "medium" | "large";
-  to: string;
   bgColor?: AllowedBgColors;
   hoverBgColor?: AllowedBgColors;
   textColor?: AllowedTextColors;
+  options: string[];
+  value: string;
+  onClick: () => void;
+  onChange: (option: string) => void;
 }
 
-export default function IconButton({
+export default function IconButtonDropdown({
   icon,
   text,
   size,
-  to,
   bgColor,
   hoverBgColor,
   textColor,
-
+  options,
+  value,
+  onClick,
+  onChange,
 }: IconButtonProps) {
-
   return (
     <div
       className={`bg-cream ${bgColor} text-pink ${textColor} rounded-lg shadow-md group hover:${hoverBgColor}
-      relative space-y-4`}
+      relative space-y-4 cursor-pointer`}
     >
       {size === "small" && (
-        <Link
-          to={to}
-          className="h-12 w-12 p-1 flex flex-col justify-evenly items-center"
-        >
+        <div className="h-12 w-12 p-1 flex flex-col justify-evenly items-center">
           <div className="group-hover:text-onyx">{icon}</div>
           {text && <Text size={TextVariant.large}>{text}</Text>}
-        </Link>
+        </div>
       )}
       {size === "medium" && (
-        <Link
-          to={to}
-          className="h-48 w-48 p-2 flex flex-col justify-evenly items-center"
-        >
+        <div className="h-48 w-48 p-2 flex flex-col justify-evenly items-center">
           <div className="group-hover:text-onyx">{icon}</div>
           {text && <Text size={TextVariant.large}>{text}</Text>}
-        </Link>
+        </div>
       )}
       {size === "large" && (
-        <div
-          className={`h-64 w-64 relative flex flex-col`}
-        >
-          <Link
-            to={to}
+        <div className={`h-64 w-64 relative flex flex-col`}>
+          <div
             className="h-full p-2 flex flex-col justify-evenly items-center"
+            onClick={onClick}
           >
             <div className="group-hover:text-onyx">{icon}</div>
             {text && <Text size={TextVariant.large}>{text}</Text>}
-          </Link>
+          </div>
+          <div className="absolute bottom-0 w-full">
+            <Dropdown options={options} value={value} onChange={onChange} />
+          </div>
         </div>
       )}
     </div>
