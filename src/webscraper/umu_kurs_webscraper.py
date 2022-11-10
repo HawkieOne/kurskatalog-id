@@ -1,4 +1,5 @@
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -35,7 +36,7 @@ for course in courses:
             e.text.strip() for e in group_elements
         ]
         pace = pace.split(",")[1].strip()
-        pace = pace.replace("%", "")
+        pace = int(pace.replace("%", ""))
         prerequisite = course_info.find(
             "span", class_="tillfalle-kort-utfallning").text.strip()
         description = soup.find(id="om").parent.find("p").text
@@ -49,7 +50,9 @@ for course in courses:
     soup = BeautifulSoup(page.content, "html.parser")
 
     course_code = extract_text(soup.find("div", class_="kod").find("p"))
+    subject = " ".join(re.findall("[a-zA-Z]+", course_code))
     points = extract_text(soup.find("div", class_="poang").find("p"))
+    points = float(points.replace(",", "."))
     level = extract_text(soup.find("div", class_="niva").find("p"))
 
     dictionary = {}
@@ -67,6 +70,8 @@ for course in courses:
             "endDate": endDate,
             "location": location,
             "code": course_code,
+            "subject": subject,
+            "rating": 0,
         }
     else:
         dictionary = {
@@ -75,6 +80,8 @@ for course in courses:
             "link": URL,
             "level": level,
             "code": course_code,
+            "subject": subject,
+            "rating": 0,
         }
 
     json_object = json.dumps(dictionary, indent=4)

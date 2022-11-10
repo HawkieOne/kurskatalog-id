@@ -59,4 +59,5 @@ export interface Course {
     location?: string;
     period?: String;
     rating: number;
+    subject: string;
 }

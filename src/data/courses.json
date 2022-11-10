@@ -5,6 +5,7 @@
     "link": "https://www.umu.se/utbildning/kurser/interaktionsteknik-och-design/",
     "level": "Grundnivå",
     "code": "5TF020",
+    "subject": "TF",
     "rating": 0
   },
   {
@@ -20,6 +21,7 @@
     "endDate": "31 oktober 2022",
     "location": "Umeå",
     "code": "5DV157",
+    "subject": "DV",
     "rating": 0
   },
   {
@@ -35,6 +37,7 @@
     "endDate": "1 december 2022",
     "location": "Umeå",
     "code": "5MA197",
+    "subject": "MA",
     "rating": 0
   },
   {
@@ -50,6 +53,7 @@
     "endDate": "15 januari 2023",
     "location": "Umeå",
     "code": "6MA046",
+    "subject": "MA",
     "rating": 0
   },
   {
@@ -58,6 +62,7 @@
     "link": "https://www.umu.se/utbildning/kurser/interaktionsteknik-kommunikation-och-medier/",
     "level": "Grundnivå",
     "code": "5EL279",
+    "subject": "EL",
     "rating": 0
   },
   {
@@ -73,6 +78,7 @@
     "endDate": "21 mars 2023",
     "location": "Umeå",
     "code": "5DV149",
+    "subject": "DV",
     "rating": 0
   },
   {
@@ -88,6 +94,7 @@
     "endDate": "31 oktober 2022",
     "location": "Umeå",
     "code": "5EL223",
+    "subject": "EL",
     "rating": 0
   },
   {
@@ -96,6 +103,7 @@
     "link": "https://www.umu.se/utbildning/kurser/objektorienterad-programmeringsmetodik/",
     "level": "Grundnivå",
     "code": "5DV133",
+    "subject": "DV",
     "rating": 0
   },
   {
@@ -111,6 +119,7 @@
     "endDate": "31 oktober 2022",
     "location": "Umeå",
     "code": "6MA036",
+    "subject": "MA",
     "rating": 0
   },
   {
@@ -126,6 +135,7 @@
     "endDate": "31 oktober 2022",
     "location": "Umeå",
     "code": "5DV212",
+    "subject": "DV",
     "rating": 0
   },
   {
@@ -134,6 +144,7 @@
     "link": "https://www.umu.se/utbildning/kurser/psykets-arkitektur-for-interaktion-och-design/",
     "level": "Grundnivå",
     "code": "2PS030",
+    "subject": "PS",
     "rating": 0
   },
   {
@@ -142,6 +153,7 @@
     "link": "https://www.umu.se/utbildning/kurser/statistik-for-teknologer2/",
     "level": "Grundnivå",
     "code": "5MS069",
+    "subject": "MS",
     "rating": 0
   },
   {
@@ -157,6 +169,7 @@
     "endDate": "21 mars 2023",
     "location": "Ortsoberoende",
     "code": "5TF019",
+    "subject": "TF",
     "rating": 0
   },
   {
@@ -165,6 +178,7 @@
     "link": "https://www.umu.se/utbildning/kurser/hallbar-utveckling-for-ingenjorer/",
     "level": "Grundnivå",
     "code": "5TF080",
+    "subject": "TF",
     "rating": 0
   },
   {
@@ -173,6 +187,7 @@
     "link": "https://www.umu.se/utbildning/kurser/design-for-anvandarupplevelse3/",
     "level": "Grundnivå",
     "code": "5ID219",
+    "subject": "ID",
     "rating": 0
   },
   {
@@ -181,6 +196,7 @@
     "link": "https://www.umu.se/utbildning/kurser/manniska-datorinteraktion-med-inriktning-mot-kognition-och-design/",
     "level": "Grundnivå",
     "code": "5DV045",
+    "subject": "DV",
     "rating": 0
   },
   {
@@ -196,6 +212,7 @@
     "endDate": "31 oktober 2022",
     "location": "Umeå",
     "code": "5DV124",
+    "subject": "DV",
     "rating": 0
   },
   {
@@ -211,6 +228,7 @@
     "endDate": "31 oktober 2022",
     "location": "Ortsoberoende",
     "code": "5TF048",
+    "subject": "TF",
     "rating": 0
   },
   {
@@ -226,6 +244,7 @@
     "endDate": "21 mars 2023",
     "location": "Umeå",
     "code": "5EL265",
+    "subject": "EL",
     "rating": 0
   },
   {
@@ -241,6 +260,7 @@
     "endDate": "21 mars 2023",
     "location": "Umeå",
     "code": "5EL266",
+    "subject": "EL",
     "rating": 0
   },
   {
@@ -256,6 +276,7 @@
     "endDate": "4 juni 2023",
     "location": "Umeå",
     "code": "5TF073",
+    "subject": "TF",
     "rating": 0
   },
   {
@@ -271,6 +292,7 @@
     "endDate": "15 januari 2023",
     "location": "Ortsoberoende",
     "code": "5TF042",
+    "subject": "TF",
     "rating": 0
   }
 ]
