@@ -10,7 +10,7 @@ interface TextProps {
 
 export default function Text({ children, size, color, hoverColor } : TextProps) {
   return (
-    <p className={`text-onyx text-md ${size && size} ${color && color} ${hoverColor && (`group-hover:${hoverColor}`)}`}>
+    <p className={` ${color ? color : "text-onyx"} text-md ${size && size} ${hoverColor && (`group-hover:${hoverColor}`)}`}>
         {children}
     </p>
   )
