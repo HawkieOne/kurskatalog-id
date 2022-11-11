@@ -57,7 +57,7 @@ export default function ExamBuilder() {
           </div>
 
           <div className="flex flex-col gap-6 p-4">
-            <FileInput onUpload={onFileUpload} />
+            <FileInput onUpload={onFileUpload} acceptedFormat=".json" />
 
             <PresetChooser onChange={onPresetChosen} presets={presets} />
 
