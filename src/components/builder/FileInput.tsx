@@ -28,7 +28,7 @@ export default function FileInput({ acceptedFormat, onUpload } : FileInputProps)
               setErrorText("");
             } else {
               setErrorText("Soemthing went wrong uploading the files")
-            }         
+            }
           } else {
             setErrorText("Invalid file format")
           }
