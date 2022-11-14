@@ -1,27 +1,33 @@
-import React from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import { TextVariant, TitleVariant } from "../../shared/constants";
-import Text from "../Text";
+import { Year as YearType } from "../../shared/interfaces";
 import Title from "../Title";
-import DraggableCourse from "./DraggableCourse";
-import DroppableArea from "./DroppableArea";
+import Period from "./Period";
 
 interface YearProps {
   year: number;
+  coursesYear: YearType;
 }
-export default function Year({ year }: YearProps) {
-  const periods = 4;
+export default function Year({ year, coursesYear }: YearProps) {
+
   return (
-    <div className="flex items-center space-x-6">
+    <div className="flex items-start space-x-6 self-start">
       <Title>År {year}</Title>
-      <DraggableCourse />
-      {Array.from(Array(periods).keys()).map((_, index) => (
-        <div className="flex flex-col justify-center items-center" key={index}>
-          <Text>Läsperiod {index + 1}</Text>
-          {/* <DraggableCourse /> */}
-          <DroppableArea />
-        </div>
-      ))}
+      {/* <DraggableCourse /> */}
+      <Period 
+        number={1} 
+        courses={coursesYear.lp1}
+      />
+      <Period 
+        number={2} 
+        courses={coursesYear.lp2}
+      />
+      <Period 
+        number={3} 
+        courses={coursesYear.lp3}
+      />
+      <Period 
+        number={4} 
+        courses={coursesYear.lp4}
+      />
     </div>
   );
 }

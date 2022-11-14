@@ -39,11 +39,14 @@ export interface Preset {
 }
 
 export interface Year {
-    firstPeriod: Course;
-    secondPeriod: Course;
-    thirdPeriod: Course;
-    fourthPeriod: Course;
+    year: number;
+    lp1: CoursesPeriod;
+    lp2: CoursesPeriod;
+    lp3: CoursesPeriod;
+    lp4: CoursesPeriod;
 }
+
+export type CoursesPeriod = (Course | null)[];
 
 export interface Course {
     name: string;

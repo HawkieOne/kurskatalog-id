@@ -7,10 +7,13 @@ import PresetChooser from "../components/builder/PresetChooser";
 import Progress from "../components/builder/Progress";
 import Year from "../components/builder/Year";
 import Title from "../components/Title";
+import { testDataYearsBuilder } from "../shared/data";
 import { Preset, Year as YearType } from "../shared/interfaces";
+import { IoIosAddCircleOutline } from 'react-icons/io'
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
+  const [activeYear, setActiveYear] = useState(1);
   const { state } = useLocation();
 
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,18 +21,18 @@ export default function ExamBuilder() {
     if (file?.name.endsWith("json")) {
       const fileReader = new FileReader();
       fileReader.readAsText(file, "UTF-8");
-      fileReader.onload = e => {
-        if(e.target?.result) {
+      fileReader.onload = (e) => {
+        if (e.target?.result) {
           const data = JSON.parse(e.target.result as string) as YearType[];
           const preset = {
             name: file.name,
-            years: data
-          }
+            years: data,
+          };
           const cpyPresets = presets.slice();
           cpyPresets.push(preset);
           setPresets(cpyPresets);
         }
-      }
+      };
     }
   };
 
@@ -37,23 +40,63 @@ export default function ExamBuilder() {
     console.log(e.currentTarget.value);
   };
 
-  const years = 5;
+  const [allCourses, setAllCourses] = useState<YearType[]>(testDataYearsBuilder);
   return (
-    <div className="bg-white p-4">
+    <div className="bg-white p-4 relative">
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-row justify-between">
-          <label htmlFor="my-drawer" className="btn btn-accent drawer-button">
+          <label
+            htmlFor="my-drawer"
+            className="btn btn-accent drawer-button absolute top-2 left-2"
+          >
             Visa kurser
           </label>
 
           <div className="flex flex-col p-4 gap-3 items-center">
             <Title>Examenbyggare</Title>
-            <DndProvider backend={HTML5Backend}>
-              {Array.from(Array(years).keys()).map((_, index) => (
-                <Year year={index + 1} key={index} />
-              ))}
-            </DndProvider>
+            <div className="tabs">
+              {allCourses.map((year, index) =>
+                // <Year year={index + 1} key={index} />
+                year.year === activeYear ? (
+                  <button className="tab tab-lg tab-active text-pink border-b-pink">
+                    År {index + 1}
+                  </button>
+                ) : (
+                  <button
+                    className="tab tab-lg"
+                    onClick={() => setActiveYear(index)}
+                  >
+                    År {index + 1}
+                  </button>
+                )
+              )}
+              <button
+                className="tab tab-lg"
+                onClick={() => {
+                  const cpyAllCourses = allCourses.slice();
+                  const emptyYear = {
+                    year: cpyAllCourses[cpyAllCourses.length -1 ].year,
+                    lp1: [null],
+                    lp2: [null],
+                    lp3: [null],
+                    lp4: [null]
+                  };
+                  cpyAllCourses.push(emptyYear);
+                  setAllCourses(cpyAllCourses);
+                }}
+              >
+                <IoIosAddCircleOutline />
+              </button>
+            </div>
+            <div className="self-start">
+              <DndProvider backend={HTML5Backend}>
+                <Year
+                  year={activeYear + 1}
+                  coursesYear={allCourses[activeYear]}
+                />
+              </DndProvider>
+            </div>
           </div>
 
           <div className="flex flex-col gap-6 p-4">

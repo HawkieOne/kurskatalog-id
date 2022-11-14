@@ -1,9 +1,13 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 import { AiOutlineClose } from "react-icons/ai";
-import { ItemTypes } from "../../shared/interfaces";
+import { Course, ItemTypes } from "../../shared/interfaces";
 
-export default function DraggableCourse() {
+interface DraggableCourseProps {
+  course: Course;  
+}
+
+export default function DraggableCourse({ course } : DraggableCourseProps) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.COURSE,
     collect: (monitor) => ({
@@ -12,7 +16,7 @@ export default function DraggableCourse() {
   }));
 
   return (
-    <div className={`card card-compact w-56 h-28 hshadow-xl bg-cream ${isDragging && "bg-red-200"}`} ref={drag}>
+    <div className={`card card-compact w-64 h-44 hshadow-xl bg-cream ${isDragging && "bg-red-200"}`} ref={drag}>
       <div className="card-body">
         <div className="card-actions justify-end">
           <button className="btn btn-square btn-xs bg-onyx  border-none text-white" >
@@ -20,7 +24,7 @@ export default function DraggableCourse() {
           </button>
         </div>
         <p className="text-sm text-black">
-          We are using cookies for no reason.
+          {course.code}
         </p>
       </div>
     </div>
