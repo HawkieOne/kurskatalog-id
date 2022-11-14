@@ -35,8 +35,10 @@ soup = BeautifulSoup(page.content, "html.parser")
 
 start_point = soup.find("h2", string="Allmänt").nextSibling
 
-headers = tags_between(soup.find('strong', text='Allmänna ingenjörskurser'),
-                       soup.find('strong', text='Valbara kurser'))
+headers = tags_between(
+    soup.find("strong", text="Allmänna ingenjörskurser"),
+    soup.find("strong", text="Valbara kurser"),
+)
 
 file_path = "obligKurser.json"
 with open(file_path, "w") as outfile:
@@ -45,14 +47,12 @@ with open(file_path, "w") as outfile:
 for i, header in enumerate(headers):
     if i == len(headers) - 1:
         break
-    for text in text_between(header.next_sibling, headers[i+1]):
+    for text in text_between(header.next_sibling, headers[i + 1]):
         code = text.split(" ")[0].strip()
-        dictionary = {
-            "code": code,
-            "subject": header.text
-        }
-        json_object = json.dumps(dictionary, indent=4,
-                                 ensure_ascii=False).encode('utf8')
+        dictionary = {"code": code, "subject": header.text}
+        json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode(
+            "utf8"
+        )
         with open(file_path, "a") as outfile:
             outfile.write(json_object.decode())
             outfile.write(",\n")
