@@ -10,7 +10,7 @@ export default function Year({}: YearProps) {
     <div className="flex items-start space-x-6 self-start">
       {/* <DraggableCourse /> */}
       {coursesYear.periods.map((courses, index) => (
-        <Period number={index}  key={index}/>
+        <Period periodIndex={index}  key={index}/>
       ))}
     </div>
   );
