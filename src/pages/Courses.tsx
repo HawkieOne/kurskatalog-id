@@ -2,7 +2,7 @@ import React from "react";
 import Course from "../components/course/Course";
 import Title from "../components/Title";
 import { TitleVariant } from "../shared/constants";
-import { courses } from "../shared/data";
+import coursesJson from '../data/courses.json'
 
 export default function Courses() {
 
@@ -10,7 +10,7 @@ export default function Courses() {
     <div className="h-full w-full bg-white flex flex-col items-center py-12 space-y-8">
       <Title>Kurser</Title>
       <div className="w-3/4 flex flex-col items-center space-y-6">
-        {courses.map((course, index) => (
+        {coursesJson.map((course, index) => (
           <Course course={course} key={index} />
         ))}
       </div>

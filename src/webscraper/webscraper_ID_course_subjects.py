@@ -40,11 +40,7 @@ with open(headers_file_path, "w") as outfile:
 
 for header in headers:
     with open(headers_file_path, "a") as outfile:
-        dictionary = {
-            "subject": header.text
-        }
-        json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode('utf8')
-        outfile.write(json_object.decode())
+        outfile.write(header)
         outfile.write(",\n")
 
 with open(headers_file_path, "a") as outfile:

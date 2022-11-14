@@ -1,15 +1,18 @@
 import Table from '../components/Table'
 import Title from '../components/Title'
-import { courses, mandatoryCourses, subjects } from '../shared/data'
+import { subjects } from '../shared/data'
+import coursesJson from '../data/courses.json'
+import mandatoryCoursesJson from '../data/mandatoryCourses.json'
+
 import { Course } from '../shared/interfaces'
 
 export default function MandatoryCourses() {
 
   const selectedCourses = (subject: string) => {
-    const courseCodes = mandatoryCourses.filter(course => {
+    const courseCodes = mandatoryCoursesJson.filter(course => {
       return course.subject === subject;
     });
-    const allowedCourses = courses.filter(course => courseCodes.find(e => e.code === course.code)) as Course[];
+    const allowedCourses = coursesJson.filter(course => courseCodes.find(e => e.code === course.code)) as Course[];
     return allowedCourses;
   };
 
@@ -18,10 +21,10 @@ export default function MandatoryCourses() {
       <div className='w-1/2 text-center'>
 
         {subjects.map((subject) => {
-          const allowedCourses = selectedCourses(subject.subject);
+          const allowedCourses = selectedCourses(subject);
           return (
             <div className='p-4'>
-              <Title>{subject.subject}</Title>
+              <Title>{subject}</Title>
               <Table courses={allowedCourses} />
             </div>
           );
