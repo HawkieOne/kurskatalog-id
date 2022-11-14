@@ -112,37 +112,47 @@ export const TestCourse2 = {
 export const testDataYearsBuilder = [
   {
     year: 1,
-    lp1: [TestCourse, TestCourse],
-    lp2: [TestCourse],
-    lp3: [TestCourse, TestCourse, TestCourse],
-    lp4: [TestCourse, TestCourse, TestCourse, TestCourse],
+    periods: [
+      [TestCourse, TestCourse],
+      [TestCourse],
+      [TestCourse],
+      [TestCourse],
+    ],
   },
   {
     year: 2,
-    lp1: [TestCourse, TestCourse],
-    lp2: [TestCourse],
-    lp3: [TestCourse, TestCourse, TestCourse],
-    lp4: [TestCourse, TestCourse, TestCourse, TestCourse],
+    periods: [
+      [TestCourse, TestCourse],
+      [TestCourse, TestCourse],
+      [TestCourse, TestCourse],
+      [TestCourse, TestCourse, TestCourse],
+    ],
   },
   {
     year: 3,
-    lp1: [TestCourse, TestCourse],
-    lp2: [TestCourse],
-    lp3: [TestCourse, TestCourse, TestCourse],
-    lp4: [TestCourse, TestCourse, TestCourse, TestCourse],
+    periods: [
+      [TestCourse, TestCourse],
+      [TestCourse],
+      [TestCourse],
+      [TestCourse],
+    ],
   },
   {
     year: 4,
-    lp1: [TestCourse, TestCourse],
-    lp2: [TestCourse],
-    lp3: [TestCourse, TestCourse, TestCourse],
-    lp4: [TestCourse, TestCourse, TestCourse, TestCourse],
+    periods: [
+      [TestCourse, TestCourse],
+      [TestCourse, TestCourse],
+      [TestCourse, TestCourse],
+      [TestCourse, TestCourse, TestCourse],
+    ],
   },
   {
     year: 5,
-    lp1: [TestCourse, TestCourse],
-    lp2: [TestCourse],
-    lp3: [TestCourse, TestCourse, TestCourse],
-    lp4: [TestCourse, TestCourse, TestCourse, TestCourse],
+    periods: [
+      [TestCourse, TestCourse],
+      [TestCourse],
+      [TestCourse],
+      [TestCourse],
+    ],
   },
 ];

@@ -1,21 +1,26 @@
 import { ChangeEvent, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { IoIosAddCircleOutline } from 'react-icons/io';
 import { useLocation } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { activeYearState, coursesBuilderState, movingCourseState } from "../atoms/atoms";
 import FileInput from "../components/builder/FileInput";
 import PresetChooser from "../components/builder/PresetChooser";
 import Progress from "../components/builder/Progress";
 import Year from "../components/builder/Year";
 import Title from "../components/Title";
-import { testDataYearsBuilder } from "../shared/data";
 import { Preset, Year as YearType } from "../shared/interfaces";
-import { IoIosAddCircleOutline } from 'react-icons/io'
+import { v4 as uuidv4 } from 'uuid';
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
-  const [activeYear, setActiveYear] = useState(1);
   const { state } = useLocation();
+  const [courses, setCourses] = useRecoilState(coursesBuilderState);
+  const [activeYear, setActiveYear] = useRecoilState(activeYearState);
 
+  const moveCourse = useRecoilValue(movingCourseState);
+  console.log(moveCourse);
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0);
     if (file?.name.endsWith("json")) {
@@ -40,7 +45,7 @@ export default function ExamBuilder() {
     console.log(e.currentTarget.value);
   };
 
-  const [allCourses, setAllCourses] = useState<YearType[]>(testDataYearsBuilder);
+
   return (
     <div className="bg-white p-4 relative">
       <div className="drawer">
@@ -56,16 +61,16 @@ export default function ExamBuilder() {
           <div className="flex flex-col p-4 gap-3 items-center">
             <Title>Examenbyggare</Title>
             <div className="tabs">
-              {allCourses.map((year, index) =>
-                // <Year year={index + 1} key={index} />
-                year.year === activeYear ? (
-                  <button className="tab tab-lg tab-active text-pink border-b-pink">
+              {courses.map((_, index) =>
+                index === activeYear ? (
+                  <button className="tab tab-lg tab-active text-pink border-b-pink" key={uuidv4()}>
                     År {index + 1}
                   </button>
                 ) : (
                   <button
                     className="tab tab-lg"
                     onClick={() => setActiveYear(index)}
+                    key={index}
                   >
                     År {index + 1}
                   </button>
@@ -74,16 +79,19 @@ export default function ExamBuilder() {
               <button
                 className="tab tab-lg"
                 onClick={() => {
-                  const cpyAllCourses = allCourses.slice();
+                  const cpyAllCourses = courses.slice();
                   const emptyYear = {
-                    year: cpyAllCourses[cpyAllCourses.length -1 ].year,
-                    lp1: [null],
-                    lp2: [null],
-                    lp3: [null],
-                    lp4: [null]
+                    year: cpyAllCourses[cpyAllCourses.length - 1].year + 1,
+                    periods: [
+                      [null],
+                      [null],
+                      [null],
+                      [null]
+                    ]
                   };
                   cpyAllCourses.push(emptyYear);
-                  setAllCourses(cpyAllCourses);
+                  setCourses(cpyAllCourses);
+                  setActiveYear(cpyAllCourses.length - 1)
                 }}
               >
                 <IoIosAddCircleOutline />
@@ -91,10 +99,7 @@ export default function ExamBuilder() {
             </div>
             <div className="self-start">
               <DndProvider backend={HTML5Backend}>
-                <Year
-                  year={activeYear + 1}
-                  coursesYear={allCourses[activeYear]}
-                />
+                <Year />
               </DndProvider>
             </div>
           </div>

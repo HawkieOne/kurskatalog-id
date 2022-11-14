@@ -1,36 +1,42 @@
-import React, { useState } from "react";
-import { TestCourse2 } from "../../shared/data";
-import { CoursesPeriod } from "../../shared/interfaces";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { v4 as uuidv4 } from 'uuid';
+import { activeYearState, coursesBuilderSelector, coursesYearState } from '../../atoms/atoms';
 import Text from "../Text";
 import AddDroppableArea from "./AddDroppableArea";
-import DraggableCourse from "./DraggableCourse";
 import DroppableArea from "./DroppableArea";
 
 interface PeriodProps {
   number: number;
-  courses: CoursesPeriod;
 }
 
-export default function Period({ number, courses }: PeriodProps) {
-  const [currentCourses, setCurrentCourses] = useState(courses);
+export default function Period({ number }: PeriodProps) {
+  const coursesYear = useRecoilValue(coursesYearState);
+  const activeYear = useRecoilValue(activeYearState);
+  const [courses, setCourses] = useRecoilState(coursesBuilderSelector);
+  const coursesInPeriod = coursesYear.periods[number];
   return (
     <div
       className="flex flex-col justify-start items-center space-y-4"
       key={number}
     >
-      <Text>Läsperiod {number}</Text>
-      <DraggableCourse course={TestCourse2} />
-      {currentCourses.length > 0 && (
+      <Text>Läsperiod {number + 1}</Text>
+      {/* <DraggableCourse course={TestCourse2} /> */}
+      {coursesInPeriod.length > 0 && (
         <div className="h-80 w-full flex flex-col space-y-4">
-          {currentCourses.map((course, index) => (
+          {coursesInPeriod.map((course, index) => (
             <DroppableArea
+              key={uuidv4()}
               course={course}
               index={index}
-              basis={currentCourses.length > 1 ? `basis-1/2` : "basis-full"}
+              basis={coursesInPeriod.length > 1 ? "basis-1/2" : "basis-full"}
               onRemove={(index: number) => {
-                const cpyCourses = currentCourses.slice();
+                const cpyCourses = coursesInPeriod.slice();
                 cpyCourses.splice(index, 1);
-                setCurrentCourses(cpyCourses);
+                const cpyCoursesYear = coursesYear;
+                cpyCoursesYear.periods[number] = cpyCourses;
+                const cpyAllCourses = courses;
+                cpyAllCourses[activeYear] = cpyCoursesYear; 
+                setCourses(cpyAllCourses);
               }}
             />
           ))}
@@ -38,11 +44,10 @@ export default function Period({ number, courses }: PeriodProps) {
       )}
       <AddDroppableArea
         onClick={() => {
-          if (courses.length < 6) {
-            console.log("HYE");
-            const cpyCourses = currentCourses.slice();
+          if (coursesInPeriod.length < 6) {
+            const cpyCourses = coursesInPeriod.slice();
             cpyCourses.push(null);
-            setCurrentCourses(cpyCourses);
+            // setCurrentCourses(cpyCourses);
           }
         }}
       />
