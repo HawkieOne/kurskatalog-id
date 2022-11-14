@@ -35,7 +35,7 @@ start_point = soup.find("h2", string="Allmänt").nextSibling
 headers = tags_between(soup.find('strong', text='Allmänna ingenjörskurser'),
                                         soup.find('strong', text='Valbara kurser'))                                 
 
-file_path = "obligCourses.json"
+file_path = "mandatoryCourses.json"
 with open(file_path, "w") as outfile:
     outfile.write("[\n")
 
