@@ -40,10 +40,7 @@ export interface Preset {
 
 export interface Year {
     year: number;
-    lp1: CoursesPeriod;
-    lp2: CoursesPeriod;
-    lp3: CoursesPeriod;
-    lp4: CoursesPeriod;
+    periods: CoursesPeriod[];
 }
 
 export type CoursesPeriod = (Course | null)[];

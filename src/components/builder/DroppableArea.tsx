@@ -12,12 +12,10 @@ interface DroppableAreaProps {
 
 export default function DroppableArea({ course, index, basis, onRemove } : DroppableAreaProps) {
 
-    const [currentCourse, setCurrentCourse] = useState(course);
-
     const [{ isOver }, drop] = useDrop(
         () => ({
           accept: ItemTypes.COURSE,
-          drop: () => setCurrentCourse(TestCourse2),
+          drop: () => ({code: course?.code}),
           collect: (monitor) => ({
             isOver: !!monitor.isOver()
           })
@@ -29,7 +27,7 @@ export default function DroppableArea({ course, index, basis, onRemove } : Dropp
     <div className={`${basis} w-full bg-white ${isOver && "bg-pink"} border border-onyx border-dashed rounded-xl
                      flex justify-center items-center hover:bg-cream cursor-pointer`} ref={drop}
                      onClick={() => onRemove(index)}>
-        {currentCourse ? currentCourse.code : "DROP A COURSE HERE"}
+        {course ? course.code : "DROP A COURSE HERE"}
     </div>
   )
 }
