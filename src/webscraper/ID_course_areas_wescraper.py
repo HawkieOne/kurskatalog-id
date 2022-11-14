@@ -33,10 +33,25 @@ soup = BeautifulSoup(page.content, "html.parser")
 start_point = soup.find("h2", string="Allmänt").nextSibling
 
 headers = tags_between(soup.find('strong', text='Allmänna ingenjörskurser'),
-                                        soup.find('strong', text='Valbara kurser'))                                 
+                                        soup.find('strong', text='Examensarbete'))                                 
+headers_file_path = "subjects.json"
+with open(headers_file_path, "w") as outfile:
+    outfile.write("[\n")
 
-file_path = "mandatoryCourses.json"
-with open(file_path, "w") as outfile:
+for header in headers:
+    with open(headers_file_path, "a") as outfile:
+        dictionary = {
+            "subject": header.text
+        }
+        json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode('utf8')
+        outfile.write(json_object.decode())
+        outfile.write(",\n")
+
+with open(headers_file_path, "a") as outfile:
+    outfile.write("]")
+
+courses_file_path = "mandatoryCourses.json"
+with open(courses_file_path, "w") as outfile:
     outfile.write("[\n")
 
 for i, header in enumerate(headers):
@@ -49,10 +64,10 @@ for i, header in enumerate(headers):
                 "subject": header.text
             }
         json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode('utf8')
-        with open(file_path, "a") as outfile:
+        with open(courses_file_path, "a") as outfile:
             outfile.write(json_object.decode())
             outfile.write(",\n")
         print("Webscriping", code, "successful")
 
-with open(file_path, "a") as outfile:
+with open(courses_file_path, "a") as outfile:
     outfile.write("]")
