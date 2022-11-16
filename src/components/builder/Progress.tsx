@@ -1,5 +1,3 @@
-import React from "react";
-import { TitleVariant } from "../../shared/constants";
 import Title from "../Title";
 
 interface ProgressProps {

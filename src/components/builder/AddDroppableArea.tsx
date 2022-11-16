@@ -7,8 +7,8 @@ interface AddDroppableAreaProps {
 
 export default function AddDroppableArea({ onClick } : AddDroppableAreaProps) {
   return (
-    <div className={`w-64 h-24 bg-white border border-onyx border-dashed rounded-xl
-                     flex justify-center items-center hover:bg-cream cursor-pointer`}
+    <div className={`w-80 h-16 bg-white border border-onyx text-onyx border-solid rounded-xl
+                     flex justify-center items-center hover:bg-creamDark cursor-pointer`}
         onClick={onClick}                 
     >
       <IoIosAddCircleOutline  size="3em" />

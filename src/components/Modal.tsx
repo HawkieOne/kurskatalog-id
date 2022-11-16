@@ -1,9 +1,8 @@
+import { ChangeEvent } from "react";
 import Modal from "react-modal";
+import { Preset } from "../shared/interfaces";
 import FileInput from "./builder/FileInput";
 import Title from "./Title";
-import { ChangeEvent } from "react";
-import { relative } from "path";
-import { Preset } from "../shared/interfaces";
 
 interface ModalProps {
   isOpen: boolean;
@@ -54,7 +53,7 @@ export default function ModalWindow({
             className="btn btn-link no-underline text-red-500"
           >
             Cancel
-          </button>
+          </button>np
           <button
             onClick={onSuccess}
             className="btn bg-cream text-onyx hover:bg-creamDark border-none"

@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
-import { activeYearState, coursesBuilderSelector, coursesYearState } from '../../atoms/atoms';
+import { coursesYearState } from '../../atoms/atoms';
 import useCourses from '../../shared/useCourses';
 import Text from "../Text";
 import AddDroppableArea from "./AddDroppableArea";
@@ -13,8 +12,6 @@ interface PeriodProps {
 
 export default function Period({ periodIndex }: PeriodProps) {
   const coursesYear = useRecoilValue(coursesYearState);
-  const activeYear = useRecoilValue(activeYearState);
-  const [courses, setCourses] = useRecoilState(coursesBuilderSelector);
   const { addCourseToPeriod, removeCoursefromPeriod } = useCourses();
 
   const coursesInPeriod = coursesYear.periods[periodIndex];
@@ -26,12 +23,13 @@ export default function Period({ periodIndex }: PeriodProps) {
       <Text>Läsperiod {periodIndex + 1}</Text>
       {/* <DraggableCourse course={TestCourse2} /> */}
       {coursesInPeriod.length > 0 && (
-        <div className="h-80 w-full flex flex-col space-y-4">
+        <div className="w-80 flex flex-col space-y-4">
           {coursesInPeriod.map((course, index) => (
             <DroppableArea
               key={uuidv4()}
               course={course}
-              index={index}
+              periodIndex={periodIndex}
+              courseIndex={index}
               basis={coursesInPeriod.length > 1 ? "basis-1/2" : "basis-full"}
               onRemove={(index: number) => {
                 removeCoursefromPeriod(periodIndex, index);
