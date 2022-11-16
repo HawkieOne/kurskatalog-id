@@ -1,5 +1,4 @@
 import { atom, selector } from "recoil";
-import { moveCourse } from "../shared/builderFunctions";
 import { testDataYearsBuilder } from "../shared/data";
 import { Course, Year } from "../shared/interfaces";
 
@@ -23,16 +22,6 @@ export const coursesBuilderSelector = selector({
   }
 });
 
-export const movingCourseState = atom<Course | null>({
-  key: "mobingCourseState",
-  default: null
-})
-
-export const hoveringCourseState = atom<Course | null>({
-  key: "hoveringCourseState",
-  default: null
-})
-
 export const coursesYearState = selector({
   key: "coursesYearState",
   get: ({ get }) => {
@@ -40,18 +29,19 @@ export const coursesYearState = selector({
     const courses = get(coursesBuilderState);
     return courses[year];
   },
-  // set: ({ get, set }, newValue) => {
-  //   set(coursesBuilderState, newValue);
-  // }
 });
 
-// const periodsYearState = atomFamily({
-//   key: ‘MyAtom’,
-//   default: selectorFamily({
-//     key: 'MyAtom/Default',
-//     get: param => ({get}) => {
-//       const otherAtomValue = get(otherState);
-//       return computeDefaultUsingParam(otherAtomValue, param);
-//     },
-//   }),
-// });
+export const rightDrawerState = atom({
+  key: "rightDrawerState",
+  default: false
+});
+
+export const leftDrawerState = atom({
+  key: "leftDrawerState",
+  default: false
+});
+
+export const courseRightDrawerState = atom<Course | null>({
+  key: "courseRightDrawerState",
+  default: null
+});
