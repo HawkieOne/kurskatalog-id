@@ -8,7 +8,7 @@ export const moveCourse = (
   periodCourseTwo: number,
   indexCourseTwo: number
 ) => {
-    const courseOne = courses 
+    const courseOne = courses
   return courses;
 };
 
