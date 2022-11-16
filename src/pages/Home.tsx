@@ -2,6 +2,8 @@ import { useState, ChangeEvent } from "react";
 import { AiFillBuild } from "react-icons/ai";
 import { BsList, BsViewList } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { coursesBuilderState } from "../atoms/atoms";
 import AppBar from "../components/AppBar";
 import Footer from "../components/Footer";
 import IconButton from "../components/IconButton";
@@ -9,6 +11,7 @@ import IconButtonDropdown from "../components/IconButtonDropdown";
 import ModalWindow from "../components/Modal";
 import Text from "../components/Text";
 import Title from "../components/Title";
+import { createIDTemplate } from "../shared/builderFunctions";
 import { Templates, TextVariant } from "../shared/constants";
 import { templates } from "../shared/data";
 import { Preset, Year } from "../shared/interfaces";
@@ -17,6 +20,7 @@ export default function Home() {
   const [chosenTemplate, setChosenTemplate] = useState(templates[0]);
   const [uploadedPreset, setUploadedPreset] = useState<Preset>();
   const [isUploadModalOpen, setIsUploadMdalOpen] = useState(false);
+  const setCourses = useSetRecoilState(coursesBuilderState);
   const navigate = useNavigate();
 
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,13 +64,10 @@ export default function Home() {
             onChange={setChosenTemplate}
             onClick={() => {
               if (chosenTemplate === Templates.id) {
-                navigate("/byggare", {
-                  state: Templates.id,
-                });
+                setCourses(createIDTemplate());
+                navigate("/byggare");
               } else if (chosenTemplate === Templates.empty) {
-                navigate("/byggare", {
-                  state: Templates.empty,
-                });
+                navigate("/byggare");
               } else if (chosenTemplate === Templates.upload) {
                 setIsUploadMdalOpen(true);
               }
