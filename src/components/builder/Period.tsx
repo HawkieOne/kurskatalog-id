@@ -26,12 +26,13 @@ export default function Period({ periodIndex }: PeriodProps) {
       <Text>Läsperiod {periodIndex + 1}</Text>
       {/* <DraggableCourse course={TestCourse2} /> */}
       {coursesInPeriod.length > 0 && (
-        <div className="h-80 w-full flex flex-col space-y-4">
+        <div className="w-80 flex flex-col space-y-4">
           {coursesInPeriod.map((course, index) => (
             <DroppableArea
               key={uuidv4()}
               course={course}
-              index={index}
+              periodIndex={periodIndex}
+              courseIndex={index}
               basis={coursesInPeriod.length > 1 ? "basis-1/2" : "basis-full"}
               onRemove={(index: number) => {
                 removeCoursefromPeriod(periodIndex, index);

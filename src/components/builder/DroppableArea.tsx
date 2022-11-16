@@ -1,33 +1,56 @@
-import { useState } from 'react';
-import { useDrop } from 'react-dnd';
-import { TestCourse2 } from '../../shared/data';
-import { Course, ItemTypes } from '../../shared/interfaces';
+import { useDrop } from "react-dnd";
+import { useRecoilValue } from "recoil";
+import { activeYearState } from "../../atoms/atoms";
+import { Course, ItemTypes } from "../../shared/interfaces";
+import DraggableCourse from "./DraggableCourse";
 
 interface DroppableAreaProps {
   course: Course | null;
-  index: number;
+  periodIndex: number;
+  courseIndex: number;
   basis: string;
   onRemove: (index: number) => void;
 }
 
-export default function DroppableArea({ course, index, basis, onRemove } : DroppableAreaProps) {
-
-    const [{ isOver }, drop] = useDrop(
-        () => ({
-          accept: ItemTypes.COURSE,
-          drop: () => ({code: course?.code}),
-          collect: (monitor) => ({
-            isOver: !!monitor.isOver()
-          })
-        }),
-        []
-      )
+export default function DroppableArea({
+  course,
+  periodIndex,
+  courseIndex,
+  basis,
+  onRemove,
+}: DroppableAreaProps) {
+  const activeYear = useRecoilValue(activeYearState);
+  const [{ isOver }, drop] = useDrop(
+    () => ({
+      accept: ItemTypes.COURSE,
+      // canDrop: () => (),
+      drop: () => ({
+        yearIndex: activeYear,
+        periodIndex,
+        courseIndex,
+        course: course,
+      }),
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+      }),
+    }),
+    []
+  );
 
   return (
-    <div className={`${basis} w-full bg-white ${isOver && "bg-pink"} border border-onyx border-dashed rounded-xl
-                     flex justify-center items-center hover:bg-cream cursor-pointer`} ref={drop}
-                     onClick={() => onRemove(index)}>
-        {course ? course.code : "DROP A COURSE HERE"}
+    <div
+      className={`${basis} w-full bg-white rounded-2xl
+                     flex justify-center items-center hover:bg-cream ${course ? "cursor-grab" : "cursor-auto"}`}
+      ref={drop}
+    >
+      <DraggableCourse 
+        course={course}
+        courseIndex={courseIndex}
+        periodIndex={periodIndex}
+        yearIndex={activeYear}
+        onRemove={onRemove}
+        isOver={isOver}
+      />
     </div>
-  )
+  );
 }
