@@ -482,3 +482,99 @@ export const testDataYearsBuilder = [
     ],
   },
 ];
+
+export const templateEmpty = [
+  {
+    year: 1,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+  {
+    year: 2,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+  {
+    year: 3,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+  {
+    year: 4,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+  {
+    year: 5,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+];
+
+export const templateID = [
+  {
+    year: 1,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+  {
+    year: 2,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+  {
+    year: 3,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+  {
+    year: 4,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+  {
+    year: 5,
+    periods: [
+      [],
+      [],
+      [],
+      [],
+    ],
+  },
+];
