@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { TextVariant } from "../shared/constants";
 import { AllowedBgColors, AllowedTextColors } from "../shared/interfaces";
 import Dropdown from "./Dropdown";
