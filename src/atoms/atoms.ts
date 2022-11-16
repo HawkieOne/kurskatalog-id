@@ -34,7 +34,7 @@ export const hoveringCourseState = atom<Course | null>({
 })
 
 export const coursesYearState = selector({
-  key: "coursesYearState", 
+  key: "coursesYearState",
   get: ({ get }) => {
     const year = get(activeYearState);
     const courses = get(coursesBuilderState);
