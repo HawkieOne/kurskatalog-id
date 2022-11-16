@@ -12,4 +12,3 @@ export const createEmptyTemplate = () => {
 export const createIDTemplate = () => {
   return templateID;
 }
-
