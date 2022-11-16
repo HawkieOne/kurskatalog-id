@@ -43,7 +43,7 @@ export default function DroppableArea({
                      flex justify-center items-center hover:bg-cream ${course ? "cursor-grab" : "cursor-auto"}`}
       ref={drop}
     >
-      <DraggableCourse 
+      <DraggableCourse
         course={course}
         courseIndex={courseIndex}
         periodIndex={periodIndex}
