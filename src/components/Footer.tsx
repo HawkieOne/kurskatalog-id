@@ -1,4 +1,3 @@
-import { TextVariant } from '../shared/constants'
 import Text from './Text'
 
 export default function Footer() {

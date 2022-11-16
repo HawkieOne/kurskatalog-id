@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { TextVariant, TitleVariant } from "../../shared/constants";
-import { Course } from "../../shared/interfaces";
-import Title from "../Title";
+import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
-import Text from "../Text";
-import Stats from "../Stats";
+import { TitleVariant } from "../../shared/constants";
+import { Course } from "../../shared/interfaces";
 import Rating from "../Rating";
+import Stats from "../Stats";
+import Text from "../Text";
+import Title from "../Title";
 
 interface CourseProps {
   course: Course;

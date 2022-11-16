@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
-import { activeYearState, coursesBuilderSelector, coursesYearState } from '../../atoms/atoms';
+import { coursesYearState } from '../../atoms/atoms';
 import useCourses from '../../shared/useCourses';
 import Text from "../Text";
 import AddDroppableArea from "./AddDroppableArea";
@@ -13,8 +12,6 @@ interface PeriodProps {
 
 export default function Period({ periodIndex }: PeriodProps) {
   const coursesYear = useRecoilValue(coursesYearState);
-  const activeYear = useRecoilValue(activeYearState);
-  const [courses, setCourses] = useRecoilState(coursesBuilderSelector);
   const { addCourseToPeriod, removeCoursefromPeriod } = useCourses();
 
   const coursesInPeriod = coursesYear.periods[periodIndex];

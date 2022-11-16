@@ -1,5 +1,3 @@
-import React from 'react'
-import Courses from '../pages/Courses';
 import { Course } from "../shared/interfaces";
 
 interface CourseProps {

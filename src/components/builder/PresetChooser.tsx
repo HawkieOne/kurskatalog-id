@@ -1,5 +1,4 @@
-import React from "react";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { Preset } from "../../shared/interfaces";
 
 interface PresetChooserProps {
