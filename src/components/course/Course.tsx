@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
 import { TitleVariant } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
@@ -25,9 +26,11 @@ export default function CourseCard({ course }: CourseProps) {
             <Stats course={course} />
             <Text>{course.description}</Text>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary bg-pink hover:bg-onyx border-none">
-                Läs mer och se recensioner
-              </button>
+              <Link to={course.name} state={{course: course}}>
+                <button className="btn btn-primary bg-pink hover:bg-onyx border-none">
+                  Läs mer och se recensioner
+                </button>
+              </Link>
             </div>
           </div>
         )}

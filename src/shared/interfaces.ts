@@ -1,6 +1,7 @@
 
 export type TextVariant = "text-md" | "text-xl" | "text-2xl" | "text-3xl";
 export type TitleVariant = "text-2xl" | "text-4xl";
+export type FontVariant = "font-light" | "font-semibold" | "font-bold";
 export interface TextVariantObject {
   small: TextVariant;
   medium: TextVariant;
@@ -11,6 +12,12 @@ export interface TextVariantObject {
 export interface TitleVariantObject {
   small: TitleVariant;
   large: TitleVariant;
+}
+
+export interface FontVariantObject {
+  light: FontVariant;
+  semibold: FontVariant;
+  bold: FontVariant;
 }
 
 export type AllowedTextColors =
