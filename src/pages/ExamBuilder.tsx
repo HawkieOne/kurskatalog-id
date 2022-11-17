@@ -2,10 +2,7 @@ import { ChangeEvent, createRef, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { IoIosAddCircleOutline } from "react-icons/io";
-<<<<<<< HEAD
-=======
 import { useLocation } from "react-router-dom";
->>>>>>> 4b3675d (fix all warnings in terminal)
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -25,11 +22,8 @@ import RightDrawer from "./RightDrawer";
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
-<<<<<<< HEAD
-=======
   const { state } = useLocation();
   console.log(state)
->>>>>>> 4b3675d (fix all warnings in terminal)
   const [courses, setCourses] = useRecoilState(coursesBuilderState);
   const [activeYear, setActiveYear] = useRecoilState(activeYearState);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =

@@ -4,6 +4,7 @@ import {
   RecoilRoot
 } from "recoil";
 import Navbar from "./components/Navbar";
+import CoursePage from "./pages/CoursePage";
 import Courses from "./pages/Courses";
 import ExamBuilder from "./pages/ExamBuilder";
 import Home from "./pages/Home";
@@ -28,6 +29,7 @@ function App() {
               </Route>
               <Route path="/byggare" element={<ExamBuilder />} />
               <Route path="/obligatoriskt" element={<MandatoryCourses />} />
+              <Route path="/kurser/:name" element={<CoursePage />} />
             </Routes>
           </div>
         </div>
