@@ -54,7 +54,6 @@ for header in headers:
 with open(headers_file_path, "a") as outfile:
     outfile.write("]")
 
-
 # Write all mandatory courses to file
 courses_file_path = "mandatoryCourses.json"
 with open(courses_file_path, "w") as outfile:
@@ -66,9 +65,8 @@ for i, header in enumerate(headers):
     for text in text_between(header.next_sibling, headers[i + 1]):
         code = text.split(" ")[0].strip()
         dictionary = {"code": code, "subject": header.text}
-        json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode(
-            "utf8"
-        )
+        json_object = json.dumps(dictionary, indent=4,
+                                 ensure_ascii=False).encode("utf8")
         with open(courses_file_path, "a") as outfile:
             outfile.write(json_object.decode())
             outfile.write(",\n")
