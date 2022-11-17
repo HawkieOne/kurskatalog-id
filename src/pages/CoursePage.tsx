@@ -28,7 +28,7 @@ export default function CoursePage() {
       </div>
       <div className="flex flex-col text-md w-3/4 space-y-8 px-4 pb-4">
         <div className="flex flex-col items-center">
-          <Title size={TitleVariant.small}>Om Kurs</Title>
+          <Title size={TitleVariant.small}>Om kurs</Title>
           <Text>{course.description}</Text>
         </div>
 
