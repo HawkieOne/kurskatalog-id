@@ -1,13 +1,13 @@
 [
-{
+  {
     "name": "Interaktionsteknik och design",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/interaktionsteknik-och-design/",
     "level": "Grundnivå",
     "code": "5TF020",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Programmeringsteknik med C och Matlab",
     "points": 7.5,
     "pace": 100,
@@ -22,8 +22,8 @@
     "location": "Umeå",
     "code": "5DV157",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Envariabelanalys 1",
     "points": 7.5,
     "pace": 100,
@@ -38,8 +38,8 @@
     "location": "Umeå",
     "code": "5MA197",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Envariabelanalys 2",
     "points": 7.5,
     "pace": 100,
@@ -54,16 +54,16 @@
     "location": "Umeå",
     "code": "6MA046",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Interaktionsteknik, kommunikation och medier",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/interaktionsteknik-kommunikation-och-medier/",
     "level": "Grundnivå",
     "code": "5EL279",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Datastrukturer och algoritmer (C)",
     "points": 7.5,
     "pace": 50,
@@ -78,8 +78,8 @@
     "location": "Umeå",
     "code": "5DV149",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Projektledning 1",
     "points": 7.5,
     "pace": 50,
@@ -94,16 +94,16 @@
     "location": "Umeå",
     "code": "5EL223",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Objektorienterad programmeringsmetodik",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/objektorienterad-programmeringsmetodik/",
     "level": "Grundnivå",
     "code": "5DV133",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Linjär algebra",
     "points": 7.5,
     "pace": 50,
@@ -118,8 +118,8 @@
     "location": "Umeå",
     "code": "6MA036",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Datakommunikation och internet",
     "points": 7.5,
     "pace": 50,
@@ -134,24 +134,24 @@
     "location": "Umeå",
     "code": "5DV212",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Psykets Arkitektur för Interaktion och Design",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/psykets-arkitektur-for-interaktion-och-design/",
     "level": "Grundnivå",
     "code": "2PS030",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Statistik för teknologer",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/statistik-for-teknologer2/",
     "level": "Grundnivå",
     "code": "5MS069",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Webbteknik för ingenjörer",
     "points": 7.5,
     "pace": 50,
@@ -166,32 +166,32 @@
     "location": "Ortsoberoende",
     "code": "5TF019",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Hållbar utveckling för ingenjörer",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/hallbar-utveckling-for-ingenjorer/",
     "level": "Grundnivå",
     "code": "5TF080",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Design för användarupplevelse",
-    "points": 15.0,
+    "points": 15,
     "link": "https://www.umu.se/utbildning/kurser/design-for-anvandarupplevelse3/",
     "level": "Grundnivå",
     "code": "5ID219",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Människa-datorinteraktion med inriktning mot kognition och design",
     "points": 7.5,
     "link": "https://www.umu.se/utbildning/kurser/manniska-datorinteraktion-med-inriktning-mot-kognition-och-design/",
     "level": "Grundnivå",
     "code": "5DV045",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Artificiell intelligens - grunderna",
     "points": 7.5,
     "pace": 50,
@@ -206,8 +206,8 @@
     "location": "Umeå",
     "code": "5DV124",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Databasteknik och webbaserade system",
     "points": 7.5,
     "pace": 50,
@@ -222,8 +222,8 @@
     "location": "Ortsoberoende",
     "code": "5TF048",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Grundläggande signalbehandling av media",
     "points": 7.5,
     "pace": 50,
@@ -238,8 +238,8 @@
     "location": "Umeå",
     "code": "5EL265",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Design och tjänsteutveckling för Internet of Things",
     "points": 7.5,
     "pace": 50,
@@ -254,8 +254,8 @@
     "location": "Umeå",
     "code": "5EL266",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Produktutveckling i medieteknik med metoden \"Design-Build-Test\"",
     "points": 7.5,
     "pace": 25,
@@ -270,8 +270,8 @@
     "location": "Umeå",
     "code": "5TF073",
     "rating": 0
-},
-{
+  },
+  {
     "name": "Applikationsutveckling för internet",
     "points": 7.5,
     "pace": 50,
@@ -286,5 +286,5 @@
     "location": "Ortsoberoende",
     "code": "5TF042",
     "rating": 0
-}
+  }
 ]
