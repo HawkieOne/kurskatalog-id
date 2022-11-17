@@ -19,6 +19,10 @@ def extract_text(data):
 with open(sys.argv[1]) as file:
     courses = [line.rstrip() for line in file]
 
+file_path = "courses.json"
+with open(file_path, "w") as outfile:
+    outfile.write("[\n")
+
 for course in courses:
     URL = course
     page = requests.get(URL)
@@ -29,8 +33,10 @@ for course in courses:
     try:
         course_info = soup.find("div", class_="kurstillfalle")
         groups = course_info.find_all("div", class_="group")
-        period = soup.find("div",
+        periodAndYear = soup.find("div",
                            class_="terminskarusell").find_all("span")[1].text
+        period, year = periodAndYear.split()
+        year = int(year)
         group_elements = groups[0].find_all("div")
         startDate, endDate, location, language, pace = [
             e.text.strip() for e in group_elements
@@ -50,7 +56,6 @@ for course in courses:
     soup = BeautifulSoup(page.content, "html.parser")
 
     course_code = extract_text(soup.find("div", class_="kod").find("p"))
-    subject = " ".join(re.findall("[a-zA-Z]+", course_code))
     points = extract_text(soup.find("div", class_="poang").find("p"))
     points = float(points.replace(",", "."))
     level = extract_text(soup.find("div", class_="niva").find("p"))
@@ -62,6 +67,7 @@ for course in courses:
             "points": points,
             "pace": pace,
             "period": period,
+            "year": year,
             "description": description,
             "prerequisite": prerequisite,
             "link": URL,
@@ -70,7 +76,6 @@ for course in courses:
             "endDate": endDate,
             "location": location,
             "code": course_code,
-            "subject": subject,
             "rating": 0,
         }
     else:
@@ -80,23 +85,16 @@ for course in courses:
             "link": URL,
             "level": level,
             "code": course_code,
-            "subject": subject,
             "rating": 0,
         }
 
-    json_object = json.dumps(dictionary, indent=4)
+    json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode('utf8')
 
-    file_path = "kurser.json"
+    # Write course to file
     file = Path(file_path)
-    if file.is_file():
-        with open(file_path, "a") as outfile:
-            outfile.write(json_object)
-            outfile.write(",\n")
-    else:
-        with open(file_path, "w") as outfile:
-            outfile.write("[\n")
-            outfile.write(json_object)
-            outfile.write(",\n")
+    with open(file_path, "a") as outfile:
+        outfile.write(json_object.decode())
+        outfile.write(",\n")
     print("Webscriping ", name, "successful")
 
 with open(file_path, "a") as outfile:

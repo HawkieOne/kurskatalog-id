@@ -65,6 +65,6 @@ export interface Course {
     prerequisite?: string;
     location?: string;
     period?: String;
+    year?: number;
     rating: number;
-    subject: string;
 }

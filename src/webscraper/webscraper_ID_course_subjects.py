@@ -33,7 +33,9 @@ soup = BeautifulSoup(page.content, "html.parser")
 start_point = soup.find("h2", string="Allmänt").nextSibling
 
 headers = tags_between(soup.find('strong', text='Allmänna ingenjörskurser'),
-                                        soup.find('strong', text='Examensarbete'))                                 
+                                        soup.find('strong', text='Examensarbete'))       
+
+# Write all course subjects courses to file
 headers_file_path = "subjects.json"
 with open(headers_file_path, "w") as outfile:
     outfile.write("[\n")
@@ -46,6 +48,8 @@ for header in headers:
 with open(headers_file_path, "a") as outfile:
     outfile.write("]")
 
+
+# Write all mandatory courses to file
 courses_file_path = "mandatoryCourses.json"
 with open(courses_file_path, "w") as outfile:
     outfile.write("[\n")
