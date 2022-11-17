@@ -20,10 +20,10 @@ export default function MandatoryCourses() {
     <div className='h-full bg-white flex flex-col items-center'>
       <div className='w-1/2 text-center'>
 
-        {subjects.map((subject) => {
+        {subjects.map((subject, index) => {
           const allowedCourses = selectedCourses(subject);
           return (
-            <div className='p-4'>
+            <div className='p-4' key={index}>
               <Title>{subject}</Title>
               <Table courses={allowedCourses} />
             </div>
