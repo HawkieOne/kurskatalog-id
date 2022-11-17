@@ -33,8 +33,9 @@ for course in courses:
     try:
         course_info = soup.find("div", class_="kurstillfalle")
         groups = course_info.find_all("div", class_="group")
-        periodAndYear = soup.find("div",
-                                  class_="terminskarusell").find_all("span")[1].text
+        periodAndYear = (
+            soup.find("div", class_="terminskarusell").find_all("span")[1].text
+        )
         period, year = periodAndYear.split()
         year = int(year)
         group_elements = groups[0].find_all("div")
@@ -44,7 +45,8 @@ for course in courses:
         pace = pace.split(",")[1].strip()
         pace = int(pace.replace("%", ""))
         prerequisite = course_info.find(
-            "span", class_="tillfalle-kort-utfallning").text.strip()
+            "span", class_="tillfalle-kort-utfallning"
+        ).text.strip()
         description = soup.find(id="om").parent.find("p").text
     except:
         groupFound = False
@@ -88,8 +90,7 @@ for course in courses:
             "rating": 0,
         }
 
-    json_object = json.dumps(dictionary, indent=4,
-                             ensure_ascii=False).encode('utf8')
+    json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode("utf8")
 
     # Write course to file
     file = Path(file_path)
