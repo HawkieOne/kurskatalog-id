@@ -7,6 +7,7 @@ import bs4
 import requests
 from bs4 import BeautifulSoup, NavigableString
 
+
 def text_between(cur, end):
     while cur and cur != end:
         if isinstance(cur, NavigableString):
@@ -14,6 +15,7 @@ def text_between(cur, end):
             if len(text):
                 yield text
         cur = cur.next_element
+
 
 def tags_between(cur, end):
     headers = start_point.find_all("strong")
@@ -25,6 +27,7 @@ def tags_between(cur, end):
             break
     return allowedHeaders
 
+
 URL = "https://www.umu.se/utbildning/program/civilingenjorsprogrammet-i-interaktion-och-design/utbildningsplan/"
 
 page = requests.get(URL)
@@ -33,7 +36,7 @@ soup = BeautifulSoup(page.content, "html.parser")
 start_point = soup.find("h2", string="Allmänt").nextSibling
 
 headers = tags_between(soup.find('strong', text='Allmänna ingenjörskurser'),
-                                        soup.find('strong', text='Examensarbete'))       
+                       soup.find('strong', text='Examensarbete'))
 
 # Write all course subjects courses to file
 headers_file_path = "subjects.json"
@@ -60,10 +63,11 @@ for i, header in enumerate(headers):
     for text in text_between(header.next_sibling, headers[i+1]):
         code = text.split(" ")[0].strip()
         dictionary = {
-                "code": code,
-                "subject": header.text
-            }
-        json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode('utf8')
+            "code": code,
+            "subject": header.text
+        }
+        json_object = json.dumps(dictionary, indent=4,
+                                 ensure_ascii=False).encode('utf8')
         with open(courses_file_path, "a") as outfile:
             outfile.write(json_object.decode())
             outfile.write(",\n")

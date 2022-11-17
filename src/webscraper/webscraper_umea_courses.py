@@ -34,7 +34,7 @@ for course in courses:
         course_info = soup.find("div", class_="kurstillfalle")
         groups = course_info.find_all("div", class_="group")
         periodAndYear = soup.find("div",
-                           class_="terminskarusell").find_all("span")[1].text
+                                  class_="terminskarusell").find_all("span")[1].text
         period, year = periodAndYear.split()
         year = int(year)
         group_elements = groups[0].find_all("div")
@@ -88,7 +88,8 @@ for course in courses:
             "rating": 0,
         }
 
-    json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode('utf8')
+    json_object = json.dumps(dictionary, indent=4,
+                             ensure_ascii=False).encode('utf8')
 
     # Write course to file
     file = Path(file_path)
