@@ -5,7 +5,8 @@ from pathlib import Path
 
 import bs4
 import requests
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup
+from bs4 import NavigableString
 
 
 def text_between(cur, end):
