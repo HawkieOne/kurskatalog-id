@@ -53,7 +53,6 @@ for course in courses:
     except:
         groupFound = False
 
-
     URL_kursplan = URL + "kursplan/"
     page = requests.get(URL_kursplan)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -62,7 +61,8 @@ for course in courses:
     points = extract_text(soup.find("div", class_="poang").find("p"))
     points = float(points.replace(",", "."))
     level = extract_text(soup.find("div", class_="niva").find("p"))
-    prerequisite = soup.find(id='behorighetskrav').parent.findAll(text=True)[2].strip()
+    prerequisite = soup.find(
+        id='behorighetskrav').parent.findAll(text=True)[2].strip()
 
     dictionary = {}
     if groupFound:
