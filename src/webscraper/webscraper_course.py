@@ -32,7 +32,8 @@ description = " ".join(description)
 
 groupFound = True
 try:
-    periodAndYear = soup.find("div", class_="terminskarusell").find_all("span")[1].text
+    periodAndYear = soup.find(
+        "div", class_="terminskarusell").find_all("span")[1].text
     period, year = periodAndYear.split()
     year = int(year)
 
@@ -56,7 +57,8 @@ course_code = extract_text(soup.find("div", class_="kod").find("p"))
 points = extract_text(soup.find("div", class_="poang").find("p"))
 points = float(points.replace(",", "."))
 level = extract_text(soup.find("div", class_="niva").find("p"))
-prerequisite = soup.find(id="behorighetskrav").parent.findAll(text=True)[2].strip()
+prerequisite = soup.find(id="behorighetskrav").parent.findAll(
+    text=True)[2].strip()
 
 dictionary = {}
 if groupFound:
@@ -89,7 +91,8 @@ else:
         "rating": 0,
     }
 
-json_object = json.dumps(dictionary, indent=4, ensure_ascii=False).encode("utf8")
+json_object = json.dumps(dictionary, indent=4,
+                         ensure_ascii=False).encode("utf8")
 
 # Write course to file
 file = Path(file_path)
