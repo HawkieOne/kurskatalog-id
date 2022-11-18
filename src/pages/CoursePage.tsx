@@ -42,6 +42,7 @@ export default function CoursePage() {
             <InformationRow header="Slutar" text={course.endDate} />
             <InformationRow header="Nivå" text={course.level} />
             <InformationRow header="Studieort" text={course.location} />
+            <InformationRow header="Anmälningskod" text={course.registerCode} />
           </div>
         </div>
       </div>
