@@ -16,7 +16,11 @@ def extract_text(data):
     return " ".join(text).strip()
 
 file_path = "course.json"
-URL = sys.argv[1]
+try:
+    URL = sys.argv[1]
+except:
+    print("Please add an URL as a argurment")
+    quit()
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, "html.parser")
 
