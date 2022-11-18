@@ -20,3 +20,4 @@ https://www.umu.se/utbildning/kurser/grundlaggande-signalbehandling-av-media/
 https://www.umu.se/utbildning/kurser/design-och-tjansteutveckling-for-internet-of-things/
 https://www.umu.se/utbildning/kurser/produktutveckling-i-medieteknik-med-metoden-design-build-test2/
 https://www.umu.se/utbildning/kurser/applikationsutveckling-for-internet/
+https://www.umu.se/utbildning/kurser/examensarbete-for-civilingenjorsprogrammet-i-interaktionsteknik-och-design/

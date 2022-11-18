@@ -21,24 +21,26 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, "html.parser")
 
 name = soup.find("h1").text.strip()
-description = soup.find(id="om").parent.find("p").text
+descriptionTag = soup.find(id="om").parent.find_all("p")
+description = [desc.text.strip() for desc in descriptionTag]
+description = " ".join(description)
 
 groupFound = True
 try:
-    course_info = soup.find("div", class_="kurstillfalle")
-    groups = course_info.find_all("div", class_="group")
     periodAndYear = (soup.find(
         "div", class_="terminskarusell").find_all("span")[1].text)
     period, year = periodAndYear.split()
     year = int(year)
+
+    course_info = soup.find("div", class_="kurstillfalle")
+    groups = course_info.find_all("div", class_="group")
     group_elements = groups[0].find_all("div")
     startDate, endDate, location, language, pace = [
         e.text.strip() for e in group_elements
     ]
+    registerCode = groups[5].find("div").text.strip()
     pace = pace.split(",")[1].strip()
     pace = int(pace.replace("%", ""))
-    prerequisite = course_info.find(
-        "span", class_="tillfalle-kort-utfallning").text.strip()
 except:
     groupFound = False
 
@@ -50,6 +52,7 @@ course_code = extract_text(soup.find("div", class_="kod").find("p"))
 points = extract_text(soup.find("div", class_="poang").find("p"))
 points = float(points.replace(",", "."))
 level = extract_text(soup.find("div", class_="niva").find("p"))
+prerequisite = soup.find(id='behorighetskrav').parent.findAll(text=True)[2].strip()
 
 dictionary = {}
 if groupFound:
@@ -67,12 +70,14 @@ if groupFound:
         "endDate": endDate,
         "location": location,
         "code": course_code,
+        "registerCode": registerCode,
         "rating": 0,
     }
 else:
     dictionary = {
         "name": name,
         "description": description,
+        "prerequisite": prerequisite,
         "points": points,
         "link": URL,
         "level": level,

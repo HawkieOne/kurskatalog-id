@@ -58,6 +58,7 @@ export interface Course {
     link: string;
     level: string; // CAN ONLY BE SOME VALUES
     code: string;
+    registerCode?: string;
     description?: string;
     pace?: number;
     startDate?: string;
