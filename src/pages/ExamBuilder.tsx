@@ -62,11 +62,11 @@ export default function ExamBuilder() {
       <div className="drawer">
         {/* <input id="my-drawer" type="checkbox" className="drawer-toggle" /> */}
         <div className="drawer-content flex flex-row justify-between">
-          <button onClick={() => setIsLeftDrawerOpen(true)} className="btn">
+          {/* <button onClick={() => setIsLeftDrawerOpen(true)} className="btn">
             TEST
-          </button>
+          </button> */}
 
-          <div className="flex flex-col p-4 gap-3 items-center">
+          <div className="w-full flex flex-col p-4 gap-3 items-center">
             <Title>Examenbyggare</Title>
             <div className="tabs">
               {courses.map((_, index) =>
@@ -103,14 +103,14 @@ export default function ExamBuilder() {
                 <IoIosAddCircleOutline />
               </button>
             </div>
-            <div className="self-start">
+            <div className="w-full self-start ">
               <DndProvider backend={HTML5Backend}>
                 <Years />
               </DndProvider>
             </div>
           </div>
 
-          <div className="flex flex-col gap-6 p-4">
+          {/* <div className="flex flex-col gap-6 p-4">
             <FileInput onUpload={onFileUpload} acceptedFormat=".json" />
 
             <PresetChooser onChange={onPresetChosen} presets={presets} />
@@ -130,7 +130,7 @@ export default function ExamBuilder() {
             <button className="btn btn-accent">Spara förinställning</button>
 
             <button className="btn btn-accent">Skriv ut</button>
-          </div>
+          </div> */}
         </div>
         {isLeftDrawerOpen && (
           <div
