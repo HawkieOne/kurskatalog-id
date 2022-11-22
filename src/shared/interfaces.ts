@@ -69,3 +69,14 @@ export interface Course {
     year?: number;
     rating: number;
 }
+
+export interface BuildingBlock {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  i: string;
+  content: Course;
+  isResizable?: boolean;
+  type: "course" | "clean" | "cleanNoResize" | "sabbat" | "examWork";
+}
