@@ -10,6 +10,7 @@ import {
 import { testDataYearsBuilder } from "../../shared/data";
 import Text from "../Text";
 import useCourses from "../../shared/useCourses";
+import DraggableCourse from "./DraggableCourse";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -43,29 +44,12 @@ export default function Years() {
         }}
       >
         {coursesYear.courses.map((course, index) => (
-          <div
+          <div key={course.i} className="">
+            <DraggableCourse 
             key={course.i}
-            className="bg-cream flex items-start justify-start text-onyx shadow-lg"
-          >
-            {course.content && (
-              <div className="h-full w-full flex flex-col p-3 text-ellipsis">
-                <Text size={TextVariant.small} font={FontVariants.bold}>
-                  {course.content.name}
-                </Text>
-                <p>{course.content.code}</p>
-                <div className="self-end mt-auto">
-                  <button
-                    className="btn bg-pink border-none text-onyx hover:text-white"
-                    onClick={() => {
-                      // setCourseRightDrawer(course);
-                      // setIsRightDrawerOpen(true);
-                    }}
-                  >
-                    Läs mer
-                  </button>
-                </div>
-              </div>
-            )}
+              course={course} 
+              onRemove={removeCourse}
+            />
           </div>
         ))}
       </ResponsiveGridLayout>
