@@ -43,9 +43,9 @@ export default function Years() {
       >
         {coursesYear.courses.map((course, index) => (
           <div key={course.i} className="">
-            <DraggableCourse 
+            <DraggableCourse
             key={course.i}
-              course={course} 
+              course={course}
               onRemove={removeCourse}
             />
           </div>
