@@ -2,6 +2,11 @@ import { atom, selector } from "recoil";
 import { createEmptyTemplate } from "../shared/builderFunctions";
 import { Course, Year } from "../shared/interfaces";
 
+export const hasStartedEditingState = atom({
+  key: "hasStartedEditingState",
+  default: false,
+});
+
 export const activeYearState = atom({
   key: "activeYearState",
   default: 0,
