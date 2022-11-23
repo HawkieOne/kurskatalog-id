@@ -1,11 +1,7 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { useRecoilValue } from "recoil";
-import { coursesYearState } from "../../atoms/atoms";
 import {
   TitleVariant
 } from "../../shared/constants";
-import { testDataYearsBuilder } from "../../shared/data";
-import Text from "../Text";
 import useCourses from "../../shared/useCourses";
 import Title from "../Title";
 import DraggableCourse from "./DraggableCourse";

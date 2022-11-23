@@ -1,6 +1,5 @@
 import { atom, selector } from "recoil";
 import { createEmptyTemplate } from "../shared/builderFunctions";
-import { testDataYearsBuilder } from "../shared/data";
 import { Course, Year } from "../shared/interfaces";
 
 export const activeYearState = atom({
@@ -10,7 +9,7 @@ export const activeYearState = atom({
 
 export const coursesBuilderState = atom({
   key: "coursesBuilderState",
-  default: testDataYearsBuilder as Year[],
+  default: createEmptyTemplate() as Year[],
 });
 
 export const coursesBuilderSelector = selector({
