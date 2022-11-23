@@ -1,5 +1,7 @@
+import { createBuildingBlock, getCourse } from "./builderFunctions";
 import { Templates } from "./constants";
 import { BuildingBlock } from "./interfaces";
+import { v4 as uuidv4 } from "uuid";
 
 export const courses = [
   {
@@ -500,54 +502,21 @@ export const CleanBuildingBlockNoResize: BuildingBlock = {
   i: "5",
   content: TestCourse,
   isResizable: false,
-  type: "clean"
+  type: "clean",
 };
 
 export const testDataYearsBuilder = [
   {
     year: 1,
-    periods: [
-      {
-        x: 0,
-        y: 0,
-        w: 1,
-        h: 1,
-        i: "0",
-        content: TestCourse,
-      },
-      {
-        x: 1,
-        y: 0,
-        w: 1,
-        h: 1,
-        i: "1",
-        content: TestCourse,
-      },
-      {
-        x: 0,
-        y: 1,
-        w: 1,
-        h: 1,
-        i: "2",
-        content: TestCourse,
-      },
-      {
-        x: 0,
-        y: 2,
-        w: 1,
-        h: 1,
-        i: "3",
-        content: TestCourse,
-      },
-      {
-        x: 0,
-        y: 3,
-        w: 1,
-        h: 1,
-        i: "4",
-        content: TestCourse,
-      },
-      CleanBuildingBlockNoResize,
+    courses: [
+      createBuildingBlock(0, 0, 1, 2, getCourse("5TF020")),
+      createBuildingBlock(1, 0, 1, 2, getCourse("5DV157")),
+      createBuildingBlock(2, 0, 1, 2, getCourse("5MA197")),
+      createBuildingBlock(3, 0, 1, 2, getCourse("6MA046")),
+      createBuildingBlock(4, 0, 2, 1, getCourse("5EL279")),
+      createBuildingBlock(4, 1, 2, 1, getCourse("5DV149")),
+      createBuildingBlock(6, 0, 2, 1, getCourse("5EL223")),
+      createBuildingBlock(6, 1, 2, 1, getCourse("5DV133"))
     ],
   },
   // {
@@ -614,22 +583,51 @@ export const templateEmpty = [
 export const templateID = [
   {
     year: 1,
-    periods: [[], [], [], []],
+    courses: [
+      createBuildingBlock(0, 0, 1, 2, getCourse("5TF020")),
+      createBuildingBlock(1, 0, 1, 2, getCourse("5DV157")),
+      createBuildingBlock(2, 0, 1, 2, getCourse("5MA197")),
+      createBuildingBlock(3, 0, 1, 2, getCourse("6MA046")),
+      createBuildingBlock(4, 0, 2, 1, getCourse("5EL279")),
+      createBuildingBlock(4, 1, 2, 1, getCourse("5DV149")),
+      createBuildingBlock(6, 0, 2, 1, getCourse("5EL223")),
+      createBuildingBlock(6, 1, 2, 1, getCourse("5DV133"))
+    ],
   },
   {
     year: 2,
-    periods: [[], [], [], []],
+    courses: [
+      createBuildingBlock(0, 0, 2, 1, getCourse("6MA036")),
+      createBuildingBlock(0, 1, 2, 1, getCourse("5DV212")),
+      createBuildingBlock(2, 0, 2, 1, getCourse("2PS030")),
+      createBuildingBlock(2, 1, 2, 1, getCourse("5MS069")),
+      createBuildingBlock(4, 0, 2, 1, getCourse("5TF019")),
+      createBuildingBlock(4, 1, 2, 1, getCourse("5TF080")),
+      createBuildingBlock(6, 0, 2, 1, getCourse("5ID219")),
+    ],
   },
   {
     year: 3,
-    periods: [[], [], [], []],
+    courses: [
+      createBuildingBlock(0, 0, 2, 1, getCourse("5DV045")),
+      createBuildingBlock(0, 1, 2, 1, getCourse("5DV124")),
+      createBuildingBlock(2, 0, 2, 1, getCourse("5TF048")),
+      createBuildingBlock(4, 0, 2, 1, getCourse("5EL266")),
+      createBuildingBlock(4, 1, 2, 1, getCourse("5EL265")),
+      createBuildingBlock(3, 2, 3, 1, getCourse("5TF073")),
+      createBuildingBlock(6, 0, 2, 1, getCourse("5TF042")),
+    ],
   },
   {
     year: 4,
-    periods: [[], [], [], []],
+    courses: [
+      createBuildingBlock(4, 0, 4, 3, getCourse("5TF049")),
+    ],
   },
   {
     year: 5,
-    periods: [[], [], [], []],
+    courses: [
+      createBuildingBlock(4, 0, 4, 3, getCourse("5TF049")),
+    ],
   },
 ];

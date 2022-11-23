@@ -47,7 +47,7 @@ export interface Preset {
 
 export interface Year {
     year: number;
-    periods: CoursesPeriod[];
+    courses: BuildingBlock[];
 }
 
 export type CoursesPeriod = (Course | null)[];
@@ -76,7 +76,7 @@ export interface BuildingBlock {
   w: number;
   h: number;
   i: string;
-  content: Course;
+  content: Course | undefined;
   isResizable?: boolean;
-  type: "course" | "clean" | "cleanNoResize" | "sabbat" | "examWork";
+  type?: "course" | "clean" | "cleanNoResize" | "sabbat" | "examWork";
 }
