@@ -27,7 +27,7 @@ export default function Years() {
       </div>
       <ResponsiveGridLayout
         className="layout"
-        compactType={"horizontal"}
+        compactType={"vertical"}
         // breakpoints={lg: 1200}
         layouts={{
           md: coursesYear.courses,
@@ -38,6 +38,7 @@ export default function Years() {
         resizeHandles={["e"]}
         rowHeight={170}
         // width={800}
+        isBounded={false}
         onLayoutChange={e => {
           saveChanges(e);
         }}
