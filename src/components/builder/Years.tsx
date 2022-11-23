@@ -9,11 +9,12 @@ import {
 } from "../../shared/constants";
 import { testDataYearsBuilder } from "../../shared/data";
 import Text from "../Text";
+import useCourses from "../../shared/useCourses";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export default function Years() {
-  const coursesYear = useRecoilValue(coursesYearState);
+  const { coursesYear, saveChanges, removeCourse} = useCourses();
 
   return (
     <div className="flex flex-col space-around">
@@ -37,6 +38,9 @@ export default function Years() {
         resizeHandles={["e"]}
         rowHeight={170}
         // width={800}
+        onLayoutChange={e => {
+          saveChanges(e);
+        }}
       >
         {coursesYear.courses.map((course, index) => (
           <div

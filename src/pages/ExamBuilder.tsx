@@ -22,8 +22,6 @@ import RightDrawer from "./RightDrawer";
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
-  const { state } = useLocation();
-  console.log(state)
   const [courses, setCourses] = useRecoilState(coursesBuilderState);
   const [activeYear, setActiveYear] = useRecoilState(activeYearState);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
