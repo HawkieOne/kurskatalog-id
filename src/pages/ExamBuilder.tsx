@@ -95,7 +95,7 @@ export default function ExamBuilder() {
                     year: cpyAllCourses[cpyAllCourses.length - 1].year + 1,
                     periods: [[null], [null], [null], [null]],
                   };
-                  cpyAllCourses.push(emptyYear);
+                  // cpyAllCourses.push(emptyYear);
                   setCourses(cpyAllCourses);
                   setActiveYear(cpyAllCourses.length - 1);
                 }}

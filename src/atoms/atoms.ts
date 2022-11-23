@@ -1,15 +1,16 @@
 import { atom, selector } from "recoil";
 import { createEmptyTemplate } from "../shared/builderFunctions";
+import { testDataYearsBuilder } from "../shared/data";
 import { Course, Year } from "../shared/interfaces";
 
 export const activeYearState = atom({
   key: "activeYearState",
-  default: 0
+  default: 0,
 });
 
 export const coursesBuilderState = atom({
   key: "coursesBuilderState",
-  default: createEmptyTemplate() as Year[],
+  default: testDataYearsBuilder as Year[],
 });
 
 export const coursesBuilderSelector = selector({
@@ -19,7 +20,7 @@ export const coursesBuilderSelector = selector({
   },
   set: ({ get, set }, newValue) => {
     set(coursesBuilderState, newValue);
-  }
+  },
 });
 
 export const coursesYearState = selector({
@@ -33,15 +34,15 @@ export const coursesYearState = selector({
 
 export const rightDrawerState = atom({
   key: "rightDrawerState",
-  default: false
+  default: false,
 });
 
 export const leftDrawerState = atom({
   key: "leftDrawerState",
-  default: false
+  default: false,
 });
 
 export const courseRightDrawerState = atom<Course | null>({
   key: "courseRightDrawerState",
-  default: null
+  default: null,
 });
