@@ -11,7 +11,7 @@ import IconButtonDropdown from "../components/IconButtonDropdown";
 import ModalWindow from "../components/Modal";
 import Text from "../components/Text";
 import Title from "../components/Title";
-import { createIDTemplate } from "../shared/builderFunctions";
+import { createEmptyTemplate, createIDTemplate } from "../shared/builderFunctions";
 import { Templates, TextVariant } from "../shared/constants";
 import { templates } from "../shared/data";
 import { Preset, Year } from "../shared/interfaces";
@@ -67,6 +67,7 @@ export default function Home() {
                 setCourses(createIDTemplate());
                 navigate("/byggare");
               } else if (chosenTemplate === Templates.empty) {
+                setCourses(createEmptyTemplate());
                 navigate("/byggare");
               } else if (chosenTemplate === Templates.upload) {
                 setIsUploadMdalOpen(true);

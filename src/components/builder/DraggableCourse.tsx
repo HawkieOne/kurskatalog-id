@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { AiFillDelete } from "react-icons/ai";
+import { createRef, useEffect, useRef, useState } from "react";
+import { AiFillDelete, AiOutlineBgColors } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import {
-  FontVariants,
-  TextVariant
-} from "../../shared/constants";
+import { FontVariants, TextVariant } from "../../shared/constants";
+import { colors } from "../../shared/data";
 import { BuildingBlock, Course } from "../../shared/interfaces";
+import { useOnClickOutside } from "../../shared/onClickOutside";
 import Text from "../Text";
 
 interface DraggableCourseProps {
@@ -13,12 +12,19 @@ interface DraggableCourseProps {
   onRemove: (uuid: string) => void;
 }
 
-export default function DraggableCourse({ course, onRemove }: DraggableCourseProps) {
+export default function DraggableCourse({
+  course,
+  onRemove,
+}: DraggableCourseProps) {
   const [isOverFlowMenuOpen, SetIsOverflowMenuOpen] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState("bg-cream");
 
+  const ref = createRef<HTMLDivElement>();
+  useOnClickOutside(ref, () => SetIsOverflowMenuOpen(false));
   return (
     <div
-      className="h-full w-full bg-cream flex items-start justify-start text-onyx shadow-lg"
+      ref={ref}
+      className={`h-full w-full ${backgroundColor} flex items-start justify-start text-onyx shadow-lg`}
     >
       {course.content && (
         <div className="h-full w-full flex flex-col p-3 text-ellipsis">
@@ -30,14 +36,28 @@ export default function DraggableCourse({ course, onRemove }: DraggableCoursePro
               className="hover:bg-creamDark rounded cursor-pointer"
               onClick={() => SetIsOverflowMenuOpen(!isOverFlowMenuOpen)}
             >
-              <div className="relative">
+              <div className="relative p-1">
                 <BiDotsVerticalRounded size="1.5em" />
                 {isOverFlowMenuOpen && (
-                  <ul className="absolute menu bg-white top-full w-32 right-0 shadow-lg">
+                  <ul className="absolute menu bg-white top-full w-44 right-0 shadow-lg z-auto">
                     <li>
-                      <div className="flex" onClick={() => onRemove(course.i)}>
+                      <div
+                        className="flex active:bg-red-500"
+                        onClick={() => onRemove(course.i)}
+                      >
                         <AiFillDelete />
                         <Text>Ta bort</Text>
+                      </div>
+                      <div
+                        className={`flex flex-wrap gap-2 active:bg-cream relative`}
+                      >
+                        {colors.map((color, index) => (
+                          <div
+                            key={index}
+                            className={`w-10 h-10 ${color} rounded`}
+                            onClick={() => setBackgroundColor(color)}
+                          />
+                        ))}
                       </div>
                     </li>
                   </ul>
