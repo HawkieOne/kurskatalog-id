@@ -2,31 +2,27 @@ import { ChangeEvent, createRef, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
-import {
-  activeYearState,
-  coursesBuilderState,
-  leftDrawerState,
-  rightDrawerState,
-} from "../atoms/atoms";
-import FileInput from "../components/builder/FileInput";
-import PresetChooser from "../components/builder/PresetChooser";
-import Progress from "../components/builder/Progress";
+import { leftDrawerState, rightDrawerState } from "../atoms/atoms";
+import Drawer from "../components/builder/Drawer";
 import Years from "../components/builder/Years";
+import Text from "../components/Text";
 import Title from "../components/Title";
 import { Preset, Year as YearType } from "../shared/interfaces";
 import { useOnClickOutside } from "../shared/onClickOutside";
+import useCourses from "../shared/useCourses";
 import RightDrawer from "./RightDrawer";
+import { courses as allCourses } from "../shared/data";
+import CourseDrawer from "../components/builder/CourseDrawer";
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
-  const [courses, setCourses] = useRecoilState(coursesBuilderState);
-  const [activeYear, setActiveYear] = useRecoilState(activeYearState);
+  const { courses, setCourses, activeYear, setActiveYear, addYear } =
+    useCourses();
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
     useRecoilState(leftDrawerState);
-    const isRightDrawerOpen = useRecoilValue(rightDrawerState);
+  const isRightDrawerOpen = useRecoilValue(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
@@ -60,9 +56,12 @@ export default function ExamBuilder() {
       <div className="drawer">
         {/* <input id="my-drawer" type="checkbox" className="drawer-toggle" /> */}
         <div className="drawer-content flex flex-row justify-between">
-          {/* <button onClick={() => setIsLeftDrawerOpen(true)} className="btn">
-            TEST
-          </button> */}
+          <button
+            onClick={() => setIsLeftDrawerOpen(true)}
+            className="btn bg-pink border-none text-onyx hover:text-white absolute"
+          >
+            Visa kurser
+          </button>
 
           <div className="w-full flex flex-col p-4 gap-3 items-center">
             <Title>Examenbyggare</Title>
@@ -85,19 +84,7 @@ export default function ExamBuilder() {
                   </button>
                 )
               )}
-              <button
-                className="tab tab-lg"
-                onClick={() => {
-                  const cpyAllCourses = courses.slice();
-                  const emptyYear = {
-                    year: cpyAllCourses[cpyAllCourses.length - 1].year + 1,
-                    periods: [[null], [null], [null], [null]],
-                  };
-                  // cpyAllCourses.push(emptyYear);
-                  setCourses(cpyAllCourses);
-                  setActiveYear(cpyAllCourses.length - 1);
-                }}
-              >
+              <button className="tab tab-lg" onClick={() => addYear()}>
                 <IoIosAddCircleOutline />
               </button>
             </div>
@@ -131,23 +118,13 @@ export default function ExamBuilder() {
           </div> */}
         </div>
         {isLeftDrawerOpen && (
-          <div
-            className="absolute bg-white inset-y-0 left-0 shadow-lg"
-            ref={leftDrawerRef}
-          >
-            <ul className="menu p-4 w-80 bg-white text-base-content">
-              <li>
-                <a>Sidebar Item 1</a>
-              </li>
-              <li>
-                <a>Sidebar Item 2</a>
-              </li>
-            </ul>
-          </div>
+          <Drawer side="left" refPointer={leftDrawerRef}>
+            {allCourses.map((course, index) => (
+              <CourseDrawer key={index} course={course} />
+            ))}
+          </Drawer>
         )}
-        {isRightDrawerOpen && (
-          <RightDrawer />
-        )}
+        {isRightDrawerOpen && <RightDrawer />}
       </div>
     </div>
   );

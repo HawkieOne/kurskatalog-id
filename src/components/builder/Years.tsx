@@ -9,7 +9,7 @@ import DraggableCourse from "./DraggableCourse";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export default function Years() {
-  const { coursesYear, saveChanges, removeCourse} = useCourses();
+  const { coursesActiveYear, saveChanges, removeCourse} = useCourses();
 
   return (
     <div className="flex flex-col space-around">
@@ -25,8 +25,8 @@ export default function Years() {
         compactType={"vertical"}
         // breakpoints={lg: 1200}
         layouts={{
-          md: coursesYear.courses,
-          lg: coursesYear.courses,
+          md: coursesActiveYear.courses,
+          lg: coursesActiveYear.courses,
         }}
         cols={{ md: 4, lg: 8 }}
         maxRows={6}
@@ -38,7 +38,7 @@ export default function Years() {
           saveChanges(e);
         }}
       >
-        {coursesYear.courses.map((course, index) => (
+        {coursesActiveYear.courses.map((course, index) => (
           <div key={course.i} className="">
             <DraggableCourse
             key={course.i}

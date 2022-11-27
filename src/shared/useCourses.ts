@@ -9,8 +9,8 @@ import { BuildingBlock, Course } from "./interfaces";
 
 export default function useCourses() {
   const [courses, setCourses] = useRecoilState(coursesBuilderSelector);
-  const activeYear = useRecoilValue(activeYearState);
-  const coursesYear = useRecoilValue(coursesYearState);
+  const [activeYear, setActiveYear] = useRecoilState(activeYearState);
+  const coursesActiveYear = useRecoilValue(coursesYearState);
 
   const addCourseToPeriod = (periodIndex: number) => {};
 
@@ -42,10 +42,25 @@ export default function useCourses() {
     setCourses(cpyCourses);
   };
 
+  const addYear = () => {
+    let cpyCourses = courses.slice();
+    console.log(cpyCourses.length);
+    cpyCourses.push({
+      year: cpyCourses.length,
+      courses: []
+    })
+    setCourses(cpyCourses);
+  }
+
   return {
-    coursesYear,
+    courses, 
+    setCourses,
+    coursesActiveYear,
+    activeYear,
+    setActiveYear,
     addCourseToPeriod,
     removeCourse,
     saveChanges,
+    addYear,
   };
 }
