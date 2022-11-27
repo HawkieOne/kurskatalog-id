@@ -28,7 +28,7 @@ export default function CourseDrawer({ course }: CourseDrawerProps) {
           <Link
             to={"kurser/" + course.name}
             state={{ course: course }}
-            className="bg-cream flex flex-col justify-center 
+            className="bg-cream flex flex-col justify-center
                         items-center p-3 hover:bg-onyx hover:text-white"
           >
             <button>
