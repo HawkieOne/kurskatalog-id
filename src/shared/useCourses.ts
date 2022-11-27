@@ -53,7 +53,7 @@ export default function useCourses() {
   }
 
   return {
-    courses, 
+    courses,
     setCourses,
     coursesActiveYear,
     activeYear,
