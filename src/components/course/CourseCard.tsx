@@ -6,11 +6,11 @@ import { AiOutlineClose } from "react-icons/ai";
 
 interface CardProps {
   course: Course;
-  removeFunc?: () => void;
+  onRemoveClick?: () => void;
 }
 
 
-export default function Card({ course, removeFunc }: CardProps) {
+export default function CourseCard({ course, onRemoveClick }: CardProps) {
   const [isHoverActive, setIsHoverActive] = useState(false);
   return (
     <div
@@ -26,7 +26,7 @@ export default function Card({ course, removeFunc }: CardProps) {
       </div>
       {isHoverActive && (
         <div className='p-1 hover:bg-onyx hover:text-white hover:rounded-full absolute top-2 right-2 cursor-pointer'
-            onClick={removeFunc}>
+            onClick={onRemoveClick}>
           <AiOutlineClose />
         </div>
       )}

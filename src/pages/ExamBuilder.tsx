@@ -9,7 +9,7 @@ import CourseDrawer from "../components/builder/CourseDrawer";
 import CoursesContainer from "../components/builder/CoursesContainer";
 import Drawer from "../components/builder/Drawer";
 import Years from "../components/builder/Years";
-import Card from "../components/course/Card";
+import CourseCard from "../components/course/CourseCard";
 import Search from "../components/Search";
 import Title from "../components/Title";
 import { courses as allCourses } from "../shared/data";
@@ -100,7 +100,7 @@ export default function ExamBuilder() {
 
             <CoursesContainer>
               {selectedCourses.map((course, index) => (
-                <Card key={index} course={course} removeFunc={() =>
+                <CourseCard key={index} course={course} onRemoveClick={() =>
                   setSelectedCourses(selectedCourses.filter(function(e) { return e !== course }))}/>
               ))}
             </CoursesContainer>
@@ -152,7 +152,7 @@ export default function ExamBuilder() {
             </div>
 
             {searchedCourses.map((course, index) => (
-              <CourseDrawer key={index} course={course} addFunc={() => setSelectedCourses([...selectedCourses, course])} />
+              <CourseDrawer key={index} course={course} onAddCourseClick={() => setSelectedCourses([...selectedCourses, course])} />
             ))}
             {searchedCourses.length === 0 && <p className="text-center">Inga kurser hittade</p>}
           </Drawer>

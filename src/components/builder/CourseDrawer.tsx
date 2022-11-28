@@ -7,10 +7,10 @@ import Text from "../Text";
 
 interface CourseDrawerProps {
   course: Course;
-  addFunc?: () => void;
+  onAddCourseClick?: () => void;
 }
 
-export default function CourseDrawer({ course, addFunc }: CourseDrawerProps) {
+export default function CourseDrawer({ course, onAddCourseClick }: CourseDrawerProps) {
   const [isHoverActive, setIsHoverActive] = useState(false);
   return (
     <div
@@ -39,7 +39,7 @@ export default function CourseDrawer({ course, addFunc }: CourseDrawerProps) {
           <div
             className="bg-pink flex flex-col justify-center cursor-pointer
                         items-center p-3 hover:bg-onyx hover:text-white rounded-r-md"
-            onClick={addFunc}
+            onClick={onAddCourseClick}
           >
             <AiOutlinePlus />
           </div>
