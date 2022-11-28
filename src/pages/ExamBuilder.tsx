@@ -100,7 +100,7 @@ export default function ExamBuilder() {
 
             <CoursesContainer>
               {selectedCourses.map((course, index) => (
-                <Card key={index} course={course} removeFunc={() => 
+                <Card key={index} course={course} removeFunc={() =>
                   setSelectedCourses(selectedCourses.filter(function(e) { return e !== course }))}/>
               ))}
             </CoursesContainer>
@@ -145,7 +145,7 @@ export default function ExamBuilder() {
                   setSearchedCourses(foundCourses);
                 }
               }} />
-              <div className='p-1 text-xl cursor-pointer hover:bg-onyx hover:rounded-full hover:text-white' 
+              <div className='p-1 text-xl cursor-pointer hover:bg-onyx hover:rounded-full hover:text-white'
                   onClick={() => setIsLeftDrawerOpen(false)}>
                 <AiOutlineClose />
               </div>
