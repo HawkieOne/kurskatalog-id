@@ -2,7 +2,7 @@
 export type TextVariant = "text-md" | "text-xl" | "text-2xl" | "text-3xl";
 export type TitleVariant = "text-2xl" | "text-4xl";
 export type FontVariant = "font-light" | "font-semibold" | "font-bold";
-export type AlignVaraint = "text-left" | "text-center" | "text-right";
+export type AlignVariant = "text-left" | "text-center" | "text-right";
 
 export interface TextVariantObject {
   small: TextVariant;
@@ -23,9 +23,9 @@ export interface FontVariantObject {
 }
 
 export interface AlignVariantObject {
-  left: AlignVaraint;
-  center: AlignVaraint;
-  right: AlignVaraint;
+  left: AlignVariant;
+  center: AlignVariant;
+  right: AlignVariant;
 }
 
 export type AllowedTextColors =
