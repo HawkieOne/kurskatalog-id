@@ -31,7 +31,7 @@ export default function Search({ onSearch }: SearchProps) {
             />
           </form>
           {!isInputEmpty(searchTerm) &&
-            <div className='p-1 absolute top-1/2 -translate-y-1/2 right-3 flex flex-col justify-center cursor-pointer text-onyx hover:bg-onyx hover:text-white hover:rounded-full' 
+            <div className='p-1 absolute top-1/2 -translate-y-1/2 right-3 flex flex-col justify-center cursor-pointer text-onyx hover:bg-onyx hover:text-white hover:rounded-full'
                 onClick={() => setSearchTerm("")}>
               <AiOutlineClose />
             </div>}
