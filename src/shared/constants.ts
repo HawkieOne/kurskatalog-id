@@ -1,4 +1,4 @@
-import { FontVariantObject, TextVariantObject, TitleVariantObject } from "./interfaces";
+import { AlignVariantObject, FontVariantObject, TextVariantObject, TitleVariantObject } from "./interfaces";
 
 export const TextVariant: TextVariantObject = {
     small: "text-md",
@@ -16,6 +16,12 @@ export const FontVariants: FontVariantObject = {
     light: "font-light",
     semibold: "font-semibold",
     bold: "font-bold",
+}
+
+export const AlignVariants: AlignVariantObject = {
+    left: "text-left",
+    center: "text-center",
+    right: "text-right",
 }
 
 export const maxRating = 5;

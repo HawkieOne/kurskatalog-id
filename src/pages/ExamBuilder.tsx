@@ -5,23 +5,27 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import { leftDrawerState, rightDrawerState } from "../atoms/atoms";
+import CourseDrawer from "../components/builder/CourseDrawer";
+import CoursesContainer from "../components/builder/CoursesContainer";
 import Drawer from "../components/builder/Drawer";
 import Years from "../components/builder/Years";
-import Text from "../components/Text";
+import Card from "../components/course/Card";
+import Search from "../components/Search";
 import Title from "../components/Title";
-import { Preset, Year as YearType } from "../shared/interfaces";
+import { courses as allCourses } from "../shared/data";
+import { Course, Preset, Year as YearType } from "../shared/interfaces";
 import { useOnClickOutside } from "../shared/onClickOutside";
+import { AiOutlineClose } from "react-icons/ai";
 import useCourses from "../shared/useCourses";
 import RightDrawer from "./RightDrawer";
-import { courses as allCourses } from "../shared/data";
-import CourseDrawer from "../components/builder/CourseDrawer";
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
   const { courses, setCourses, activeYear, setActiveYear, addYear } =
     useCourses();
-  const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
-    useRecoilState(leftDrawerState);
+  const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
+  const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
+  const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useRecoilState(leftDrawerState);
   const isRightDrawerOpen = useRecoilValue(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
@@ -93,6 +97,13 @@ export default function ExamBuilder() {
                 <Years />
               </DndProvider>
             </div>
+
+            <CoursesContainer>
+              {selectedCourses.map((course, index) => (
+                <Card key={index} course={course} removeFunc={() => 
+                  setSelectedCourses(selectedCourses.filter(function(e) { return e !== course }))}/>
+              ))}
+            </CoursesContainer>
           </div>
 
           {/* <div className="flex flex-col gap-6 p-4">
@@ -119,9 +130,31 @@ export default function ExamBuilder() {
         </div>
         {isLeftDrawerOpen && (
           <Drawer side="left" refPointer={leftDrawerRef}>
-            {allCourses.map((course, index) => (
-              <CourseDrawer key={index} course={course} />
+            <div className="flex gap-3 items-center justify-center">
+              <Search onSearch={(searchTerm: string) => {
+                searchTerm = searchTerm.toLowerCase().trim();
+                if (searchTerm === "") {
+                  setSearchedCourses(allCourses);
+                  return;
+                }
+                if (searchTerm.length >= 2) {
+                  const foundCourses = allCourses.filter(e =>
+                    e.code.toLowerCase().includes(searchTerm) ||
+                    e.name.toLowerCase().includes(searchTerm) ||
+                    e.registerCode?.toLowerCase().includes(searchTerm));
+                  setSearchedCourses(foundCourses);
+                }
+              }} />
+              <div className='p-1 text-xl cursor-pointer hover:bg-onyx hover:rounded-full hover:text-white' 
+                  onClick={() => setIsLeftDrawerOpen(false)}>
+                <AiOutlineClose />
+              </div>
+            </div>
+
+            {searchedCourses.map((course, index) => (
+              <CourseDrawer key={index} course={course} addFunc={() => setSelectedCourses([...selectedCourses, course])} />
             ))}
+            {searchedCourses.length === 0 && <p className="text-center">Inga kurser hittade</p>}
           </Drawer>
         )}
         {isRightDrawerOpen && <RightDrawer />}
