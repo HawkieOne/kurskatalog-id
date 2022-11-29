@@ -18,7 +18,7 @@ export default function Years() {
   } = useCourses();
 
   return (
-    <div className="flex flex-col space-around">
+    <div className="flex flex-col space-around bg-slate-50 rounded-lg p-5">
       <div className="w-full flex justify-around">
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Title size={TitleVariant.small} key={index}>
