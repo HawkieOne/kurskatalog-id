@@ -5,7 +5,7 @@ import {
   coursesBuilderSelector,
   coursesYearState,
   draggingSavedCourseState,
-  savedCoursesState,
+  savedCoursesState
 } from "../atoms/atoms";
 import { BuildingBlock, Course } from "./interfaces";
 

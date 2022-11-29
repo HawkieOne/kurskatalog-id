@@ -53,7 +53,7 @@ export default function ModalWindow({
             className="btn btn-link no-underline text-red-500"
           >
             Cancel
-          </button>np
+          </button>
           <button
             onClick={onSuccess}
             className="btn bg-cream text-onyx hover:bg-creamDark border-none"
