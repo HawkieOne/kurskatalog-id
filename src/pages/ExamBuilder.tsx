@@ -3,28 +3,30 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useNavigation } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import { leftDrawerState, rightDrawerState } from "../atoms/atoms";
 import CourseDrawer from "../components/builder/CourseDrawer";
 import CoursesContainer from "../components/builder/CoursesContainer";
 import Drawer from "../components/builder/Drawer";
+import FileInput from "../components/builder/FileInput";
+import PresetChooser from "../components/builder/PresetChooser";
+import Progress from "../components/builder/Progress";
 import Years from "../components/builder/Years";
 import CourseCard from "../components/course/CourseCard";
 import Search from "../components/Search";
 import Title from "../components/Title";
+import { exportTemplate } from "../shared/builderFunctions";
 import { courses as allCourses } from "../shared/data";
 import { Course, Preset, Year as YearType } from "../shared/interfaces";
 import { useOnClickOutside } from "../shared/onClickOutside";
 import useCourses from "../shared/useCourses";
-import RightDrawer from "./RightDrawer";
-import Progress from "../components/builder/Progress";
-import PresetChooser from "../components/builder/PresetChooser";
-import FileInput from "../components/builder/FileInput";
-import { exportTemplate } from "../shared/builderFunctions";
 
 export default function ExamBuilder() {
+  // const navigation = useNavigation();
   const [presets, setPresets] = useState<Preset[]>([]);
+  const [activePreset, setActivePreset] = useState<Preset | null>(null);
   const {
     courses,
     setCourses,
@@ -35,6 +37,11 @@ export default function ExamBuilder() {
     removeFromSavedCourses,
     addToSavedCourses,
   } = useCourses();
+  // const params = navigation.location?.state;
+  // if (params) {
+  //   const preset = params as Preset;
+  //   setCourses(preset.years);
+  // }
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
     useRecoilState(leftDrawerState);
@@ -60,14 +67,17 @@ export default function ExamBuilder() {
           };
           const cpyPresets = presets.slice();
           cpyPresets.push(preset);
+          setActivePreset(preset);
           setPresets(cpyPresets);
         }
       };
     }
   };
-
   const onPresetChosen = (e: ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.currentTarget.value);
+    const preset = presets.find((preset) => preset.name === e.target.value);
+    if (preset) {
+      setActivePreset(preset);
+    }
   };
 
   return (
@@ -170,18 +180,21 @@ export default function ExamBuilder() {
             <div className="flex flex-col gap-6 p-4">
               <FileInput onUpload={onFileUpload} acceptedFormat=".json" />
 
-              <PresetChooser onChange={onPresetChosen} presets={presets} />
+              <PresetChooser
+                onChange={onPresetChosen}
+                presets={presets}
+                onUsePreset={() => {
+                  if (activePreset) {
+                    setCourses(activePreset.years);
+                  }
+                }}
+              />
 
               <Progress max={100} value={40} />
 
               <button
                 className="btn btn-accent"
-                onClick={() =>
-                  exportTemplate({
-                    name: "template",
-                    years: courses,
-                  })
-                }
+                onClick={() => exportTemplate("template", courses)}
               >
                 Spara förinställning
               </button>

@@ -9,7 +9,6 @@ export default function Navbar() {
     useRecoilState(rightDrawerState);
   const location = useLocation();
   const pathName = location.pathname.replace("/", "").trim();
-  console.log(pathName)
   const capitalizedPathname =
     pathName.charAt(0).toUpperCase() + pathName.slice(1);
   return (
