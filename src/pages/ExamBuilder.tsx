@@ -65,8 +65,8 @@ export default function ExamBuilder() {
   };
 
   return (
-    <div className="bg-white p-4 relative">
-      <div className="drawer">
+    <div className="h-full bg-white p-4 relative">
+      <div className="h-full drawer">
         {/* <input id="my-drawer" type="checkbox" className="drawer-toggle" /> */}
         <div className="drawer-content flex flex-row justify-between">
           <button
