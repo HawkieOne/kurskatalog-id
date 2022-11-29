@@ -34,7 +34,7 @@ export default function FileInput({ acceptedFormat, onUpload } : FileInputProps)
           }
         }}
       />
-      <div className="h-12">
+      <div className="h-6">
         <Text color="text-pink">{errorText}</Text>
       </div>
     </div>

@@ -8,7 +8,6 @@ interface ProgressProps {
 export default function Progress({ max, value } : ProgressProps) {
   return (
     <div className="flex flex-col">
-      <Title>Kurser valda</Title>
       <progress
         className="progress progress-accent w-56"
         value={value}
