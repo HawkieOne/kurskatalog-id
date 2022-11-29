@@ -27,7 +27,7 @@ function App() {
                   {/* <Route path=":id" element={<Course />} /> */}
                 </Route>
                 <Route path="/byggare" element={<ExamBuilder />} />
-                <Route path="/obligatoriskt" element={<MandatoryCourses />} />
+                <Route path="/kursplan" element={<MandatoryCourses />} />
                 <Route path="/kurser/:name" element={<CoursePage />} />
               </Routes>
             </div>
