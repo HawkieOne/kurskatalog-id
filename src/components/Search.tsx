@@ -25,7 +25,7 @@ export default function Search({ onSearch }: SearchProps) {
               type="text"
               placeholder="Sök…"
               value={searchTerm}
-              className="input input-bordered bg-cream text-onyx justify-self-end rounded-l-xl rounded-none focus:border-onyx focus:outline-none"
+              className="input bg-cream text-onyx justify-self-end rounded-l-xl rounded-none focus:border-pink focus:border-opacity-50 focus:outline-none border border-creamDark"
               onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
               onKeyDown={handleKeyDown}
             />
