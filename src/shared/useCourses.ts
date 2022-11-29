@@ -4,11 +4,13 @@ import {
   activeYearState,
   coursesBuilderSelector,
   coursesYearState,
+  savedCoursesState,
 } from "../atoms/atoms";
 import { BuildingBlock, Course } from "./interfaces";
 
 export default function useCourses() {
   const [courses, setCourses] = useRecoilState(coursesBuilderSelector);
+  const [savedCourses, setSavedCourses] = useRecoilState(savedCoursesState);
   const [activeYear, setActiveYear] = useRecoilState(activeYearState);
   const coursesActiveYear = useRecoilValue(coursesYearState);
 
@@ -47,10 +49,22 @@ export default function useCourses() {
     console.log(cpyCourses.length);
     cpyCourses.push({
       year: cpyCourses.length,
-      courses: []
-    })
+      courses: [],
+    });
     setCourses(cpyCourses);
-  }
+  };
+
+  const addToSavedCourses = (course: Course) => {
+    const savedCoursesCpy = savedCourses.slice();
+    savedCoursesCpy.push(course);
+    setSavedCourses(savedCoursesCpy);
+  };
+
+  const removeFromSavedCourses = (index: number) => {
+    const savedCoursesCpy = savedCourses.slice();
+    savedCoursesCpy.splice(index, 1);
+    setSavedCourses(savedCoursesCpy);
+  };
 
   return {
     courses,
@@ -62,5 +76,8 @@ export default function useCourses() {
     removeCourse,
     saveChanges,
     addYear,
+    savedCourses,
+    addToSavedCourses,
+    removeFromSavedCourses,
   };
 }

@@ -36,6 +36,11 @@ export const coursesYearState = selector({
   },
 });
 
+export const savedCoursesState = atom({
+  key: "savedCoursesState",
+  default: [] as Course[],
+});
+
 export const rightDrawerState = atom({
   key: "rightDrawerState",
   default: false,

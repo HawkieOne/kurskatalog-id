@@ -14,7 +14,7 @@ export default function CourseDrawer({ course, onAddCourseClick }: CourseDrawerP
   const [isHoverActive, setIsHoverActive] = useState(false);
   return (
     <div
-      className="text-onyx shadow-md w-80 flex flex-col relative rounded-md"
+      className="text-onyx shadow-md flex flex-col w-80 relative rounded-md"
       onMouseEnter={() => setIsHoverActive(true)}
       onMouseLeave={() => setIsHoverActive(false)}
     >
