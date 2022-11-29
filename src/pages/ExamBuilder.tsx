@@ -18,6 +18,10 @@ import { Course, Preset, Year as YearType } from "../shared/interfaces";
 import { useOnClickOutside } from "../shared/onClickOutside";
 import useCourses from "../shared/useCourses";
 import RightDrawer from "./RightDrawer";
+import Progress from "../components/builder/Progress";
+import PresetChooser from "../components/builder/PresetChooser";
+import FileInput from "../components/builder/FileInput";
+import { exportTemplate } from "../shared/builderFunctions";
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
@@ -34,10 +38,13 @@ export default function ExamBuilder() {
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
     useRecoilState(leftDrawerState);
-  const isRightDrawerOpen = useRecoilValue(rightDrawerState);
+  const [isRightDrawerOpen, setIsRightDrawerOpen] =
+    useRecoilState(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
+  const rightDrawerRef = createRef<HTMLDivElement>();
+  useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
 
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0);
@@ -116,28 +123,6 @@ export default function ExamBuilder() {
               ))}
             </CoursesContainer>
           </div>
-
-          {/* <div className="flex flex-col gap-6 p-4">
-            <FileInput onUpload={onFileUpload} acceptedFormat=".json" />
-
-            <PresetChooser onChange={onPresetChosen} presets={presets} />
-
-            <div className="collapse collapse-arrow rounded-box">
-              <input type="checkbox" className="peer" />
-              <div className="collapse-title bg-accent text-primary-content">
-                Visa obligatoriska kurser
-              </div>
-              <div className="collapse-content bg-accent text-primary-content">
-                <p>hello</p>
-              </div>
-            </div>
-
-            <Progress max={100} value={40} />
-
-            <button className="btn btn-accent">Spara förinställning</button>
-
-            <button className="btn btn-accent">Skriv ut</button>
-          </div> */}
         </div>
         {isLeftDrawerOpen && (
           <Drawer side="left" refPointer={leftDrawerRef}>
@@ -180,7 +165,33 @@ export default function ExamBuilder() {
             )}
           </Drawer>
         )}
-        {isRightDrawerOpen && <RightDrawer />}
+        {isRightDrawerOpen && (
+          <Drawer side="right" refPointer={rightDrawerRef}>
+            <div className="flex flex-col gap-6 p-4">
+              <FileInput onUpload={onFileUpload} acceptedFormat=".json" />
+
+              <PresetChooser onChange={onPresetChosen} presets={presets} />
+
+              <Progress max={100} value={40} />
+
+              <button
+                className="btn btn-accent"
+                onClick={() =>
+                  exportTemplate({
+                    name: "template",
+                    years: courses,
+                  })
+                }
+              >
+                Spara förinställning
+              </button>
+
+              <button className="btn btn-accent">Spara som bild</button>
+
+              <button className="btn btn-accent">Skriv ut</button>
+            </div>
+          </Drawer>
+        )}
       </div>
     </div>
   );
