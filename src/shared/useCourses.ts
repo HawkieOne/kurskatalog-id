@@ -64,12 +64,14 @@ export default function useCourses() {
   };
 
   const addYear = () => {
-    let cpyCourses = courses.slice();
-    cpyCourses.push({
-      year: cpyCourses.length,
-      courses: [],
-    });
-    setCourses(cpyCourses);
+    if (courses.length < 9) {
+      let cpyCourses = courses.slice();
+      cpyCourses.push({
+        year: cpyCourses.length,
+        courses: [],
+      });
+      setCourses(cpyCourses);
+    }
   };
 
   const addToSavedCourses = (course: Course) => {

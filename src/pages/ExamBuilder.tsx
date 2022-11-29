@@ -21,10 +21,11 @@ import { exportTemplate } from "../shared/builderFunctions";
 import { courses as allCourses } from "../shared/data";
 import { Course, Preset, Year as YearType } from "../shared/interfaces";
 import { useOnClickOutside } from "../shared/onClickOutside";
+import Validator from "json-schema"
 import useCourses from "../shared/useCourses";
 
 export default function ExamBuilder() {
-  const  location = useLocation();
+  const location = useLocation();
   const [presets, setPresets] = useState<Preset[]>([]);
   const [activePreset, setActivePreset] = useState<Preset | null>(null);
   const {
@@ -49,9 +50,9 @@ export default function ExamBuilder() {
     useRecoilState(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
-  useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
+  // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
   const rightDrawerRef = createRef<HTMLDivElement>();
-  useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
+  // useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
 
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0);
@@ -61,6 +62,7 @@ export default function ExamBuilder() {
       fileReader.onload = (e) => {
         if (e.target?.result) {
           const data = JSON.parse(e.target.result as string) as YearType[];
+          console.log(Validator.validate(data, { "type": "number"}));
           const preset = {
             name: file.name,
             years: data,
@@ -81,20 +83,11 @@ export default function ExamBuilder() {
   };
 
   return (
-    <div className="h-full bg-white p-4 relative">
-      <div className="h-full drawer">
-        {/* <input id="my-drawer" type="checkbox" className="drawer-toggle" /> */}
-        <div className="drawer-content flex flex-row justify-between">
-          <button
-            onClick={() => setIsLeftDrawerOpen(true)}
-            className="btn bg-pink border-none text-onyx hover:text-white absolute"
-          >
-            Visa kurser
-          </button>
-
-          <div className="w-full flex flex-col p-4 gap-3 items-center">
-            <Title>Examenbyggare</Title>
-            <div className="tabs">
+    <div className="h-full bg-white">
+      <div className="h-full relative p-4">
+        <div className="h-full flex flex-row justify-between">
+          <div className="w-full flex p-4 gap-3">
+            <div className="tabs flex-col items-center justify-center basis-20">
               {courses.map((_, index) =>
                 index === activeYear ? (
                   <button
@@ -105,7 +98,7 @@ export default function ExamBuilder() {
                   </button>
                 ) : (
                   <button
-                    className="tab tab-lg"
+                    className="tab tab-lg text-onyx"
                     onClick={() => setActiveYear(index)}
                     key={index}
                   >
@@ -113,25 +106,29 @@ export default function ExamBuilder() {
                   </button>
                 )
               )}
-              <button className="tab tab-lg" onClick={() => addYear()}>
+              <button
+                className="tab tab-lg text-onyx"
+                onClick={() => addYear()}
+              >
                 <IoIosAddCircleOutline />
               </button>
             </div>
-            <div className="w-full self-start ">
+            <div className="w-full flex flex-col justify-evenly space-y-8">
               <DndProvider backend={HTML5Backend}>
                 <Years />
               </DndProvider>
+              <CoursesContainer
+                onAddCourses={() => setIsLeftDrawerOpen((prev) => !prev)}
+              >
+                {savedCourses.map((course, index) => (
+                  <CourseCard
+                    key={index}
+                    course={course}
+                    onRemoveClick={() => removeFromSavedCourses(index)}
+                  />
+                ))}
+              </CoursesContainer>
             </div>
-
-            <CoursesContainer>
-              {savedCourses.map((course, index) => (
-                <CourseCard
-                  key={index}
-                  course={course}
-                  onRemoveClick={() => removeFromSavedCourses(index)}
-                />
-              ))}
-            </CoursesContainer>
           </div>
         </div>
         {isLeftDrawerOpen && (
@@ -144,15 +141,13 @@ export default function ExamBuilder() {
                     setSearchedCourses(allCourses);
                     return;
                   }
-                  if (searchTerm.length >= 2) {
-                    const foundCourses = allCourses.filter(
-                      (e) =>
-                        e.code.toLowerCase().includes(searchTerm) ||
-                        e.name.toLowerCase().includes(searchTerm) ||
-                        e.registerCode?.toLowerCase().includes(searchTerm)
-                    );
-                    setSearchedCourses(foundCourses);
-                  }
+                  const foundCourses = allCourses.filter(
+                    (e) =>
+                      e.code.toLowerCase().includes(searchTerm) ||
+                      e.name.toLowerCase().includes(searchTerm) ||
+                      e.registerCode?.toLowerCase().includes(searchTerm)
+                  );
+                  setSearchedCourses(foundCourses);
                 }}
               />
               <div

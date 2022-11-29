@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
+}
+
+.border-bottom-pink {
+  box-shadow: 0px 2px 0px 0px rgba(255, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 2px 0px 0px rgba(255, 0, 0, 0.75);
+  -moz-box-shadow: 0px 2px 0px 0px rgba(255, 0, 0, 0.75);
 }

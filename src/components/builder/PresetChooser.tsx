@@ -13,7 +13,7 @@ export default function PresetChooser({
   onUsePreset,
 }: PresetChooserProps) {
   return (
-    <div className="form-control">
+    <div className="form-control text-onyx">
       <h2>Använd förinställning</h2>
       <div className="input-group text-onyx">
         <select

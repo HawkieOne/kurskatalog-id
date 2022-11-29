@@ -1,5 +1,5 @@
 import { createRef, useEffect, useRef, useState } from "react";
-import { AiFillDelete, AiOutlineBgColors } from "react-icons/ai";
+import { AiFillDelete, AiOutlineBgColors, AiFillRead } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { FontVariants, TextVariant } from "../../shared/constants";
 import { colors } from "../../shared/data";
@@ -42,7 +42,14 @@ export default function DraggableCourse({
                   <ul className="absolute menu bg-white top-full w-44 right-0 shadow-lg z-auto">
                     <li>
                       <div
-                        className="flex active:bg-red-500"
+                        className="flex active:bg-red-500 items-center"
+                        onClick={() => {}}
+                      >
+                        <AiFillRead />
+                        <Text>Läs mer</Text>
+                      </div>
+                      <div
+                        className="flex active:bg-red-500 items-center"
                         onClick={() => onRemove(course.i)}
                       >
                         <AiFillDelete />
@@ -54,7 +61,7 @@ export default function DraggableCourse({
                         {colors.map((color, index) => (
                           <div
                             key={index}
-                            className={`w-10 h-10 ${color} rounded`}
+                            className={`w-6 h-6 ${color} rounded hover:border border-onyx`}
                             onClick={() => setBackgroundColor(color)}
                           />
                         ))}
@@ -66,17 +73,6 @@ export default function DraggableCourse({
             </div>
           </div>
           <p>{course.content.name}</p>
-          <div className="self-end mt-auto">
-            <button
-              className="btn bg-pink border-none text-onyx hover:text-white"
-              onClick={() => {
-                // setCourseRightDrawer(course);
-                // setIsRightDrawerOpen(true);
-              }}
-            >
-              Läs mer
-            </button>
-          </div>
         </div>
       )}
     </div>
