@@ -513,3 +513,14 @@ export const templateID = [
     ],
   },
 ];
+
+export const emptyCourse = {
+  name: "",
+  points: -1,
+  link: "",
+  level: "",// CAN ONLY BE SOME VALUES
+  code: "",
+  registerCode: "",
+  description: "",
+  rating: -1
+}

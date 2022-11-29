@@ -1,5 +1,6 @@
 import { atom, selector } from "recoil";
 import { createEmptyTemplate } from "../shared/builderFunctions";
+import { emptyCourse } from "../shared/data";
 import { Course, Year } from "../shared/interfaces";
 
 export const hasStartedEditingState = atom({
@@ -40,6 +41,11 @@ export const savedCoursesState = atom({
   key: "savedCoursesState",
   default: [] as Course[],
 });
+
+export const draggingSavedCourseState = atom<Course | null>({
+  key: "draggingSavedCourseState",
+  default: null,
+})
 
 export const rightDrawerState = atom({
   key: "rightDrawerState",
