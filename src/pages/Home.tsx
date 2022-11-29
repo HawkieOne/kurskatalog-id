@@ -102,7 +102,7 @@ export default function Home() {
             icon={<BsList size={"2.5em"} />}
             text="Kursplan"
             size="large"
-            to="/obligatoriskt"
+            to="/kursplan"
             hoverBgColor="bg-creamDark"
           />
         </div>
