@@ -3,7 +3,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { useNavigation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import { leftDrawerState, rightDrawerState } from "../atoms/atoms";
@@ -24,7 +24,7 @@ import { useOnClickOutside } from "../shared/onClickOutside";
 import useCourses from "../shared/useCourses";
 
 export default function ExamBuilder() {
-  // const navigation = useNavigation();
+  const  location = useLocation();
   const [presets, setPresets] = useState<Preset[]>([]);
   const [activePreset, setActivePreset] = useState<Preset | null>(null);
   const {
@@ -37,11 +37,11 @@ export default function ExamBuilder() {
     removeFromSavedCourses,
     addToSavedCourses,
   } = useCourses();
-  // const params = navigation.location?.state;
-  // if (params) {
-  //   const preset = params as Preset;
-  //   setCourses(preset.years);
-  // }
+  const params = location.state;
+  if (params) {
+    const preset = params as Preset;
+    setCourses(preset.years);
+  }
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
     useRecoilState(leftDrawerState);

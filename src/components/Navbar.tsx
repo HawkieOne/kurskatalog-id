@@ -23,7 +23,7 @@ export default function Navbar() {
       {location.pathname !== "/" && <Title>{capitalizedPathname}</Title>}
       {pathName === "byggare" && (
         <div
-          className="absolute h-full inset-y-0 right-10 flex flex-col justify-center border-pink cursor-pointer
+          className="absolute h-full inset-y-0 right-10 flex flex-col justify-center border-pink cursor-pointer text-onyx
                        hover:border-b hover:text-pink"
           onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
         >
