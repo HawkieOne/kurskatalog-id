@@ -15,6 +15,7 @@ import Title from "../components/Title";
 import {
   createEmptyTemplate,
   createIDTemplate,
+  prepareUploadedFile,
 } from "../shared/builderFunctions";
 import { Templates, TextVariant } from "../shared/constants";
 import { templates } from "../shared/data";
@@ -32,19 +33,8 @@ export default function Home() {
 
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0);
-    if (file?.name.endsWith("json")) {
-      const fileReader = new FileReader();
-      fileReader.readAsText(file, "UTF-8");
-      fileReader.onload = (e) => {
-        if (e.target?.result) {
-          const data = JSON.parse(e.target.result as string) as Year[];
-          const preset = {
-            name: file.name,
-            years: data,
-          };
-          setUploadedPreset(preset);
-        }
-      };
+    if (file) {
+      // setUploadedPreset(prepareUploadedFile(file));
     }
   };
 
@@ -55,7 +45,7 @@ export default function Home() {
           <Title>Kurskatalog</Title>
           <Text size={TextVariant.medium}>
             Vi på Interaktion & Design har ett stort urval av kurser att välja
-            bland. Och med många valfria poäng att fylla kan det vara svårt att
+            bland. Med många valfria poäng att fylla kan det vara svårt att
             hitta rätt. Denna onlinekatalog samlar information om kurser och
             hjälper dig göra bra val.
           </Text>

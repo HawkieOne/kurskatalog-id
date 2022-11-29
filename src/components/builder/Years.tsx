@@ -1,9 +1,10 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { TitleVariant } from "../../shared/constants";
+import { FontVariants, TextVariant, TitleVariant } from "../../shared/constants";
 import useCourses from "../../shared/useCourses";
 import Title from "../Title";
 import DraggableCourse from "./DraggableCourse";
 import { v4 as uuidv4 } from "uuid";
+import Text from "../Text";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -18,12 +19,12 @@ export default function Years() {
   } = useCourses();
 
   return (
-    <div className="flex flex-col space-around bg-slate-50 rounded-lg p-5">
+    <div className="basis-1/2 w-full flex flex-col space-around bg-slate-50 rounded-lg p-5">
       <div className="w-full flex justify-around">
         {Array.from(Array(4).keys()).map((entry, index) => (
-          <Title size={TitleVariant.small} key={index}>
+          <Text size={TextVariant.medium} font={FontVariants.bold} key={index}>
             Läsperiod {index + 1}
-          </Title>
+          </Text>
         ))}
       </div>
       <ResponsiveGridLayout
@@ -31,13 +32,14 @@ export default function Years() {
         compactType={"vertical"}
         // breakpoints={lg: 1200}
         layouts={{
+          xs: coursesActiveYear.courses,
           md: coursesActiveYear.courses,
           lg: coursesActiveYear.courses,
         }}
-        cols={{ md: 4, lg: 8 }}
+        cols={{ xs: 8, md: 8, lg: 8 }}
         maxRows={6}
         resizeHandles={["e"]}
-        rowHeight={170}
+        rowHeight={130}
         // width={800}
         isBounded={false}
         onLayoutChange={(layout) => {

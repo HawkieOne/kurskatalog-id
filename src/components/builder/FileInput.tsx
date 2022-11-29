@@ -10,9 +10,9 @@ export default function FileInput({ acceptedFormat, onUpload } : FileInputProps)
 
   const [errorText, setErrorText] = useState("");
   return (
-    <div className="form-control w-full max-w-xs space-y-2">
+    <div className="form-control w-full max-w-xs space-y-2 text-onyx">
       <label className="label">
-        <span className="label-text">Ladda förinställning</span>
+        <span className="label-text text-onyx">Ladda förinställning</span>
       </label>
       <input
         type="file"

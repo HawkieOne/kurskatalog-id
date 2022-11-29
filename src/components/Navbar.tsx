@@ -12,11 +12,11 @@ export default function Navbar() {
   const capitalizedPathname =
     pathName.charAt(0).toUpperCase() + pathName.slice(1);
   return (
-    <div className="navbar bg-cream p-2 shadow-lg relative flex justify-center items-center">
+    <div className="navbar bg-cream p-2 shadow-md relative flex justify-center items-center z-50">
       <Link
         to="/"
         className="normal-case text-xl text-onyx absolute inset-y-0 left-10 h-full flex flex-col justify-center
-                  border-b-pink hover:border-b"
+                  border-b-pink hover:border-b hover:text-pink"
       >
         Kurskatalog
       </Link>
