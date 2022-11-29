@@ -4,6 +4,7 @@ import {
   activeYearState,
   coursesBuilderSelector,
   coursesYearState,
+  draggingSavedCourseState,
   savedCoursesState,
 } from "../atoms/atoms";
 import { BuildingBlock, Course } from "./interfaces";
@@ -13,8 +14,26 @@ export default function useCourses() {
   const [savedCourses, setSavedCourses] = useRecoilState(savedCoursesState);
   const [activeYear, setActiveYear] = useRecoilState(activeYearState);
   const coursesActiveYear = useRecoilValue(coursesYearState);
+  const [draggingCourse, setDraggingCourse] = useRecoilState(
+    draggingSavedCourseState
+  );
 
-  const addCourseToPeriod = (periodIndex: number) => {};
+  const addCourse = (block: BuildingBlock) => {
+    if (draggingCourse) {
+      const cpyCourses = courses.slice();
+      const cpyCoursesYear = courses[activeYear].courses.slice();
+      cpyCoursesYear.push({
+        ...block,
+        content: draggingCourse,
+      });
+      cpyCourses[activeYear] = {
+        ...cpyCourses[activeYear],
+        courses: cpyCoursesYear,
+      };
+      setCourses(cpyCourses);
+      setDraggingCourse(null);
+    }
+  };
 
   const removeCourse = (uuid: string) => {
     let cpyCourses = courses.slice();
@@ -46,7 +65,6 @@ export default function useCourses() {
 
   const addYear = () => {
     let cpyCourses = courses.slice();
-    console.log(cpyCourses.length);
     cpyCourses.push({
       year: cpyCourses.length,
       courses: [],
@@ -60,8 +78,15 @@ export default function useCourses() {
     setSavedCourses(savedCoursesCpy);
   };
 
-  const removeFromSavedCourses = (index: number) => {
+  const removeFromSavedCoursesByIndex = (index: number) => {
     const savedCoursesCpy = savedCourses.slice();
+    savedCoursesCpy.splice(index, 1);
+    setSavedCourses(savedCoursesCpy);
+  };
+
+  const removeFromSavedCoursesByObject = (course: Course) => {
+    const savedCoursesCpy = savedCourses.slice();
+    const index = savedCourses.indexOf(course);
     savedCoursesCpy.splice(index, 1);
     setSavedCourses(savedCoursesCpy);
   };
@@ -72,12 +97,15 @@ export default function useCourses() {
     coursesActiveYear,
     activeYear,
     setActiveYear,
-    addCourseToPeriod,
+    addCourse,
     removeCourse,
     saveChanges,
     addYear,
     savedCourses,
     addToSavedCourses,
-    removeFromSavedCourses,
+    removeFromSavedCourses: removeFromSavedCoursesByIndex,
+    removeFromSavedCoursesByObject,
+    draggingCourse,
+    setDraggingCourse,
   };
 }

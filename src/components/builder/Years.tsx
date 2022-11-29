@@ -1,15 +1,21 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
-import {
-  TitleVariant
-} from "../../shared/constants";
+import { TitleVariant } from "../../shared/constants";
 import useCourses from "../../shared/useCourses";
 import Title from "../Title";
 import DraggableCourse from "./DraggableCourse";
+import { v4 as uuidv4 } from "uuid";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export default function Years() {
-  const { coursesActiveYear, saveChanges, removeCourse} = useCourses();
+  const {
+    coursesActiveYear,
+    saveChanges,
+    removeCourse,
+    addCourse,
+    draggingCourse,
+    removeFromSavedCoursesByObject
+  } = useCourses();
 
   return (
     <div className="flex flex-col space-around">
@@ -34,14 +40,31 @@ export default function Years() {
         rowHeight={170}
         // width={800}
         isBounded={false}
-        onLayoutChange={e => {
-          saveChanges(e);
+        onLayoutChange={(layout) => {
+          if (!draggingCourse) {
+            saveChanges(layout);
+          }
+        }}
+        isDroppable={true}
+        onDrop={(layout, layoutItem, _event) => {
+          const block = {
+            x: layoutItem.x,
+            y: layoutItem.y,
+            w: layoutItem.w,
+            h: layoutItem.h,
+            i: uuidv4(),
+            content: undefined,
+          };
+          addCourse(block);
+          if (draggingCourse) {
+            removeFromSavedCoursesByObject(draggingCourse)
+          }
         }}
       >
         {coursesActiveYear.courses.map((course, index) => (
           <div key={course.i} className="">
             <DraggableCourse
-            key={course.i}
+              key={course.i}
               course={course}
               onRemove={removeCourse}
             />

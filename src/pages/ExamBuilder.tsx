@@ -1,6 +1,7 @@
 import { ChangeEvent, createRef, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { AiOutlineClose } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
@@ -15,7 +16,6 @@ import Title from "../components/Title";
 import { courses as allCourses } from "../shared/data";
 import { Course, Preset, Year as YearType } from "../shared/interfaces";
 import { useOnClickOutside } from "../shared/onClickOutside";
-import { AiOutlineClose } from "react-icons/ai";
 import useCourses from "../shared/useCourses";
 import RightDrawer from "./RightDrawer";
 
@@ -32,7 +32,6 @@ export default function ExamBuilder() {
     addToSavedCourses,
   } = useCourses();
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
-  const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
     useRecoilState(leftDrawerState);
   const isRightDrawerOpen = useRecoilValue(rightDrawerState);
