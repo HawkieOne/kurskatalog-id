@@ -21,11 +21,20 @@ import RightDrawer from "./RightDrawer";
 
 export default function ExamBuilder() {
   const [presets, setPresets] = useState<Preset[]>([]);
-  const { courses, setCourses, activeYear, setActiveYear, addYear } =
-    useCourses();
+  const {
+    courses,
+    setCourses,
+    activeYear,
+    setActiveYear,
+    addYear,
+    savedCourses,
+    removeFromSavedCourses,
+    addToSavedCourses,
+  } = useCourses();
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
   const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
-  const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useRecoilState(leftDrawerState);
+  const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
+    useRecoilState(leftDrawerState);
   const isRightDrawerOpen = useRecoilValue(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
@@ -99,9 +108,12 @@ export default function ExamBuilder() {
             </div>
 
             <CoursesContainer>
-              {selectedCourses.map((course, index) => (
-                <CourseCard key={index} course={course} onRemoveClick={() =>
-                  setSelectedCourses(selectedCourses.filter(function(e) { return e !== course }))}/>
+              {savedCourses.map((course, index) => (
+                <CourseCard
+                  key={index}
+                  course={course}
+                  onRemoveClick={() => removeFromSavedCourses(index)}
+                />
               ))}
             </CoursesContainer>
           </div>
@@ -131,30 +143,42 @@ export default function ExamBuilder() {
         {isLeftDrawerOpen && (
           <Drawer side="left" refPointer={leftDrawerRef}>
             <div className="flex gap-3 items-center justify-center">
-              <Search onSearch={(searchTerm: string) => {
-                searchTerm = searchTerm.toLowerCase().trim();
-                if (searchTerm === "") {
-                  setSearchedCourses(allCourses);
-                  return;
-                }
-                if (searchTerm.length >= 2) {
-                  const foundCourses = allCourses.filter(e =>
-                    e.code.toLowerCase().includes(searchTerm) ||
-                    e.name.toLowerCase().includes(searchTerm) ||
-                    e.registerCode?.toLowerCase().includes(searchTerm));
-                  setSearchedCourses(foundCourses);
-                }
-              }} />
-              <div className='p-1 text-xl cursor-pointer hover:bg-onyx hover:rounded-full hover:text-white'
-                  onClick={() => setIsLeftDrawerOpen(false)}>
+              <Search
+                onSearch={(searchTerm: string) => {
+                  searchTerm = searchTerm.toLowerCase().trim();
+                  if (searchTerm === "") {
+                    setSearchedCourses(allCourses);
+                    return;
+                  }
+                  if (searchTerm.length >= 2) {
+                    const foundCourses = allCourses.filter(
+                      (e) =>
+                        e.code.toLowerCase().includes(searchTerm) ||
+                        e.name.toLowerCase().includes(searchTerm) ||
+                        e.registerCode?.toLowerCase().includes(searchTerm)
+                    );
+                    setSearchedCourses(foundCourses);
+                  }
+                }}
+              />
+              <div
+                className="p-1 text-xl cursor-pointer hover:bg-onyx hover:rounded-full hover:text-white"
+                onClick={() => setIsLeftDrawerOpen(false)}
+              >
                 <AiOutlineClose />
               </div>
             </div>
 
             {searchedCourses.map((course, index) => (
-              <CourseDrawer key={index} course={course} onAddCourseClick={() => setSelectedCourses([...selectedCourses, course])} />
+              <CourseDrawer
+                key={index}
+                course={course}
+                onAddCourseClick={() => addToSavedCourses(course)}
+              />
             ))}
-            {searchedCourses.length === 0 && <p className="text-center">Inga kurser hittade</p>}
+            {searchedCourses.length === 0 && (
+              <p className="text-center">Inga kurser hittade</p>
+            )}
           </Drawer>
         )}
         {isRightDrawerOpen && <RightDrawer />}
