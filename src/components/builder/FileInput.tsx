@@ -20,8 +20,8 @@ export default function FileInput({ acceptedFormat, onUpload } : FileInputProps)
         accept={acceptedFormat}
         className="file-input file-input-bordered w-full max-w-xs bg-white file:bg-cream
                     file:border-none file:text-pink"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {    
-          const files = e.target.files;      
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          const files = e.target.files;
           if (files?.length === 0) {
             setErrorText("");
           } else if (files?.item(0)?.name.endsWith(acceptedFormat)) {
