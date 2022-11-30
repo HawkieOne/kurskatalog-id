@@ -18,12 +18,12 @@ export default function Search({ allCourses, setSearchedCourses }: SearchProps) 
       event.currentTarget.blur();
     }
   };
-  
+
   useEffect(() => {
     console.log(searchTerm);
     onSearch(searchTerm, allCourses, setSearchedCourses);
   }, [searchTerm])
-  
+
   return (
     <div className="form-control">
       <div className="input-group relative">
