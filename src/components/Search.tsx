@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import { onSearch } from "../shared/functions";
 import { Course } from "../shared/interfaces";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
@@ -17,9 +17,13 @@ export default function Search({ allCourses, setSearchedCourses }: SearchProps) 
       event.preventDefault();
       event.currentTarget.blur();
     }
-    onSearch(searchTerm, allCourses, setSearchedCourses);
   };
-
+  
+  useEffect(() => {
+    console.log(searchTerm);
+    onSearch(searchTerm, allCourses, setSearchedCourses);
+  }, [searchTerm])
+  
   return (
     <div className="form-control">
       <div className="input-group relative">
@@ -41,7 +45,7 @@ export default function Search({ allCourses, setSearchedCourses }: SearchProps) 
               className="p-1 absolute top-1/2 -translate-y-1/2 right-3 flex flex-col justify-center cursor-pointer text-onyx hover:bg-onyx hover:text-white hover:rounded-full"
               onClick={() => {
                 setSearchTerm("");
-                onSearch("", allCourses, setSearchedCourses);
+                setSearchedCourses(allCourses)
               }}
             >
               <AiOutlineClose />
