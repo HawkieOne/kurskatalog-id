@@ -67,20 +67,18 @@ export default function ExamBuilder() {
           const ajv = new Ajv();
           const validate = ajv.addSchema(defsSchema).compile(presetSchema);
           if (validate(data)) {
-            console.log("success");
+            const preset = {
+              name: file.name,
+              years: data,
+            };
+            const cpyPresets = presets.slice();
+            cpyPresets.push(preset);
+            setActivePreset(preset);
+            setPresets(cpyPresets);
           } else {
             console.log("ERRORS");
             console.log(validate.errors);
           }
-
-          const preset = {
-            name: file.name,
-            years: data,
-          };
-          const cpyPresets = presets.slice();
-          cpyPresets.push(preset);
-          setActivePreset(preset);
-          setPresets(cpyPresets);
         }
       };
     }
