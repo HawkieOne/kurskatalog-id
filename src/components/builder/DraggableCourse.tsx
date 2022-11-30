@@ -16,11 +16,11 @@ export default function DraggableCourse({
   course,
   onRemove,
 }: DraggableCourseProps) {
-  const [isOverFlowMenuOpen, SetIsOverflowMenuOpen] = useState(false);
+  const [isOverFlowMenuOpen, setIsOverflowMenuOpen] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("bg-cream");
 
   const ref = createRef<HTMLDivElement>();
-  useOnClickOutside(ref, () => SetIsOverflowMenuOpen(false));
+  useOnClickOutside(ref, () => setIsOverflowMenuOpen(false));
   return (
     <div
       ref={ref}
@@ -33,8 +33,8 @@ export default function DraggableCourse({
               {course.content.code}
             </Text>
             <div
-              className="hover:bg-creamDark rounded cursor-pointer"
-              onClick={() => SetIsOverflowMenuOpen(!isOverFlowMenuOpen)}
+              className="hover:bg-creamDark rounded-full cursor-pointer"
+              onClick={() => setIsOverflowMenuOpen(!isOverFlowMenuOpen)}
             >
               <div className="relative p-1">
                 <BiDotsVerticalRounded size="1.5em" />
@@ -43,7 +43,7 @@ export default function DraggableCourse({
                     <li>
                       <div
                         className="flex active:bg-red-500 items-center"
-                        onClick={() => {}}
+                        onClick={() => { }}
                       >
                         <AiFillRead />
                         <Text>Läs mer</Text>
