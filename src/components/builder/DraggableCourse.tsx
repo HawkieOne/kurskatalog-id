@@ -39,35 +39,41 @@ export default function DraggableCourse({
               <div className="relative p-1">
                 <BiDotsVerticalRounded size="1.5em" />
                 {isOverFlowMenuOpen && (
-                  <ul className="absolute menu bg-white top-full w-44 right-0 shadow-lg z-auto">
-                    <li>
-                      <div
-                        className="flex active:bg-red-500 items-center"
-                        onClick={() => { }}
-                      >
-                        <AiFillRead />
-                        <Text>Läs mer</Text>
-                      </div>
-                      <div
-                        className="flex active:bg-red-500 items-center"
-                        onClick={() => onRemove(course.i)}
-                      >
-                        <AiFillDelete />
-                        <Text>Ta bort</Text>
-                      </div>
-                      <div
-                        className={`flex flex-wrap gap-2 active:bg-cream relative`}
-                      >
-                        {colors.map((color, index) => (
-                          <div
-                            key={index}
-                            className={`w-6 h-6 ${color} rounded hover:border border-onyx`}
-                            onClick={() => setBackgroundColor(color)}
-                          />
-                        ))}
-                      </div>
-                    </li>
-                  </ul>
+                  <div className="absolute menu top-full right-0 shadow-lg">
+                    <ul className="bg-white w-44 z-auto">
+                      <li>
+                        <div
+                          className="flex active:bg-red-500 items-center"
+                          onClick={() => { }}
+                        >
+                          <AiFillRead />
+                          <Text>Läs mer</Text>
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          className="flex active:bg-red-500 items-center"
+                          onClick={() => onRemove(course.i)}
+                        >
+                          <AiFillDelete />
+                          <Text>Ta bort</Text>
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          className={`flex flex-wrap gap-2 active:bg-cream relative`}
+                        >
+                          {colors.map((color, index) => (
+                            <div
+                              key={index}
+                              className={`w-6 h-6 ${color} rounded hover:border border-onyx`}
+                              onClick={() => setBackgroundColor(color)}
+                            />
+                          ))}
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                 )}
               </div>
             </div>

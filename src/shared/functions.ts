@@ -34,3 +34,18 @@ export const prepareUploadedFile = (file: File) => {
     }
   };
 };
+
+export const onSearch = (searchTerm: string, allCourses: Course[], setSearchedCourses : (allCourses : Course[]) => void ) => {
+  searchTerm = searchTerm.toLowerCase().trim();
+  if (searchTerm === "") {
+    setSearchedCourses(allCourses);
+    return;
+  }
+  const foundCourses = allCourses.filter(
+    (e) =>
+      e.code.toLowerCase().includes(searchTerm) ||
+      e.name.toLowerCase().includes(searchTerm) ||
+      e.registerCode?.toLowerCase().includes(searchTerm)
+  );
+  setSearchedCourses(foundCourses);
+};
