@@ -36,11 +36,11 @@ export default function DraggableCourse({
               className="hover:bg-creamDark rounded-full cursor-pointer"
               onClick={() => setIsOverflowMenuOpen(!isOverFlowMenuOpen)}
             >
-              <div className="relative p-1">
+              <div className="relative p-1 z-10">
                 <BiDotsVerticalRounded size="1.5em" />
                 {isOverFlowMenuOpen && (
                   <div className="absolute menu top-full right-0 shadow-lg">
-                    <ul className="bg-white w-44 z-auto">
+                    <ul className="bg-white w-44">
                       <li>
                         <div
                           className="flex active:bg-red-500 items-center"
@@ -59,7 +59,7 @@ export default function DraggableCourse({
                           <Text>Ta bort</Text>
                         </div>
                       </li>
-                      <li>
+                      <li className="">
                         <div
                           className={`flex flex-wrap gap-2 active:bg-cream relative`}
                         >
