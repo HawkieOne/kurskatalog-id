@@ -1,5 +1,7 @@
+import Ajv from "ajv";
 import { templateEmpty, templateID } from "./data";
 import { Course, Preset, Year } from "./interfaces";
+import { defsSchema, presetSchema } from "./schema";
 
 export const createEmptyTemplate = () => {
   return templateEmpty;
@@ -35,11 +37,10 @@ export const prepareUploadedFile = (file: File) => {
   };
 };
 
-export const onSearch = (searchTerm: string, allCourses: Course[], setSearchedCourses : (allCourses : Course[]) => void ) => {
+export const onSearch = (searchTerm: string, allCourses: Course[]) => {
   searchTerm = searchTerm.toLowerCase().trim();
   if (searchTerm === "") {
-    setSearchedCourses(allCourses);
-    return;
+    return allCourses;
   }
   const foundCourses = allCourses.filter(
     (e) =>
@@ -47,5 +48,13 @@ export const onSearch = (searchTerm: string, allCourses: Course[], setSearchedCo
       e.name.toLowerCase().includes(searchTerm) ||
       e.registerCode?.toLowerCase().includes(searchTerm)
   );
-  setSearchedCourses(foundCourses);
+  return foundCourses;
 };
+
+export const validateJSON = (file: File) => {
+  const ajv = new Ajv();
+  const validate = ajv.addSchema(defsSchema).compile(presetSchema);
+  validate(file);
+  console.log(validate);
+  return validate;
+}

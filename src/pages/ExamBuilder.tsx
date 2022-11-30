@@ -16,13 +16,9 @@ import Progress from "../components/builder/Progress";
 import Years from "../components/builder/Years";
 import CourseCard from "../components/course/CourseCard";
 import Search from "../components/Search";
-import Title from "../components/Title";
-import { exportTemplate, onSearch } from "../shared/functions";
 import { courses as allCourses } from "../shared/data";
+import { exportTemplate } from "../shared/functions";
 import { Course, Preset, Year as YearType } from "../shared/interfaces";
-import { useOnClickOutside } from "../shared/onClickOutside";
-import { presetSchema, defsSchema, buildingBlockSchema, courseSchema } from "../shared/schema";
-import Ajv, {JSONSchemaType, DefinedError} from "ajv"
 import useCourses from "../shared/useCourses";
 
 export default function ExamBuilder() {
@@ -63,22 +59,14 @@ export default function ExamBuilder() {
       fileReader.onload = (e) => {
         if (e.target?.result) {
           const data = JSON.parse(e.target.result as string) as YearType[];
-
-          const ajv = new Ajv();
-          const validate = ajv.addSchema(defsSchema).compile(presetSchema);
-          if (validate(data)) {
-            const preset = {
-              name: file.name,
-              years: data,
-            };
-            const cpyPresets = presets.slice();
-            cpyPresets.push(preset);
-            setActivePreset(preset);
-            setPresets(cpyPresets);
-          } else {
-            console.log("ERRORS");
-            console.log(validate.errors);
-          }
+          const preset = {
+            name: file.name,
+            years: data,
+          };
+          const cpyPresets = presets.slice();
+          cpyPresets.push(preset);
+          setActivePreset(preset);
+          setPresets(cpyPresets);
         }
       };
     }
