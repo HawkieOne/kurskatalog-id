@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-import { createEmptyTemplate } from "../shared/builderFunctions";
+import { createEmptyTemplate } from "../shared/functions";
 import { emptyCourse } from "../shared/data";
 import { Course, Year } from "../shared/interfaces";
 

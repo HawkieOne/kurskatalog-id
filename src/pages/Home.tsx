@@ -16,7 +16,7 @@ import {
   createEmptyTemplate,
   createIDTemplate,
   prepareUploadedFile,
-} from "../shared/builderFunctions";
+} from "../shared/functions";
 import { Templates, TextVariant } from "../shared/constants";
 import { templates } from "../shared/data";
 import { Preset, Year } from "../shared/interfaces";

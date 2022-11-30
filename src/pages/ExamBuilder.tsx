@@ -17,7 +17,7 @@ import Years from "../components/builder/Years";
 import CourseCard from "../components/course/CourseCard";
 import Search from "../components/Search";
 import Title from "../components/Title";
-import { exportTemplate } from "../shared/builderFunctions";
+import { exportTemplate, onSearch } from "../shared/functions";
 import { courses as allCourses } from "../shared/data";
 import { Course, Preset, Year as YearType } from "../shared/interfaces";
 import { useOnClickOutside } from "../shared/onClickOutside";
@@ -143,20 +143,8 @@ export default function ExamBuilder() {
           <Drawer side="left" refPointer={leftDrawerRef}>
             <div className="flex gap-3 items-center justify-center">
               <Search
-                onSearch={(searchTerm: string) => {
-                  searchTerm = searchTerm.toLowerCase().trim();
-                  if (searchTerm === "") {
-                    setSearchedCourses(allCourses);
-                    return;
-                  }
-                  const foundCourses = allCourses.filter(
-                    (e) =>
-                      e.code.toLowerCase().includes(searchTerm) ||
-                      e.name.toLowerCase().includes(searchTerm) ||
-                      e.registerCode?.toLowerCase().includes(searchTerm)
-                  );
-                  setSearchedCourses(foundCourses);
-                }}
+                allCourses={allCourses}
+                setSearchedCourses={setSearchedCourses}
               />
               <div
                 className="p-1 text-xl cursor-pointer hover:bg-onyx hover:rounded-full hover:text-white"
