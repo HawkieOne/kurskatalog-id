@@ -1,11 +1,14 @@
 import React, { ChangeEvent, useState } from "react";
+import { onSearch } from "../shared/functions";
+import { Course } from "../shared/interfaces";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 
 interface SearchProps {
-  onSearch: (searchTerm: string) => void;
+  allCourses: Course[];
+  setSearchedCourses: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export default function Search({ onSearch }: SearchProps) {
+export default function Search({ allCourses, setSearchedCourses }: SearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const isInputEmpty = (input: string) => input.length === 0;
@@ -14,7 +17,7 @@ export default function Search({ onSearch }: SearchProps) {
       event.preventDefault();
       event.currentTarget.blur();
     }
-    onSearch(searchTerm);
+    onSearch(searchTerm, allCourses, setSearchedCourses);
   };
 
   return (
@@ -38,7 +41,7 @@ export default function Search({ onSearch }: SearchProps) {
               className="p-1 absolute top-1/2 -translate-y-1/2 right-3 flex flex-col justify-center cursor-pointer text-onyx hover:bg-onyx hover:text-white hover:rounded-full"
               onClick={() => {
                 setSearchTerm("");
-                onSearch("");
+                onSearch("", allCourses, setSearchedCourses);
               }}
             >
               <AiOutlineClose />
@@ -47,7 +50,7 @@ export default function Search({ onSearch }: SearchProps) {
         </div>
         <button
           className="btn btn-square bg-creamDark border-none hover:bg-onyx text-onyx hover:text-white"
-          onClick={() => onSearch(searchTerm)}
+          onClick={() => onSearch(searchTerm, allCourses, setSearchedCourses)}
         >
           <AiOutlineSearch size="1.5em" />
         </button>

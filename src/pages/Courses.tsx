@@ -16,20 +16,10 @@ export default function Courses() {
       <div className="w-3/4 flex justify-center relative">
         <Title>Kurser</Title>
         <div className="absolute right-0">
-          <Search onSearch={(searchTerm: string) => {
-            searchTerm = searchTerm.toLowerCase().trim();
-            if (searchTerm === "") {
-              setSearchedCourses(originalCourses);
-              return;
-            }
-            if (searchTerm.length >= 2) {
-              const foundCourses = originalCourses.filter(e =>
-                e.code.toLowerCase().includes(searchTerm) ||
-                e.name.toLowerCase().includes(searchTerm) ||
-                e.registerCode?.toLowerCase().includes(searchTerm));
-              setSearchedCourses(foundCourses);
-            }
-          }} />
+          <Search 
+            allCourses={originalCourses}
+            setSearchedCourses={setSearchedCourses}
+          />
         </div>
       </div>
       <div className="w-3/4 flex flex-col items-center space-y-6">
