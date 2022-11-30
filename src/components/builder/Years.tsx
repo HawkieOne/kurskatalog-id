@@ -47,6 +47,7 @@ export default function Years() {
             saveChanges(layout);
           }
         }}
+        useCSSTransforms={false} // Put this on to increase speed
         isDroppable={true}
         onDrop={(layout, layoutItem, _event) => {
           const block = {
