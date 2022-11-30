@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
+import { validateJSON } from "../../shared/functions";
 import Text from "../Text";
 
 interface FileInputProps {
@@ -19,15 +20,22 @@ export default function FileInput({ acceptedFormat, onUpload } : FileInputProps)
         accept={acceptedFormat}
         className="file-input file-input-bordered w-full max-w-xs bg-white file:bg-cream
                     file:border-none file:text-pink"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          if (e.target.files?.length === 0) {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {    
+          const files = e.target.files;      
+          if (files?.length === 0) {
             setErrorText("");
-          } else if (e.target.files?.item(0)?.name.endsWith(acceptedFormat)) {
-            if (e.target.files) {
-              onUpload(e);
-              setErrorText("");
+          } else if (files?.item(0)?.name.endsWith(acceptedFormat)) {
+            const file = e.target.files?.item(0);
+            if (file) {
+              const validation = validateJSON(file);
+              if (validation.errors) {
+                setErrorText("The JSON have incorrect format")
+              } else {
+                onUpload(e);
+                setErrorText("");
+              }
             } else {
-              setErrorText("Soemthing went wrong uploading the files")
+              setErrorText("Something went wrong uploading the files")
             }
           } else {
             setErrorText("Invalid file format")

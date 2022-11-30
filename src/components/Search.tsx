@@ -8,7 +8,10 @@ interface SearchProps {
   setSearchedCourses: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export default function Search({ allCourses, setSearchedCourses }: SearchProps) {
+export default function Search({
+  allCourses,
+  setSearchedCourses,
+}: SearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const isInputEmpty = (input: string) => input.length === 0;
@@ -18,11 +21,6 @@ export default function Search({ allCourses, setSearchedCourses }: SearchProps) 
       event.currentTarget.blur();
     }
   };
-
-  useEffect(() => {
-    console.log(searchTerm);
-    onSearch(searchTerm, allCourses, setSearchedCourses);
-  }, [searchTerm])
 
   return (
     <div className="form-control">
@@ -34,9 +32,10 @@ export default function Search({ allCourses, setSearchedCourses }: SearchProps) 
               placeholder="Sök…"
               value={searchTerm}
               className="input bg-cream text-onyx justify-self-end rounded-l-xl rounded-none focus:border-pink focus:border-opacity-50 focus:outline-none border border-creamDark"
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setSearchTerm(e.target.value)
-              }
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setSearchedCourses(onSearch(e.target.value, allCourses));
+                setSearchTerm(e.target.value);
+              }}
               onKeyDown={handleKeyDown}
             />
           </form>
@@ -45,7 +44,7 @@ export default function Search({ allCourses, setSearchedCourses }: SearchProps) 
               className="p-1 absolute top-1/2 -translate-y-1/2 right-3 flex flex-col justify-center cursor-pointer text-onyx hover:bg-onyx hover:text-white hover:rounded-full"
               onClick={() => {
                 setSearchTerm("");
-                setSearchedCourses(allCourses)
+                setSearchedCourses(allCourses);
               }}
             >
               <AiOutlineClose />
@@ -54,7 +53,7 @@ export default function Search({ allCourses, setSearchedCourses }: SearchProps) 
         </div>
         <button
           className="btn btn-square bg-creamDark border-none hover:bg-onyx text-onyx hover:text-white"
-          onClick={() => onSearch(searchTerm, allCourses, setSearchedCourses)}
+          onClick={() => setSearchedCourses(onSearch(searchTerm, allCourses))}
         >
           <AiOutlineSearch size="1.5em" />
         </button>
