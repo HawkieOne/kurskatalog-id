@@ -21,7 +21,8 @@ import { exportTemplate } from "../shared/builderFunctions";
 import { courses as allCourses } from "../shared/data";
 import { Course, Preset, Year as YearType } from "../shared/interfaces";
 import { useOnClickOutside } from "../shared/onClickOutside";
-import Validator from "json-schema"
+import { presetSchema, defsSchema, buildingBlockSchema, courseSchema } from "../shared/schema";
+import Ajv, {JSONSchemaType, DefinedError} from "ajv"
 import useCourses from "../shared/useCourses";
 
 export default function ExamBuilder() {
@@ -62,7 +63,16 @@ export default function ExamBuilder() {
       fileReader.onload = (e) => {
         if (e.target?.result) {
           const data = JSON.parse(e.target.result as string) as YearType[];
-          console.log(Validator.validate(data, { "type": "number"}));
+
+          const ajv = new Ajv();
+          const validate = ajv.addSchema(defsSchema).compile(presetSchema);
+          if (validate(data)) {
+            console.log("success");
+          } else {
+            console.log("ERRORS");
+            console.log(validate.errors);
+          }
+
           const preset = {
             name: file.name,
             years: data,
