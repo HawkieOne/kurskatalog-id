@@ -16,7 +16,7 @@ export default function Courses() {
       <div className="w-3/4 flex justify-center relative">
         <Title>Kurser</Title>
         <div className="absolute right-0">
-          <Search 
+          <Search
             allCourses={originalCourses}
             setSearchedCourses={setSearchedCourses}
           />
