@@ -1,5 +1,9 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { FontVariants, TextVariant, TitleVariant } from "../../shared/constants";
+import {
+  FontVariants,
+  TextVariant,
+  TitleVariant,
+} from "../../shared/constants";
 import useCourses from "../../shared/useCourses";
 import Title from "../Title";
 import DraggableCourse from "./DraggableCourse";
@@ -15,7 +19,7 @@ export default function Years() {
     removeCourse,
     addCourse,
     draggingCourse,
-    removeFromSavedCoursesByObject
+    removeFromSavedCoursesByObject,
   } = useCourses();
 
   return (
@@ -33,10 +37,11 @@ export default function Years() {
         // breakpoints={lg: 1200}
         layouts={{
           xs: coursesActiveYear.courses,
+          sm: coursesActiveYear.courses,
           md: coursesActiveYear.courses,
           lg: coursesActiveYear.courses,
         }}
-        cols={{ xs: 8, md: 8, lg: 8 }}
+        cols={{ xs: 8, sm: 8, md: 8, lg: 8 }}
         maxRows={6}
         resizeHandles={["e"]}
         rowHeight={130}
@@ -60,7 +65,7 @@ export default function Years() {
           };
           addCourse(block);
           if (draggingCourse) {
-            removeFromSavedCoursesByObject(draggingCourse)
+            removeFromSavedCoursesByObject(draggingCourse);
           }
         }}
       >
