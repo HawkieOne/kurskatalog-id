@@ -1,14 +1,12 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
+import { v4 as uuidv4 } from "uuid";
 import {
   FontVariants,
-  TextVariant,
-  TitleVariant,
+  TextVariant
 } from "../../shared/constants";
 import useCourses from "../../shared/useCourses";
-import Title from "../Title";
-import DraggableCourse from "./DraggableCourse";
-import { v4 as uuidv4 } from "uuid";
 import Text from "../Text";
+import DraggableCourse from "./DraggableCourse";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 

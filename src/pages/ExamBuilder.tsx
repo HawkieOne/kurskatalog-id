@@ -17,7 +17,7 @@ import Years from "../components/builder/Years";
 import CourseCard from "../components/course/CourseCard";
 import Search from "../components/Search";
 import { courses as allCourses } from "../shared/data";
-import { exportTemplate } from "../shared/functions";
+import { exportTemplate, validateJSON } from "../shared/functions";
 import { Course, Preset, Year as YearType } from "../shared/interfaces";
 import useCourses from "../shared/useCourses";
 
@@ -51,26 +51,13 @@ export default function ExamBuilder() {
   const rightDrawerRef = createRef<HTMLDivElement>();
   // useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
 
-  const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.item(0);
-    if (file?.name.endsWith("json")) {
-      const fileReader = new FileReader();
-      fileReader.readAsText(file, "UTF-8");
-      fileReader.onload = (e) => {
-        if (e.target?.result) {
-          const data = JSON.parse(e.target.result as string) as YearType[];
-          const preset = {
-            name: file.name,
-            years: data,
-          };
-          const cpyPresets = presets.slice();
-          cpyPresets.push(preset);
-          setActivePreset(preset);
-          setPresets(cpyPresets);
-        }
-      };
-    }
+  const onFileUpload = (preset: Preset) => {
+    setActivePreset(preset);
+    const newPresets = presets.slice();
+    newPresets.push(preset);
+    setPresets(newPresets);
   };
+
   const onPresetChosen = (e: ChangeEvent<HTMLSelectElement>) => {
     const preset = presets.find((preset) => preset.name === e.target.value);
     if (preset) {
@@ -157,7 +144,11 @@ export default function ExamBuilder() {
         {isRightDrawerOpen && (
           <Drawer side="right" refPointer={rightDrawerRef}>
             <div className="flex flex-col gap-6 p-4">
-              <FileInput onUpload={onFileUpload} acceptedFormat=".json" />
+              <FileInput
+                onUpload={onFileUpload}
+                acceptedFormat=".json"
+                validateFunction={validateJSON}
+              />
 
               <PresetChooser
                 onChange={onPresetChosen}

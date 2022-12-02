@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import Modal from "react-modal";
+import { validateJSON } from "../shared/functions";
 import { Preset } from "../shared/interfaces";
 import FileInput from "./builder/FileInput";
 import Title from "./Title";
@@ -9,7 +10,7 @@ interface ModalProps {
   onOpen?: () => void;
   onCancel: () => void;
   onSuccess: () => void;
-  onFileUpload: (e: ChangeEvent<HTMLInputElement>) => void;
+  onFileUpload: (preset: Preset) => void;
   value: Preset | undefined;
 }
 export default function ModalWindow({
@@ -46,7 +47,11 @@ export default function ModalWindow({
       </div>
       <div className="h-full flex flex-col items-start p-4 space-y-8 relative">
         <Title>Ladda upp mall</Title>
-        <FileInput onUpload={onFileUpload} acceptedFormat=".json" />
+        <FileInput
+          onUpload={onFileUpload}
+          acceptedFormat=".json"
+          validateFunction={validateJSON}
+        />
         <div className="self-end space-x-4">
           <button
             onClick={onCancel}
