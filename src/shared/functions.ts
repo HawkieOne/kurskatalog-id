@@ -51,10 +51,28 @@ export const onSearch = (searchTerm: string, allCourses: Course[]) => {
   return foundCourses;
 };
 
-export const validateJSON = (file: File) => {
+export const validateJSON = (preset: Preset) => {
   const ajv = new Ajv();
   const validate = ajv.addSchema(defsSchema).compile(presetSchema);
-  validate(file);
-  console.log(validate);
-  return validate;
-}
+  if (validate(preset)) {
+    return preset;
+  } else {
+    return false;
+  }
+};
+
+export const getJsonFromFile = async (file: File) => {
+  const fileReader = new FileReader();
+  fileReader.readAsText(file, "UTF-8");
+  return await new Promise<Preset>((resolve, reject) => {
+    fileReader.onload = async (e) => {
+      if (e.target?.result) {
+        const data = JSON.parse(e.target.result as string) as Year[];
+        resolve({
+          name: file.name,
+          years: data,
+        });
+      }
+    };
+  });
+};

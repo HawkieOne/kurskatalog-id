@@ -31,11 +31,8 @@ export default function Home() {
   );
   const navigate = useNavigate();
 
-  const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.item(0);
-    if (file) {
-      // setUploadedPreset(prepareUploadedFile(file));
-    }
+  const onFileUpload = (preset: Preset) => {
+    setUploadedPreset(preset);
   };
 
   return (
