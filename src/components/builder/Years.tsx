@@ -2,11 +2,17 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import { v4 as uuidv4 } from "uuid";
 import {
   FontVariants,
-  TextVariant
+  localStorageKey,
+  TextVariant,
+  TitleVariant,
 } from "../../shared/constants";
 import useCourses from "../../shared/useCourses";
 import Text from "../Text";
 import DraggableCourse from "./DraggableCourse";
+import { useLocalStorage } from "../../shared/useLocalStorage";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { coursesBuilderState } from "../../atoms/atoms";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -19,6 +25,13 @@ export default function Years() {
     draggingCourse,
     removeFromSavedCoursesByObject,
   } = useCourses();
+  const setCourses = useSetRecoilState(coursesBuilderState);
+  const [coursesLocalStorage, setCoursesLocaStorage] =
+    useLocalStorage(localStorageKey);
+
+  useEffect(() => {
+    setCourses(coursesLocalStorage);
+  }, [coursesLocalStorage, setCourses]);
 
   return (
     <div className="basis-1/2 w-full flex flex-col space-around bg-slate-50 rounded-lg p-5">
@@ -47,7 +60,8 @@ export default function Years() {
         isBounded={false}
         onLayoutChange={(layout) => {
           if (!draggingCourse) {
-            saveChanges(layout);
+            const newlayout = saveChanges(layout);
+            setCoursesLocaStorage(newlayout);
           }
         }}
         useCSSTransforms={false} // Put this on to increase speed

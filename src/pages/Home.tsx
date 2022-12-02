@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { AiFillBuild } from "react-icons/ai";
 import { BsList, BsViewList } from "react-icons/bs";
 import { VscDebugContinueSmall } from "react-icons/vsc";
@@ -12,14 +12,11 @@ import IconButtonDropdown from "../components/IconButtonDropdown";
 import ModalWindow from "../components/Modal";
 import Text from "../components/Text";
 import Title from "../components/Title";
-import {
-  createEmptyTemplate,
-  createIDTemplate,
-  prepareUploadedFile,
-} from "../shared/functions";
-import { Templates, TextVariant } from "../shared/constants";
-import { templates } from "../shared/data";
-import { Preset, Year } from "../shared/interfaces";
+import { localStorageKey, Templates, TextVariant } from "../shared/constants";
+import { templateEmpty, templates } from "../shared/data";
+import { createEmptyTemplate, createIDTemplate } from "../shared/functions";
+import { Preset } from "../shared/interfaces";
+import { useLocalStorage } from "../shared/useLocalStorage";
 
 export default function Home() {
   const [chosenTemplate, setChosenTemplate] = useState(templates[0]);
@@ -30,8 +27,19 @@ export default function Home() {
     hasStartedEditingState
   );
   const navigate = useNavigate();
+  const [coursesLocalStorage, setCoursesLocalStorage] = useLocalStorage(
+    localStorageKey,
+    null
+  );
+
+  useEffect(() => {
+    if (coursesLocalStorage) {
+      setCourses(coursesLocalStorage);
+    }
+  }, [coursesLocalStorage, setCourses]);
 
   const onFileUpload = (preset: Preset) => {
+    setCoursesLocalStorage(preset);
     setUploadedPreset(preset);
   };
 
@@ -48,7 +56,7 @@ export default function Home() {
           </Text>
         </div>
         <div className="hidden sm:flex justify-center items-start space-x-16">
-          {hasStartedEditing && (
+          {coursesLocalStorage && (
             <IconButton
               icon={<VscDebugContinueSmall size={"2.5em"} />}
               text="Fortsätt"
@@ -69,9 +77,11 @@ export default function Home() {
               setHasStartedEditing(true);
               if (chosenTemplate === Templates.id) {
                 setCourses(createIDTemplate());
+                setCoursesLocalStorage(createIDTemplate());
                 navigate("/byggare");
               } else if (chosenTemplate === Templates.empty) {
                 setCourses(createEmptyTemplate());
+                setCoursesLocalStorage(createEmptyTemplate());
                 navigate("/byggare");
               } else if (chosenTemplate === Templates.upload) {
                 setIsUploadMdalOpen(true);

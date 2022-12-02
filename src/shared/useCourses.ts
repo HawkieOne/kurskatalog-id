@@ -61,6 +61,7 @@ export default function useCourses() {
       courses: newLayout,
     };
     setCourses(cpyCourses);
+    return cpyCourses;
   };
 
   const addYear = () => {
