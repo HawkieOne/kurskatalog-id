@@ -1,6 +1,4 @@
 import { ChangeEvent, createRef, useState } from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
@@ -110,9 +108,7 @@ export default function ExamBuilder() {
               </button>
             </div>
             <div className="w-full flex flex-col justify-evenly space-y-8">
-              <DndProvider backend={HTML5Backend}>
-                <Years />
-              </DndProvider>
+              <Years />
               <CoursesContainer
                 onAddCourses={() => setIsLeftDrawerOpen((prev) => !prev)}
               >
