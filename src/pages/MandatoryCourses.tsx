@@ -17,13 +17,13 @@ export default function MandatoryCourses() {
   };
 
   return (
-    <div className='h-full bg-white flex flex-col items-center'>
-      <div className='w-1/2 text-center'>
+    <div className='h-full bg-white flex flex-col items-center p-5'>
+      <div className='w-3/4 text-center'>
 
         {subjects.map((subject, index) => {
           const allowedCourses = selectedCourses(subject);
           return (
-            <div className='p-4' key={index}>
+            <div className='p-4 space-y-4' key={index}>
               <Title>{subject}</Title>
               <Table courses={allowedCourses} />
             </div>

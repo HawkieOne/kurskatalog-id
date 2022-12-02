@@ -21,7 +21,7 @@ export default function Table({ courses }: CourseProps) {
                     {courses.map((course, index) => (
                         <tr key={index}>
                             <th className='bg-cream border-none'>{course.name}</th>
-                            <td className='bg-cream border-none'>{course.pace}%</td>
+                            <td className='bg-cream border-none'>{course.pace ? course.pace + "%" : "??" }</td>
                             <td className='bg-cream border-none'>{course.startDate}</td>
                             <td className='bg-cream border-none'>{course.points}hp</td>
                             <td className='bg-cream border-none'>{course.level}</td>
