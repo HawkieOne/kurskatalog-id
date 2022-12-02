@@ -16,7 +16,7 @@ export default function Navbar() {
       <Link
         to="/"
         className="normal-case text-xl text-onyx absolute inset-y-0 left-10 h-full flex flex-col justify-center
-                  border-b-pink hover:border-b hover:text-pink"
+                  border-b-pink hover:border-b hover:-mb-1 hover:text-pink"
       >
         Kurskatalog
       </Link>
@@ -24,7 +24,7 @@ export default function Navbar() {
       {pathName === "byggare" && (
         <div
           className="absolute h-full inset-y-0 right-10 flex flex-col justify-center border-pink cursor-pointer text-onyx
-                       hover:border-b hover:text-pink"
+                       hover:border-b hover:-mb-1 hover:text-pink"
           onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
         >
           <FiSettings size="1.5em" />
