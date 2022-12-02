@@ -1,5 +1,6 @@
 import { AlignVariantObject, FontVariantObject, TextVariantObject, TitleVariantObject } from "./interfaces";
 
+export const localStorageKey = "layout";
 export const TextVariant: TextVariantObject = {
     small: "text-md",
     medium: "text-xl",
