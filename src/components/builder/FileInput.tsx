@@ -34,7 +34,7 @@ export default function FileInput({
             const file = e.target.files?.item(0);
             if (file) {
               const json = await getJsonFromFile(file);
-              if (validateFunction) {                
+              if (validateFunction) {
                 const validation = validateFunction(json);
                 if (validation) {
                   onUpload(json);
