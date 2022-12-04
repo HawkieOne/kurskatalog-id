@@ -572,5 +572,3 @@ export const yearOffCourse: Course = {
   rating: -1,
   type: "yearOff"
 }
-
-
