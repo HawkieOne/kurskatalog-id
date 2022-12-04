@@ -15,7 +15,7 @@ export default function CourseCard({ course, onRemoveClick }: CardProps) {
   const { draggingCourse, setDraggingCourse } = useCourses();
   return (
     <div
-      className="bg-cream text-onyx shadow-lg h-32 w-80 flex flex-col relative rounded-md"
+      className={`${getColorByType(course.type)} text-onyx shadow-lg h-32 w-80 flex flex-col relative rounded-md`}
       draggable={true}
       unselectable="on"
       onDragStart={(e) => {
@@ -44,3 +44,20 @@ export default function CourseCard({ course, onRemoveClick }: CardProps) {
     </div>
   );
 }
+
+const getColorByType = (type: Course["type"]) => {
+  switch (type) {
+    case "course":
+      return "bg-cream";
+    case "custom":
+      return "bg-fuchsia-300";
+    case "exchange":
+      return "bg-violet-300";
+    case "working":
+      return "bg-stone-300";
+    case "yearOff":
+      return "bg-indigo-300";
+    default:
+      return "bg-cream";
+  }
+};

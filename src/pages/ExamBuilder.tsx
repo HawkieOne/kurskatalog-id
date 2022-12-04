@@ -5,18 +5,22 @@ import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import { leftDrawerState, rightDrawerState } from "../atoms/atoms";
-import CourseDrawer from "../components/builder/CourseDrawer";
+import CourseBlock from "../components/builder/blocks/CourseBlock";
+import CustomBlock from "../components/builder/blocks/CustomBlock";
+import ExchangeBlock from "../components/builder/blocks/ExchangeBlock";
+import WorkingBlock from "../components/builder/blocks/WorkingBlock";
+import YearOffBlock from "../components/builder/blocks/YearOffBlock";
 import CoursesContainer from "../components/builder/CoursesContainer";
 import Drawer from "../components/builder/Drawer";
 import FileInput from "../components/builder/FileInput";
 import PresetChooser from "../components/builder/PresetChooser";
 import Progress from "../components/builder/Progress";
 import Years from "../components/builder/Years";
-import CourseCard from "../components/course/CourseCard";
+import Collapse from "../components/Collapse";
 import Search from "../components/Search";
 import { courses as allCourses } from "../shared/data";
 import { exportTemplate, validateJSON } from "../shared/functions";
-import { Course, Preset, Year as YearType } from "../shared/interfaces";
+import { Course, Preset } from "../shared/interfaces";
 import useCourses from "../shared/useCourses";
 
 export default function ExamBuilder() {
@@ -29,9 +33,7 @@ export default function ExamBuilder() {
     activeYear,
     setActiveYear,
     addYear,
-    savedCourses,
-    removeFromSavedCourses,
-    addToSavedCourses,
+    getSavedCourses,
   } = useCourses();
   const params = location.state;
   if (params) {
@@ -97,44 +99,43 @@ export default function ExamBuilder() {
             <div className="w-full flex flex-col justify-evenly space-y-8">
               <Years />
               <CoursesContainer
-                onAddCourses={() => setIsLeftDrawerOpen((prev) => !prev)}
-              >
-                {savedCourses.map((course, index) => (
-                  <CourseCard
-                    key={index}
-                    course={course}
-                    onRemoveClick={() => removeFromSavedCourses(index)}
-                  />
-                ))}
-              </CoursesContainer>
+                onAddCoursesClick={() => setIsLeftDrawerOpen((prev) => !prev)}
+                courses={getSavedCourses()}
+              />
             </div>
           </div>
         </div>
         {isLeftDrawerOpen && (
           <Drawer side="left" refPointer={leftDrawerRef}>
-            <div className="flex gap-3 items-center justify-center">
-              <Search
-                allCourses={allCourses}
-                setSearchedCourses={setSearchedCourses}
-              />
-              <div
-                className="p-1 text-xl cursor-pointer hover:bg-onyx hover:rounded-full hover:text-white"
-                onClick={() => setIsLeftDrawerOpen(false)}
-              >
-                <AiOutlineClose />
-              </div>
-            </div>
+            <Collapse
+              title="Kursblock"
+              content={
+                <div className="w-full flex flex-col items-center space-y-4">
+                  <Search
+                    allCourses={allCourses}
+                    setSearchedCourses={setSearchedCourses}
+                  />
 
-            {searchedCourses.map((course, index) => (
-              <CourseDrawer
-                key={index}
-                course={course}
-                onAddCourseClick={() => addToSavedCourses(course)}
-              />
-            ))}
-            {searchedCourses.length === 0 && (
-              <p className="text-center">Inga kurser hittade</p>
-            )}
+                  {searchedCourses.map((course, index) => (
+                    <CourseBlock key={index} course={course} />
+                  ))}
+                  {searchedCourses.length === 0 && (
+                    <p className="text-center">Inga kurser hittade</p>
+                  )}
+                </div>
+              }
+            />
+            <Collapse
+              title="Övriga block"
+              content={
+                <div className="flex flex-col items-center space-y-4">
+                  <CustomBlock />
+                  <YearOffBlock />
+                  <WorkingBlock />
+                  <ExchangeBlock />
+                </div>
+              }
+            />
           </Drawer>
         )}
         {isRightDrawerOpen && (

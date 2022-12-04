@@ -12,7 +12,7 @@ import IconButtonDropdown from "../components/IconButtonDropdown";
 import ModalWindow from "../components/Modal";
 import Text from "../components/Text";
 import Title from "../components/Title";
-import { localStorageKey, Templates, TextVariant } from "../shared/constants";
+import { localStorageLayuotKey, Templates, TextVariant } from "../shared/constants";
 import { templateEmpty, templates } from "../shared/data";
 import { createEmptyTemplate, createIDTemplate } from "../shared/functions";
 import { Preset } from "../shared/interfaces";
@@ -28,7 +28,7 @@ export default function Home() {
   );
   const navigate = useNavigate();
   const [coursesLocalStorage, setCoursesLocalStorage] = useLocalStorage(
-    localStorageKey,
+    localStorageLayuotKey,
     null
   );
 

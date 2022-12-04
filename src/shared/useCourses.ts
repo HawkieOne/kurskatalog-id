@@ -5,9 +5,11 @@ import {
   coursesBuilderSelector,
   coursesYearState,
   draggingSavedCourseState,
-  savedCoursesState
+  savedCoursesState,
 } from "../atoms/atoms";
+import { localStorageSavedCoursesKey } from "./constants";
 import { BuildingBlock, Course } from "./interfaces";
+import { useLocalStorage } from "./useLocalStorage";
 
 export default function useCourses() {
   const [courses, setCourses] = useRecoilState(coursesBuilderSelector);
@@ -17,6 +19,9 @@ export default function useCourses() {
   const [draggingCourse, setDraggingCourse] = useRecoilState(
     draggingSavedCourseState
   );
+
+  const [savedCoursesLocalStorage, setSavedCoursesLocalStorage] =
+    useLocalStorage(localStorageSavedCoursesKey, null);
 
   const addCourse = (block: BuildingBlock) => {
     if (draggingCourse) {
@@ -75,15 +80,29 @@ export default function useCourses() {
     }
   };
 
+  const getSavedCourses = () => {
+    // Uncomment for local storage but it does not work correctly
+
+    // if (savedCoursesLocalStorage) {
+    //   setSavedCourses(savedCoursesLocalStorage);
+    //   return savedCoursesLocalStorage;
+    // } else {
+    //   return savedCourses;
+    // }
+    return savedCourses;
+  };
+
   const addToSavedCourses = (course: Course) => {
     const savedCoursesCpy = savedCourses.slice();
     savedCoursesCpy.push(course);
     setSavedCourses(savedCoursesCpy);
+    setSavedCoursesLocalStorage(savedCoursesCpy);
   };
 
   const removeFromSavedCoursesByIndex = (index: number) => {
     const savedCoursesCpy = savedCourses.slice();
     savedCoursesCpy.splice(index, 1);
+    setSavedCoursesLocalStorage(savedCoursesCpy);
     setSavedCourses(savedCoursesCpy);
   };
 
@@ -91,6 +110,7 @@ export default function useCourses() {
     const savedCoursesCpy = savedCourses.slice();
     const index = savedCourses.indexOf(course);
     savedCoursesCpy.splice(index, 1);
+    setSavedCoursesLocalStorage(savedCoursesCpy);
     setSavedCourses(savedCoursesCpy);
   };
 
@@ -104,7 +124,7 @@ export default function useCourses() {
     removeCourse,
     saveChanges,
     addYear,
-    savedCourses,
+    getSavedCourses,
     addToSavedCourses,
     removeFromSavedCourses: removeFromSavedCoursesByIndex,
     removeFromSavedCoursesByObject,
