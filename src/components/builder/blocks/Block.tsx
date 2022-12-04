@@ -11,7 +11,7 @@ interface BlockProps {
   background?: string;
   course?: Course;
   info?: boolean;
-  onAddCourseClick: () => void; 
+  onAddCourseClick: () => void;
 }
 
 export default function Block({

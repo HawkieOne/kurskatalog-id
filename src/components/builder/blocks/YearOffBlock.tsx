@@ -5,7 +5,7 @@ import Block from './Block'
 export default function YearOffBlock() {
     const { addToSavedCourses } = useCourses();
   return (
-    <Block 
+    <Block
       title="Paus"
       subtitle="Du pluggar inte"
       background="bg-indigo-300"
