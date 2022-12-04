@@ -8,7 +8,6 @@ interface CollapseProps {
 
 export default function Collapse({ title, content }: CollapseProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  console.log(isCollapsed);
   return (
     <div className="flex flex-col items-center space-y-4">
       <div

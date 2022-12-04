@@ -19,6 +19,7 @@ export default function CoursePage() {
           icon={<IoMdArrowBack size={"2.5em"} />}
           size="small"
           to="/kurser"
+          goBack
           hoverBgColor="bg-creamDark"
         />
       </div>

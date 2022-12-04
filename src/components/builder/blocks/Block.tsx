@@ -39,7 +39,7 @@ export default function Block({
         <div className="absolute inset-y-0 right-0 h-full flex">
           {info && course && (
             <Link
-              to={"kurser/" + course.name}
+              to={"/kurser/" + course.name}
               state={{ course: course }}
               className="bg-cream flex flex-col justify-center
                         items-center p-3 hover:bg-onyx hover:text-white"
