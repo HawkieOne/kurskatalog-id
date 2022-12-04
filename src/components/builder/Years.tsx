@@ -2,7 +2,7 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import { v4 as uuidv4 } from "uuid";
 import {
   FontVariants,
-  localStorageKey,
+  localStorageLayuotKey,
   TextVariant,
   TitleVariant,
 } from "../../shared/constants";
@@ -27,7 +27,7 @@ export default function Years() {
   } = useCourses();
   const setCourses = useSetRecoilState(coursesBuilderState);
   const [coursesLocalStorage, setCoursesLocaStorage] =
-    useLocalStorage(localStorageKey);
+    useLocalStorage(localStorageLayuotKey);
 
   useEffect(() => {
     setCourses(coursesLocalStorage);

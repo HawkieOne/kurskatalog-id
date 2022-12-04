@@ -17,7 +17,7 @@ export default function DraggableCourse({
   onRemove,
 }: DraggableCourseProps) {
   const [isOverFlowMenuOpen, setIsOverflowMenuOpen] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState("bg-cream");
+  const [backgroundColor, setBackgroundColor] = useState(getColorByType(course.content?.type));
 
   const ref = createRef<HTMLDivElement>();
   useOnClickOutside(ref, () => setIsOverflowMenuOpen(false));
@@ -84,3 +84,20 @@ export default function DraggableCourse({
     </div>
   );
 }
+
+const getColorByType = (type: Course["type"]) => {
+  switch (type) {
+    case "course":
+      return "bg-cream";
+    case "custom":
+      return "bg-fuchsia-300";
+    case "exchange":
+      return "bg-violet-300";
+    case "working":
+      return "bg-stone-300";
+    case "yearOff":
+      return "bg-indigo-300";
+    default:
+      return "bg-cream";
+  }
+};

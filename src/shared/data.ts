@@ -514,7 +514,7 @@ export const templateID = [
   },
 ];
 
-export const emptyCourse = {
+export const emptyCourse: Course = {
   name: "",
   points: -1,
   link: "",
@@ -524,3 +524,53 @@ export const emptyCourse = {
   description: "",
   rating: -1
 }
+
+export const customCourse: Course = {
+  name: "Valfri kurs",
+  points: -1,
+  link: "",
+  level: "",// CAN ONLY BE SOME VALUES
+  code: "",
+  registerCode: "",
+  description: "",
+  rating: -1,
+  type: "custom"
+}
+
+export const exchangeCourse: Course = {
+  name: "Utbyte",
+  points: -1,
+  link: "",
+  level: "",// CAN ONLY BE SOME VALUES
+  code: "",
+  registerCode: "",
+  description: "",
+  rating: -1,
+  type: "exchange"
+}
+
+export const workingCourse: Course = {
+  name: "Arbete",
+  points: -1,
+  link: "",
+  level: "",// CAN ONLY BE SOME VALUES
+  code: "",
+  registerCode: "",
+  description: "",
+  rating: -1,
+  type: "working"
+}
+
+export const yearOffCourse: Course = {
+  name: "Övrigt",
+  points: -1,
+  link: "",
+  level: "",// CAN ONLY BE SOME VALUES
+  code: "",
+  registerCode: "",
+  description: "",
+  rating: -1,
+  type: "yearOff"
+}
+
+

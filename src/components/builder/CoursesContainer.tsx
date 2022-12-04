@@ -1,21 +1,23 @@
-import React from "react";
-import {
-  FontVariants,
-  TextVariant,
-  AlignVariants,
-} from "../../shared/constants";
-import Text from "../Text";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import {
+  AlignVariants, FontVariants,
+  TextVariant
+} from "../../shared/constants";
+import { Course } from "../../shared/interfaces";
+import useCourses from "../../shared/useCourses";
+import CourseCard from "../course/CourseCard";
+import Text from "../Text";
 
 interface CoursesContainerProps {
-  onAddCourses: () => void;
-  children: React.ReactNode;
+  onAddCoursesClick: () => void;
+  courses: Course[];
 }
 
 export default function CoursesContainer({
-  children,
-  onAddCourses,
+  onAddCoursesClick,
+  courses,
 }: CoursesContainerProps) {
+  const { removeFromSavedCourses } = useCourses();
   return (
     <div className="basis-1/2 w-full p-5 flex flex-col text-onyx space-y-4 bg-slate-50 relative">
       <Text
@@ -25,10 +27,18 @@ export default function CoursesContainer({
       >
         Kurser
       </Text>
-      <div className=" flex flex-wrap gap-3">{children}</div>
+      <div className="flex flex-wrap gap-3">
+        {courses.map((course, index) => (
+          <CourseCard
+            key={index}
+            course={course}
+            onRemoveClick={() => removeFromSavedCourses(index)}
+          />
+        ))}
+      </div>
       <div
         className="absolute top-0 right-5 btn btn-ghost"
-        onClick={onAddCourses}
+        onClick={onAddCoursesClick}
       >
         <AiOutlineAppstoreAdd size="2em" />
       </div>
