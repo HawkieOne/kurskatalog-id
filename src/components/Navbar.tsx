@@ -8,9 +8,12 @@ export default function Navbar() {
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
     useRecoilState(rightDrawerState);
   const location = useLocation();
-  const pathName = location.pathname.replace("/", "").trim();
-  const capitalizedPathname =
-    pathName.charAt(0).toUpperCase() + pathName.slice(1);
+  const pathString = location.pathname.replace("/", "").trim();
+
+  const pathNameSplited = pathString.split("/");
+  const pathName = pathNameSplited[pathNameSplited.length - 1];
+  const capitalizedPathname = decodeURI(pathName.charAt(0).toUpperCase() + pathName.slice(1));
+
   return (
     <div className="navbar bg-cream p-2 shadow-md relative flex justify-center items-center z-50">
       <Link
