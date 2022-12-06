@@ -14,13 +14,10 @@ export default function Courses() {
   return (
     <div className="h-full w-full bg-white flex flex-col items-center py-12 space-y-8">
       <div className="w-3/4 flex justify-center relative">
-        <Title>Kurser</Title>
-        <div className="absolute right-0">
           <Search
             allCourses={originalCourses}
             setSearchedCourses={setSearchedCourses}
           />
-        </div>
       </div>
       <div className="w-3/4 flex flex-col items-center space-y-6">
         {searchedCourses.map((course, index) => (

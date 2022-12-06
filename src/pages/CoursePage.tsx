@@ -23,7 +23,6 @@ export default function CoursePage() {
           hoverBgColor="bg-creamDark"
         />
       </div>
-      <Title>{course.name}</Title>
       <div className="flex flex-row justify-center w-1/2 text-onyx text-md space-y-8 px-4 pb-4">
         <Stats course={course} />
       </div>
