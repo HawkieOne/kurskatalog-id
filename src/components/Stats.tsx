@@ -13,10 +13,12 @@ export default function Stats({ course }: StatsProps) {
                 <Stat
                     label="Studietakt"
                     value={course.pace}
+                    unit={"%"}
                 />}
             <Stat
                 label="Poäng"
                 value={course.points}
+                unit={"hp"}
             />
             {course.period && <Stat
                 label="Kurskod"
