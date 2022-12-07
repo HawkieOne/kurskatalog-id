@@ -4,6 +4,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
+import { jsPDF } from "jspdf";
 import { leftDrawerState, rightDrawerState } from "../atoms/atoms";
 import CourseBlock from "../components/builder/blocks/CourseBlock";
 import CustomBlock from "../components/builder/blocks/CustomBlock";
@@ -64,6 +65,20 @@ export default function ExamBuilder() {
       setActivePreset(preset);
     }
   };
+
+  const saveToPDF = () => {
+    const doc = new jsPDF({
+      orientation: "landscape",
+    });
+    doc.html(document.body, {
+      callback: function (doc) {
+        doc.save();
+      },
+      x: 10,
+      y: 10
+   });
+    doc.save("kursplan.pdf");
+  }
 
   return (
     <div className="h-full bg-white">
@@ -166,9 +181,9 @@ export default function ExamBuilder() {
                 Spara förinställning
               </button>
 
-              <button className="btn btn-accent">Spara som bild</button>
+              <button className="btn btn-accent" onClick={saveToPDF}>Spara som bild</button>
 
-              <button className="btn btn-accent">Skriv ut</button>
+              <button className="btn btn-accent" onClick={() => window.print()}>Skriv ut</button>
             </div>
           </Drawer>
         )}
