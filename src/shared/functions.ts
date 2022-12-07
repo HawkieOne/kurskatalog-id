@@ -1,4 +1,7 @@
 import Ajv from "ajv";
+import { jsPDF } from "jspdf";
+import FileSaver from 'file-saver';
+import html2canvas from "html2canvas";
 import { templateEmpty, templateID } from "./data";
 import { Course, Preset, Year } from "./interfaces";
 import { defsSchema, presetSchema } from "./schema";
@@ -10,6 +13,40 @@ export const createEmptyTemplate = () => {
 export const createIDTemplate = () => {
   return templateID;
 };
+
+export const saveToPDF = (idHtmlElement: string) => {
+  const pdfData = document.getElementById(idHtmlElement);
+  console.log(pdfData);
+  if(pdfData) {
+    html2canvas(pdfData)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+
+        const doc = new jsPDF({
+          orientation: "l",
+          hotfixes: ["px_scaling"]
+        });
+        const imgProps= doc.getImageProperties(imgData);
+        const width = doc.internal.pageSize.getWidth();
+        const height = (imgProps.height * width) / imgProps.width;
+        doc.addImage(imgData, 'PNG', 0, 0, width, height);
+        doc.save("kursplan.pdf");
+      })
+  }
+}
+
+export const saveToImage = (idHtmlElement: string) => {
+  const pdfData = document.getElementById(idHtmlElement);
+  console.log(pdfData);
+  if(pdfData) {
+    html2canvas(pdfData)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        FileSaver.saveAs(imgData, "kursplan.png");
+        // const imgUrl = '<img src="'+imgData+'"/>';
+      })
+  }
+}
 
 export const exportTemplate = (name: string, courses: Year[]) => {
   const element = document.createElement("a");

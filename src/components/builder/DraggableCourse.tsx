@@ -24,7 +24,7 @@ export default function DraggableCourse({
   return (
     <div
       ref={ref}
-      className={`h-full w-full ${backgroundColor} flex items-start justify-start text-onyx shadow-lg`}
+      className={`h-full w-full ${backgroundColor} flex items-start justify-start text-onyx drop-shadow-lg`}
     >
       {course.content && (
         <div className="h-full w-full flex flex-col p-3 text-ellipsis">

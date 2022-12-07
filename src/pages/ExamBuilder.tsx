@@ -4,7 +4,6 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
-import { jsPDF } from "jspdf";
 import { leftDrawerState, rightDrawerState } from "../atoms/atoms";
 import CourseBlock from "../components/builder/blocks/CourseBlock";
 import CustomBlock from "../components/builder/blocks/CustomBlock";
@@ -20,7 +19,7 @@ import Years from "../components/builder/Years";
 import Collapse from "../components/Collapse";
 import Search from "../components/Search";
 import { courses as allCourses } from "../shared/data";
-import { exportTemplate, validateJSON } from "../shared/functions";
+import { exportTemplate, validateJSON, saveToPDF, saveToImage } from "../shared/functions";
 import { Course, Preset } from "../shared/interfaces";
 import useCourses from "../shared/useCourses";
 
@@ -66,20 +65,6 @@ export default function ExamBuilder() {
     }
   };
 
-  const saveToPDF = () => {
-    const doc = new jsPDF({
-      orientation: "landscape",
-    });
-    doc.html(document.body, {
-      callback: function (doc) {
-        doc.save();
-      },
-      x: 10,
-      y: 10
-   });
-    doc.save("kursplan.pdf");
-  }
-
   return (
     <div className="h-full bg-white">
       <div className="h-full relative p-4">
@@ -111,7 +96,7 @@ export default function ExamBuilder() {
                 <IoIosAddCircleOutline />
               </button>
             </div>
-            <div className="w-full flex flex-col justify-evenly space-y-8">
+            <div id="pdf" className="w-full flex flex-col justify-evenly space-y-8">
               <Years />
               <CoursesContainer
                 onAddCoursesClick={() => setIsLeftDrawerOpen((prev) => !prev)}
@@ -180,9 +165,9 @@ export default function ExamBuilder() {
               >
                 Spara förinställning
               </button>
-
-              <button className="btn btn-accent" onClick={saveToPDF}>Spara som bild</button>
-
+              
+              <button className="btn btn-accent" onClick={() => saveToImage("pdf")}>Spara som bild</button>
+              <button className="btn btn-accent" onClick={() => saveToPDF("pdf")}>Spara som PDF</button>            
               <button className="btn btn-accent" onClick={() => window.print()}>Skriv ut</button>
             </div>
           </Drawer>
