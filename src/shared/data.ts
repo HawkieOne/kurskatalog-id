@@ -522,6 +522,7 @@ export const emptyCourse: Course = {
   code: "",
   registerCode: "",
   description: "",
+  prerequisite: "",
   rating: -1
 }
 
@@ -533,6 +534,7 @@ export const customCourse: Course = {
   code: "",
   registerCode: "",
   description: "",
+  prerequisite: "",
   rating: -1,
   type: "custom"
 }
@@ -545,6 +547,7 @@ export const exchangeCourse: Course = {
   code: "",
   registerCode: "",
   description: "",
+  prerequisite: "",
   rating: -1,
   type: "exchange"
 }
@@ -557,6 +560,7 @@ export const workingCourse: Course = {
   code: "",
   registerCode: "",
   description: "",
+  prerequisite: "",
   rating: -1,
   type: "working"
 }
@@ -569,6 +573,7 @@ export const yearOffCourse: Course = {
   code: "",
   registerCode: "",
   description: "",
+  prerequisite: "",
   rating: -1,
   type: "yearOff"
 }

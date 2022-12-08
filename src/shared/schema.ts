@@ -33,6 +33,8 @@ export const buildingBlockSchema = {
     w: { type: "integer" },
     h: { type: "integer" },
     i: { type: "string" },
+    moved: { type: "boolean"},
+    static: { type: "boolean"},
     content: { $ref: "cSchema.json" },
   },
   required: ["x", "y", "w", "h", "i", "content"],
