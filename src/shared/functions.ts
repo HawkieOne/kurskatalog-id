@@ -14,9 +14,8 @@ export const createIDTemplate = () => {
   return templateID;
 };
 
-export const saveToPDF = (idHtmlElement: string) => {
-  const pdfData = document.getElementById(idHtmlElement);
-  console.log(pdfData);
+export const saveToPDF = (idTargetElement: string) => {
+  const pdfData = document.getElementById(idTargetElement);
   if(pdfData) {
     html2canvas(pdfData)
       .then((canvas) => {
@@ -35,8 +34,8 @@ export const saveToPDF = (idHtmlElement: string) => {
   }
 }
 
-export const saveToImage = (idHtmlElement: string) => {
-  const pdfData = document.getElementById(idHtmlElement);
+export const saveToImage = (idTargetElement: string) => {
+  const pdfData = document.getElementById(idTargetElement);
   console.log(pdfData);
   if(pdfData) {
     html2canvas(pdfData)
