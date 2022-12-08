@@ -36,13 +36,11 @@ export const saveToPDF = (idTargetElement: string) => {
 
 export const saveToImage = (idTargetElement: string) => {
   const pdfData = document.getElementById(idTargetElement);
-  console.log(pdfData);
   if(pdfData) {
     html2canvas(pdfData)
       .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         FileSaver.saveAs(imgData, "kursplan.png");
-        // const imgUrl = '<img src="'+imgData+'"/>';
       })
   }
 }
