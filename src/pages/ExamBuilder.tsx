@@ -165,9 +165,9 @@ export default function ExamBuilder() {
               >
                 Spara förinställning
               </button>
-              
+
               <button className="btn btn-accent" onClick={() => saveToImage("pdf")}>Spara som bild</button>
-              <button className="btn btn-accent" onClick={() => saveToPDF("pdf")}>Spara som PDF</button>            
+              <button className="btn btn-accent" onClick={() => saveToPDF("pdf")}>Spara som PDF</button>
               <button className="btn btn-accent" onClick={() => window.print()}>Skriv ut</button>
             </div>
           </Drawer>
