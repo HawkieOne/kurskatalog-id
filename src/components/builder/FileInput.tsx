@@ -18,7 +18,7 @@ export default function FileInput({
   const [errorText, setErrorText] = useState("");
   return (
     <div className="form-control w-full max-w-xs space-y-2 text-onyx">
-      <label className="label">
+      <label className="label p-0">
         <span className="label-text text-onyx">Ladda förinställning</span>
       </label>
       <input
@@ -54,9 +54,9 @@ export default function FileInput({
           }
         }}
       />
-      <div className="h-6">
-        <Text color="text-pink">{errorText}</Text>
-      </div>
+      <label className="label p-0">
+        <span className="label-text-alt text-pink">{errorText}</span>
+      </label>
     </div>
   );
 }

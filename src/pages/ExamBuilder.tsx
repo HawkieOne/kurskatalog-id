@@ -16,7 +16,9 @@ import FileInput from "../components/builder/FileInput";
 import PresetChooser from "../components/builder/PresetChooser";
 import Progress from "../components/builder/Progress";
 import Years from "../components/builder/Years";
+import Button from "../components/Button";
 import Collapse from "../components/Collapse";
+import Divider from "../components/Divider";
 import Search from "../components/Search";
 import { courses as allCourses } from "../shared/data";
 import { exportTemplate, validateJSON, saveToPDF, saveToImage } from "../shared/functions";
@@ -157,18 +159,13 @@ export default function ExamBuilder() {
                 }}
               />
 
-              <Progress max={100} value={40} />
-
-              <button
-                className="btn btn-accent"
-                onClick={() => exportTemplate("template", courses)}
-              >
-                Spara förinställning
-              </button>
-
-              <button className="btn btn-accent" onClick={() => saveToImage("pdf")}>Spara som bild</button>
-              <button className="btn btn-accent" onClick={() => saveToPDF("pdf")}>Spara som PDF</button>
-              <button className="btn btn-accent" onClick={() => window.print()}>Skriv ut</button>
+              <Divider />
+              <Button text="Spara förinställning" onClick={() => exportTemplate("template", courses)} />
+              <div className="btn-group btn-group-vertical">
+                <Button text="Spara bild" onClick={() => saveToImage("pdf")} />
+                <Button text="Spara PDF" onClick={() => saveToPDF("pdf")} />
+                <Button text="Skriv ut" onClick={window.print} />
+              </div>
             </div>
           </Drawer>
         )}

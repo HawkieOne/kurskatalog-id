@@ -14,11 +14,12 @@ export default function PresetChooser({
 }: PresetChooserProps) {
   return (
     <div className="form-control text-onyx">
-      <h2>Använd förinställning</h2>
-      <div className="input-group text-onyx">
+      <label className="label">
+        <span className="label-text text-onyx">Använd förinställning</span>
+      </label>
+      <div className="input-group">
         <select
-          className="select select-accent select-bordered bg-white border-pink
-                           outline-pink"
+          className="select select-accent select-bordered bg-white border-pink focus:outline-none"
           onChange={onChange}
         >
           {presets.length > 0 ? (
@@ -28,7 +29,7 @@ export default function PresetChooser({
           )}
         </select>
         <button
-          className="btn bg-cream text-pink border-none"
+          className="btn bg-cream text-pink border-none hover:bg-onyx hover:text-white"
           onClick={onUsePreset}
         >
           Använd
