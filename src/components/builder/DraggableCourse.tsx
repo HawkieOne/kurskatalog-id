@@ -1,5 +1,5 @@
-import { createRef, useEffect, useRef, useState } from "react";
-import { AiFillDelete, AiOutlineBgColors, AiFillRead } from "react-icons/ai";
+import { createRef, useState } from "react";
+import { AiFillDelete, AiFillRead } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { FontVariants, TextVariant } from "../../shared/constants";
 import { colors } from "../../shared/data";

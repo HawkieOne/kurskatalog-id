@@ -1,5 +1,4 @@
 import { ChangeEvent, createRef, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -14,7 +13,6 @@ import CoursesContainer from "../components/builder/CoursesContainer";
 import Drawer from "../components/builder/Drawer";
 import FileInput from "../components/builder/FileInput";
 import PresetChooser from "../components/builder/PresetChooser";
-import Progress from "../components/builder/Progress";
 import Years from "../components/builder/Years";
 import Button from "../components/Button";
 import Collapse from "../components/Collapse";

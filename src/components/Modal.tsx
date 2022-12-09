@@ -1,4 +1,3 @@
-import { ChangeEvent } from "react";
 import Modal from "react-modal";
 import { validateJSON } from "../shared/functions";
 import { Preset } from "../shared/interfaces";

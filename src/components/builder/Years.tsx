@@ -4,7 +4,6 @@ import {
   FontVariants,
   localStorageLayuotKey,
   TextVariant,
-  TitleVariant,
 } from "../../shared/constants";
 import useCourses from "../../shared/useCourses";
 import Text from "../Text";

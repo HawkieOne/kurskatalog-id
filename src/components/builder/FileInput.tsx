@@ -1,8 +1,6 @@
-import { ValidateFunction } from "ajv";
-import React, { ChangeEvent, useState } from "react";
-import { getJsonFromFile, validateJSON } from "../../shared/functions";
+import { ChangeEvent, useState } from "react";
+import { getJsonFromFile } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
-import Text from "../Text";
 
 interface FileInputProps {
   acceptedFormat: string;

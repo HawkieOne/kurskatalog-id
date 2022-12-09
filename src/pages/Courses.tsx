@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Course from "../components/course/Course";
-import Title from "../components/Title";
-import { TitleVariant } from "../shared/constants";
-import coursesJson from '../data/courses.json'
 import Search from "../components/Search";
+import coursesJson from '../data/courses.json';
 
 export default function Courses() {
-
   const originalCourses = coursesJson;
   const [searchedCourses, setSearchedCourses] = useState(coursesJson);
-
 
   return (
     <div className="h-full w-full bg-white flex flex-col items-center py-12 space-y-8">

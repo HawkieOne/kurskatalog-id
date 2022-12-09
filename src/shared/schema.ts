@@ -1,6 +1,3 @@
-import { Course, BuildingBlock } from "./interfaces";
-import { JSONSchemaType } from "ajv";
-
 export const presetSchema = {
   $id: "http://schema.com/schemas/presetSchema.json",
   type: "object",
