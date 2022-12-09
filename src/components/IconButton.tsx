@@ -29,7 +29,7 @@ export default function IconButton({
   return (
     <div
       className={`bg-cream ${bgColor} text-pink ${textColor} rounded-lg shadow-md group hover:${hoverBgColor}
-      relative space-y-4`}
+      relative space-y-4 cursor-pointer`}
     >
       {size === "small" && (
         <div

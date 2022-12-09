@@ -15,7 +15,7 @@ export default function CourseCard({ course, onRemoveClick }: CardProps) {
   const { draggingCourse, setDraggingCourse } = useCourses();
   return (
     <div
-      className={`${getColorByType(course.type)} text-onyx drop-shadow-lg h-32 w-80 flex flex-col relative rounded-md`}
+      className={`${getColorByType(course.type)} text-onyx drop-shadow-lg h-32 w-80 flex flex-col relative rounded-md cursor-grab`}
       draggable={true}
       unselectable="on"
       onDragStart={(e) => {
