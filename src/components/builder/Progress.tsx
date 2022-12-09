@@ -1,5 +1,3 @@
-import Title from "../Title";
-
 interface ProgressProps {
     max: number;
     value: number;

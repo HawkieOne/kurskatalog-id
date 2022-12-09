@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillBuild } from "react-icons/ai";
 import { BsList, BsViewList } from "react-icons/bs";
 import { VscDebugContinueSmall } from "react-icons/vsc";
@@ -13,7 +13,7 @@ import ModalWindow from "../components/Modal";
 import Text from "../components/Text";
 import Title from "../components/Title";
 import { localStorageLayuotKey, Templates, TextVariant } from "../shared/constants";
-import { templateEmpty, templates } from "../shared/data";
+import { templates } from "../shared/data";
 import { createEmptyTemplate, createIDTemplate } from "../shared/functions";
 import { Preset } from "../shared/interfaces";
 import { useLocalStorage } from "../shared/useLocalStorage";

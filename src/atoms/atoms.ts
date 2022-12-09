@@ -1,9 +1,6 @@
 import { atom, selector } from "recoil";
 import { createEmptyTemplate } from "../shared/functions";
-import { emptyCourse } from "../shared/data";
 import { Course, Year } from "../shared/interfaces";
-import { useLocalStorage } from "../shared/useLocalStorage";
-import { localStorageSavedCoursesKey } from "../shared/constants";
 
 export const hasStartedEditingState = atom({
   key: "hasStartedEditingState",

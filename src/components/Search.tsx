@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { onSearch } from "../shared/functions";
 import { Course } from "../shared/interfaces";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
