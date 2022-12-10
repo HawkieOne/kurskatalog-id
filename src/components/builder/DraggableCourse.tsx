@@ -1,6 +1,7 @@
 import { createRef, useEffect, useState } from "react";
 import { AiFillDelete, AiFillRead } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import { Link } from "react-router-dom";
 import { FontVariants, TextVariant } from "../../shared/constants";
 import { colors } from "../../shared/data";
 import { BuildingBlock, Course } from "../../shared/interfaces";
@@ -60,13 +61,14 @@ export default function DraggableCourse({
                   <div className="absolute menu top-full right-0 shadow-lg">
                     <ul className="bg-white w-44">
                       <li>
-                        <div
-                          className="flex active:bg-red-500 items-center"
-                          onClick={() => {}}
+                        <Link
+                          to={"/kurser/" + course.content.name}
+                          state={{ course: course.content }}
+                          className="flex items-center p-3 active:bg-red-500"
                         >
                           <AiFillRead />
                           <Text>Läs mer</Text>
-                        </div>
+                        </Link>
                       </li>
                       <li>
                         <div
