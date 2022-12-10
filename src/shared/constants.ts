@@ -29,7 +29,7 @@ export const AlignVariants: AlignVariantObject = {
 export const maxRating = 5;
 
 export const Templates = {
-    id: "ID",
+    id: "Interaktion & Design",
     custom: "Anpassad mall",
     empty: "Tom mall",
     upload: "Ladda upp mall"

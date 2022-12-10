@@ -67,7 +67,7 @@ export default function Home() {
           )}
           <IconButtonDropdown
             icon={<AiFillBuild size={"2.5em"} />}
-            text="Ny"
+            text="Skapa kursplan"
             size="large"
             hoverBgColor="bg-creamDark"
             options={templates}
@@ -97,7 +97,7 @@ export default function Home() {
           />
           <IconButton
             icon={<BsList size={"2.5em"} />}
-            text="Kursplan"
+            text="Obligatoriska kurser"
             size="large"
             to="/kursplan"
             hoverBgColor="bg-creamDark"
