@@ -31,35 +31,13 @@ export default function IconButton({
       className={`bg-cream ${bgColor} text-pink ${textColor} rounded-lg shadow-md group hover:${hoverBgColor}
       relative space-y-4`}
     >
-      {size === "small" && (
-        <div
-          onClick={() => (goBack ? navigate(-1) : navigate(to))}
-          className="h-full p-2 flex flex-col justify-evenly items-center"
-        >
-          <div className="group-hover:text-onyx">{icon}</div>
-          {text && <Text size={TextVariant.large}>{text}</Text>}
-        </div>
-      )}
-      {size === "medium" && (
-        <div
-          onClick={() => (goBack ? navigate(-1) : navigate(to))}
-          className="h-full p-2 flex flex-col justify-evenly items-center"
-        >
-          <div className="group-hover:text-onyx">{icon}</div>
-          {text && <Text size={TextVariant.large}>{text}</Text>}
-        </div>
-      )}
-      {size === "large" && (
-        <div className={`h-64 w-64 relative flex flex-col`}>
-          <div
-            onClick={() => (goBack ? navigate(-1) : navigate(to))}
-            className="h-full p-2 flex flex-col justify-evenly items-center"
-          >
-            <div className="group-hover:text-onyx">{icon}</div>
-            {text && <Text size={TextVariant.large}>{text}</Text>}
-          </div>
-        </div>
-      )}
+      <div
+        onClick={() => (goBack ? navigate(-1) : navigate(to))}
+        className={`${size === "large" ? "h-64 w-64 relative " : "h-full "} p-2 flex flex-col justify-evenly items-center`}
+      >
+        <div className="group-hover:text-onyx">{icon}</div>
+        {text && <Text size={TextVariant.large}>{text}</Text>}
+      </div>
     </div>
   );
 }
