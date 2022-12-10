@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 import { jsPDF } from "jspdf";
-import FileSaver from 'file-saver';
+import FileSaver from "file-saver";
 import html2canvas from "html2canvas";
 import { templateEmpty, templateID } from "./data";
 import { Course, Preset, Year } from "./interfaces";
@@ -16,34 +16,32 @@ export const createIDTemplate = () => {
 
 export const saveToPDF = (idTargetElement: string) => {
   const pdfData = document.getElementById(idTargetElement);
-  if(pdfData) {
-    html2canvas(pdfData)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
+  if (pdfData) {
+    html2canvas(pdfData).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
 
-        const doc = new jsPDF({
-          orientation: "l",
-          hotfixes: ["px_scaling"]
-        });
-        const imgProps= doc.getImageProperties(imgData);
-        const width = doc.internal.pageSize.getWidth();
-        const height = (imgProps.height * width) / imgProps.width;
-        doc.addImage(imgData, 'PNG', 0, 0, width, height);
-        doc.save("kursplan.pdf");
-      })
+      const doc = new jsPDF({
+        orientation: "l",
+        hotfixes: ["px_scaling"],
+      });
+      const imgProps = doc.getImageProperties(imgData);
+      const width = doc.internal.pageSize.getWidth();
+      const height = (imgProps.height * width) / imgProps.width;
+      doc.addImage(imgData, "PNG", 0, 0, width, height);
+      doc.save("kursplan.pdf");
+    });
   }
-}
+};
 
 export const saveToImage = (idTargetElement: string) => {
   const pdfData = document.getElementById(idTargetElement);
-  if(pdfData) {
-    html2canvas(pdfData)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        FileSaver.saveAs(imgData, "kursplan.png");
-      })
+  if (pdfData) {
+    html2canvas(pdfData).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      FileSaver.saveAs(imgData, "kursplan.png");
+    });
   }
-}
+};
 
 export const exportTemplate = (name: string, courses: Year[]) => {
   const element = document.createElement("a");

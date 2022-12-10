@@ -9,6 +9,8 @@ export default function WorkingBlock() {
       title="Arbete"
       subtitle="Du arbetar"
       background="bg-stone-300"
+      hoverBackground="hover:bg-stone-500"
+      borderColor="border-stone-500"
       onAddCourseClick={() => addToSavedCourses(workingCourse)}
     />
   );

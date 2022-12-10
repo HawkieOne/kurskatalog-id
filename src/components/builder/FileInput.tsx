@@ -14,10 +14,11 @@ export default function FileInput({
   validateFunction,
 }: FileInputProps) {
   const [errorText, setErrorText] = useState("");
+  const [successText, setSuccessText] = useState("");
   return (
     <div className="form-control w-full max-w-xs space-y-2 text-onyx">
       <label className="label p-0">
-        <span className="label-text text-onyx">Ladda förinställning</span>
+        <span className="label-text text-onyx">Ladda upp mall</span>
       </label>
       <input
         type="file"
@@ -37,24 +38,36 @@ export default function FileInput({
                 if (validation) {
                   onUpload(json);
                   setErrorText("");
+                  setSuccessText("Mall är uppladdad");
                 } else {
-                  setErrorText("The JSON does not follow the schema");
+                  setErrorText("Mall har felaktigt format");
+                  setSuccessText("");
                 }
               } else {
                 onUpload(json);
                 setErrorText("");
+                setSuccessText("");
               }
             } else {
-              setErrorText("Something went wrong uploading the files");
+              setErrorText("Någonting gick fel när mallen laddades upp");
+              setSuccessText("");
             }
           } else {
-            setErrorText("Invalid file format");
+            setErrorText("Ogiltigt filformat");
+            setSuccessText("");
           }
         }}
       />
       <label className="label p-0">
-        <span className="label-text-alt text-pink">{errorText}</span>
+        <span className={`label-text-alt ${successText !== "" ? "text-emerald-600" : "text-pink"}`}>{showNotificationText(errorText, successText)}</span>
       </label>
     </div>
   );
+}
+ 
+const showNotificationText = (errorText: string, successText: string) => {
+  if (errorText === "") {
+    return successText;
+  }
+  return errorText;
 }

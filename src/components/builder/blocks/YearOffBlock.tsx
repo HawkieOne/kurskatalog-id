@@ -9,6 +9,8 @@ export default function YearOffBlock() {
       title="Paus"
       subtitle="Du pluggar inte"
       background="bg-indigo-300"
+      hoverBackground="hover:bg-indigo-500"
+      borderColor="border-indigo-500"
       onAddCourseClick={() => addToSavedCourses(yearOffCourse)}
     />
   )

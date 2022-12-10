@@ -5,8 +5,8 @@ interface ButtonProps {
 
 export default function Button({ text, onClick } : ButtonProps) {
   return (
-    <button className="btn btn-accent bg-cream text-onyx border-pink
-    hover:bg-onyx hover:text-white hover:border-pink"
+    <button className="btn btn-accent bg-cream text-onyx border-none 
+    hover:bg-creamDark shadow-md"
     onClick={onClick}>
         {text}
     </button>

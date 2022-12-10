@@ -9,6 +9,8 @@ export default function CustomBlock() {
       title="Valfri kurs"
       subtitle="Anpassa kursen själv"
       background="bg-fuchsia-300"
+      hoverBackground="hover:bg-fuchsia-500"
+      borderColor="border-fuchsia-500"
       onAddCourseClick={() => addToSavedCourses(customCourse)}
     />
   );

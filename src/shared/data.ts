@@ -410,11 +410,11 @@ export const subjects = [
 
 export const colors = [
   "bg-cream",
-  "bg-red-500",
-  "bg-blue-500",
-  "bg-emerald-500",
-  "bg-slate-500",
-  "bg-violet-500",
+  "bg-red-300",
+  "bg-blue-300",
+  "bg-emerald-300",
+  "bg-slate-300",
+  "bg-violet-300",
 ];
 
 export const templates = [Templates.id, Templates.empty, Templates.upload];

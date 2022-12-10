@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { AiFillDelete, AiFillRead } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { FontVariants, TextVariant } from "../../shared/constants";
@@ -17,7 +17,25 @@ export default function DraggableCourse({
   onRemove,
 }: DraggableCourseProps) {
   const [isOverFlowMenuOpen, setIsOverflowMenuOpen] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState(getColorByType(course.content?.type));
+  const [backgroundColor, setBackgroundColor] = useState(
+    getColorByType(course.content?.type)
+  );
+  const [hoverBackgroundColor, setHoverBackgroundColor] = useState("");
+  console.log(backgroundColor);
+  useEffect(() => {
+    if (backgroundColor === "bg-cream") {
+      setHoverBackgroundColor("hover:bg-creamDark");
+    } else {
+      let hoverBackgroundColor = backgroundColor.replace("bg", "hover:bg");
+      hoverBackgroundColor = hoverBackgroundColor.substring(
+        0,
+        hoverBackgroundColor.lastIndexOf("-")
+      );
+      hoverBackgroundColor += "-500";
+      setHoverBackgroundColor(hoverBackgroundColor);
+      console.log(hoverBackgroundColor);
+    }
+  }, [backgroundColor]);
 
   const ref = createRef<HTMLDivElement>();
   useOnClickOutside(ref, () => setIsOverflowMenuOpen(false));
@@ -33,7 +51,7 @@ export default function DraggableCourse({
               {course.content.code}
             </Text>
             <div
-              className="hover:bg-creamDark rounded-full cursor-pointer"
+              className={`${hoverBackgroundColor} rounded-full cursor-pointer`}
               onClick={() => setIsOverflowMenuOpen(!isOverFlowMenuOpen)}
             >
               <div className="relative p-1 z-10">
@@ -44,7 +62,7 @@ export default function DraggableCourse({
                       <li>
                         <div
                           className="flex active:bg-red-500 items-center"
-                          onClick={() => { }}
+                          onClick={() => {}}
                         >
                           <AiFillRead />
                           <Text>Läs mer</Text>

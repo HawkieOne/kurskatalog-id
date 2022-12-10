@@ -1,3 +1,4 @@
+import { hover } from "@testing-library/user-event/dist/hover";
 import { useState } from "react";
 import { AiOutlineInfoCircle, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -9,6 +10,8 @@ interface BlockProps {
   title: string;
   subtitle?: string;
   background?: string;
+  hoverBackground?: string;
+  borderColor?: string;
   course?: Course;
   info?: boolean;
   onAddCourseClick: () => void;
@@ -18,9 +21,11 @@ export default function Block({
   title,
   subtitle,
   background,
+  hoverBackground,
+  borderColor,
   course,
   info,
-  onAddCourseClick
+  onAddCourseClick,
 }: BlockProps) {
   const [isHoverActive, setIsHoverActive] = useState(false);
   return (
@@ -36,12 +41,12 @@ export default function Block({
         <Text size={TextVariant.small}>{subtitle}</Text>
       </div>
       {isHoverActive && (
-        <div className="absolute inset-y-0 right-0 h-full flex">
+        <div className={`absolute inset-y-0 right-0 h-full flex border-l ${borderColor}`}>
           {info && course && (
             <Link
               to={"/kurser/" + course.name}
               state={{ course: course }}
-              className="bg-cream flex flex-col justify-center
+              className="flex flex-col justify-center
                         items-center p-3 hover:bg-onyx hover:text-white"
             >
               <button>
@@ -50,8 +55,8 @@ export default function Block({
             </Link>
           )}
           <div
-            className="bg-pink flex flex-col justify-center cursor-pointer
-                        items-center p-3 hover:bg-onyx hover:text-white rounded-r-md"
+            className={`flex flex-col justify-center cursor-pointer
+                        items-center p-3 ${hoverBackground} rounded-r-md ${course && "hover:bg-pink"}`}
             onClick={onAddCourseClick}
           >
             <AiOutlinePlus />

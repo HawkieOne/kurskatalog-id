@@ -13,19 +13,19 @@ export default function PresetChooser({
   onUsePreset,
 }: PresetChooserProps) {
   return (
-    <div className="form-control text-onyx">
+    <div className="w-full form-control text-onyx">
       <label className="label">
-        <span className="label-text text-onyx">Använd förinställning</span>
+        <span className="label-text text-onyx">Välj mall</span>
       </label>
-      <div className="input-group">
+      <div className="w-full input-group">
         <select
-          className="select select-accent select-bordered bg-white border-pink focus:outline-none"
+          className="select select-accent select-bordered bg-white border-pink focus:outline-none flex-grow"
           onChange={onChange}
         >
           {presets.length > 0 ? (
             presets.map((preset, index) => <option key={index}>{preset.name}</option>)
           ) : (
-            <option disabled>Ingen förinställning uppladdad</option>
+            <option disabled>Ingen mall uppladdad</option>
           )}
         </select>
         <button

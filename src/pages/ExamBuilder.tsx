@@ -19,8 +19,14 @@ import Collapse from "../components/Collapse";
 import Divider from "../components/Divider";
 import Search from "../components/Search";
 import { courses as allCourses } from "../shared/data";
-import { exportTemplate, validateJSON, saveToPDF, saveToImage } from "../shared/functions";
+import {
+  exportTemplate,
+  validateJSON,
+  saveToPDF,
+  saveToImage,
+} from "../shared/functions";
 import { Course, Preset } from "../shared/interfaces";
+import { useOnClickOutside } from "../shared/onClickOutside";
 import useCourses from "../shared/useCourses";
 
 export default function ExamBuilder() {
@@ -47,15 +53,17 @@ export default function ExamBuilder() {
     useRecoilState(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
-  // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
+  useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
   const rightDrawerRef = createRef<HTMLDivElement>();
-  // useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
+  useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
 
   const onFileUpload = (preset: Preset) => {
-    setActivePreset(preset);
-    const newPresets = presets.slice();
-    newPresets.push(preset);
-    setPresets(newPresets);
+    if (!presets.find(e => e.name === preset.name)) {
+      setActivePreset(preset);
+      const newPresets = presets.slice();
+      newPresets.push(preset);
+      setPresets(newPresets);
+    }
   };
 
   const onPresetChosen = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -96,7 +104,10 @@ export default function ExamBuilder() {
                 <IoIosAddCircleOutline />
               </button>
             </div>
-            <div id="pdf" className="w-full flex flex-col justify-evenly space-y-8">
+            <div
+              id="pdf"
+              className="w-full flex flex-col justify-evenly space-y-8"
+            >
               <Years />
               <CoursesContainer
                 onAddCoursesClick={() => setIsLeftDrawerOpen((prev) => !prev)}
@@ -157,8 +168,11 @@ export default function ExamBuilder() {
                 }}
               />
 
-              <Divider />
-              <Button text="Spara förinställning" onClick={() => exportTemplate("template", courses)} />
+              <Divider text="Exportera" />
+              <Button
+                text="Exportera mall"
+                onClick={() => exportTemplate("template", courses)}
+              />
               <div className="btn-group btn-group-vertical">
                 <Button text="Spara bild" onClick={() => saveToImage("pdf")} />
                 <Button text="Spara PDF" onClick={() => saveToPDF("pdf")} />

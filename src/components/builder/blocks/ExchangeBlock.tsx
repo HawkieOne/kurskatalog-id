@@ -9,6 +9,8 @@ export default function ExchangeBlock() {
       title="Utbyte"
       subtitle="Du är inte i Sverige"
       background="bg-violet-300"
+      hoverBackground="hover:bg-violet-500"
+      borderColor="border-violet-500"
       onAddCourseClick={() => addToSavedCourses(exchangeCourse)}
     />
   );
