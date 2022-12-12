@@ -5,7 +5,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import Title from "../../components/Title";
 import Stats from "../../components/Stats";
 import Text from "../../components/Text";
-import InformationRow from "../Courses/InformationRow";
+import InformationRow from "../courses/InformationRow";
 import IconButton from "../../components/IconButton";
 
 export default function CoursePage() {
