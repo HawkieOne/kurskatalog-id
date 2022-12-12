@@ -89,10 +89,10 @@ export const validateJSON = (preset: Preset) => {
   if(validate) {
     if (validate(preset)) {
       return preset;
-    } else {      
+    } else {
       return false;
     }
-  } 
+  }
   return false;
 };
 
