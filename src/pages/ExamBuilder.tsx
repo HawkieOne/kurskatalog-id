@@ -120,8 +120,9 @@ export default function ExamBuilder() {
           <Drawer side="left" refPointer={leftDrawerRef}>
             <Collapse
               title="Kursblock"
+              open={false}
               content={
-                <div className="w-full flex flex-col items-center space-y-4">
+                <div className="w-full flex flex-col items-center space-y-4 p-3">
                   <Search
                     allCourses={allCourses}
                     setSearchedCourses={setSearchedCourses}
@@ -138,8 +139,9 @@ export default function ExamBuilder() {
             />
             <Collapse
               title="Övriga block"
+              open={false}
               content={
-                <div className="flex flex-col items-center space-y-4">
+                <div className="flex flex-col items-center space-y-4 p-3">
                   <CustomBlock />
                   <YearOffBlock />
                   <WorkingBlock />
