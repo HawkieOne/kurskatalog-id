@@ -8,7 +8,7 @@ import {
   savedCoursesState,
 } from "../atoms/atoms";
 import { localStorageSavedCoursesKey } from "./constants";
-import { BuildingBlock, Course } from "./interfaces";
+import { BuildingBlock, Course, Year } from "./interfaces";
 import { useLocalStorage } from "./useLocalStorage";
 
 export default function useCourses() {
@@ -56,11 +56,11 @@ export default function useCourses() {
 
   const saveChanges = (changedLayout: ReactGridLayout.Layout[]) => {
     let cpyCourses = courses.slice();
-    const newLayout: BuildingBlock[] = changedLayout.map((course, index) => ({
-      ...course,
-      content: cpyCourses[activeYear].courses.find((e) => e.i === course.i)
-        ?.content,
+    const newLayout: BuildingBlock[] = changedLayout.map((block, index) => ({
+      ...block,
+      content: findCourse(cpyCourses, block)
     }));
+
     cpyCourses[activeYear] = {
       ...cpyCourses[activeYear],
       courses: newLayout,
@@ -68,6 +68,22 @@ export default function useCourses() {
     setCourses(cpyCourses);
     return cpyCourses;
   };
+
+  const findCourse = (cpyCourses: Year[], course: ReactGridLayout.Layout) => {
+    const foundCourse = cpyCourses[activeYear].courses.find((e) => e.i === course.i);
+    if (foundCourse) {
+      return foundCourse.content;
+    } else {
+      return {
+        name: "",
+        points: 0,
+        link: "",
+        level: "",
+        code: "",
+        rating: 0
+      }
+    }
+  }
 
   const addYear = () => {
     if (courses.length < 9) {

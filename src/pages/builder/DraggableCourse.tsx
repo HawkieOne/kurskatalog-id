@@ -19,7 +19,7 @@ export default function DraggableCourse({
 }: DraggableCourseProps) {
   const [isOverFlowMenuOpen, setIsOverflowMenuOpen] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState(
-    getColorByType(course.content?.type)
+    getColorByType(course.content?.group)
   );
   const [hoverBackgroundColor, setHoverBackgroundColor] = useState("");
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function DraggableCourse({
                 {isOverFlowMenuOpen && (
                   <div className="absolute menu top-full right-0 shadow-lg">
                     <ul className="bg-white w-44">
-                      {course.content.type === "course" && (
+                      {course.content.group === "course" && (
                         <li>
                           <Link
                             to={"/kurser/" + course.content.name}
@@ -105,7 +105,7 @@ export default function DraggableCourse({
   );
 }
 
-const getColorByType = (type: Course["type"]) => {
+const getColorByType = (type: Course["group"]) => {
   switch (type) {
     case "course":
       return "bg-cream";
