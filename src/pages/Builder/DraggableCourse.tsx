@@ -2,11 +2,11 @@ import { createRef, useEffect, useState } from "react";
 import { AiFillDelete, AiFillRead } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Text from "../../components/Text";
 import { FontVariants, TextVariant } from "../../shared/constants";
 import { colors } from "../../shared/data";
 import { BuildingBlock, Course } from "../../shared/interfaces";
 import { useOnClickOutside } from "../../shared/onClickOutside";
-import Text from "../Text";
 
 interface DraggableCourseProps {
   course: BuildingBlock;
