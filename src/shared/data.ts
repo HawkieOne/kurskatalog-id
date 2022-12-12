@@ -23,7 +23,7 @@ export const getCourse = (code: string) => {
   return courses.find((course: Course) => code === course.code);
 };
 
-export const courses = [
+export const courses: Course[] = [
   {
     name: "Interaktionsteknik och design",
     description:
@@ -416,6 +416,15 @@ export const colors = [
   "bg-slate-300",
   "bg-violet-300",
 ];
+
+export const sortOptions = {
+    nameRising: "Alfabet (A - Ö)",
+    nameFalling: "Alfabet (Ö - A)",
+    pointsRising: "Poäng - stigande",
+    pointsFalling: "Poäng - fallande",
+    studyPaceRising: "Studietakt - stigande",
+    studyPaceFalling: "Studietakt - fallande",
+}
 
 export const templates = [Templates.id, Templates.empty, Templates.upload];
 
