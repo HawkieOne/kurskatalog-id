@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import FileInput from "../pages/Builder/FileInput";
+import FileInput from "../pages/builder/FileInput";
 import { validateJSON } from "../shared/functions";
 import { Preset } from "../shared/interfaces";
 import Title from "./Title";
