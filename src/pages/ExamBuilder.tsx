@@ -18,6 +18,7 @@ import Button from "../components/Button";
 import Collapse from "../components/Collapse";
 import Divider from "../components/Divider";
 import Search from "../components/Search";
+import { useKeyPress } from "../shared/useKeyPress";
 import { courses as allCourses } from "../shared/data";
 import {
   exportTemplate,
@@ -47,10 +48,8 @@ export default function ExamBuilder() {
     setCourses(preset.years);
   }
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
-  const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
-    useRecoilState(leftDrawerState);
-  const [isRightDrawerOpen, setIsRightDrawerOpen] =
-    useRecoilState(rightDrawerState);
+  const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useRecoilState(leftDrawerState);
+  const [isRightDrawerOpen, setIsRightDrawerOpen] = useRecoilState(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
@@ -72,6 +71,16 @@ export default function ExamBuilder() {
       setActivePreset(preset);
     }
   };
+
+  const onShortcutCoursesDrawer = () => {
+    setIsLeftDrawerOpen((prev) => !prev);
+  };
+  const onShortcutExportDrawer = () => {
+    setIsRightDrawerOpen((prev) => !prev);
+  }
+
+  useKeyPress(['a'], onShortcutCoursesDrawer);
+  useKeyPress(['c'], onShortcutExportDrawer);
 
   return (
     <div className="h-full bg-white">
