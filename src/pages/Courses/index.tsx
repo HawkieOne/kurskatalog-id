@@ -1,11 +1,10 @@
 import { useState } from "react";
-import CourseElement from "../components/course/Course";
-import Filter from "../components/Filter";
-import Search from "../components/Search";
-import Dropdown from "../components/Dropdown";
-import { Course } from "../shared/interfaces";
-import { courses, sortOptions } from "../shared/data";
-import { isConstructorDeclaration } from "typescript";
+import Dropdown from "../../components/Dropdown";
+import CourseElement from "./Course"
+import Filter from "../../components/Filter";
+import Search from "../../components/Search";
+import { courses, sortOptions } from "../../shared/data";
+import { Course } from "../../shared/interfaces";
 
 export default function Courses() {
   const originalCourses = courses;

@@ -3,32 +3,32 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
-import { leftDrawerState, rightDrawerState } from "../atoms/atoms";
-import CourseBlock from "../components/builder/blocks/CourseBlock";
-import CustomBlock from "../components/builder/blocks/CustomBlock";
-import ExchangeBlock from "../components/builder/blocks/ExchangeBlock";
-import WorkingBlock from "../components/builder/blocks/WorkingBlock";
-import YearOffBlock from "../components/builder/blocks/YearOffBlock";
-import CoursesContainer from "../components/builder/CoursesContainer";
-import Drawer from "../components/builder/Drawer";
-import FileInput from "../components/builder/FileInput";
-import PresetChooser from "../components/builder/PresetChooser";
-import Years from "../components/builder/Years";
-import Button from "../components/Button";
-import Collapse from "../components/Collapse";
-import Divider from "../components/Divider";
-import Search from "../components/Search";
-import { useKeyPress } from "../shared/useKeyPress";
-import { courses as allCourses } from "../shared/data";
+import { leftDrawerState, rightDrawerState } from "../../atoms/atoms";
+import CourseBlock from "./blocks/CourseBlock";
+import CustomBlock from "./blocks/CustomBlock";
+import ExchangeBlock from "./blocks/ExchangeBlock";
+import WorkingBlock from "./blocks/WorkingBlock";
+import YearOffBlock from "./blocks/YearOffBlock";
+import Button from "../../components/Button";
+import Collapse from "../../components/Collapse";
+import Divider from "../../components/Divider";
+import Search from "../../components/Search";
+import { useKeyPress } from "../../shared/useKeyPress";
+import { courses as allCourses } from "../../shared/data";
 import {
   exportTemplate,
   validateJSON,
   saveToPDF,
   saveToImage,
-} from "../shared/functions";
-import { Course, Preset } from "../shared/interfaces";
-import { useOnClickOutside } from "../shared/onClickOutside";
-import useCourses from "../shared/useCourses";
+} from "../../shared/functions";
+import { Course, Preset } from "../../shared/interfaces";
+import { useOnClickOutside } from "../../shared/onClickOutside";
+import useCourses from "../../shared/useCourses";
+import CoursesContainer from "./CoursesContainer";
+import Years from "./Years";
+import Drawer from "./Drawer";
+import PresetChooser from "./PresetChooser";
+import FileInput from "./FileInput";
 
 export default function ExamBuilder() {
   const location = useLocation();

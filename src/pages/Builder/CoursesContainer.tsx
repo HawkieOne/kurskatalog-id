@@ -1,12 +1,12 @@
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import Text from "../../components/Text";
 import {
   AlignVariants, FontVariants,
   TextVariant
 } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
 import useCourses from "../../shared/useCourses";
-import CourseCard from "../course/CourseCard";
-import Text from "../Text";
+import CourseCard from "./CourseCard";
 
 interface CoursesContainerProps {
   onAddCoursesClick: () => void;

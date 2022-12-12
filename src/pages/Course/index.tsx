@@ -1,12 +1,12 @@
 import React from "react";
 import { useLocation } from 'react-router-dom';
-import { TitleVariant } from "../shared/constants";
+import { TitleVariant } from "../../shared/constants";
 import { IoMdArrowBack } from "react-icons/io";
-import Title from "../components/Title";
-import Stats from "../components/Stats";
-import Text from "../components/Text";
-import InformationRow from "../components/InformationRow";
-import IconButton from "../components/IconButton";
+import Title from "../../components/Title";
+import Stats from "../../components/Stats";
+import Text from "../../components/Text";
+import InformationRow from "../Courses/InformationRow";
+import IconButton from "../../components/IconButton";
 
 export default function CoursePage() {
   const location = useLocation();

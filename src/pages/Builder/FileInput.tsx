@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import Text from "../../components/Text";
 import { getJsonFromFile } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
 
@@ -14,11 +15,10 @@ export default function FileInput({
   validateFunction,
 }: FileInputProps) {
   const [errorText, setErrorText] = useState("");
-  const [successText, setSuccessText] = useState("");
   return (
     <div className="form-control w-full max-w-xs space-y-2 text-onyx">
-      <label className="label p-0">
-        <span className="label-text text-onyx">Ladda upp mall</span>
+      <label className="label">
+        <span className="label-text text-onyx">Ladda förinställning</span>
       </label>
       <input
         type="file"
@@ -33,41 +33,29 @@ export default function FileInput({
             const file = e.target.files?.item(0);
             if (file) {
               const json = await getJsonFromFile(file);
-              if (validateFunction) {
+              if (validateFunction) {                
                 const validation = validateFunction(json);
                 if (validation) {
                   onUpload(json);
                   setErrorText("");
-                  setSuccessText("Mall är uppladdad");
                 } else {
-                  setErrorText("Mall har felaktigt format");
-                  setSuccessText("");
+                  setErrorText("The JSON does not follow the schema");
                 }
               } else {
                 onUpload(json);
                 setErrorText("");
-                setSuccessText("");
               }
             } else {
-              setErrorText("Någonting gick fel när mallen laddades upp");
-              setSuccessText("");
+              setErrorText("Something went wrong uploading the files");
             }
           } else {
-            setErrorText("Ogiltigt filformat");
-            setSuccessText("");
+            setErrorText("Invalid file format");
           }
         }}
       />
-      <label className="label p-0">
-        <span className={`label-text-alt ${successText !== "" ? "text-emerald-600" : "text-pink"}`}>{showNotificationText(errorText, successText)}</span>
-      </label>
+      <div className="h-6">
+        <Text color="text-pink">{errorText}</Text>
+      </div>
     </div>
   );
-}
- 
-const showNotificationText = (errorText: string, successText: string) => {
-  if (errorText === "") {
-    return successText;
-  }
-  return errorText;
 }

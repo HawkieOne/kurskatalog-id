@@ -6,12 +6,12 @@ import {
   TextVariant,
 } from "../../shared/constants";
 import useCourses from "../../shared/useCourses";
-import Text from "../Text";
 import DraggableCourse from "./DraggableCourse";
 import { useLocalStorage } from "../../shared/useLocalStorage";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { coursesBuilderState } from "../../atoms/atoms";
+import Text from "../../components/Text";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 

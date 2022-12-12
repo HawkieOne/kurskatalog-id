@@ -1,10 +1,9 @@
-import Title from "../components/Title";
-import coursesJson from "../data/courses.json";
-import mandatoryCoursesJson from "../data/mandatoryCourses.json";
-import { subjects } from "../shared/data";
-import Collapse from "../components/Collapse";
+import Collapse from "../../components/Collapse";
+import coursesJson from "../../data/courses.json";
+import mandatoryCoursesJson from "../../data/mandatoryCourses.json";
+import { subjects } from "../../shared/data";
 
-import { Course } from "../shared/interfaces";
+import { Course } from "../../shared/interfaces";
 
 export default function MandatoryCourses() {
   const selectedCourses = (subject: string) => {
