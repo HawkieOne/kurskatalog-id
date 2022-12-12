@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Course from "../components/course/Course";
-import Search from "../components/Search";
-import coursesJson from '../data/courses.json';
+import Course from "./Course";
+import Search from "../../components/Search";
+import coursesJson from '../../data/courses.json';
 
 export default function Courses() {
   const originalCourses = coursesJson;

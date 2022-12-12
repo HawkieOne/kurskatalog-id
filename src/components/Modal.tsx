@@ -1,7 +1,7 @@
 import Modal from "react-modal";
+import FileInput from "../pages/Builder/FileInput";
 import { validateJSON } from "../shared/functions";
 import { Preset } from "../shared/interfaces";
-import FileInput from "./builder/FileInput";
 import Title from "./Title";
 
 interface ModalProps {

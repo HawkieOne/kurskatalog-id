@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
 import { TitleVariant } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
-import Rating from "../Rating";
-import Stats from "../Stats";
-import Text from "../Text";
-import Title from "../Title";
+import Rating from "../../components/Rating";
+import Stats from "../../components/Stats";
+import Text from "../../components/Text";
+import Title from "../../components/Title";
 
 interface CourseProps {
   course: Course;

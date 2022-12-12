@@ -2,11 +2,11 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import Navbar from "./components/Navbar";
-import CoursePage from "./pages/CoursePage";
+import CoursePage from "./pages/Course";
 import Courses from "./pages/Courses";
-import ExamBuilder from "./pages/ExamBuilder";
+import ExamBuilder from "./pages/Builder";
 import Home from "./pages/Home";
-import MandatoryCourses from "./pages/MandatoryCourses";
+import MandatoryCourses from "./pages/Mandatory";
 
 function App() {
   return (

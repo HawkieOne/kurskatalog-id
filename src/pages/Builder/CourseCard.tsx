@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FontVariants, TextVariant } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
-import Text from "../Text";
+import Text from "../../components/Text";
 import { AiOutlineClose } from "react-icons/ai";
 import useCourses from "../../shared/useCourses";
 
