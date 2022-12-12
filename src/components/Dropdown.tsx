@@ -15,14 +15,14 @@ export default function Dropdown({
 }: DropdownProps) {
   const [isOptionsExpanded, setIsOptionsExpanded] = useState(false);
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <div
         tabIndex={0}
-        className="w-full bg-cream p-2 flex justify-between cursor-pointer"
+        className="w-full bg-cream p-2 flex justify-between cursor-pointer space-x-4"
         onClick={() => setIsOptionsExpanded(!isOptionsExpanded)}
       >
         <Text>
-          Mall: <span className="text-pink">{value}</span>
+          <span className="text-pink">{value}</span>
         </Text>
         <div className="flex justify-center text-pink cursor-pointer">
           {!isOptionsExpanded ? (
@@ -35,7 +35,7 @@ export default function Dropdown({
       {isOptionsExpanded && (
         <ul
           tabIndex={0}
-          className={`absolute top-full menu w-full shadow cursor-pointer space-y-1 bg-cream text-onyx rounded-b-lg`}
+          className={`absolute top-full menu w-full shadow cursor-pointer space-y-1 bg-cream text-onyx rounded-b-lg z-50`}
         >
           {options.map((option, index) => (
             <li
