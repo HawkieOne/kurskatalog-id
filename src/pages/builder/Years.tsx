@@ -72,7 +72,14 @@ export default function Years() {
             w: layoutItem.w,
             h: layoutItem.h,
             i: uuidv4(),
-            content: undefined,
+            content: {
+              name: "",
+              points: 0,
+              link: "",
+              level: "",
+              code: "",
+              rating: 0,
+            },
           };
           addCourse(block);
           if (draggingCourse) {

@@ -72,10 +72,10 @@ export interface Course {
   endDate?: string;
   prerequisite?: string;
   location?: string;
-  period?: String;
+  period?: string;
   year?: number;
   rating: number;
-  type?: "course" | "custom" | "exchange" | "working" | "yearOff";
+  group?: "course" | "custom" | "exchange" | "working" | "yearOff";
 }
 export interface BuildingBlock {
   x: number;
@@ -83,6 +83,6 @@ export interface BuildingBlock {
   w: number;
   h: number;
   i: string;
-  content: Course | undefined;
+  content: Course;
   isResizable?: boolean;
 }

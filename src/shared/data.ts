@@ -7,7 +7,7 @@ const createLayoutBlock = (
   y: number,
   w: number,
   h: number,
-  content: Course | undefined
+  content: Course
 ) => {
   return {
     x,
@@ -20,7 +20,19 @@ const createLayoutBlock = (
 };
 
 export const getCourse = (code: string) => {
-  return courses.find((course: Course) => code === course.code);
+  const course = courses.find((course: Course) => code === course.code);
+  if (course) {
+    return course;
+  } else {
+    return {
+      name: "",
+      points: 0,
+      link: "",
+      level: "",
+      code: "",
+      rating: 0,
+    }
+  }
 };
 
 export const courses: Course[] = [
@@ -545,7 +557,7 @@ export const customCourse: Course = {
   description: "",
   prerequisite: "",
   rating: -1,
-  type: "custom"
+  group: "custom"
 }
 
 export const exchangeCourse: Course = {
@@ -558,7 +570,7 @@ export const exchangeCourse: Course = {
   description: "",
   prerequisite: "",
   rating: -1,
-  type: "exchange"
+  group: "exchange"
 }
 
 export const workingCourse: Course = {
@@ -571,7 +583,7 @@ export const workingCourse: Course = {
   description: "",
   prerequisite: "",
   rating: -1,
-  type: "working"
+  group: "working"
 }
 
 export const yearOffCourse: Course = {
@@ -584,5 +596,5 @@ export const yearOffCourse: Course = {
   description: "",
   prerequisite: "",
   rating: -1,
-  type: "yearOff"
+  group: "yearOff"
 }

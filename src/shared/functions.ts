@@ -4,7 +4,7 @@ import FileSaver from "file-saver";
 import html2canvas from "html2canvas";
 import { templateEmpty, templateID } from "./data";
 import { Course, Preset, Year } from "./interfaces";
-import { defsSchema, presetSchema } from "./schema";
+import { buildingBlockSchema, courseSchema, presetSchema } from "./schema";
 
 export const createEmptyTemplate = () => {
   return templateEmpty;
@@ -84,13 +84,16 @@ export const onSearch = (searchTerm: string, allCourses: Course[]) => {
 };
 
 export const validateJSON = (preset: Preset) => {
-  const ajv = new Ajv();
-  const validate = ajv.addSchema(defsSchema).compile(presetSchema);
-  if (validate(preset)) {
-    return preset;
-  } else {
-    return false;
-  }
+  const ajv = new Ajv({ schemas: [presetSchema, buildingBlockSchema, courseSchema]});
+  const validate = ajv.getSchema("http://schema.com/schemas/presetSchema.json");
+  if(validate) {
+    if (validate(preset)) {
+      return preset;
+    } else {      
+      return false;
+    }
+  } 
+  return false;
 };
 
 export const getJsonFromFile = async (file: File) => {

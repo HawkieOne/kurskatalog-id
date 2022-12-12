@@ -1,3 +1,6 @@
+import { JSONSchemaType } from "ajv";
+import { BuildingBlock, Course } from "./interfaces";
+
 export const presetSchema = {
   $id: "http://schema.com/schemas/presetSchema.json",
   type: "object",
@@ -11,7 +14,7 @@ export const presetSchema = {
           year: { type: "number" },
           courses: {
             type: "array",
-            items: { $ref: "defsSchema.json#/definitions/buildingBlock" },
+            items: { $ref: "buildSchema.json" },
           },
         },
       },
@@ -21,7 +24,7 @@ export const presetSchema = {
   },
 };
 
-export const buildingBlockSchema = {
+export const buildingBlockSchema: JSONSchemaType<BuildingBlock> = {
   $id: "http://schema.com/schemas/buildSchema.json",
   type: "object",
   properties: {
@@ -30,90 +33,39 @@ export const buildingBlockSchema = {
     w: { type: "integer" },
     h: { type: "integer" },
     i: { type: "string" },
-    moved: { type: "boolean"},
-    static: { type: "boolean"},
     content: { $ref: "cSchema.json" },
+    isResizable: {type: "boolean", nullable: true}
   },
   required: ["x", "y", "w", "h", "i", "content"],
 };
 
-export const courseSchema = {
-  id: "http://schema.com/schemas/cSchema.json",
+export const courseSchema: JSONSchemaType<Course> = {
+  $id: "http://schema.com/schemas/cSchema.json",
   type: "object",
   properties: {
     name: { type: "string" },
-    description: { type: "string" },
-    prerequisite: { type: "string" },
     points: { type: "number" },
     link: { type: "string" },
     level: { type: "string" },
     code: { type: "string" },
     rating: { type: "number" },
-    pace: { type: "number" },
-    period: { type: "string" },
-    year: { type: "number" },
-    startDate: { type: "string" },
-    endDate: { type: "string" },
-    location: { type: "string" },
-    registerCode: { type: "string" },
+    description: { type: "string", nullable: true },
+    prerequisite: { type: "string", nullable: true },
+    pace: { type: "number", nullable: true },
+    period: { type: "string", nullable: true },
+    year: { type: "number", nullable: true },
+    startDate: { type: "string", nullable: true },
+    endDate: { type: "string", nullable: true },
+    location: { type: "string", nullable: true },
+    registerCode: { type: "string", nullable: true },
+    group: { type: "string", nullable: true }
   },
   required: [
     "name",
-    "description",
-    "prerequisite",
     "points",
     "link",
     "level",
     "code",
     "rating",
   ],
-  additionalProperties: false,
-};
-
-export const defsSchema = {
-  $id: "http://schema.com/schemas/defsSchema.json",
-  definitions: {
-    buildingBlock: {
-      type: "object",
-      properties: {
-        x: { type: "integer" },
-        y: { type: "integer" },
-        w: { type: "integer" },
-        h: { type: "integer" },
-        i: { type: "string" },
-        content: { $ref: "defsSchema.json#/definitions/course" },
-      },
-      required: ["x", "y", "w", "h", "i", "content"],
-    },
-    course: {
-      type: "object",
-      properties: {
-        name: { type: "string" },
-        description: { type: "string" },
-        prerequisite: { type: "string" },
-        points: { type: "number" },
-        link: { type: "string" },
-        level: { type: "string" },
-        code: { type: "string" },
-        rating: { type: "number" },
-        pace: { type: "number" },
-        period: { type: "string" },
-        year: { type: "number" },
-        startDate: { type: "string" },
-        endData: { type: "string" },
-        location: { type: "string" },
-        registerCode: { type: "string" },
-      },
-      required: [
-        "name",
-        "description",
-        "prerequisite",
-        "points",
-        "link",
-        "level",
-        "code",
-        "rating",
-      ],
-    },
-  },
 };
