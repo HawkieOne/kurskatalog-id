@@ -3,10 +3,11 @@ import { AlignVariantObject, FontVariantObject, TextVariantObject, TitleVariantO
 export const localStorageLayuotKey = "layout";
 export const localStorageSavedCoursesKey = "savedCourses";
 export const TextVariant: TextVariantObject = {
-    small: "text-md",
-    medium: "text-xl",
-    large: "text-2xl",
-    xl: "text-3xl",
+    small: "text-sm",
+    medium: "text-md",
+    large: "text-xl",
+    xl: "text-2xl",
+    xxl: "text-3xl"
 }
 
 export const TitleVariant: TitleVariantObject = {
