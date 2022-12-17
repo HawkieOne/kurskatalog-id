@@ -48,7 +48,7 @@ export default function ModalWindow({
         <Title>Ladda upp mall</Title>
         <FileInput
           onUpload={onFileUpload}
-          acceptedFormat=".json"
+          validFormat=".json"
           validateFunction={validateJSON}
         />
         <div className="self-end space-x-4">
