@@ -19,7 +19,7 @@ export default function PresetChooser({
       </label>
       <div className="w-full input-group">
         <select
-          className="select select-accent select-bordered bg-white border-pink focus:outline-none flex-grow"
+          className="select select-accent select-bordered bg-white border-onyx focus:outline-none flex-grow"
           onChange={onChange}
         >
           {presets.length > 0 ? (
@@ -29,7 +29,7 @@ export default function PresetChooser({
           )}
         </select>
         <button
-          className="btn bg-cream text-pink border-none hover:bg-onyx hover:text-white"
+          className="btn bg-onyx text-white border-none hover:text-pink"
           onClick={onUsePreset}
         >
           Använd
