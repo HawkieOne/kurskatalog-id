@@ -24,7 +24,7 @@ export default function FileInput({
         </div>
         <label className="block w-full">
           <input type="file" accept={validFormat}
-            className={`block w-full text-sm text-onyx cursor-pointer outline-2 border ${errorText ? "border-pink" : "border-onyx"}
+            className={`block w-full text-sm text-onyx font-semibold cursor-pointer outline-2 border ${errorText ? "border-pink" : "border-onyx"}
               file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 rounded-md
               file:text-sm file:font-semibold file:bg-onyx file:text-white hover:file:text-pink`}
             onChange={async (e: ChangeEvent<HTMLInputElement>) => {
