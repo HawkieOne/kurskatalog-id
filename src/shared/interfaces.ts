@@ -1,4 +1,4 @@
-export type TextVariant = "text-md" | "text-xl" | "text-2xl" | "text-3xl";
+export type TextVariant = "text-sm" | "text-md" | "text-xl" | "text-2xl" | "text-3xl";
 export type TitleVariant = "text-2xl" | "text-4xl";
 export type FontVariant = "font-light" | "font-semibold" | "font-bold";
 export type AlignVariant = "text-left" | "text-center" | "text-right";
@@ -8,6 +8,7 @@ export interface TextVariantObject {
   medium: TextVariant;
   large: TextVariant;
   xl: TextVariant;
+  xxl: TextVariant;
 }
 
 export interface TitleVariantObject {

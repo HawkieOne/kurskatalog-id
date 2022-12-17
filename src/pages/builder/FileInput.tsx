@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import Text from "../../components/Text";
+import { TextVariant } from "../../shared/constants";
 import { getJsonFromFile } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
 
@@ -17,44 +18,47 @@ export default function FileInput({
   const [errorText, setErrorText] = useState("");
   return (
     <div className="form-control w-full max-w-xs space-y-2 text-onyx">
-      <label className="label">
-        <span className="label-text text-onyx">Ladda förinställning</span>
-      </label>
-      <input
-        type="file"
-        accept={acceptedFormat}
-        className="file-input file-input-bordered w-full max-w-xs bg-white file:bg-cream
-                    file:border-none file:text-pink"
-        onChange={async (e: ChangeEvent<HTMLInputElement>) => {
-          const files = e.target.files;
-          if (files?.length === 0) {
-            setErrorText("");
-          } else if (files?.item(0)?.name.endsWith(acceptedFormat)) {
-            const file = e.target.files?.item(0);
-            if (file) {
-              const json = await getJsonFromFile(file);
-              if (validateFunction) {
-                const validation = validateFunction(json);
-                if (validation) {
-                  onUpload(json);
-                  setErrorText("");
+      <Text  size={TextVariant.small}>Ladda upp mall</Text>
+      <form className="w-full flex items-center">
+        <div className="h-6">
+        </div>
+        <label className="block w-full">
+          <input type="file" accept={acceptedFormat}
+            className={`block w-full text-sm text-onyx cursor-pointer outline-2 border ${errorText ? "border-pink" : "border-onyx"}
+              file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 rounded-md
+              file:text-sm file:font-semibold file:bg-onyx file:text-white hover:file:text-pink`}
+            onChange={async (e: ChangeEvent<HTMLInputElement>) => {
+              const files = e.target.files;
+              if (files?.length === 0) {
+                setErrorText("");
+              } else if (files?.item(0)?.name.endsWith(acceptedFormat)) {
+                const file = e.target.files?.item(0);
+                if (file) {
+                  const json = await getJsonFromFile(file);
+                  if (validateFunction) {
+                    const validation = validateFunction(json);
+                    if (validation) {
+                      onUpload(json);
+                      setErrorText("");
+                    } else {
+                      setErrorText("Den valda filen följer inte rätt format");
+                    }
+                  } else {
+                    onUpload(json);
+                    setErrorText("");
+                  }
                 } else {
-                  setErrorText("The JSON does not follow the schema");
+                  setErrorText("Någonting gick fel med uppladdningen av filerna");
                 }
               } else {
-                onUpload(json);
-                setErrorText("");
+                setErrorText("Ogiltigt filformat");
               }
-            } else {
-              setErrorText("Something went wrong uploading the files");
-            }
-          } else {
-            setErrorText("Invalid file format");
-          }
-        }}
-      />
+            }}
+          />
+        </label>
+      </form>
       <div className="h-6">
-        <Text color="text-pink">{errorText}</Text>
+        <Text color="text-pink" size={TextVariant.small}>{errorText}</Text>
       </div>
     </div>
   );
