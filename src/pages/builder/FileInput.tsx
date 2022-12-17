@@ -5,13 +5,13 @@ import { getJsonFromFile } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
 
 interface FileInputProps {
-  acceptedFormat: string;
+  validFormat: string;
   onUpload: (preset: Preset) => void;
   validateFunction?: (preset: Preset) => Preset | false;
 }
 
 export default function FileInput({
-  acceptedFormat,
+  validFormat,
   onUpload,
   validateFunction,
 }: FileInputProps) {
@@ -23,7 +23,7 @@ export default function FileInput({
         <div className="h-6">
         </div>
         <label className="block w-full">
-          <input type="file" accept={acceptedFormat}
+          <input type="file" accept={validFormat}
             className={`block w-full text-sm text-onyx cursor-pointer outline-2 border ${errorText ? "border-pink" : "border-onyx"}
               file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 rounded-md
               file:text-sm file:font-semibold file:bg-onyx file:text-white hover:file:text-pink`}
@@ -31,7 +31,7 @@ export default function FileInput({
               const files = e.target.files;
               if (files?.length === 0) {
                 setErrorText("");
-              } else if (files?.item(0)?.name.endsWith(acceptedFormat)) {
+              } else if (files?.item(0)?.name.endsWith(validFormat)) {
                 const file = e.target.files?.item(0);
                 if (file) {
                   const json = await getJsonFromFile(file);
@@ -48,7 +48,7 @@ export default function FileInput({
                     setErrorText("");
                   }
                 } else {
-                  setErrorText("Någonting gick fel med uppladdningen av filerna");
+                  setErrorText("Uppladdning misslyckades");
                 }
               } else {
                 setErrorText("Ogiltigt filformat");

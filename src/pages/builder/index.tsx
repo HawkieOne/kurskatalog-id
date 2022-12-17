@@ -165,7 +165,7 @@ export default function ExamBuilder() {
             <div className="flex flex-col gap-6 p-4">
               <FileInput
                 onUpload={onFileUpload}
-                acceptedFormat=".json"
+                validFormat=".json"
                 validateFunction={validateJSON}
               />
 
