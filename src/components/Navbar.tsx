@@ -26,7 +26,11 @@ export default function Navbar() {
       >
         Kurskatalog
       </Link>
-      {location.pathname !== "/" && <Title>{capitalizedPathname}</Title>}
+      {location.pathname !== "/" && (
+        <div className="w-3/4 flex justify-center items-center">
+          <Title>{capitalizedPathname}</Title>
+        </div>
+      )}
       {pathName === "byggare" && (
         <div
           className="absolute h-full inset-y-0 right-10 flex flex-col justify-center border-pink cursor-pointer text-onyx
