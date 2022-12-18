@@ -12,21 +12,25 @@ import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { coursesBuilderState } from "../../atoms/atoms";
 import Text from "../../components/Text";
+import { useEditinghistory } from "../../shared/useEditingHistory";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export default function Years() {
   const {
     coursesActiveYear,
+    courses,
     saveChanges,
     removeCourse,
     addCourse,
     draggingCourse,
     removeFromSavedCoursesByObject,
   } = useCourses();
+  const { addAction, doingAction, setDoingAction } = useEditinghistory();
   const setCourses = useSetRecoilState(coursesBuilderState);
-  const [coursesLocalStorage, setCoursesLocaStorage] =
-    useLocalStorage(localStorageLayuotKey);
+  const [coursesLocalStorage, setCoursesLocaStorage] = useLocalStorage(
+    localStorageLayuotKey
+  );
 
   useEffect(() => {
     setCourses(coursesLocalStorage);
@@ -59,10 +63,12 @@ export default function Years() {
         isBounded={false}
         onLayoutChange={(layout) => {
           if (!draggingCourse) {
+            addAction(courses);
             const newlayout = saveChanges(layout);
             setCoursesLocaStorage(newlayout);
           }
         }}
+        onDragStop={() => console.log("STOP")}
         useCSSTransforms={false} // Put this on to increase speed
         isDroppable={true}
         onDrop={(layout, layoutItem, _event) => {
@@ -74,6 +80,7 @@ export default function Years() {
             i: uuidv4(),
             content: undefined,
           };
+          addAction(courses);
           addCourse(block);
           if (draggingCourse) {
             removeFromSavedCoursesByObject(draggingCourse);

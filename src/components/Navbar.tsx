@@ -1,12 +1,17 @@
+import { BiRedo, BiUndo } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { rightDrawerState } from "../atoms/atoms";
+import useCourses from "../shared/useCourses";
+import { useEditinghistory } from "../shared/useEditingHistory";
 import Title from "./Title";
 
 export default function Navbar() {
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
     useRecoilState(rightDrawerState);
+  const { goBack, goForward } = useEditinghistory();
+  const { setCourses } = useCourses();
   const location = useLocation();
   const pathString = location.pathname.replace("/", "").trim();
 
@@ -29,11 +34,27 @@ export default function Navbar() {
       {location.pathname !== "/" && <Title>{capitalizedPathname}</Title>}
       {pathName === "byggare" && (
         <div
-          className="absolute h-full inset-y-0 right-10 flex flex-col justify-center border-pink cursor-pointer text-onyx
-                       hover:border-b hover:-mb-1 hover:text-pink"
-          onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
+          className="absolute h-full inset-y-0 right-10 flex justify-between text-onyx
+                     space-x-4"
         >
-          <FiSettings size="1.5em" />
+          <button
+            onClick={() => {
+              const undoState = goBack();
+              if (undoState) {
+                setCourses(undoState);
+              }
+            }}
+          >
+            <BiUndo size="2em" className="hover:text-pink cursor-pointer" />
+          </button>
+          <button onClick={() => goForward()}>
+            <BiRedo size="2em" className="horedover:text-pink cursor-pointer" />
+          </button>
+          <FiSettings
+            size="1.5em"
+            className="hover:text-pink cursor-pointer"
+            onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
+          />
         </div>
       )}
     </div>

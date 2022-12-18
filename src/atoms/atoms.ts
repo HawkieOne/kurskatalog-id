@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, DefaultValue, selector } from "recoil";
 import { createEmptyTemplate } from "../shared/functions";
 import { Course, Year } from "../shared/interfaces";
 
@@ -60,3 +60,27 @@ export const courseRightDrawerState = atom<Course | null>({
   key: "courseRightDrawerState",
   default: null,
 });
+
+
+
+export const editingHistoryIndex = atom({
+  key: "editingHistoryIndexState",
+  default: 0,
+})
+
+export const editingHistory = atom<Year[][]>({
+  key: "editingHistoryState",
+  default: [],
+})
+
+export const editingHistorySelector = selector({
+  key: "editingHistorySelectorState",
+  get: ({ get }) => {
+    return get(editingHistory)
+  },
+  set: ({ get, set }, newValue) => {
+    if (!(newValue !instanceof DefaultValue)) {
+      set(editingHistory, newValue)
+    }
+  },
+})
