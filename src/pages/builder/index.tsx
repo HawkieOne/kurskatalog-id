@@ -52,9 +52,9 @@ export default function ExamBuilder() {
   const [isRightDrawerOpen, setIsRightDrawerOpen] = useRecoilState(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
-  useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
+  // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
   const rightDrawerRef = createRef<HTMLDivElement>();
-  useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
+  // useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
 
   const onFileUpload = (preset: Preset) => {
     if (!presets.find(e => e.name === preset.name)) {
@@ -81,7 +81,6 @@ export default function ExamBuilder() {
 
   useKeyPress(['a'], onShortcutCoursesDrawer);
   useKeyPress(['c'], onShortcutExportDrawer);
-
   return (
     <div className="h-full bg-white">
       <div className="h-full relative p-4">
