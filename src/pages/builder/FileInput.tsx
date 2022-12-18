@@ -18,7 +18,7 @@ export default function FileInput({
   const [errorText, setErrorText] = useState("");
   return (
     <div className="form-control w-full max-w-xs space-y-2 text-onyx">
-      <Text  size={TextVariant.small}>Ladda upp mall</Text>
+      <Text size={TextVariant.small}>Ladda upp mall</Text>
       <form className="w-full flex items-center">
         <div className="h-6">
         </div>

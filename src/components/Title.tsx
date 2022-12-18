@@ -1,9 +1,9 @@
 import React from 'react'
-import { TitleVariant } from '../shared/interfaces';
+import { AllowedTitleVariants } from '../shared/interfaces';
 
 interface TitleProps {
     children: React.ReactNode;
-    size?: TitleVariant;
+    size?: AllowedTitleVariants;
 }
 
 export default function Title({ children, size } : TitleProps) {
