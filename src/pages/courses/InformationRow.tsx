@@ -1,11 +1,10 @@
 import React from 'react'
 import Text from '../../components/Text'
 import { FontVariants } from '../../shared/constants';
-import { TextVariant } from '../../shared/interfaces';
 
 interface TextProps {
   header: React.ReactNode;
-  text: TextVariant;
+  text: string;
 }
 
 export default function InformationRow({ header, text}: TextProps) {

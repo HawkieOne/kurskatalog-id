@@ -7,7 +7,7 @@ import Text from "./Text";
 interface IconButtonProps {
   icon: React.ReactNode;
   text?: string;
-  size: "small" | "medium" | "large";
+  size: string;
   to: string;
   bgColor?: AllowedBgColors;
   hoverBgColor?: AllowedBgColors;

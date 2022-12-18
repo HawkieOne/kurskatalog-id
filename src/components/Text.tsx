@@ -1,13 +1,13 @@
 import React from 'react'
-import { AlignVariant, AllowedTextColors, FontVariant, TextVariant } from '../shared/interfaces';
+import { AllowedAlignVariants, AllowedTextColors, AllowedFontVariants, AllowedTextVariants } from '../shared/interfaces';
 
 interface TextProps {
     children: React.ReactNode;
-    size?: TextVariant;
+    size?: AllowedTextVariants;
     color?: AllowedTextColors;
     hoverColor?: AllowedTextColors;
-    font?: FontVariant;
-    align?: AlignVariant;
+    font?: AllowedFontVariants;
+    align?: AllowedAlignVariants;
 }
 
 export default function Text({ children, size, color, hoverColor, font, align} : TextProps) {

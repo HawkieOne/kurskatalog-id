@@ -1,30 +1,28 @@
-import { AlignVariantObject, FontVariantObject, TextVariantObject, TitleVariantObject } from "./interfaces";
-
 export const localStorageLayuotKey = "layout";
 export const localStorageSavedCoursesKey = "savedCourses";
-export const TextVariant: TextVariantObject = {
-    small: "text-sm",
-    medium: "text-md",
-    large: "text-xl",
-    xl: "text-2xl",
-    xxl: "text-3xl"
+export const TextVariant = {
+    small: "text-sm" as const,
+    medium: "text-md" as const,
+    large: "text-xl" as const,
+    xl: "text-2xl" as const,
+    xxl: "text-3xl" as const,
 }
 
-export const TitleVariant: TitleVariantObject = {
-    small: "text-2xl",
-    large: "text-4xl",
+export const TitleVariant = {
+    small: "text-2xl" as const,
+    large: "text-4xl" as const,
 }
 
-export const FontVariants: FontVariantObject = {
-    light: "font-light",
-    semibold: "font-semibold",
-    bold: "font-bold",
+export const FontVariants = {
+    light: "font-light" as const,
+    semibold: "font-semibold" as const,
+    bold: "font-bold" as const,
 }
 
-export const AlignVariants: AlignVariantObject = {
-    left: "text-left",
-    center: "text-center",
-    right: "text-right",
+export const AlignVariants = {
+    left: "text-left" as const,
+    center: "text-center" as const,
+    right: "text-right" as const,
 }
 
 export const maxRating = 5;

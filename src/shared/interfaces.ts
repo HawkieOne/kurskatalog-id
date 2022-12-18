@@ -1,32 +1,23 @@
-export type TextVariant = "text-sm" | "text-md" | "text-xl" | "text-2xl" | "text-3xl";
-export type TitleVariant = "text-2xl" | "text-4xl";
-export type FontVariant = "font-light" | "font-semibold" | "font-bold";
-export type AlignVariant = "text-left" | "text-center" | "text-right";
+export type AllowedTextVariants =
+  | "text-sm"
+  | "text-md"
+  | "text-xl"
+  | "text-2xl"
+  | "text-3xl";
 
-export interface TextVariantObject {
-  small: TextVariant;
-  medium: TextVariant;
-  large: TextVariant;
-  xl: TextVariant;
-  xxl: TextVariant;
-}
+export type AllowedTitleVariants =
+  | "text-2xl"
+  | "text-4xl";
 
-export interface TitleVariantObject {
-  small: TitleVariant;
-  large: TitleVariant;
-}
+export type AllowedFontVariants =
+  | "font-light"
+  | "font-semibold"
+  | "font-bold";
 
-export interface FontVariantObject {
-  light: FontVariant;
-  semibold: FontVariant;
-  bold: FontVariant;
-}
-
-export interface AlignVariantObject {
-  left: AlignVariant;
-  center: AlignVariant;
-  right: AlignVariant;
-}
+export type AllowedAlignVariants =
+  | "text-left"
+  | "text-center"
+  | "text-right";
 
 export type AllowedTextColors =
   | "text-black"
