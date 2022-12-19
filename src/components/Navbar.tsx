@@ -21,6 +21,7 @@ export default function Navbar() {
     <div className="navbar bg-cream p-2 shadow-md relative flex justify-center items-center z-50">
       <Link
         to="/"
+        title={pathString === "byggare" ? "Alt+a to open" : ""}
         className="normal-case text-xl text-onyx absolute inset-y-0 left-10 h-full flex flex-col justify-center
                   border-b-pink hover:border-b hover:-mb-1 hover:text-pink"
       >
@@ -33,6 +34,7 @@ export default function Navbar() {
       )}
       {pathName === "byggare" && (
         <div
+          title="Alt+c to open"
           className="absolute h-full inset-y-0 right-10 flex flex-col justify-center border-pink cursor-pointer text-onyx
                        hover:border-b hover:-mb-1 hover:text-pink"
           onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
