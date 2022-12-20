@@ -25,8 +25,9 @@ export default function Years() {
     removeFromSavedCoursesByObject,
   } = useCourses();
   const setCourses = useSetRecoilState(coursesBuilderState);
-  const [coursesLocalStorage, setCoursesLocaStorage] =
-    useLocalStorage(localStorageLayuotKey);
+  const [coursesLocalStorage, setCoursesLocaStorage] = useLocalStorage(
+    localStorageLayuotKey
+  );
 
   useEffect(() => {
     setCourses(coursesLocalStorage);
@@ -53,17 +54,17 @@ export default function Years() {
         }}
         cols={{ xs: 8, sm: 8, md: 8, lg: 8 }}
         maxRows={6}
-        resizeHandles={["e"]}
+        resizeHandles={["se"]}
         rowHeight={130}
         // width={800}
-        isBounded={false}
+        isBounded={true}
         onLayoutChange={(layout) => {
           if (!draggingCourse) {
             const newlayout = saveChanges(layout);
             setCoursesLocaStorage(newlayout);
           }
         }}
-        useCSSTransforms={false} // Put this on to increase speed
+        useCSSTransforms={true} // Put this on to increase speed
         isDroppable={true}
         onDrop={(layout, layoutItem, _event) => {
           const block = {
