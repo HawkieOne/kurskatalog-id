@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { coursesBuilderState } from "../../atoms/atoms";
 import Text from "../../components/Text";
+import { Course } from "../../shared/interfaces";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -79,7 +80,8 @@ export default function Years() {
               level: "",
               code: "",
               rating: 0,
-            },
+              group: "custom",
+            } as Course,
           };
           addCourse(block);
           if (draggingCourse) {

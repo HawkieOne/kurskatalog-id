@@ -58,7 +58,7 @@ export default function useCourses() {
     let cpyCourses = courses.slice();
     const newLayout: BuildingBlock[] = changedLayout.map((block, index) => ({
       ...block,
-      content: findCourse(cpyCourses, block)
+      content: findCourse(cpyCourses, block) as Course
     }));
 
     cpyCourses[activeYear] = {
@@ -80,7 +80,8 @@ export default function useCourses() {
         link: "",
         level: "",
         code: "",
-        rating: 0
+        rating: 0,
+        group: "course"
       }
     }
   }

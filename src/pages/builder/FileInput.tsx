@@ -41,6 +41,7 @@ export default function FileInput({
                       onUpload(json);
                       setErrorText("");
                     } else {
+                      console.log()
                       setErrorText("Den valda filen följer inte rätt format");
                     }
                   } else {

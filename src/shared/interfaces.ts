@@ -67,7 +67,7 @@ export interface Course {
   period?: string;
   year?: number;
   rating: number;
-  group?: "course" | "custom" | "exchange" | "working" | "yearOff";
+  group: "course" | "custom" | "exchange" | "working" | "yearOff";
 }
 export interface BuildingBlock {
   x: number;

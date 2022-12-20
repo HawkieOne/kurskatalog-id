@@ -45,6 +45,7 @@ export const saveToImage = (idTargetElement: string) => {
 
 export const exportTemplate = (name: string, courses: Year[]) => {
   const element = document.createElement("a");
+  console.log(courses);
   const textFile = new Blob([JSON.stringify(courses)], {
     type: "application/json",
   });
@@ -90,6 +91,7 @@ export const validateJSON = (preset: Preset) => {
     if (validate(preset)) {
       return preset;
     } else {
+      console.log(validate.errors)
       return false;
     }
   }
