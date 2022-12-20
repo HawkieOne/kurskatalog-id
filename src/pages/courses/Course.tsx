@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
-import { TitleVariant } from "../../shared/constants";
+import { TitleVariants } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
 import Rating from "../../components/Rating";
 import Stats from "../../components/Stats";
@@ -18,7 +18,7 @@ export default function CourseCard({ course }: CourseProps) {
     <div className="card w-full bg-cream shadow">
       <div className="px-0">
         <div className="flex justify-between items-center space-x-8 p-4">
-          <Title size={TitleVariant.small}>{course.name}</Title>
+          <Title size={TitleVariants.small}>{course.name}</Title>
           <Rating rating={course.rating} />
         </div>
         {showDetails && (

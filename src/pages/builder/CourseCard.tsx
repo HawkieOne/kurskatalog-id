@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FontVariants, TextVariant } from "../../shared/constants";
+import { FontVariants, TextVariants } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
 import Text from "../../components/Text";
 import { AiOutlineClose } from "react-icons/ai";
@@ -28,10 +28,10 @@ export default function CourseCard({ course, onRemoveClick }: CardProps) {
       onMouseLeave={() => setIsHoverActive(false)}
     >
       <div className="p-3 flex flex-col">
-        <Text size={TextVariant.small} font={FontVariants.bold}>
+        <Text size={TextVariants.small} font={FontVariants.bold}>
           {course.name}
         </Text>
-        <Text size={TextVariant.small}>{course.code}</Text>
+        <Text size={TextVariants.small}>{course.code}</Text>
       </div>
       {isHoverActive && (
         <div

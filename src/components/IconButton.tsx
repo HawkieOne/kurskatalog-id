@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { TextVariant } from "../shared/constants";
+import { TextVariants } from "../shared/constants";
 import { AllowedBgColors, AllowedTextColors } from "../shared/interfaces";
 import Text from "./Text";
 
@@ -36,7 +36,7 @@ export default function IconButton({
         className={`${size === "large" ? "h-64 w-64 relative " : "h-full "} p-2 flex flex-col justify-evenly items-center`}
       >
         <div className="group-hover:text-onyx">{icon}</div>
-        {text && <Text size={TextVariant.large}>{text}</Text>}
+        {text && <Text size={TextVariants.large}>{text}</Text>}
       </div>
     </div>
   );
