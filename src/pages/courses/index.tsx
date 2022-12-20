@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown";
-import CourseElement from "./Course"
+import CourseElement from "./Course";
 import Filter from "../../components/Filter";
 import Search from "../../components/Search";
 import { courses, sortOptions } from "../../shared/data";
@@ -8,8 +8,11 @@ import { Course } from "../../shared/interfaces";
 
 export default function Courses() {
   const originalCourses = courses;
-  const [searchedCourses, setSearchedCourses] = useState(courses);
-  const [sortOption, setSortOption] = useState("Sortera");
+  const [sortOption, setSortOption] = useState(sortOptions.nameRising);
+  const [searchedCourses, setSearchedCourses] = useState(
+    sortArray(courses, sortOption)
+  );
+
 
   return (
     <div className="h-full w-full bg-white flex flex-col items-center py-12 space-y-8">
@@ -52,7 +55,7 @@ export default function Courses() {
               value={sortOption}
               onChange={(value: string) => {
                 setSortOption(value);
-                setSearchedCourses(sortArray(searchedCourses, sortOption));
+                setSearchedCourses(sortArray(searchedCourses, value));
               }}
             />
           </div>
@@ -71,17 +74,25 @@ export default function Courses() {
 const sortArray = (arr: Course[], sortOption: string) => {
   switch (sortOption) {
     case sortOptions.nameRising:
-      return arr.sort((a: Course,b: Course) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0))
+      return arr.sort((a: Course, b: Course) =>
+        b.name > a.name ? -1 : a.name > b.name ? 1 : 0
+      );
     case sortOptions.nameFalling:
-      return arr.sort((a: Course,b: Course) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+      return arr.sort((a: Course, b: Course) =>
+        a.name > b.name ? -1 : b.name > a.name ? 1 : 0
+      );
     case sortOptions.pointsRising:
-      return arr.sort((a: Course, b: Course) => b.points - a.points);
-    case sortOptions.pointsFalling:
       return arr.sort((a: Course, b: Course) => a.points - b.points);
+    case sortOptions.pointsFalling:
+      return arr.sort((a: Course, b: Course) => b.points - a.points);
     case sortOptions.studyPaceRising:
-      return arr.sort((a: Course, b: Course) => (a.pace ? a.pace : 0) - (b.pace ? b.pace : 0));
+      return arr.sort(
+        (a: Course, b: Course) => (a.pace ? a.pace : 0) - (b.pace ? b.pace : 0)
+      );
     case sortOptions.studyPaceFalling:
-      return arr.sort((a: Course, b: Course) => (b.pace ? b.pace : 0) - (a.pace ? a.pace : 0));
+      return arr.sort(
+        (a: Course, b: Course) => (b.pace ? b.pace : 0) - (a.pace ? a.pace : 0)
+      );
     default:
       return arr;
   }
