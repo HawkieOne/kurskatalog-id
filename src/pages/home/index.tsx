@@ -17,6 +17,7 @@ import { templates } from "../../shared/data";
 import { createEmptyTemplate, createIDTemplate } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
 import { useLocalStorage } from "../../shared/useLocalStorage";
+import { motion } from "framer-motion"
 
 export default function Home() {
   const [chosenTemplate, setChosenTemplate] = useState(templates[0]);
@@ -95,13 +96,18 @@ export default function Home() {
             to="/kurser"
             hoverBgColor="bg-creamDark"
           />
-          <IconButton
-            icon={<BsList size={"2.5em"} />}
-            text="Obligatoriska kurser"
-            size="large"
-            to="/kursplan"
-            hoverBgColor="bg-creamDark"
-          />
+          <motion.div
+            initial={{ x: -100 }}
+            animate={{ x: 0 }}
+            transition={{ ease: "easeIn", duration: 0.5 }}>
+            <IconButton
+              icon={<BsList size={"2.5em"} />}
+              text="Obligatoriska kurser"
+              size="large"
+              to="/kursplan"
+              hoverBgColor="bg-creamDark"
+            />
+          </motion.div>
         </div>
       </div>
       <div className="hidden sm:block">
