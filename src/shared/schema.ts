@@ -58,7 +58,7 @@ export const courseSchema: JSONSchemaType<Course> = {
     endDate: { type: "string", nullable: true },
     location: { type: "string", nullable: true },
     registerCode: { type: "string", nullable: true },
-    group: { type: "string", nullable: true }
+    group: { type: "string" }
   },
   required: [
     "name",
@@ -67,5 +67,6 @@ export const courseSchema: JSONSchemaType<Course> = {
     "level",
     "code",
     "rating",
+    "group",
   ],
 };

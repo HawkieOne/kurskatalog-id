@@ -82,6 +82,7 @@ for course in courses:
             "code": course_code,
             "registerCode": registerCode,
             "rating": 0,
+            "group": "course",
         }
     else:
         dictionary = {
@@ -93,6 +94,7 @@ for course in courses:
             "level": level,
             "code": course_code,
             "rating": 0,
+            "group": "course"
         }
 
     json_object = json.dumps(dictionary, indent=4,
