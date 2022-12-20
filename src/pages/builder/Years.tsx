@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import {
   FontVariants,
   localStorageLayuotKey,
-  TextVariant,
+  TextVariants,
 } from "../../shared/constants";
 import useCourses from "../../shared/useCourses";
 import DraggableCourse from "./DraggableCourse";
@@ -36,7 +36,7 @@ export default function Years() {
     <div className="basis-1/2 w-full flex flex-col space-around bg-slate-50 rounded-lg p-5">
       <div className="w-full flex justify-around">
         {Array.from(Array(4).keys()).map((entry, index) => (
-          <Text size={TextVariant.medium} font={FontVariants.bold} key={index}>
+          <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>
             Läsperiod {index + 1}
           </Text>
         ))}

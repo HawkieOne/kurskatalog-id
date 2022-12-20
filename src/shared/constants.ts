@@ -1,6 +1,7 @@
 export const localStorageLayuotKey = "layout";
 export const localStorageSavedCoursesKey = "savedCourses";
-export const TextVariant = {
+
+export const TextVariants = {
     small: "text-sm" as const,
     medium: "text-md" as const,
     large: "text-xl" as const,
@@ -8,7 +9,7 @@ export const TextVariant = {
     xxl: "text-3xl" as const,
 }
 
-export const TitleVariant = {
+export const TitleVariants = {
     small: "text-2xl" as const,
     large: "text-4xl" as const,
 }

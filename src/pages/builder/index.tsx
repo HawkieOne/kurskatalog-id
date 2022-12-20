@@ -11,9 +11,10 @@ import WorkingBlock from "./blocks/WorkingBlock";
 import YearOffBlock from "./blocks/YearOffBlock";
 import Button from "../../components/Button";
 import Collapse from "../../components/Collapse";
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion";
 import Divider from "../../components/Divider";
 import Search from "../../components/Search";
+import { TextVariants, FontVariants } from "../../shared/constants";
 import { useKeyPress } from "../../shared/useKeyPress";
 import { courses as allCourses } from "../../shared/data";
 import {
@@ -30,6 +31,9 @@ import Years from "./Years";
 import Drawer from "./Drawer";
 import PresetChooser from "./PresetChooser";
 import FileInput from "./FileInput";
+import Text from "../../components/Text";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import Title from "../../components/Title";
 
 export default function ExamBuilder() {
   const location = useLocation();
@@ -49,8 +53,10 @@ export default function ExamBuilder() {
     setCourses(preset.years);
   }
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
-  const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useRecoilState(leftDrawerState);
-  const [isRightDrawerOpen, setIsRightDrawerOpen] = useRecoilState(rightDrawerState);
+  const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
+    useRecoilState(leftDrawerState);
+  const [isRightDrawerOpen, setIsRightDrawerOpen] =
+    useRecoilState(rightDrawerState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
@@ -58,7 +64,7 @@ export default function ExamBuilder() {
   // useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
 
   const onFileUpload = (preset: Preset) => {
-    if (!presets.find(e => e.name === preset.name)) {
+    if (!presets.find((e) => e.name === preset.name)) {
       setActivePreset(preset);
       const newPresets = presets.slice();
       newPresets.push(preset);
@@ -78,10 +84,10 @@ export default function ExamBuilder() {
   };
   const onShortcutExportDrawer = () => {
     setIsRightDrawerOpen((prev) => !prev);
-  }
+  };
 
-  useKeyPress(['a'], onShortcutCoursesDrawer);
-  useKeyPress(['c'], onShortcutExportDrawer);
+  useKeyPress(["a"], onShortcutCoursesDrawer);
+  useKeyPress(["c"], onShortcutExportDrawer);
   return (
     <div className="h-full bg-white">
       <div className="h-full relative p-4">
@@ -128,37 +134,50 @@ export default function ExamBuilder() {
         <AnimatePresence>
           {isLeftDrawerOpen && (
             <Drawer side="left" refPointer={leftDrawerRef}>
-              <Collapse
-                title="Kursblock"
-                open={false}
-                content={
-                  <div className="w-full flex flex-col items-center space-y-4 p-3">
-                    <Search
-                      allCourses={allCourses}
-                      setSearchedCourses={setSearchedCourses}
-                    />
+              <div className="flex p-4 px-3 justify-between items-center">
+                <Text size={TextVariants.large} font={FontVariants.bold}>
+                  Kurser
+                </Text>
+                <div
+                  className="p-2 cursor-pointer hover:bg-slate-100 rounded-md"
+                  onClick={() => setIsLeftDrawerOpen(!isLeftDrawerOpen)}
+                >
+                  <AiOutlineCloseCircle size="1.5em" />
+                </div>
+              </div>
+              <>
+                <Collapse
+                  title="Kursblock"
+                  open={false}
+                  content={
+                    <div className="w-full flex flex-col items-center space-y-4 p-3">
+                      <Search
+                        allCourses={allCourses}
+                        setSearchedCourses={setSearchedCourses}
+                      />
 
-                    {searchedCourses.map((course, index) => (
-                      <CourseBlock key={index} course={course} />
-                    ))}
-                    {searchedCourses.length === 0 && (
-                      <p className="text-center">Inga kurser hittade</p>
-                    )}
-                  </div>
-                }
-              />
-              <Collapse
-                title="Övriga block"
-                open={false}
-                content={
-                  <div className="flex flex-col items-center space-y-4 p-3">
-                    <CustomBlock />
-                    <YearOffBlock />
-                    <WorkingBlock />
-                    <ExchangeBlock />
-                  </div>
-                }
-              />
+                      {searchedCourses.map((course, index) => (
+                        <CourseBlock key={index} course={course} />
+                      ))}
+                      {searchedCourses.length === 0 && (
+                        <p className="text-center">Inga kurser hittade</p>
+                      )}
+                    </div>
+                  }
+                />
+                <Collapse
+                  title="Övriga block"
+                  open={false}
+                  content={
+                    <div className="flex flex-col items-center space-y-4 p-3">
+                      <CustomBlock />
+                      <YearOffBlock />
+                      <WorkingBlock />
+                      <ExchangeBlock />
+                    </div>
+                  }
+                />
+              </>
             </Drawer>
           )}
         </AnimatePresence>
@@ -188,7 +207,10 @@ export default function ExamBuilder() {
                   onClick={() => exportTemplate("template", courses)}
                 />
                 <div className="btn-group btn-group-vertical">
-                  <Button text="Spara bild" onClick={() => saveToImage("pdf")} />
+                  <Button
+                    text="Spara bild"
+                    onClick={() => saveToImage("pdf")}
+                  />
                   <Button text="Spara PDF" onClick={() => saveToPDF("pdf")} />
                   <Button text="Skriv ut" onClick={window.print} />
                 </div>

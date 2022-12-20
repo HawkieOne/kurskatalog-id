@@ -1,5 +1,5 @@
 import React from "react";
-import { TextVariant } from "../shared/constants";
+import { TextVariants } from "../shared/constants";
 import Text from "./Text";
 
 interface StatProps {
@@ -14,7 +14,7 @@ export default function Stat({ label, unit, value }: StatProps) {
         <Text>{label}</Text>
       </div>
       <div className="stat-value">
-        <Text size={TextVariant.xl}>{value}{unit}</Text>
+        <Text size={TextVariants.xl}>{value}{unit}</Text>
       </div>
     </div>
   );

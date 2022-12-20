@@ -1,5 +1,5 @@
 import React from "react";
-import { TextVariant } from "../shared/constants";
+import { TextVariants } from "../shared/constants";
 import { AllowedBgColors, AllowedTextColors } from "../shared/interfaces";
 import Dropdown from "./Dropdown";
 import Text from "./Text";
@@ -37,13 +37,13 @@ export default function IconButtonDropdown({
       {size === "small" && (
         <div className="h-12 w-12 p-1 flex flex-col justify-evenly items-center">
           <div className="group-hover:text-onyx">{icon}</div>
-          {text && <Text size={TextVariant.large}>{text}</Text>}
+          {text && <Text size={TextVariants.large}>{text}</Text>}
         </div>
       )}
       {size === "medium" && (
         <div className="h-48 w-48 p-2 flex flex-col justify-evenly items-center">
           <div className="group-hover:text-onyx">{icon}</div>
-          {text && <Text size={TextVariant.large}>{text}</Text>}
+          {text && <Text size={TextVariants.large}>{text}</Text>}
         </div>
       )}
       {size === "large" && (
@@ -53,7 +53,7 @@ export default function IconButtonDropdown({
             onClick={onClick}
           >
             <div className="group-hover:text-onyx">{icon}</div>
-            {text && <Text size={TextVariant.large}>{text}</Text>}
+            {text && <Text size={TextVariants.large}>{text}</Text>}
           </div>
           <div className="absolute bottom-0 w-full">
             <Dropdown options={options} value={value} onChange={onChange} />

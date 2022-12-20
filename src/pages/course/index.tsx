@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from 'react-router-dom';
-import { TitleVariant } from "../../shared/constants";
+import { TitleVariants } from "../../shared/constants";
 import { IoMdArrowBack } from "react-icons/io";
 import Title from "../../components/Title";
 import Stats from "../../components/Stats";
@@ -28,7 +28,7 @@ export default function CoursePage() {
       </div>
       <div className="flex flex-col text-md w-3/4 space-y-8 px-4 pb-4">
         <div className="flex flex-col items-center">
-          <Title size={TitleVariant.small}>Om kurs</Title>
+          <Title size={TitleVariants.small}>Om kurs</Title>
           <Text>{course.description}</Text>
         </div>
 

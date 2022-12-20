@@ -3,7 +3,7 @@ import { AiFillDelete, AiFillRead } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Text from "../../components/Text";
-import { FontVariants, TextVariant } from "../../shared/constants";
+import { FontVariants, TextVariants } from "../../shared/constants";
 import { colors } from "../../shared/data";
 import { BuildingBlock, Course } from "../../shared/interfaces";
 import { useOnClickOutside } from "../../shared/onClickOutside";
@@ -46,7 +46,7 @@ export default function DraggableCourse({
       {course.content && (
         <div className="h-full w-full flex flex-col p-3 text-ellipsis">
           <div className="flex justify-between">
-            <Text size={TextVariant.small} font={FontVariants.bold}>
+            <Text size={TextVariants.small} font={FontVariants.bold}>
               {course.content.code}
             </Text>
             <div

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import Text from "../../components/Text";
-import { TextVariant } from "../../shared/constants";
+import { TextVariants } from "../../shared/constants";
 import { getJsonFromFile } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
 
@@ -18,7 +18,7 @@ export default function FileInput({
   const [errorText, setErrorText] = useState("");
   return (
     <div className="form-control w-full max-w-xs space-y-2 text-onyx">
-      <Text size={TextVariant.small}>Ladda upp mall</Text>
+      <Text size={TextVariants.small}>Ladda upp mall</Text>
       <form className="w-full flex items-center">
         <div className="h-6">
         </div>
@@ -58,7 +58,7 @@ export default function FileInput({
         </label>
       </form>
       <div className="h-6">
-        <Text color="text-pink" size={TextVariant.small}>{errorText}</Text>
+        <Text color="text-pink" size={TextVariants.small}>{errorText}</Text>
       </div>
     </div>
   );

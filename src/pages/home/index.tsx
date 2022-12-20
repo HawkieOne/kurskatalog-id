@@ -12,21 +12,22 @@ import IconButtonDropdown from "../../components/IconButtonDropdown";
 import ModalWindow from "../../components/Modal";
 import Text from "../../components/Text";
 import Title from "../../components/Title";
-import { localStorageLayuotKey, Templates, TextVariant } from "../../shared/constants";
+import {
+  localStorageLayuotKey,
+  Templates,
+  TextVariants,
+} from "../../shared/constants";
 import { templates } from "../../shared/data";
 import { createEmptyTemplate, createIDTemplate } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
 import { useLocalStorage } from "../../shared/useLocalStorage";
-import { motion } from "framer-motion"
 
 export default function Home() {
   const [chosenTemplate, setChosenTemplate] = useState(templates[0]);
   const [uploadedPreset, setUploadedPreset] = useState<Preset>();
   const [isUploadModalOpen, setIsUploadMdalOpen] = useState(false);
   const setCourses = useSetRecoilState(coursesBuilderState);
-  const [hasStartedEditing, setHasStartedEditing] = useRecoilState(
-    hasStartedEditingState
-  );
+  const [, setHasStartedEditing] = useRecoilState(hasStartedEditingState);
   const navigate = useNavigate();
   const [coursesLocalStorage, setCoursesLocalStorage] = useLocalStorage(
     localStorageLayuotKey,
@@ -49,7 +50,7 @@ export default function Home() {
       <div className="h-full flex flex-col justify-evenly items-center">
         <div className="w-3/5 flex flex-col items-center space-y-4 px-4">
           <Title>Kurskatalog</Title>
-          <Text size={TextVariant.medium}>
+          <Text size={TextVariants.medium}>
             Vi på Interaktion & Design har ett stort urval av kurser att välja
             bland. Med många valfria poäng att fylla kan det vara svårt att
             hitta rätt. Denna onlinekatalog samlar information om kurser och
@@ -96,18 +97,14 @@ export default function Home() {
             to="/kurser"
             hoverBgColor="bg-creamDark"
           />
-          <motion.div
-            initial={{ x: -100 }}
-            animate={{ x: 0 }}
-            transition={{ ease: "easeIn", duration: 0.5 }}>
-            <IconButton
-              icon={<BsList size={"2.5em"} />}
-              text="Obligatoriska kurser"
-              size="large"
-              to="/kursplan"
-              hoverBgColor="bg-creamDark"
-            />
-          </motion.div>
+
+          <IconButton
+            icon={<BsList size={"2.5em"} />}
+            text="Obligatoriska kurser"
+            size="large"
+            to="/kursplan"
+            hoverBgColor="bg-creamDark"
+          />
         </div>
       </div>
       <div className="hidden sm:block">
