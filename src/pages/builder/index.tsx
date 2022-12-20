@@ -11,6 +11,7 @@ import WorkingBlock from "./blocks/WorkingBlock";
 import YearOffBlock from "./blocks/YearOffBlock";
 import Button from "../../components/Button";
 import Collapse from "../../components/Collapse";
+import { AnimatePresence, motion } from "framer-motion"
 import Divider from "../../components/Divider";
 import Search from "../../components/Search";
 import { useKeyPress } from "../../shared/useKeyPress";
@@ -124,73 +125,77 @@ export default function ExamBuilder() {
             </div>
           </div>
         </div>
-        {isLeftDrawerOpen && (
-          <Drawer side="left" refPointer={leftDrawerRef}>
-            <Collapse
-              title="Kursblock"
-              open={false}
-              content={
-                <div className="w-full flex flex-col items-center space-y-4 p-3">
-                  <Search
-                    allCourses={allCourses}
-                    setSearchedCourses={setSearchedCourses}
-                  />
+        <AnimatePresence>
+          {isLeftDrawerOpen && (
+            <Drawer side="left" refPointer={leftDrawerRef}>
+              <Collapse
+                title="Kursblock"
+                open={false}
+                content={
+                  <div className="w-full flex flex-col items-center space-y-4 p-3">
+                    <Search
+                      allCourses={allCourses}
+                      setSearchedCourses={setSearchedCourses}
+                    />
 
-                  {searchedCourses.map((course, index) => (
-                    <CourseBlock key={index} course={course} />
-                  ))}
-                  {searchedCourses.length === 0 && (
-                    <p className="text-center">Inga kurser hittade</p>
-                  )}
+                    {searchedCourses.map((course, index) => (
+                      <CourseBlock key={index} course={course} />
+                    ))}
+                    {searchedCourses.length === 0 && (
+                      <p className="text-center">Inga kurser hittade</p>
+                    )}
+                  </div>
+                }
+              />
+              <Collapse
+                title="Övriga block"
+                open={false}
+                content={
+                  <div className="flex flex-col items-center space-y-4 p-3">
+                    <CustomBlock />
+                    <YearOffBlock />
+                    <WorkingBlock />
+                    <ExchangeBlock />
+                  </div>
+                }
+              />
+            </Drawer>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isRightDrawerOpen && (
+            <Drawer side="right" refPointer={rightDrawerRef}>
+              <div className="flex flex-col gap-6 p-4">
+                <FileInput
+                  onUpload={onFileUpload}
+                  validFormat=".json"
+                  validateFunction={validateJSON}
+                />
+
+                <PresetChooser
+                  onChange={onPresetChosen}
+                  presets={presets}
+                  onUsePreset={() => {
+                    if (activePreset) {
+                      setCourses(activePreset.years);
+                    }
+                  }}
+                />
+
+                <Divider text="Exportera" />
+                <Button
+                  text="Exportera mall"
+                  onClick={() => exportTemplate("template", courses)}
+                />
+                <div className="btn-group btn-group-vertical">
+                  <Button text="Spara bild" onClick={() => saveToImage("pdf")} />
+                  <Button text="Spara PDF" onClick={() => saveToPDF("pdf")} />
+                  <Button text="Skriv ut" onClick={window.print} />
                 </div>
-              }
-            />
-            <Collapse
-              title="Övriga block"
-              open={false}
-              content={
-                <div className="flex flex-col items-center space-y-4 p-3">
-                  <CustomBlock />
-                  <YearOffBlock />
-                  <WorkingBlock />
-                  <ExchangeBlock />
-                </div>
-              }
-            />
-          </Drawer>
-        )}
-        {isRightDrawerOpen && (
-          <Drawer side="right" refPointer={rightDrawerRef}>
-            <div className="flex flex-col gap-6 p-4">
-              <FileInput
-                onUpload={onFileUpload}
-                validFormat=".json"
-                validateFunction={validateJSON}
-              />
-
-              <PresetChooser
-                onChange={onPresetChosen}
-                presets={presets}
-                onUsePreset={() => {
-                  if (activePreset) {
-                    setCourses(activePreset.years);
-                  }
-                }}
-              />
-
-              <Divider text="Exportera" />
-              <Button
-                text="Exportera mall"
-                onClick={() => exportTemplate("template", courses)}
-              />
-              <div className="btn-group btn-group-vertical">
-                <Button text="Spara bild" onClick={() => saveToImage("pdf")} />
-                <Button text="Spara PDF" onClick={() => saveToPDF("pdf")} />
-                <Button text="Skriv ut" onClick={window.print} />
               </div>
-            </div>
-          </Drawer>
-        )}
+            </Drawer>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
