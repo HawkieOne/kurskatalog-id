@@ -1,39 +1,42 @@
+import { AnimatePresence } from "framer-motion";
 import { ChangeEvent, createRef, useState } from "react";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
-import { leftDrawerState, rightDrawerState } from "../../atoms/atoms";
+import {
+  courseModalOpenState,
+  leftDrawerState,
+  rightDrawerState,
+} from "../../atoms/atoms";
+import Button from "../../components/Button";
+import Collapse from "../../components/Collapse";
+import Divider from "../../components/Divider";
+import Search from "../../components/Search";
+import Text from "../../components/Text";
+import { FontVariants, TextVariants } from "../../shared/constants";
+import { courses as allCourses } from "../../shared/data";
+import {
+  exportTemplate,
+  saveToImage,
+  saveToPDF,
+  validateJSON,
+} from "../../shared/functions";
+import { Course, Preset, Year } from "../../shared/interfaces";
+import useCourses from "../../shared/useCourses";
+import { useKeyPress } from "../../shared/useKeyPress";
 import CourseBlock from "./blocks/CourseBlock";
 import CustomBlock from "./blocks/CustomBlock";
 import ExchangeBlock from "./blocks/ExchangeBlock";
 import WorkingBlock from "./blocks/WorkingBlock";
 import YearOffBlock from "./blocks/YearOffBlock";
-import Button from "../../components/Button";
-import Collapse from "../../components/Collapse";
-import { AnimatePresence, motion } from "framer-motion";
-import Divider from "../../components/Divider";
-import Search from "../../components/Search";
-import { TextVariants, FontVariants } from "../../shared/constants";
-import { useKeyPress } from "../../shared/useKeyPress";
-import { courses as allCourses } from "../../shared/data";
-import {
-  exportTemplate,
-  validateJSON,
-  saveToPDF,
-  saveToImage,
-} from "../../shared/functions";
-import { Course, Preset } from "../../shared/interfaces";
-import { useOnClickOutside } from "../../shared/onClickOutside";
-import useCourses from "../../shared/useCourses";
 import CoursesContainer from "./CoursesContainer";
-import Years from "./Years";
+import CustomCourseModal from "./CustomCourseModal";
 import Drawer from "./Drawer";
-import PresetChooser from "./PresetChooser";
 import FileInput from "./FileInput";
-import Text from "../../components/Text";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-import Title from "../../components/Title";
+import PresetChooser from "./PresetChooser";
+import Years from "./Years";
 
 export default function ExamBuilder() {
   const location = useLocation();
@@ -42,10 +45,12 @@ export default function ExamBuilder() {
   const {
     courses,
     setCourses,
+    editCourse,
     activeYear,
     setActiveYear,
     addYear,
     getSavedCourses,
+    addToSavedCourses,
   } = useCourses();
   const params = location.state;
   if (params) {
@@ -57,6 +62,8 @@ export default function ExamBuilder() {
     useRecoilState(leftDrawerState);
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
     useRecoilState(rightDrawerState);
+  const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] =
+    useRecoilState(courseModalOpenState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
@@ -219,6 +226,28 @@ export default function ExamBuilder() {
           )}
         </AnimatePresence>
       </div>
+      <CustomCourseModal
+        isOpen={isCustomCourseModalOpen}
+        onCancel={() => setIsCustomCourseModalOpen(false)}
+        onSave={(course, id) => {
+          setIsCustomCourseModalOpen(false);
+          // Check when to save to courses and when to change existing
+          if (!doesCourseExist(courses, id)) {
+            addToSavedCourses(course);
+          } else if (id) {
+            editCourse(id, course);
+          }
+        }}
+      />
     </div>
   );
 }
+
+const doesCourseExist = (blocks: Year[], id: string | null) => {
+  for (var i = 0; i < blocks.length; i ++) {
+    const year = blocks[i];
+    if (year.courses.some(block => block.i === id)) {
+      return true;
+    }
+  }
+};

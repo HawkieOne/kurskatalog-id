@@ -1,9 +1,19 @@
+import { useSetRecoilState } from "recoil";
+import {
+  activeCustomCourseEditState,
+  courseModalOpenState,
+  leftDrawerState
+} from "../../../atoms/atoms";
 import { customCourse } from "../../../shared/data";
-import useCourses from "../../../shared/useCourses";
 import Block from "./Block";
 
 export default function CustomBlock() {
-  const { addToSavedCourses } = useCourses();
+  const setIsCustomCourseModalOpen = useSetRecoilState(courseModalOpenState);
+  const setLeftDrawerOpen = useSetRecoilState(leftDrawerState);
+  const setActiveCustomCourseEdit = useSetRecoilState(
+    activeCustomCourseEditState
+  );
+
   return (
     <Block
       title="Valfri kurs"
@@ -11,7 +21,11 @@ export default function CustomBlock() {
       background="bg-fuchsia-300"
       hoverBackground="hover:bg-fuchsia-500"
       borderColor="border-fuchsia-500"
-      onAddCourseClick={() => addToSavedCourses(customCourse)}
+      onAddCourseClick={() => {
+        setActiveCustomCourseEdit({ course: customCourse, id: null });
+        setIsCustomCourseModalOpen(true);
+        setLeftDrawerOpen(false);
+      }}
     />
   );
 }
