@@ -20,7 +20,7 @@ export default function useCourses() {
     draggingSavedCourseState
   );
 
-  const [savedCoursesLocalStorage, setSavedCoursesLocalStorage] =
+  const [, setSavedCoursesLocalStorage] =
     useLocalStorage(localStorageSavedCoursesKey, null);
 
   const addCourse = (block: BuildingBlock) => {
@@ -39,6 +39,23 @@ export default function useCourses() {
       setDraggingCourse(null);
     }
   };
+
+  const editCourse = (uuid: string, newCourse: Course) => {
+    let cpyCourses = courses.slice();
+    let cpyYearCourses = cpyCourses[activeYear].courses.slice();
+    const uuidIndex = cpyYearCourses.findIndex((e) => e.i === uuid);
+    if (uuidIndex !== -1) {
+      cpyYearCourses[uuidIndex] = {
+        ...cpyYearCourses[uuidIndex],
+        content: newCourse
+      };
+      cpyCourses[activeYear] = {
+        ...cpyCourses[activeYear],
+        courses: cpyYearCourses,
+      };
+      setCourses(cpyCourses);
+    }
+  }
 
   const removeCourse = (uuid: string) => {
     let cpyCourses = courses.slice();
@@ -138,6 +155,7 @@ export default function useCourses() {
     activeYear,
     setActiveYear,
     addCourse,
+    editCourse,
     removeCourse,
     saveChanges,
     addYear,

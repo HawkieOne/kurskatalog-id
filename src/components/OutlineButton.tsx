@@ -1,0 +1,16 @@
+interface ButtonProps {
+  text: string;
+  onClick: () => void;
+}
+
+export default function OutlineButton({ text, onClick }: ButtonProps) {
+  return (
+    <button
+      className="btn btn-outline text-pink border-pink hover:bg-pink 
+                 outline-none hover:border-none"
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+}

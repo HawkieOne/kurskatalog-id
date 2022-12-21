@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { customCourse } from "../shared/data";
 import { createEmptyTemplate } from "../shared/functions";
 import { Course, Year } from "../shared/interfaces";
 
@@ -44,7 +45,7 @@ export const savedCoursesState = atom({
 export const draggingSavedCourseState = atom<Course | null>({
   key: "draggingSavedCourseState",
   default: null,
-})
+});
 
 export const rightDrawerState = atom({
   key: "rightDrawerState",
@@ -59,4 +60,17 @@ export const leftDrawerState = atom({
 export const courseRightDrawerState = atom<Course | null>({
   key: "courseRightDrawerState",
   default: null,
+});
+
+export const courseModalOpenState = atom({
+  key: "courseModalOpenState",
+  default: false,
+});
+
+export const activeCustomCourseEditState = atom<{
+  course: Course;
+  id: string | null;
+}>({
+  key: "activeCustomCourseEditState",
+  default: { course: customCourse, id: null },
 });

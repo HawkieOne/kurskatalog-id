@@ -475,8 +475,9 @@ export const emptyCourse: Course = {
 }
 
 export const customCourse: Course = {
-  name: "Valfri kurs",
-  points: -1,
+  name: "",
+  points: 7.5,
+  pace: 50,
   link: "",
   level: "",// CAN ONLY BE SOME VALUES
   code: "",
@@ -484,6 +485,8 @@ export const customCourse: Course = {
   description: "",
   prerequisite: "",
   rating: -1,
+  startDate: "2018-07-22",
+  endDate: "2018-07-22",
   group: "custom"
 }
 
