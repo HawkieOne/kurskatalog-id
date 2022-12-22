@@ -8,23 +8,19 @@ interface DropdownProps {
   onChange: (option: string) => void;
 }
 
-export default function Dropdown({
-  options,
-  value,
-  onChange,
-}: DropdownProps) {
+export default function Dropdown({ options, value, onChange }: DropdownProps) {
   const [isOptionsExpanded, setIsOptionsExpanded] = useState(false);
   return (
     <div className="w-full relative">
       <div
         tabIndex={0}
-        className="w-full bg-cream p-2 flex justify-between cursor-pointer space-x-4"
+        className="w-full bg-darkGrey text-whiteBackground flex justify-between cursor-pointer space-x-4 border border-darkGrey"
         onClick={() => setIsOptionsExpanded(!isOptionsExpanded)}
       >
-        <Text>
-          <span className="text-pink">{value}</span>
-        </Text>
-        <div className="flex justify-center text-pink cursor-pointer">
+        <div className="p-2 flex justify-center items-center">
+          <Text>{value}</Text>
+        </div>
+        <div className="p-2 flex justify-center bg-darkGrey text-lightGreen cursor-pointer">
           {!isOptionsExpanded ? (
             <BsChevronDown size="1.5em" />
           ) : (
@@ -35,11 +31,12 @@ export default function Dropdown({
       {isOptionsExpanded && (
         <ul
           tabIndex={0}
-          className={`absolute top-full menu w-full shadow cursor-pointer space-y-1 bg-cream text-onyx rounded-b-lg z-50`}
+          className={`absolute top-full menu w-full shadow cursor-pointer space-y-1 bg-darkGrey 
+            text-lightGreen rounded-b-lg z-50`}
         >
           {options.map((option, index) => (
             <li
-              className="hover:text-pink hover:bg-creamDark px-2"
+              className="hover:text-darkGrey hover:bg-boneGrey px-2"
               onClick={() => {
                 onChange(option);
                 setIsOptionsExpanded(false);

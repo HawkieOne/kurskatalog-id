@@ -43,7 +43,7 @@ export default function DraggableCourse({
     <div className={`w-full h-full flipCard ${!flipped ? "flipped" : ""} `}>
       {/* Front */}
       <div
-        className={`h-full w-full ${backgroundColor} flex items-start justify-start text-onyx drop-shadow-lg cursor-grab front`}
+        className={`h-full w-full ${backgroundColor} flex items-start justify-start text-whiteBackground drop-shadow-lg cursor-grab front`}
       >
         <div className={`h-full w-full`}>
           {course.content && (
@@ -70,7 +70,7 @@ export default function DraggableCourse({
       </div>
       {/* Back */}
       <div
-        className={`h-full w-full ${darkerBackgroundColor} flex flex-col items-start justify-start text-onyx drop-shadow-lg cursor-grab space-y-4 back`}
+        className={`h-full w-full ${darkerBackgroundColor} flex flex-col items-start justify-start text-whiteBackground drop-shadow-lg cursor-grab space-y-4 back`}
       >
         <div
           className={`w-full flex items-center ${
@@ -150,7 +150,7 @@ const isBlockCustom = (course: BuildingBlock) =>
 const getColorByType = (group: Course["group"]) => {
   switch (group) {
     case "course":
-      return "bg-cream";
+      return "bg-darkGrey";
     case "custom":
       return "bg-fuchsia-300";
     case "exchange":
@@ -160,14 +160,14 @@ const getColorByType = (group: Course["group"]) => {
     case "yearOff":
       return "bg-indigo-300";
     default:
-      return "bg-cream";
+      return "bg-darkGrey";
   }
 };
 
 const getDarkerBgColorByType = (group: Course["group"]) => {
   switch (group) {
     case "course":
-      return "bg-creamDark";
+      return "bg-midnightGreenEagleGreen";
     case "custom":
       return "bg-fuchsia-400";
     case "exchange":
@@ -177,6 +177,6 @@ const getDarkerBgColorByType = (group: Course["group"]) => {
     case "yearOff":
       return "bg-indigo-400";
     default:
-      return "bg-cream";
+      return "bg-midnightGreenEagleGreen";
   }
 };

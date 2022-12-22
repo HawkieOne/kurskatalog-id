@@ -47,7 +47,7 @@ export default function Block({
               to={"/kurser/" + course.name}
               state={{ course: course }}
               className="flex flex-col justify-center
-                        items-center p-3 hover:bg-onyx hover:text-white"
+                        items-center p-3 hover:bg-darkGrey hover:text-whiteBackground"
             >
               <button>
                 <AiOutlineInfoCircle />
@@ -56,7 +56,7 @@ export default function Block({
           )}
           <div
             className={`flex flex-col justify-center cursor-pointer
-                        items-center p-3 ${hoverBackground} rounded-r-md ${course && "hover:bg-pink"}`}
+                        items-center p-3 ${hoverBackground} rounded-r-md ${course && "hover:bg-lightSeaGreen"}`}
             onClick={onAddCourseClick}
           >
             <AiOutlinePlus />

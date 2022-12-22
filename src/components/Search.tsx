@@ -31,7 +31,7 @@ export default function Search({
               type="text"
               placeholder="Sök…"
               value={searchTerm}
-              className="input bg-cream text-onyx justify-self-end rounded-l-xl rounded-none focus:border-pink focus:border-opacity-50 focus:outline-none border border-creamDark"
+              className="input bg-whiteBackground text-onyx justify-self-end rounded-l-xl rounded-none focus:border-lightSeaGreen focus:border-opacity-50 focus:outline-none border border-darkGrey"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setSearchedCourses(onSearch(e.target.value, allCourses));
                 setSearchTerm(e.target.value);
@@ -52,7 +52,7 @@ export default function Search({
           )}
         </div>
         <button
-          className="btn btn-square bg-creamDark border-none hover:bg-onyx text-onyx hover:text-white"
+          className="btn btn-square bg-darkGrey border-none hover:bg-lightSeaGreen text-whiteBackground hover:text-darkGrey"
           onClick={() => setSearchedCourses(onSearch(searchTerm, allCourses))}
         >
           <AiOutlineSearch size="1.5em" />

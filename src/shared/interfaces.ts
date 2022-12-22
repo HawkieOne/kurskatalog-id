@@ -22,18 +22,28 @@ export type AllowedAlignVariants =
 export type AllowedTextColors =
   | "text-black"
   | "text-white"
+  | "text-whiteBackground"
   | "text-pink"
   | "text-onyx"
-  | "text-cream"
-  | "text-creamDark";
+  | "text-midnightGreenEagleGreen"
+  | "text-creamDark"
+  | "text-darkGrey";
 
 export type AllowedBgColors =
   | "bg-black"
   | "bg-white"
-  | "bg-pink"
+  | "aquamarine"
   | "bg-onyx"
-  | "bg-cream"
-  | "bg-creamDark";
+  | "bg-midnightGreenEagleGreen"
+  | "bg-creamDark"
+  | "bg-lightGreen"
+  | "bg-deepBlue"
+  | "bg-darkMossgreen"
+  | "bg-lightSeaGreen"
+  | "bg-darkGrey"
+  | "bg-boneGrey"
+  | "bg-webGrey"
+  ;
 
 export const ItemTypes = {
   COURSE: "course",

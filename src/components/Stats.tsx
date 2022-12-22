@@ -8,7 +8,7 @@ interface StatsProps {
 
 export default function Stats({ course }: StatsProps) {
     return (
-        <div className="stats bg-cream text-onyx">
+        <div className="stats bg-midnightGreenEagleGreen text-onyx">
             {course.pace &&
                 <Stat
                     label="Studietakt"

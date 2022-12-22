@@ -13,7 +13,7 @@ export default function CoursePage() {
   const course = location.state.course;
 
   return (
-    <div className="relative h-full w-full bg-white flex flex-col items-center py-12 space-y-8">
+    <div className="relative h-full w-full bg-white flex flex-col">
       <div className="absolute left-5 top-5">
         <IconButton
           icon={<IoMdArrowBack size={"2.5em"} />}
@@ -23,7 +23,15 @@ export default function CoursePage() {
           hoverBgColor="bg-creamDark"
         />
       </div>
-      <div className="flex flex-row justify-center w-1/2 text-onyx text-md space-y-8 px-4 pb-4">
+      <div className="bg-onyx py-24 px-40 text-white flex flex-col justify-around 
+                      items-start space-y-12">
+        <Title>{course.name.toUpperCase()}</Title>
+        <Text>{course.description}</Text>
+      </div>
+      <div className="bg-slate-600">
+
+      </div>
+    {/*   <div className="flex flex-row justify-center w-1/2 text-onyx text-md space-y-8 px-4 pb-4">
         <Stats course={course} />
       </div>
       <div className="flex flex-col text-md w-3/4 space-y-8 px-4 pb-4">
@@ -33,10 +41,10 @@ export default function CoursePage() {
         </div>
 
         <div className="flex flex-row gap-3">
-          <div className="flex flex-col w-1/2 bg-cream text-onyx p-4 rounded-2xl">
+          <div className="flex flex-col w-1/2 bg-midnightGreenEagleGreen text-onyx p-4 rounded-2xl">
             <InformationRow header="Behörigheteskrav" text={course.prerequisite} />
           </div>
-          <div className="flex flex-col w-1/2 bg-cream text-onyx p-4 rounded-2xl">
+          <div className="flex flex-col w-1/2 bg-midnightGreenEagleGreen text-onyx p-4 rounded-2xl">
             <InformationRow header="Period" text={course.period} />
             <InformationRow header="Startar" text={course.startDate} />
             <InformationRow header="Slutar" text={course.endDate} />
@@ -45,7 +53,7 @@ export default function CoursePage() {
             <InformationRow header="Anmälningskod" text={course.registerCode} />
           </div>
         </div>
-      </div>
+      </div> */}
 
 
     </div>

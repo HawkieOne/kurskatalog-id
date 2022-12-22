@@ -48,7 +48,7 @@ export default function CourseCard({ course, onRemoveClick }: CardProps) {
 const getColorByType = (type: Course["group"]) => {
   switch (type) {
     case "course":
-      return "bg-cream";
+      return "bg-midnightGreenEagleGreen";
     case "custom":
       return "bg-fuchsia-300";
     case "exchange":
@@ -58,6 +58,6 @@ const getColorByType = (type: Course["group"]) => {
     case "yearOff":
       return "bg-indigo-300";
     default:
-      return "bg-cream";
+      return "bg-midnightGreenEagleGreen";
   }
 };

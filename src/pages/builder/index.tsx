@@ -96,22 +96,22 @@ export default function ExamBuilder() {
   useKeyPress(["a"], onShortcutCoursesDrawer);
   useKeyPress(["c"], onShortcutExportDrawer);
   return (
-    <div className="h-full bg-white">
+    <div className="h-full bg-whiteBackground">
       <div className="h-full relative p-4">
         <div className="h-full flex flex-row justify-between">
           <div className="w-full flex p-4 gap-3">
-            <div className="tabs flex-col items-center justify-center basis-20">
+            <div className="tabs flex-col items-center justify-center basis-20 text-onyx">
               {courses.map((_, index) =>
                 index === activeYear ? (
                   <button
-                    className="tab tab-lg tab-active text-pink border-b-pink"
+                    className="tab tab-lg tab-active border-y border-darkGrey"
                     key={uuidv4()}
                   >
                     År {index + 1}
                   </button>
                 ) : (
                   <button
-                    className="tab tab-lg text-onyx"
+                    className="tab tab-lg"
                     onClick={() => setActiveYear(index)}
                     key={index}
                   >
@@ -120,7 +120,7 @@ export default function ExamBuilder() {
                 )
               )}
               <button
-                className="tab tab-lg text-onyx"
+                className="tab tab-lg btn btn-ghost"
                 onClick={() => addYear()}
               >
                 <IoIosAddCircleOutline />
@@ -146,7 +146,7 @@ export default function ExamBuilder() {
                   Kurser
                 </Text>
                 <div
-                  className="p-2 cursor-pointer hover:bg-slate-100 rounded-md"
+                  className="p-2 cursor-pointer hover:bg-ashGrey rounded-md"
                   onClick={() => setIsLeftDrawerOpen(!isLeftDrawerOpen)}
                 >
                   <AiOutlineCloseCircle size="1.5em" />

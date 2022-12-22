@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <main className="h-full flex flex-col justify-between bg-white">
+    <main className="h-full flex flex-col justify-between bg-whiteBackground">
       <div className="h-full flex flex-col justify-evenly items-center">
         <div className="w-3/5 flex flex-col items-center space-y-4 px-4">
           <Title>Kurskatalog</Title>
@@ -64,14 +64,16 @@ export default function Home() {
               text="Fortsätt"
               size="large"
               to="/byggare"
-              hoverBgColor="bg-creamDark"
+              bgColor="bg-lightSeaGreen"
+              hoverBgColor="bg-darkGrey"
             />
           )}
           <IconButtonDropdown
             icon={<AiFillBuild size={"2.5em"} />}
             text="Skapa kursplan"
             size="large"
-            hoverBgColor="bg-creamDark"
+            bgColor={coursesLocalStorage ? "bg-darkGrey" : "bg-lightSeaGreen"}
+            hoverBgColor="bg-lightSeaGreen"
             options={templates}
             value={chosenTemplate}
             onChange={setChosenTemplate}
@@ -95,7 +97,8 @@ export default function Home() {
             text="Kurser"
             size="large"
             to="/kurser"
-            hoverBgColor="bg-creamDark"
+            bgColor="bg-darkGrey"
+            hoverBgColor="bg-lightSeaGreen"
           />
 
           <IconButton
@@ -103,7 +106,8 @@ export default function Home() {
             text="Obligatoriska kurser"
             size="large"
             to="/kursplan"
-            hoverBgColor="bg-creamDark"
+            bgColor="bg-darkGrey"
+            hoverBgColor="bg-lightSeaGreen"
           />
         </div>
       </div>

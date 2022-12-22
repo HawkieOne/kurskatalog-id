@@ -8,7 +8,7 @@ interface TitleProps {
 
 export default function Title({ children, size } : TitleProps) {
   return (
-    <h1 className={`text-4xl ${size && size} text-onyx`}>
+    <h1 className={`text-4xl ${size && size}`}>
         {children}
     </h1>
   )

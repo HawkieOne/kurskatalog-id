@@ -23,9 +23,9 @@ export default function MandatoryCourses() {
   const renderHeaderCell = (text: string) => <div className="p-2">{text}</div>;
 
   return (
-    <div className="h-full bg-white flex flex-col items-center p-5">
+    <div className="h-full bg-whiteBackground flex flex-col items-center p-5">
       <div className="w-4/5 text-center flex flex-col">
-        <div className="grid grid-cols-5 font-bold bg-slate-100 text-onyx">
+        <div className="grid grid-cols-5 font-bold bg-darkGrey text-whiteBackground">
           {renderHeaderCell("Kursnamn")}
           {renderHeaderCell("Studietakt")}
           {renderHeaderCell("Läsperiod")}
@@ -42,7 +42,7 @@ export default function MandatoryCourses() {
                 content={
                   <div>
                     {allowedCourses.map((course, _) => (
-                      <div className="grid grid-cols-5 bg-slate-100 text-onyx">
+                      <div className="grid grid-cols-5 bg-boneGrey text-onyx">
                         {renderCell(course.name)}
                         {renderCell(course.pace ? course.pace + "%" : "??")}
                         {renderCell(course.startDate ? course.startDate : "??")}

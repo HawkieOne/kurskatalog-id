@@ -31,19 +31,19 @@ export default function IconButtonDropdown({
 }: IconButtonProps) {
   return (
     <div
-      className={`bg-cream ${bgColor} text-pink ${textColor} rounded-lg shadow-md group hover:${hoverBgColor}
+      className={`${bgColor} text-lightGreen ${textColor} rounded-lg shadow-md group hover:${hoverBgColor} 
       relative space-y-4 cursor-pointer`}
     >
       {size === "small" && (
         <div className="h-12 w-12 p-1 flex flex-col justify-evenly items-center">
-          <div className="group-hover:text-onyx">{icon}</div>
+          <div className="group-hover:text-darkGrey">{icon}</div>
           {text && <Text size={TextVariants.large}>{text}</Text>}
         </div>
       )}
       {size === "medium" && (
         <div className="h-48 w-48 p-2 flex flex-col justify-evenly items-center">
-          <div className="group-hover:text-onyx">{icon}</div>
-          {text && <Text size={TextVariants.large}>{text}</Text>}
+          <div className="group-hover:text-whiteBackground">{icon}</div>
+          {text && <Text size={TextVariants.large} hoverColor="text-whiteBackground">{text}</Text>}
         </div>
       )}
       {size === "large" && (
@@ -52,7 +52,7 @@ export default function IconButtonDropdown({
             className="h-full p-2 flex flex-col justify-evenly items-center"
             onClick={onClick}
           >
-            <div className="group-hover:text-onyx">{icon}</div>
+            <div className="group-hover:text-darkGrey">{icon}</div>
             {text && <Text size={TextVariants.large}>{text}</Text>}
           </div>
           <div className="absolute bottom-0 w-full">

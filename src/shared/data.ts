@@ -347,7 +347,7 @@ export const subjects = [
 ];
 
 export const colors = [
-  "bg-cream",
+  "bg-midnightGreenEagleGreen",
   "bg-red-300",
   "bg-blue-300",
   "bg-emerald-300",

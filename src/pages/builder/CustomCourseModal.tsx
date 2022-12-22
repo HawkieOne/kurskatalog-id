@@ -1,13 +1,13 @@
-import { AiOutlineCloseCircle } from "react-icons/ai";
-import Modal from "react-modal";
-import Text from "../../components/Text";
-import Button from "../../components/Button";
-import { FontVariants, TextVariants } from "../../shared/constants";
-import { Course } from "../../shared/interfaces";
 import { useState } from "react";
-import OutlineButton from "../../components/OutlineButton";
+import { AiOutlineCloseSquare } from "react-icons/ai";
+import Modal from "react-modal";
 import { useRecoilValue } from "recoil";
 import { activeCustomCourseEditState } from "../../atoms/atoms";
+import Button from "../../components/Button";
+import OutlineButton from "../../components/OutlineButton";
+import Text from "../../components/Text";
+import { FontVariants, TextVariants } from "../../shared/constants";
+import { Course } from "../../shared/interfaces";
 
 interface ModalProps {
   isOpen: boolean;
@@ -56,7 +56,7 @@ export default function CustomCourseModal({
           className="p-2 cursor-pointer hover:bg-slate-100 rounded-md"
           onClick={onCancel}
         >
-          <AiOutlineCloseCircle size="1.5em" />
+          <AiOutlineCloseSquare size="1.5em" />
         </div>
       </div>
       <div className="form-control w-full">
@@ -142,7 +142,7 @@ export default function CustomCourseModal({
       <div className="flex justify-between mt-5">
         <OutlineButton text="Avbryt" onClick={onCancel} />
         <Button
-          text="Spara"
+          text="Lägg till"
           onClick={() => {
             onSave(
               {

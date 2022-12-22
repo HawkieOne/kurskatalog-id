@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Dropdown from "../../components/Dropdown";
-import CourseElement from "./Course";
 import Filter from "../../components/Filter";
 import Search from "../../components/Search";
 import { courses, sortOptions } from "../../shared/data";
 import { Course } from "../../shared/interfaces";
+import CourseElement from "./CourseElement";
 
 export default function Courses() {
   const originalCourses = courses;
@@ -13,9 +13,8 @@ export default function Courses() {
     sortArray(courses, sortOption)
   );
 
-
   return (
-    <div className="h-full w-full bg-white flex flex-col items-center py-12 space-y-8">
+    <div className="h-full w-full bg-whiteBackground flex flex-col items-center py-12 space-y-8">
       <div className="w-3/4 flex flex-col items-center relative space-y-4">
         <Search
           allCourses={originalCourses}
@@ -61,6 +60,7 @@ export default function Courses() {
           </div>
         </div>
       </div>
+      
       <div className="w-3/4 flex flex-col items-center space-y-6">
         {searchedCourses.map((course, index) => (
           <CourseElement course={course} key={index} />

@@ -14,7 +14,7 @@ export default function Checkbox({ value, label, onChange }: CheckboxProps) {
         <input
           type="checkbox"
           checked={value}
-          className="checkbox checkbox-info"
+          className="checkbox checkbox-success rounded-md"
           onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.currentTarget.checked)}
         />
       </label>

@@ -60,7 +60,7 @@ export default function ModalWindow({
           </button>
           <button
             onClick={onSuccess}
-            className="btn bg-cream text-onyx hover:bg-creamDark border-none"
+            className="btn bg-midnightGreenEagleGreen text-onyx hover:bg-creamDark border-none"
             disabled={!value || (value && !value.name.endsWith(".json"))}
           >
             Välj mall
