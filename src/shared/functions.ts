@@ -27,7 +27,7 @@ export const saveToPDF = (idTargetElement: string) => {
       const imgProps = doc.getImageProperties(imgData);
       const width = doc.internal.pageSize.getWidth();
       const height = (imgProps.height * width) / imgProps.width;
-      doc.addImage(imgData, "PNG", 0, 0, width, height);
+      doc.addImage(imgData, "PNG", 0, doc.internal.pageSize.getHeight() * 0.25, width, height);
       doc.save("kursplan.pdf");
     });
   }

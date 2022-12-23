@@ -39,7 +39,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center z-50">
+    <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center z-50 print:hidden">
       <Link
         to="/"
         className="normal-case text-xl text-onyx absolute inset-y-0 left-10 h-full flex flex-col justify-center border-b-darkMossgreen hover:border-b-2"
