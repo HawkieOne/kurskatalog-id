@@ -35,7 +35,7 @@ export default function Years() {
   }, [coursesLocalStorage, setCourses]);
 
   return (
-    <div className="basis-1/2 w-full flex flex-col space-around bg-slate-50 rounded-lg p-5">
+    <div id="pdf" className="basis-1/2 w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 print:w-full">
       <div className="w-full flex justify-around">
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>

@@ -100,7 +100,7 @@ export default function ExamBuilder() {
       <div className="h-full relative p-4">
         <div className="h-full flex flex-row justify-between">
           <div className="w-full flex p-4 gap-3">
-            <div className="tabs flex-col items-center justify-center basis-20 text-onyx">
+            <div className="tabs flex-col items-center justify-center basis-20 text-onyx print:hidden">
               {courses.map((_, index) =>
                 index === activeYear ? (
                   <button
@@ -126,10 +126,7 @@ export default function ExamBuilder() {
                 <IoIosAddCircleOutline />
               </button>
             </div>
-            <div
-              id="pdf"
-              className="w-full flex flex-col justify-evenly space-y-8"
-            >
+            <div className="w-full flex flex-col justify-evenly space-y-8 print:">
               <Years />
               <CoursesContainer
                 onAddCoursesClick={() => setIsLeftDrawerOpen((prev) => !prev)}
@@ -208,16 +205,15 @@ export default function ExamBuilder() {
                   }}
                 />
 
-                <Divider text="Exportera" />
+                <Divider text="Spara" />
                 <Button
-                  text="Exportera mall"
+                  text="Spara mall"
                   onClick={() => exportTemplate("template", courses)}
                 />
+                <Divider text="Exportera" />
+                <Text size={TextVariants.small}>Endast innehåll på det aktiva året exporteras</Text>
                 <div className="btn-group btn-group-vertical">
-                  <Button
-                    text="Spara bild"
-                    onClick={() => saveToImage("pdf")}
-                  />
+                  <Button text="Spara bild" onClick={() => saveToImage("pdf")} />
                   <Button text="Spara PDF" onClick={() => saveToPDF("pdf")} />
                   <Button text="Skriv ut" onClick={window.print} />
                 </div>
