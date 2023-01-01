@@ -58,7 +58,10 @@ export default function TutorialModal({
                 y: 1,
                 i: "11",
               }}
-              onRemove={() => {}}
+              onInfoClick={() => {}}
+              onMoveBackClick={() => {}}
+              onSettingsClick={() => {}}
+              onRemoveClick={() => {}}
             />
           </div>
           <div className="basis-1/2">
@@ -82,7 +85,10 @@ export default function TutorialModal({
                 y: 1,
                 i: "11", // can be any value - only for tutorial purposes
               }}
-              onRemove={() => {}}
+              onInfoClick={() => {}}
+              onMoveBackClick={() => {}}
+              onSettingsClick={() => {}}
+              onRemoveClick={() => {}}
             />
           </div>
           <div className="basis-1/2">
@@ -108,7 +114,10 @@ export default function TutorialModal({
                 y: 1,
                 i: "11",
               }}
-              onRemove={() => {}}
+              onInfoClick={() => {}}
+              onMoveBackClick={() => {}}
+              onSettingsClick={() => {}}
+              onRemoveClick={() => {}}
             />
           </div>
           <div className="basis-1/2">

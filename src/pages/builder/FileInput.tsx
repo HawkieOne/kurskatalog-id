@@ -1,4 +1,5 @@
 import { ChangeEvent, createRef, useState } from "react";
+import { toast } from "react-toastify";
 import Text from "../../components/Text";
 import { TextVariants } from "../../shared/constants";
 import { getJsonFromFile } from "../../shared/functions";
@@ -21,7 +22,6 @@ export default function FileInput({
   const [successText, setSuccessText] = useState("");
   return (
     <div className="form-control w-full max-w-xs space-y-2 text-onyx">
-      <Text size={TextVariants.small}>Ladda upp</Text>
       <form className="w-full flex items-center">
         <div className="h-6"></div>
         <label className="block w-full">
@@ -60,6 +60,7 @@ export default function FileInput({
               const files = e.target.files;
               if (files?.length === 0) {
                 setErrorText("");
+                setSuccessText("");
               } else if (files?.item(0)?.name.endsWith(validFormat)) {
                 const file = e.target.files?.item(0);
                 if (file) {
@@ -70,13 +71,15 @@ export default function FileInput({
                       onUpload(json);
                       setErrorText("");
                       setSuccessText(file.name + " är uppladdad");
+                      toast.success(file.name + " is uploaded")
                     } else {
-                      setErrorText(file.name + " följer inte rätt format");
+                      setErrorText(file.name + " har inte rätt format");
                       setSuccessText("");
                     }
                   } else {
                     onUpload(json);
                     setErrorText("");
+                    setSuccessText("");
                   }
                 } else {
                   setErrorText("Uppladdning misslyckades");
@@ -91,7 +94,7 @@ export default function FileInput({
         </label>
       </form>
       <div
-        className={`h-6 ${errorText !== "" ? "text-pink" : "text-green-500"}`}
+        className={`${errorText !== "" ? "text-pink" : "text-green-500"}`}
       >
         {errorText !== "" ? (
           <Text size={TextVariants.small}>{errorText}</Text>
