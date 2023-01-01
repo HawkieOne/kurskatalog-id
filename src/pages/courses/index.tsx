@@ -5,6 +5,7 @@ import Search from "../../components/Search";
 import { courses, sortOptions } from "../../shared/data";
 import { Course } from "../../shared/interfaces";
 import CourseElement from "./CourseElement";
+import { motion } from "framer-motion"
 
 export default function Courses() {
   const originalCourses = courses;
@@ -61,11 +62,11 @@ export default function Courses() {
         </div>
       </div>
       
-      <div className="w-3/4 flex flex-col items-center space-y-6">
+      <motion.div layout className="w-3/4 flex flex-col items-center space-y-6">
         {searchedCourses.map((course, index) => (
           <CourseElement course={course} key={index} />
         ))}
-      </div>
+      </motion.div>
       {searchedCourses.length === 0 && <p>Inga kurser hittade</p>}
     </div>
   );
