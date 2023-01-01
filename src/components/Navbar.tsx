@@ -1,14 +1,23 @@
-import { FiSettings, FiInfo } from "react-icons/fi";
-import { BsFillKeyboardFill } from "react-icons/bs";
+import { FiSettings } from "react-icons/fi";
+import { BsFillKeyboardFill, BsInfoLg } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { keyboardShortcutsModalOpenState, rightDrawerState } from "../atoms/atoms";
+import {
+  keyboardShortcutsModalOpenState,
+  rightDrawerState,
+  tutorialsModalOpenState,
+} from "../atoms/atoms";
 import Title from "./Title";
 
 export default function Navbar() {
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
     useRecoilState(rightDrawerState);
-  const setKeyboardShortcutsModalOpen = useSetRecoilState(keyboardShortcutsModalOpenState);
+  const setKeyboardShortcutsModalOpen = useSetRecoilState(
+    keyboardShortcutsModalOpenState
+  );
+  const setIsTutorialModalOpen = useSetRecoilState(
+    tutorialsModalOpenState
+  );
   const location = useLocation();
   const pathString = location.pathname.replace("/", "").trim();
 
@@ -18,7 +27,6 @@ export default function Navbar() {
     pathString === "byggare"
       ? "Egen kursplan"
       : decodeURI(pathName.charAt(0).toUpperCase() + pathName.slice(1));
-
   return (
     <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center z-50 print:hidden">
       <Link
@@ -34,6 +42,12 @@ export default function Navbar() {
       )}
       {pathName === "byggare" && (
         <div className="absolute flex gap-5 h-full inset-y-0 right-10">
+          <div
+            className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
+            onClick={() => setIsTutorialModalOpen(true)}
+          >
+            <BsInfoLg size="1.5em" />
+          </div>
           <div
             className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
             onClick={() => setKeyboardShortcutsModalOpen(true)}

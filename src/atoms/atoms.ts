@@ -62,6 +62,11 @@ export const courseRightDrawerState = atom<Course | null>({
   default: null,
 });
 
+export const tutorialsModalOpenState = atom({
+  key: "tutorialsModalOpenState",
+  default: false,
+});
+
 export const keyboardShortcutsModalOpenState = atom({
   key: "keyboardShortcutsModalOpenState",
   default: false,
@@ -84,3 +89,4 @@ export const resizeIsAllowed = atom({
   key: "resizeIsAllowedState",
   default: true,
 });
+

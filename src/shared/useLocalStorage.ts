@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Year } from "./interfaces";
 
-export const useLocalStorage = (key: string, initialValue?: Year[] | number | null) => {
+export const useLocalStorage = (key: string, initialValue?: Year[] | number | boolean |  null) => {
 
   const [storedValue, setStoredValue] = useState(() => {
     if (typeof window === "undefined") {

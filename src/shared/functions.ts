@@ -111,3 +111,21 @@ export const getJsonFromFile = async (file: File) => {
     };
   });
 };
+
+export const generateCustomCourse = (name: string, code: string) => {
+  return {
+    name: name,
+    points: 7.5,
+    pace: 50,
+    link: "",
+    level: "", // CAN ONLY BE SOME VALUES
+    code: code,
+    registerCode: "",
+    description: "",
+    prerequisite: "",
+    rating: -1,
+    startDate: "2018-07-22",
+    endDate: "2018-07-22",
+    group: "custom",
+  } as Course;
+}
