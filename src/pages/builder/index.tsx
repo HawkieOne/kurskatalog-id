@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { ChangeEvent, createRef, useState } from "react";
-import { AiFillDelete, AiOutlineCloseCircle } from "react-icons/ai";
+import { AiFillDelete, AiOutlineCloseCircle, AiOutlineFileAdd } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -54,6 +54,7 @@ export default function ExamBuilder() {
     removeYear,
     getSavedCourses,
     addToSavedCourses,
+    removeAllCoursesInYear
   } = useCourses();
   const params = location.state;
   if (params) {
@@ -61,7 +62,8 @@ export default function ExamBuilder() {
     setCourses(preset.years);
   }
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isConfirmRemoveYearModalOpen, setIsConfirmRemoveYearModalOpen] = useState(false);
+  const [isConfirmClearCoursesModalOpen, setIsConfirmClearCoursesModalOpen] = useState(false);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
     useRecoilState(leftDrawerState);
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
@@ -138,13 +140,15 @@ export default function ExamBuilder() {
                   </button>
                   <button
                     className="tab tab-lg hover:text-red-500"
-                    onClick={() => setIsConfirmModalOpen(true)}
+                    onClick={() => setIsConfirmRemoveYearModalOpen(true)}
                   >
                     <AiFillDelete size="1.25em" />
                   </button>
                 </div>
               </div>
-              <Years />
+              <Years 
+                onClearCoursesClick={() => setIsConfirmClearCoursesModalOpen(true)}
+              />
             </div>
             <div className="basis-1/3 flex space-x-4">
               <div className="basis-20" />
@@ -231,9 +235,14 @@ export default function ExamBuilder() {
                   onClick={() => exportTemplate("template", courses)}
                 />
                 <Divider text="Exportera" />
-                <Text size={TextVariants.small}>Endast innehåll på det aktiva året exporteras</Text>
+                <Text size={TextVariants.small}>
+                  Endast innehåll på det aktiva året exporteras
+                </Text>
                 <div className="btn-group btn-group-vertical">
-                  <Button text="Spara bild" onClick={() => saveToImage("pdf")} />
+                  <Button
+                    text="Spara bild"
+                    onClick={() => saveToImage("pdf")}
+                  />
                   <Button text="Spara PDF" onClick={() => saveToPDF("pdf")} />
                   <Button text="Skriv ut" onClick={window.print} />
                 </div>
@@ -258,15 +267,26 @@ export default function ExamBuilder() {
           }}
         />
       )}
-      {isConfirmModalOpen && (
+      {isConfirmRemoveYearModalOpen && (
         <ConfirmationModal
           text={"Är du säker på att du vill ta bort år " + courses.length + "?"}
-          isOpen={isConfirmModalOpen}
-          onCancel={() => setIsConfirmModalOpen(false)}
+          isOpen={isConfirmRemoveYearModalOpen}
+          onCancel={() => setIsConfirmRemoveYearModalOpen(false)}
           onConfirm={() => {
             setActiveYear(courses.length - 2);
             removeYear();
-            setIsConfirmModalOpen(false);
+            setIsConfirmRemoveYearModalOpen(false);
+          }}
+        />
+      )}
+      {isConfirmClearCoursesModalOpen && (
+        <ConfirmationModal
+          text={"Är du säker på att du vill ta bort alla kurser för detta år?"}
+          isOpen={isConfirmClearCoursesModalOpen}
+          onCancel={() => setIsConfirmClearCoursesModalOpen(false)}
+          onConfirm={() => {
+            removeAllCoursesInYear();
+            setIsConfirmClearCoursesModalOpen(false);
           }}
         />
       )}

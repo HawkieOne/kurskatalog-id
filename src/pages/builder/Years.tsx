@@ -13,10 +13,15 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { coursesBuilderState, resizeIsAllowed } from "../../atoms/atoms";
 import Text from "../../components/Text";
 import { Course } from "../../shared/interfaces";
+import { MdOutlineDeleteSweep } from "react-icons/md";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-export default function Years() {
+interface YearsProps {
+  onClearCoursesClick: () => void;
+}
+
+export default function Years({ onClearCoursesClick } : YearsProps) {
   const {
     coursesActiveYear,
     saveChanges,
@@ -37,7 +42,14 @@ export default function Years() {
   }, [coursesLocalStorage, setCourses]);
 
   return (
-    <div className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5">
+    <div className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 relative">
+      <div
+        className="absolute top-2 right-2 btn btn-ghost"
+        onClick={onClearCoursesClick}
+        title="Rensa kurser för detta år"
+      >
+        <MdOutlineDeleteSweep size="2em" />
+      </div>
       <div className="w-full flex justify-around">
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>

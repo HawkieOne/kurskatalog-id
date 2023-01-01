@@ -7,7 +7,10 @@ import {
   draggingSavedCourseState,
   savedCoursesState,
 } from "../atoms/atoms";
-import { localStorageActiveYearKey, localStorageSavedCoursesKey } from "./constants";
+import {
+  localStorageActiveYearKey,
+  localStorageSavedCoursesKey,
+} from "./constants";
 import { BuildingBlock, Course, Year } from "./interfaces";
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -33,11 +36,13 @@ export default function useCourses() {
   const setChosenYear = (index: number) => {
     setActiveYear(index);
     setActiveYearLocalStorage(index);
-  }
+  };
 
   const getChosenYear = () => {
-    return activeYearLocalStorage ? activeYearLocalStorage as number : activeYear;
-  }
+    return activeYearLocalStorage
+      ? (activeYearLocalStorage as number)
+      : activeYear;
+  };
 
   const addCourse = (block: BuildingBlock) => {
     if (draggingCourse) {
@@ -97,6 +102,16 @@ export default function useCourses() {
     cpyCourses[activeYear] = {
       ...cpyCourses[activeYear],
       courses: newLayout,
+    };
+    setCourses(cpyCourses);
+    return cpyCourses;
+  };
+
+  const removeAllCoursesInYear = () => {
+    let cpyCourses = courses.slice();
+    cpyCourses[activeYear] = {
+      ...cpyCourses[activeYear],
+      courses: [],
     };
     setCourses(cpyCourses);
     return cpyCourses;
@@ -218,6 +233,7 @@ export default function useCourses() {
     removeCourse,
     saveChanges,
     resetChanges,
+    removeAllCoursesInYear,
     resetCourseSize,
     addYear,
     removeYear,
