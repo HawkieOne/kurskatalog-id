@@ -42,7 +42,7 @@ export default function MandatoryCourses() {
                 content={
                   <div>
                     {allowedCourses.map((course, _) => (
-                      <div className="grid grid-cols-5 bg-boneGrey text-onyx">
+                      <div className="grid grid-cols-5 bg-whiteBackground text-onyx">
                         {renderCell(course.name)}
                         {renderCell(course.pace ? course.pace + "%" : "??")}
                         {renderCell(course.startDate ? course.startDate : "??")}
