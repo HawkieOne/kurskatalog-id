@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { ChangeEvent, createRef, useState } from "react";
-import { AiFillDelete, AiOutlineCloseCircle, AiOutlineFileAdd } from "react-icons/ai";
+import { AiFillDelete, AiOutlineCloseCircle } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
