@@ -3,17 +3,9 @@ import {
   AiFillDelete,
   AiFillRead,
   AiFillSetting,
-  AiFillSwitcher,
   AiOutlineArrowLeft,
   AiOutlineRollback,
-  AiOutlineSwitcher,
 } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import {
-  activeCustomCourseEditState,
-  courseModalOpenState,
-} from "../../atoms/atoms";
 import List from "../../components/List/List";
 import ListItem from "../../components/List/ListItem";
 import Text from "../../components/Text";
@@ -23,24 +15,24 @@ import {
   TextVariants,
 } from "../../shared/constants";
 import { BuildingBlock, Course } from "../../shared/interfaces";
-import useCourses from "../../shared/useCourses";
 
 interface DraggableCourseProps {
   course: BuildingBlock;
-  onRemove: (uuid: string) => void;
+  onInfoClick: () => void;
+  onSettingsClick: () => void;
+  onMoveBackClick: () => void;
+  onRemoveClick: (uuid: string) => void;
 }
 
 export default function DraggableCourse({
   course,
-  onRemove,
+  onInfoClick,
+  onSettingsClick,
+  onMoveBackClick,
+  onRemoveClick,
 }: DraggableCourseProps) {
-  const navigate = useNavigate();
-  const { addToSavedCourses } = useCourses();
   const [flipped, setFlipped] = useState(false);
-  const setIsCustomCourseModalOpen = useSetRecoilState(courseModalOpenState);
-  const setActiveCustomCourseEdit = useSetRecoilState(
-    activeCustomCourseEditState
-  );
+
 
   const backgroundColor = getColorByType(course.content?.group);
   return (
@@ -96,11 +88,7 @@ export default function DraggableCourse({
               icon={<AiFillRead />}
               text="Läs mer"
               title="Läs mer"
-              onClick={() => {
-                navigate("/kurser/" + course.content.name, {
-                  state: { course: course.content },
-                });
-              }}
+              onClick={onInfoClick}
             />
           )}
           {isBlockCustom(course) && (
@@ -108,29 +96,20 @@ export default function DraggableCourse({
               icon={<AiFillSetting />}
               text="Inställningar"
               title={"Inställningar"}
-              onClick={() => {
-                setActiveCustomCourseEdit({
-                  course: course.content,
-                  id: course.i,
-                });
-                setIsCustomCourseModalOpen(true);
-              }}
+              onClick={onSettingsClick}
             />
           )}
           <ListItem
             icon={<AiOutlineArrowLeft />}
             text="Flytta tillbaka"
             title={"Flytta till kurser"}
-            onClick={() => {
-              addToSavedCourses(course.content);
-              onRemove(course.i);
-            }}
+            onClick={onMoveBackClick}
           />
           <ListItem
             icon={<AiFillDelete />}
             text="Ta bort"
             title={"Ta bort"}
-            onClick={() => onRemove(course.i)}
+            onClick={() => onRemoveClick(course.i)}
           />
         </List>
         <ul

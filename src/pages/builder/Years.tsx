@@ -10,10 +10,11 @@ import DraggableCourse from "./DraggableCourse";
 import { useLocalStorage } from "../../shared/useLocalStorage";
 import { useEffect } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { coursesBuilderState, resizeIsAllowed } from "../../atoms/atoms";
+import { activeCustomCourseEditState, courseModalOpenState, coursesBuilderState, resizeIsAllowed } from "../../atoms/atoms";
 import Text from "../../components/Text";
 import { Course } from "../../shared/interfaces";
 import { MdOutlineDeleteSweep } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -21,7 +22,7 @@ interface YearsProps {
   onClearCoursesClick: () => void;
 }
 
-export default function Years({ onClearCoursesClick } : YearsProps) {
+export default function Years({ onClearCoursesClick }: YearsProps) {
   const {
     coursesActiveYear,
     saveChanges,
@@ -30,6 +31,7 @@ export default function Years({ onClearCoursesClick } : YearsProps) {
     draggingCourse,
     removeFromSavedCoursesByObject,
     resetChanges,
+    addToSavedCourses
   } = useCourses();
   const setCourses = useSetRecoilState(coursesBuilderState);
   const [isResizeAllowed, setIsResizeAllowed] = useRecoilState(resizeIsAllowed);
@@ -40,6 +42,12 @@ export default function Years({ onClearCoursesClick } : YearsProps) {
   useEffect(() => {
     setCourses(coursesLocalStorage);
   }, [coursesLocalStorage, setCourses]);
+
+  const navigate = useNavigate();
+  const setIsCustomCourseModalOpen = useSetRecoilState(courseModalOpenState);
+  const setActiveCustomCourseEdit = useSetRecoilState(
+    activeCustomCourseEditState
+  );
 
   return (
     <div className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 relative">
@@ -122,7 +130,23 @@ export default function Years({ onClearCoursesClick } : YearsProps) {
             <DraggableCourse
               key={course.i}
               course={course}
-              onRemove={removeCourse}
+              onInfoClick={() => {
+                navigate("/kurser/" + course.content.name, {
+                  state: { course: course.content },
+                });
+              }}
+              onSettingsClick={() => {
+                setActiveCustomCourseEdit({
+                  course: course.content,
+                  id: course.i,
+                });
+                setIsCustomCourseModalOpen(true);
+              }}
+              onMoveBackClick={() => {
+                addToSavedCourses(course.content);
+                removeCourse(course.i);
+              }}
+              onRemoveClick={removeCourse}
             />
           </div>
         ))}
