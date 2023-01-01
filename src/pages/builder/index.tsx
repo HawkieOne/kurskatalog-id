@@ -7,6 +7,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import {
   activeCustomCourseEditState,
   courseModalOpenState,
+  keyboardShortcutsModalOpenState,
   leftDrawerState,
   rightDrawerState,
 } from "../../atoms/atoms";
@@ -36,6 +37,7 @@ import CoursesContainer from "./CoursesContainer";
 import CustomCourseModal from "./CustomCourseModal";
 import Drawer from "./Drawer";
 import FileInput from "./FileInput";
+import KeyboardShortcutsModal from "./KeyboardShortcutsModal";
 import PresetChooser from "./PresetChooser";
 import YearButton from "./YearButton";
 import Years from "./Years";
@@ -69,6 +71,7 @@ export default function ExamBuilder() {
   const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] =
     useRecoilState(courseModalOpenState);
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
+  const [isKeyboardShortcutsModalOpen, setKeyboardShortcutsModalOpen] = useRecoilState(keyboardShortcutsModalOpenState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
@@ -268,6 +271,12 @@ export default function ExamBuilder() {
             removeYear();
             setIsConfirmModalOpen(false);
           }}
+        />
+      )}
+      {isKeyboardShortcutsModalOpen && (
+        <KeyboardShortcutsModal 
+          isOpen={isKeyboardShortcutsModalOpen}
+          onCloseModal={() => setKeyboardShortcutsModalOpen(false)}
         />
       )}
     </div>
