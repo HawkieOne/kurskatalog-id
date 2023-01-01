@@ -7,7 +7,7 @@ import {
   draggingSavedCourseState,
   savedCoursesState,
 } from "../atoms/atoms";
-import { localStorageSavedCoursesKey } from "./constants";
+import { localStorageActiveYearKey, localStorageSavedCoursesKey } from "./constants";
 import { BuildingBlock, Course, Year } from "./interfaces";
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -20,8 +20,24 @@ export default function useCourses() {
     draggingSavedCourseState
   );
 
-  const [, setSavedCoursesLocalStorage] =
-    useLocalStorage(localStorageSavedCoursesKey, null);
+  const [, setSavedCoursesLocalStorage] = useLocalStorage(
+    localStorageSavedCoursesKey,
+    null
+  );
+
+  const [activeYearLocalStorage, setActiveYearLocalStorage] = useLocalStorage(
+    localStorageActiveYearKey,
+    null
+  );
+
+  const setChosenYear = (index: number) => {
+    setActiveYear(index);
+    setActiveYearLocalStorage(index);
+  }
+
+  const getChosenYear = () => {
+    return activeYearLocalStorage ? activeYearLocalStorage as number : activeYear;
+  }
 
   const addCourse = (block: BuildingBlock) => {
     if (draggingCourse) {
@@ -47,7 +63,7 @@ export default function useCourses() {
     if (uuidIndex !== -1) {
       cpyYearCourses[uuidIndex] = {
         ...cpyYearCourses[uuidIndex],
-        content: newCourse
+        content: newCourse,
       };
       cpyCourses[activeYear] = {
         ...cpyCourses[activeYear],
@@ -55,7 +71,7 @@ export default function useCourses() {
       };
       setCourses(cpyCourses);
     }
-  }
+  };
 
   const removeCourse = (uuid: string) => {
     let cpyCourses = courses.slice();
@@ -75,7 +91,7 @@ export default function useCourses() {
     let cpyCourses = courses.slice();
     const newLayout: BuildingBlock[] = changedLayout.map((block, index) => ({
       ...block,
-      content: findCourse(cpyCourses, block) as Course
+      content: findCourse(cpyCourses, block) as Course,
     }));
 
     cpyCourses[activeYear] = {
@@ -86,8 +102,43 @@ export default function useCourses() {
     return cpyCourses;
   };
 
+  const resetChanges = () => {
+    let cpyCourses = courses.slice();
+    setCourses(cpyCourses);
+    return cpyCourses;
+  };
+
+  const resetCourseSize = (
+    oldItem: ReactGridLayout.Layout,
+    newItem: ReactGridLayout.Layout
+  ) => {
+    let cpyCourses = courses.slice();
+    let coursesActiveYearCpy = coursesActiveYear.courses.slice();
+    const newLayout: BuildingBlock[] = coursesActiveYearCpy.map((block) => {
+      if (oldItem.i === block.i) {
+        return {
+          ...block,
+          w: newItem.w,
+          h: newItem.h,
+          content: findCourse(cpyCourses, oldItem) as Course,
+        };
+      } else {
+        return block;
+      }
+    });
+
+    cpyCourses[activeYear] = {
+      ...cpyCourses[activeYear],
+      courses: newLayout,
+    };
+    setCourses(cpyCourses);
+    return cpyCourses;
+  };
+
   const findCourse = (cpyCourses: Year[], course: ReactGridLayout.Layout) => {
-    const foundCourse = cpyCourses[activeYear].courses.find((e) => e.i === course.i);
+    const foundCourse = cpyCourses[activeYear].courses.find(
+      (e) => e.i === course.i
+    );
     if (foundCourse) {
       return foundCourse.content;
     } else {
@@ -98,10 +149,10 @@ export default function useCourses() {
         level: "",
         code: "",
         rating: 0,
-        group: "course"
-      }
+        group: "course",
+      };
     }
-  }
+  };
 
   const addYear = () => {
     if (courses.length < 9) {
@@ -110,6 +161,14 @@ export default function useCourses() {
         year: cpyCourses.length,
         courses: [],
       });
+      setCourses(cpyCourses);
+    }
+  };
+
+  const removeYear = () => {
+    if (courses.length > 1) {
+      let cpyCourses = courses.slice();
+      cpyCourses.pop();
       setCourses(cpyCourses);
     }
   };
@@ -152,13 +211,16 @@ export default function useCourses() {
     courses,
     setCourses,
     coursesActiveYear,
-    activeYear,
-    setActiveYear,
+    activeYear: getChosenYear,
+    setActiveYear: setChosenYear,
     addCourse,
     editCourse,
     removeCourse,
     saveChanges,
+    resetChanges,
+    resetCourseSize,
     addYear,
+    removeYear,
     getSavedCourses,
     addToSavedCourses,
     removeFromSavedCourses: removeFromSavedCoursesByIndex,

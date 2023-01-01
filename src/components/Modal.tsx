@@ -1,7 +1,9 @@
+import { AiOutlineCloseSquare } from "react-icons/ai";
 import Modal from "react-modal";
 import FileInput from "../pages/builder/FileInput";
 import { validateJSON } from "../shared/functions";
 import { Preset } from "../shared/interfaces";
+import Button from "./Button";
 import Title from "./Title";
 
 interface ModalProps {
@@ -27,6 +29,7 @@ export default function ModalWindow({
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
+      padding: "2%",
       transform: "translate(-50%, -50%)",
     },
   };
@@ -39,10 +42,10 @@ export default function ModalWindow({
       style={customStyles}
     >
       <div
-        className="btn btn-ghost btn-sm btn-circle absolute right-2 top-2 cursor-pointer"
+        className="btn btn-ghost absolute right-2 top-2 cursor-pointer hover:bg-slate-100 "
         onClick={onCancel}
       >
-        ✕
+        <AiOutlineCloseSquare size="1.5em" />
       </div>
       <div className="h-full flex flex-col items-start p-4 space-y-8 relative">
         <Title>Ladda upp mall</Title>
@@ -58,13 +61,11 @@ export default function ModalWindow({
           >
             Cancel
           </button>
-          <button
+          <Button 
+            text="Välj mall"
             onClick={onSuccess}
-            className="btn bg-midnightGreenEagleGreen text-onyx hover:bg-creamDark border-none"
             disabled={!value || (value && !value.name.endsWith(".json"))}
-          >
-            Välj mall
-          </button>
+          />
         </div>
       </div>
     </Modal>

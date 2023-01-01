@@ -1,3 +1,4 @@
+import { CardsColors } from "../../../shared/constants";
 import { Course } from "../../../shared/interfaces";
 import useCourses from "../../../shared/useCourses";
 import Block from "./Block";
@@ -12,7 +13,8 @@ export default function CourseBlock({ course }: CourseBlockProps) {
     <Block
       title={course.name}
       subtitle={course.code}
-      info
+      background={CardsColors.course}
+      info  
       course={course}
       onAddCourseClick={() => addToSavedCourses(course)}
     />

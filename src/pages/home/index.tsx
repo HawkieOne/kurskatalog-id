@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AiFillBuild } from "react-icons/ai";
+import { AiOutlineAppstoreAdd, AiOutlineCloudUpload } from "react-icons/ai";
 import { BsList, BsViewList } from "react-icons/bs";
 import { VscDebugContinueSmall } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
@@ -7,33 +7,28 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { coursesBuilderState, hasStartedEditingState } from "../../atoms/atoms";
 import AppBar from "../../components/AppBar";
 import Footer from "../../components/Footer";
-import IconButton from "../../components/IconButton";
-import IconButtonDropdown from "../../components/IconButtonDropdown";
 import ModalWindow from "../../components/Modal";
+import RectangleIconButton from "../../components/RectangleIconButton";
+import SquareIconButton from "../../components/SquareIconButton";
 import Text from "../../components/Text";
 import Title from "../../components/Title";
-import {
-  localStorageLayuotKey,
-  Templates,
-  TextVariants,
-} from "../../shared/constants";
-import { templates } from "../../shared/data";
+import { localStorageLayuotKey, TextVariants } from "../../shared/constants";
 import { createEmptyTemplate, createIDTemplate } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
+import useCourses from "../../shared/useCourses";
 import { useLocalStorage } from "../../shared/useLocalStorage";
 
 export default function Home() {
-  const [chosenTemplate, setChosenTemplate] = useState(templates[0]);
   const [uploadedPreset, setUploadedPreset] = useState<Preset>();
   const [isUploadModalOpen, setIsUploadMdalOpen] = useState(false);
   const setCourses = useSetRecoilState(coursesBuilderState);
+  const { setActiveYear } = useCourses();
   const [, setHasStartedEditing] = useRecoilState(hasStartedEditingState);
   const navigate = useNavigate();
   const [coursesLocalStorage, setCoursesLocalStorage] = useLocalStorage(
     localStorageLayuotKey,
     null
   );
-
   useEffect(() => {
     if (coursesLocalStorage) {
       setCourses(coursesLocalStorage);
@@ -57,58 +52,54 @@ export default function Home() {
             hjälper dig göra bra val.
           </Text>
         </div>
-        <div className="hidden sm:flex justify-center items-start space-x-16">
+        <div className="self-stretch basis-1/3 hidden sm:flex justify-center items-center space-x-16">
           {coursesLocalStorage && (
-            <IconButton
+            <SquareIconButton
               icon={<VscDebugContinueSmall size={"2.5em"} />}
               text="Fortsätt"
-              size="large"
-              to="/byggare"
-              bgColor="bg-lightSeaGreen"
-              hoverBgColor="bg-darkGrey"
+              onClick={() => navigate("/byggare")}
             />
           )}
-          <IconButtonDropdown
-            icon={<AiFillBuild size={"2.5em"} />}
-            text="Skapa kursplan"
-            size="large"
-            bgColor={coursesLocalStorage ? "bg-darkGrey" : "bg-lightSeaGreen"}
-            hoverBgColor="bg-lightSeaGreen"
-            options={templates}
-            value={chosenTemplate}
-            onChange={setChosenTemplate}
+          <SquareIconButton
+            icon={<AiOutlineAppstoreAdd size={"2.5em"} />}
+            text="Skapa tom mall"
             onClick={() => {
               setHasStartedEditing(true);
-              if (chosenTemplate === Templates.id) {
-                setCourses(createIDTemplate());
-                setCoursesLocalStorage(createIDTemplate());
-                navigate("/byggare");
-              } else if (chosenTemplate === Templates.empty) {
-                setCourses(createEmptyTemplate());
-                setCoursesLocalStorage(createEmptyTemplate());
-                navigate("/byggare");
-              } else if (chosenTemplate === Templates.upload) {
-                setIsUploadMdalOpen(true);
-              }
+              setCourses(createEmptyTemplate());
+              setCoursesLocalStorage(createEmptyTemplate());
+              setActiveYear(0);
+              navigate("/byggare");
             }}
           />
-          <IconButton
-            icon={<BsViewList size={"2.5em"} />}
-            text="Kurser"
-            size="large"
-            to="/kurser"
-            bgColor="bg-darkGrey"
-            hoverBgColor="bg-lightSeaGreen"
-          />
-
-          <IconButton
-            icon={<BsList size={"2.5em"} />}
-            text="Obligatoriska kurser"
-            size="large"
-            to="/kursplan"
-            bgColor="bg-darkGrey"
-            hoverBgColor="bg-lightSeaGreen"
-          />
+          <div className="h-full flex flex-col justify-around">
+            <RectangleIconButton
+              icon={<AiOutlineCloudUpload size={"2.5em"} />}
+              text="Ladda upp mall"
+              onClick={() => {
+                setIsUploadMdalOpen(true);
+              }}
+            />
+            <RectangleIconButton
+              icon={<AiOutlineAppstoreAdd size={"2.5em"} />}
+              text="Ladda Interaktion & Design mall"
+              onClick={() => {
+                setCourses(createIDTemplate());
+                setCoursesLocalStorage(createIDTemplate());
+                setActiveYear(0);
+                navigate("/byggare");
+              }}
+            />
+            <RectangleIconButton
+              icon={<BsViewList size={"2.5em"} />}
+              text="Kurser"
+              onClick={() => navigate("/kurser")}
+            />
+            <RectangleIconButton
+              icon={<BsList size={"2.5em"} />}
+              text="Obligatoriska kurser"
+              onClick={() => navigate("/kursplan")}
+            />
+          </div>
         </div>
       </div>
       <div className="hidden sm:block">
@@ -121,11 +112,12 @@ export default function Home() {
         isOpen={isUploadModalOpen}
         onCancel={() => setIsUploadMdalOpen(false)}
         onFileUpload={onFileUpload}
-        onSuccess={() =>
+        onSuccess={() => {
+          setActiveYear(0);
           navigate("/byggare", {
             state: uploadedPreset,
-          })
-        }
+          });
+        }}
         value={uploadedPreset}
       />
     </main>

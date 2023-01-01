@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FontVariants, TextVariants } from "../../shared/constants";
+import { CardsColors, FontVariants, TextVariants } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
 import Text from "../../components/Text";
 import { AiOutlineClose } from "react-icons/ai";
@@ -15,7 +15,7 @@ export default function CourseCard({ course, onRemoveClick }: CardProps) {
   const { draggingCourse, setDraggingCourse } = useCourses();
   return (
     <div
-      className={`${getColorByType(course.group)} text-onyx drop-shadow-lg h-32 w-80 flex flex-col relative rounded-md cursor-grab`}
+      className={`${getColorByType(course.group)} text-whiteBackground drop-shadow-lg h-32 w-80 flex flex-col relative rounded-md cursor-grab`}
       draggable={true}
       unselectable="on"
       onDragStart={(e) => {
@@ -35,10 +35,10 @@ export default function CourseCard({ course, onRemoveClick }: CardProps) {
       </div>
       {isHoverActive && (
         <div
-          className="p-1 hover:bg-onyx hover:text-white hover:rounded-full absolute top-2 right-2 cursor-pointer"
+          className="p-1  text-whiteBackground absolute top-2 right-2 cursor-pointer"
           onClick={onRemoveClick}
         >
-          <AiOutlineClose />
+          <AiOutlineClose size="1.25em" />
         </div>
       )}
     </div>
@@ -48,16 +48,16 @@ export default function CourseCard({ course, onRemoveClick }: CardProps) {
 const getColorByType = (type: Course["group"]) => {
   switch (type) {
     case "course":
-      return "bg-midnightGreenEagleGreen";
+      return CardsColors.course;
     case "custom":
-      return "bg-fuchsia-300";
+      return CardsColors.custom;
     case "exchange":
-      return "bg-violet-300";
+      return CardsColors.exchange;
     case "working":
-      return "bg-stone-300";
+      return CardsColors.work;
     case "yearOff":
-      return "bg-indigo-300";
+      return CardsColors.pause;
     default:
-      return "bg-midnightGreenEagleGreen";
+      return CardsColors.course;
   }
 };

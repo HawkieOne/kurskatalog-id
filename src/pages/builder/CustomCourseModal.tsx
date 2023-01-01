@@ -14,14 +14,18 @@ interface ModalProps {
   onOpen?: () => void;
   onCancel: () => void;
   onSave: (course: Course, id: string | null) => void;
+  courseInfo: {
+    course: Course;
+    id: string | null;
+  }
 }
 export default function CustomCourseModal({
   isOpen,
   onOpen,
   onCancel,
   onSave,
+  courseInfo
 }: ModalProps) {
-  const courseInfo = useRecoilValue(activeCustomCourseEditState);
 
   const [name, setName] = useState(courseInfo.course.name);
   const [code, setCode] = useState(courseInfo.course.code);
@@ -142,7 +146,7 @@ export default function CustomCourseModal({
       <div className="flex justify-between mt-5">
         <OutlineButton text="Avbryt" onClick={onCancel} />
         <Button
-          text="Lägg till"
+          text="Spara"
           onClick={() => {
             onSave(
               {

@@ -37,16 +37,15 @@ export default function Navbar() {
       transform: "translate(-50%, -50%)",
     },
   };
-
   return (
     <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center z-50 print:hidden">
       <Link
         to="/"
-        className="normal-case text-xl text-onyx absolute inset-y-0 left-10 h-full flex flex-col justify-center border-b-darkMossgreen hover:border-b-2"
+        className="normal-case text-xl text-onyx absolute inset-y-0 left-10 h-full flex flex-col justify-center border-b-onyx hover:border-b-2"
       >
         Kurskatalog
       </Link>
-      {location.pathname !== "/" && (
+      {location.pathname !== "/" && !location.pathname.includes("/kurser/") && (
         <div className="w-3/4 flex justify-center items-center">
           <Title>{capitalizedPathname}</Title>
         </div>

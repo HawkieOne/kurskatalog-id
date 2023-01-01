@@ -1,3 +1,4 @@
+import { CardsColors } from '../../../shared/constants';
 import { yearOffCourse } from '../../../shared/data';
 import useCourses from '../../../shared/useCourses';
 import Block from './Block'
@@ -8,9 +9,7 @@ export default function YearOffBlock() {
     <Block
       title="Paus"
       subtitle="Du pluggar inte"
-      background="bg-indigo-300"
-      hoverBackground="hover:bg-indigo-500"
-      borderColor="border-indigo-500"
+      background={CardsColors.pause}
       onAddCourseClick={() => addToSavedCourses(yearOffCourse)}
     />
   )
