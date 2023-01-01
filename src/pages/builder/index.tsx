@@ -10,6 +10,7 @@ import {
   keyboardShortcutsModalOpenState,
   leftDrawerState,
   rightDrawerState,
+  tutorialsModalOpenState,
 } from "../../atoms/atoms";
 import Button from "../../components/Button";
 import Collapse from "../../components/Collapse";
@@ -17,7 +18,11 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 import Divider from "../../components/Divider";
 import Search from "../../components/Search";
 import Text from "../../components/Text";
-import { FontVariants, TextVariants } from "../../shared/constants";
+import {
+  FontVariants,
+  localStorageTutorialModalKey,
+  TextVariants,
+} from "../../shared/constants";
 import { courses as allCourses } from "../../shared/data";
 import {
   exportTemplate,
@@ -28,6 +33,7 @@ import {
 import { Course, Preset, Year } from "../../shared/interfaces";
 import useCourses from "../../shared/useCourses";
 import { useKeyPress } from "../../shared/useKeyPress";
+import { useLocalStorage } from "../../shared/useLocalStorage";
 import CourseBlock from "./blocks/CourseBlock";
 import CustomBlock from "./blocks/CustomBlock";
 import ExchangeBlock from "./blocks/ExchangeBlock";
@@ -39,6 +45,7 @@ import Drawer from "./Drawer";
 import FileInput from "./FileInput";
 import KeyboardShortcutsModal from "./KeyboardShortcutsModal";
 import PresetChooser from "./PresetChooser";
+import TutorialModal from "./TutorialModal";
 import YearButton from "./YearButton";
 import Years from "./Years";
 
@@ -56,7 +63,7 @@ export default function ExamBuilder() {
     removeYear,
     getSavedCourses,
     addToSavedCourses,
-    removeAllCoursesInYear
+    removeAllCoursesInYear,
   } = useCourses();
   const params = location.state;
   if (params) {
@@ -64,21 +71,36 @@ export default function ExamBuilder() {
     setCourses(preset.years);
   }
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
-  const [isConfirmRemoveYearModalOpen, setIsConfirmRemoveYearModalOpen] = useState(false);
-  const [isConfirmClearCoursesModalOpen, setIsConfirmClearCoursesModalOpen] = useState(false);
+  const [isConfirmRemoveYearModalOpen, setIsConfirmRemoveYearModalOpen] =
+    useState(false);
+  const [isConfirmClearCoursesModalOpen, setIsConfirmClearCoursesModalOpen] =
+    useState(false);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
     useRecoilState(leftDrawerState);
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
     useRecoilState(rightDrawerState);
   const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] =
     useRecoilState(courseModalOpenState);
+  const [isTutorialModalOpen, setIsTutorialModalOpen] = useRecoilState(
+    tutorialsModalOpenState
+  );
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
-  const [isKeyboardShortcutsModalOpen, setKeyboardShortcutsModalOpen] = useRecoilState(keyboardShortcutsModalOpenState);
+  const [isKeyboardShortcutsModalOpen, setKeyboardShortcutsModalOpen] =
+    useRecoilState(keyboardShortcutsModalOpenState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
   const rightDrawerRef = createRef<HTMLDivElement>();
   // useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
+
+  const [isTutorialShown, setIsTutorialShown] = useLocalStorage(
+    localStorageTutorialModalKey,
+    false
+  );
+
+  if (!isTutorialShown) {
+    setIsTutorialModalOpen(true);
+  }
 
   const onFileUpload = (preset: Preset) => {
     if (!presets.find((e) => e.name === preset.name)) {
@@ -96,15 +118,8 @@ export default function ExamBuilder() {
     }
   };
 
-  const onShortcutCoursesDrawer = () => {
-    setIsLeftDrawerOpen((prev) => !prev);
-  };
-  const onShortcutExportDrawer = () => {
-    setIsRightDrawerOpen((prev) => !prev);
-  };
-
-  useKeyPress(["a"], onShortcutCoursesDrawer);
-  useKeyPress(["c"], onShortcutExportDrawer);
+  useKeyPress(["a"], () => setIsLeftDrawerOpen(!isLeftDrawerOpen));
+  useKeyPress(["c"], () => setIsRightDrawerOpen(!isRightDrawerOpen));
   return (
     <div className="h-full bg-whiteBackground">
       <div className="h-full relative p-4 py-8">
@@ -149,8 +164,10 @@ export default function ExamBuilder() {
                   </button>
                 </div>
               </div>
-              <Years 
-                onClearCoursesClick={() => setIsConfirmClearCoursesModalOpen(true)}
+              <Years
+                onClearCoursesClick={() =>
+                  setIsConfirmClearCoursesModalOpen(true)
+                }
               />
             </div>
             <div className="basis-1/3 flex space-x-4">
@@ -294,9 +311,18 @@ export default function ExamBuilder() {
         />
       )}
       {isKeyboardShortcutsModalOpen && (
-        <KeyboardShortcutsModal 
+        <KeyboardShortcutsModal
           isOpen={isKeyboardShortcutsModalOpen}
           onCloseModal={() => setKeyboardShortcutsModalOpen(false)}
+        />
+      )}
+      {isTutorialModalOpen && (
+        <TutorialModal
+          isOpen={isTutorialModalOpen}
+          onCloseModal={() => {
+            setIsTutorialModalOpen(false);
+            setIsTutorialShown(true);
+          }}
         />
       )}
     </div>
