@@ -3,6 +3,7 @@ import { ChangeEvent, createRef, useState } from "react";
 import { AiFillDelete, AiOutlineCloseCircle } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   activeCustomCourseEditState,
@@ -233,12 +234,12 @@ export default function ExamBuilder() {
           {isRightDrawerOpen && (
             <Drawer side="right" refPointer={rightDrawerRef}>
               <div className="flex flex-col gap-6 p-4">
+                <Divider text="Ladda upp" />
                 <FileInput
                   onUpload={onFileUpload}
                   validFormat=".json"
                   validateFunction={validateJSON}
                 />
-
                 <PresetChooser
                   onChange={onPresetChosen}
                   presets={presets}
@@ -325,6 +326,18 @@ export default function ExamBuilder() {
           }}
         />
       )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

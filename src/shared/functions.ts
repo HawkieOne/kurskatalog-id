@@ -5,6 +5,7 @@ import html2canvas from "html2canvas";
 import { templateEmpty, templateID } from "./data";
 import { Course, Preset, Year } from "./interfaces";
 import { buildingBlockSchema, courseSchema, presetSchema } from "./schema";
+import { toast } from "react-toastify";
 
 export const createEmptyTemplate = () => {
   return templateEmpty;
@@ -27,18 +28,22 @@ export const saveToPDF = (idTargetElement: string) => {
       const imgProps = doc.getImageProperties(imgData);
       const width = doc.internal.pageSize.getWidth();
       const height = (imgProps.height * width) / imgProps.width;
+      const fileName = "kursplan.pdf";
       doc.addImage(imgData, "PNG", 0, doc.internal.pageSize.getHeight() * 0.25, width, height);
-      doc.save("kursplan.pdf");
+      doc.save(fileName);
+      toast.success(fileName + " is downloaded")
     });
   }
 };
 
 export const saveToImage = (idTargetElement: string) => {
+  const fileName = "kursplan.img"
   const pdfData = document.getElementById(idTargetElement);
   if (pdfData) {
     html2canvas(pdfData).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      FileSaver.saveAs(imgData, "kursplan.png");
+      FileSaver.saveAs(imgData, fileName);
+      toast.success(fileName + " is downloaded")
     });
   }
 };
@@ -52,6 +57,7 @@ export const exportTemplate = (name: string, courses: Year[]) => {
   element.download = name;
   document.body.appendChild(element);
   element.click();
+  toast.success("Template is downloaded")
 };
 
 export const prepareUploadedFile = (file: File) => {
