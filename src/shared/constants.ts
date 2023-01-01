@@ -1,5 +1,6 @@
 export const localStorageLayuotKey = "layout";
 export const localStorageSavedCoursesKey = "savedCourses";
+export const localStorageActiveYearKey = "activeYear";
 
 export const TextVariants = {
     small: "text-sm" as const,
@@ -34,3 +35,12 @@ export const Templates = {
     empty: "Tom mall",
     upload: "Ladda upp mall"
 }
+
+
+export const CardsColors = {
+    course: "bg-darkGrey",
+    custom: "bg-customCourse",
+    pause: "bg-pauseCourse",
+    exchange: "bg-exchangeCourse",
+    work: "bg-workCourse"
+};

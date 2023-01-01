@@ -10,8 +10,6 @@ interface BlockProps {
   title: string;
   subtitle?: string;
   background?: string;
-  hoverBackground?: string;
-  borderColor?: string;
   course?: Course;
   info?: boolean;
   onAddCourseClick: () => void;
@@ -21,8 +19,6 @@ export default function Block({
   title,
   subtitle,
   background,
-  hoverBackground,
-  borderColor,
   course,
   info,
   onAddCourseClick,
@@ -30,7 +26,7 @@ export default function Block({
   const [isHoverActive, setIsHoverActive] = useState(false);
   return (
     <div
-      className={`${background} text-onyx shadow-md flex flex-col w-full relative rounded-md`}
+      className={`${background} text-whiteBackground shadow-md flex flex-col w-full relative rounded-md`}
       onMouseEnter={() => setIsHoverActive(true)}
       onMouseLeave={() => setIsHoverActive(false)}
     >
@@ -41,13 +37,13 @@ export default function Block({
         <Text size={TextVariants.small}>{subtitle}</Text>
       </div>
       {isHoverActive && (
-        <div className={`absolute inset-y-0 right-0 h-full flex border-l ${borderColor}`}>
+        <div className={`absolute inset-y-0 right-0 h-full flex`}>
           {info && course && (
             <Link
               to={"/kurser/" + course.name}
               state={{ course: course }}
               className="flex flex-col justify-center
-                        items-center p-3 hover:bg-darkGrey hover:text-whiteBackground"
+                        items-center p-3 darkerBg"
             >
               <button>
                 <AiOutlineInfoCircle />
@@ -56,7 +52,7 @@ export default function Block({
           )}
           <div
             className={`flex flex-col justify-center cursor-pointer
-                        items-center p-3 ${hoverBackground} rounded-r-md ${course && "hover:bg-lightSeaGreen"}`}
+                        items-center p-3 darkerBg rounded-r-md`}
             onClick={onAddCourseClick}
           >
             <AiOutlinePlus />

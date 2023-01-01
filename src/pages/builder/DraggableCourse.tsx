@@ -5,6 +5,7 @@ import {
   AiFillSetting,
   AiFillSwitcher,
   AiOutlineArrowLeft,
+  AiOutlineRollback,
   AiOutlineSwitcher,
 } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +17,11 @@ import {
 import List from "../../components/List/List";
 import ListItem from "../../components/List/ListItem";
 import Text from "../../components/Text";
-import { FontVariants, TextVariants } from "../../shared/constants";
+import {
+  CardsColors,
+  FontVariants,
+  TextVariants,
+} from "../../shared/constants";
 import { BuildingBlock, Course } from "../../shared/interfaces";
 import useCourses from "../../shared/useCourses";
 
@@ -38,7 +43,6 @@ export default function DraggableCourse({
   );
 
   const backgroundColor = getColorByType(course.content?.group);
-  const darkerBackgroundColor = getDarkerBgColorByType(course.content?.group);
   return (
     <div className={`w-full h-full flipCard ${!flipped ? "flipped" : ""} `}>
       {/* Front */}
@@ -57,7 +61,7 @@ export default function DraggableCourse({
                   onClick={() => setFlipped(!flipped)}
                 >
                   <div className="relative p-1 z-10 darkerBg">
-                    <AiOutlineSwitcher size="1.5em" />
+                    <AiFillSetting size="1.5em" />
                   </div>
                 </div>
               </div>
@@ -70,24 +74,19 @@ export default function DraggableCourse({
       </div>
       {/* Back */}
       <div
-        className={`h-full w-full ${darkerBackgroundColor} flex flex-col items-start justify-start text-whiteBackground drop-shadow-lg cursor-grab space-y-4 back`}
+        className={`h-full w-full bg-boneGrey flex flex-col items-start justify-start text-darkGrey 
+                    drop-shadow-lg cursor-grab space-y-2 back`}
       >
-        <div
-          className={`w-full flex items-center ${
-            isBlockBig(course) ? "justify-between" : "justify-end"
-          } p-3`}
-        >
-          {isBlockBig(course) && (
-            <Text size={TextVariants.small} font={FontVariants.bold}>
-              {course.content.code}
-            </Text>
-          )}
+        <div className={`w-full flex items-center justify-between px-2 py-1`}>
+          <Text size={TextVariants.small} font={FontVariants.bold}>
+            {course.content.code ? course.content.code : course.content.name}
+          </Text>
           <div
             className={`cursor-pointer darkerBg`}
             onClick={() => setFlipped(!flipped)}
           >
             <div className="relative p-1 z-10">
-              <AiFillSwitcher size="1.5em" />
+              <AiOutlineRollback size="1.5em" />
             </div>
           </div>
         </div>
@@ -104,19 +103,10 @@ export default function DraggableCourse({
               }}
             />
           )}
-          <ListItem
-            icon={<AiOutlineArrowLeft />}
-            text={isBlockBig(course) ? "Till behållare" : ""}
-            title={"Till behållare"}
-            onClick={() => {
-              addToSavedCourses(course.content);
-              onRemove(course.i);
-            }}
-          />
           {isBlockCustom(course) && (
             <ListItem
               icon={<AiFillSetting />}
-              text={isBlockBig(course) ? "Inställningar" : ""}
+              text="Inställningar"
               title={"Inställningar"}
               onClick={() => {
                 setActiveCustomCourseEdit({
@@ -128,8 +118,17 @@ export default function DraggableCourse({
             />
           )}
           <ListItem
+            icon={<AiOutlineArrowLeft />}
+            text="Flytta tillbaka"
+            title={"Flytta till kurser"}
+            onClick={() => {
+              addToSavedCourses(course.content);
+              onRemove(course.i);
+            }}
+          />
+          <ListItem
             icon={<AiFillDelete />}
-            text={isBlockBig(course) ? "Ta bort" : ""}
+            text="Ta bort"
             title={"Ta bort"}
             onClick={() => onRemove(course.i)}
           />
@@ -142,7 +141,7 @@ export default function DraggableCourse({
   );
 }
 
-const isBlockBig = (course: BuildingBlock) => course.h > 1;
+const isBlockBig = (course: BuildingBlock) => course.h > 1 || course.w > 1;
 
 const isBlockCustom = (course: BuildingBlock) =>
   course.content.group === "custom";
@@ -150,33 +149,16 @@ const isBlockCustom = (course: BuildingBlock) =>
 const getColorByType = (group: Course["group"]) => {
   switch (group) {
     case "course":
-      return "bg-darkGrey";
+      return CardsColors.course;
     case "custom":
-      return "bg-fuchsia-300";
+      return CardsColors.custom;
     case "exchange":
-      return "bg-violet-300";
+      return CardsColors.exchange;
     case "working":
-      return "bg-stone-300";
+      return CardsColors.work;
     case "yearOff":
-      return "bg-indigo-300";
+      return CardsColors.pause;
     default:
-      return "bg-darkGrey";
-  }
-};
-
-const getDarkerBgColorByType = (group: Course["group"]) => {
-  switch (group) {
-    case "course":
-      return "bg-midnightGreenEagleGreen";
-    case "custom":
-      return "bg-fuchsia-400";
-    case "exchange":
-      return "bg-violet-400";
-    case "working":
-      return "bg-stone-400";
-    case "yearOff":
-      return "bg-indigo-400";
-    default:
-      return "bg-midnightGreenEagleGreen";
+      return CardsColors.course;
   }
 };

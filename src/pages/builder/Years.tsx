@@ -9,8 +9,8 @@ import useCourses from "../../shared/useCourses";
 import DraggableCourse from "./DraggableCourse";
 import { useLocalStorage } from "../../shared/useLocalStorage";
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import { coursesBuilderState } from "../../atoms/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { coursesBuilderState, resizeIsAllowed } from "../../atoms/atoms";
 import Text from "../../components/Text";
 import { Course } from "../../shared/interfaces";
 
@@ -24,8 +24,10 @@ export default function Years() {
     addCourse,
     draggingCourse,
     removeFromSavedCoursesByObject,
+    resetChanges,
   } = useCourses();
   const setCourses = useSetRecoilState(coursesBuilderState);
+  const [isResizeAllowed, setIsResizeAllowed] = useRecoilState(resizeIsAllowed);
   const [coursesLocalStorage, setCoursesLocaStorage] = useLocalStorage(
     localStorageLayuotKey
   );
@@ -35,7 +37,7 @@ export default function Years() {
   }, [coursesLocalStorage, setCourses]);
 
   return (
-    <div id="pdf" className="basis-1/2 w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 print:w-full">
+    <div className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5">
       <div className="w-full flex justify-around">
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>
@@ -45,6 +47,7 @@ export default function Years() {
       </div>
       <ResponsiveGridLayout
         className="layout"
+        style={{ minHeight: "100%" }} // Set as constant
         compactType={"vertical"}
         // breakpoints={lg: 1200}
         layouts={{
@@ -56,23 +59,35 @@ export default function Years() {
         cols={{ xs: 8, sm: 8, md: 8, lg: 8 }}
         maxRows={6}
         resizeHandles={["se"]}
-        rowHeight={130}
-        // width={800}
+        rowHeight={180}
         isBounded={true}
         onLayoutChange={(layout) => {
-          if (!draggingCourse) {
+          if (!draggingCourse && isResizeAllowed) {
             const newlayout = saveChanges(layout);
             setCoursesLocaStorage(newlayout);
+          } else {
+            // Not working atm
+            const newlayout = resetChanges();
+            setCoursesLocaStorage(newlayout);
+          }
+          setIsResizeAllowed(true);
+        }}
+        onResize={(layout, oldItem, newItem) => {
+          if (newItem.h > 1) {
+            setIsResizeAllowed(false);
+          } else {
+            setIsResizeAllowed(true);
           }
         }}
         useCSSTransforms={true} // Put this on to increase speed
         isDroppable={true}
+        onDropDragOver={() => ({ w: 2, h: 1 })}
         onDrop={(layout, layoutItem, _event) => {
           const block = {
             x: layoutItem.x,
             y: layoutItem.y,
-            w: layoutItem.w,
-            h: layoutItem.h,
+            w: 2,
+            h: 1,
             i: uuidv4(),
             content: {
               name: "",

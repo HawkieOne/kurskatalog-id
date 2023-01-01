@@ -1,17 +1,18 @@
 import { AnimatePresence } from "framer-motion";
 import { ChangeEvent, createRef, useState } from "react";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiFillDelete, AiOutlineCloseCircle } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useLocation } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { v4 as uuidv4 } from "uuid";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  activeCustomCourseEditState,
   courseModalOpenState,
   leftDrawerState,
   rightDrawerState,
 } from "../../atoms/atoms";
 import Button from "../../components/Button";
 import Collapse from "../../components/Collapse";
+import ConfirmationModal from "../../components/ConfirmationModal";
 import Divider from "../../components/Divider";
 import Search from "../../components/Search";
 import Text from "../../components/Text";
@@ -36,6 +37,7 @@ import CustomCourseModal from "./CustomCourseModal";
 import Drawer from "./Drawer";
 import FileInput from "./FileInput";
 import PresetChooser from "./PresetChooser";
+import YearButton from "./YearButton";
 import Years from "./Years";
 
 export default function ExamBuilder() {
@@ -49,6 +51,7 @@ export default function ExamBuilder() {
     activeYear,
     setActiveYear,
     addYear,
+    removeYear,
     getSavedCourses,
     addToSavedCourses,
   } = useCourses();
@@ -58,12 +61,14 @@ export default function ExamBuilder() {
     setCourses(preset.years);
   }
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
     useRecoilState(leftDrawerState);
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
     useRecoilState(rightDrawerState);
   const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] =
     useRecoilState(courseModalOpenState);
+  const courseInfo = useRecoilValue(activeCustomCourseEditState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
@@ -97,37 +102,52 @@ export default function ExamBuilder() {
   useKeyPress(["c"], onShortcutExportDrawer);
   return (
     <div className="h-full bg-whiteBackground">
-      <div className="h-full relative p-4">
+      <div className="h-full relative p-4 py-8">
         <div className="h-full flex flex-row justify-between">
-          <div className="w-full flex p-4 gap-3">
-            <div className="tabs flex-col items-center justify-center basis-20 text-onyx print:hidden">
-              {courses.map((_, index) =>
-                index === activeYear ? (
+          <div
+            id="pdf"
+            className="w-full flex flex-col justify-evenly space-y-8"
+          >
+            <div className="basis-2/3 flex space-x-4">
+              <div className="tabs flex-col items-center justify-center basis-20 text-onyx print:hidden">
+                {courses.map((_, index) =>
+                  index === activeYear() ? (
+                    <YearButton
+                      active
+                      number={index}
+                      key={index}
+                      onClick={() => setActiveYear(index)}
+                    />
+                  ) : (
+                    <YearButton
+                      number={index}
+                      key={index}
+                      onClick={() => setActiveYear(index)}
+                    />
+                  )
+                )}
+                <div className="flex justify-between">
                   <button
-                    className="tab tab-lg tab-active border-y border-darkGrey"
-                    key={uuidv4()}
+                    className="tab tab-lg btn btn-ghost"
+                    onClick={() => {
+                      addYear();
+                      setActiveYear(courses.length);
+                    }}
                   >
-                    År {index + 1}
+                    <IoIosAddCircleOutline size="1.25em" />
                   </button>
-                ) : (
                   <button
-                    className="tab tab-lg"
-                    onClick={() => setActiveYear(index)}
-                    key={index}
+                    className="tab tab-lg hover:text-red-500"
+                    onClick={() => setIsConfirmModalOpen(true)}
                   >
-                    År {index + 1}
+                    <AiFillDelete size="1.25em" />
                   </button>
-                )
-              )}
-              <button
-                className="tab tab-lg btn btn-ghost"
-                onClick={() => addYear()}
-              >
-                <IoIosAddCircleOutline />
-              </button>
-            </div>
-            <div className="w-full flex flex-col justify-evenly space-y-8 print:">
+                </div>
+              </div>
               <Years />
+            </div>
+            <div className="basis-1/3 flex space-x-4">
+              <div className="basis-20" />
               <CoursesContainer
                 onAddCoursesClick={() => setIsLeftDrawerOpen((prev) => !prev)}
                 courses={getSavedCourses()}
@@ -222,27 +242,42 @@ export default function ExamBuilder() {
           )}
         </AnimatePresence>
       </div>
-      <CustomCourseModal
-        isOpen={isCustomCourseModalOpen}
-        onCancel={() => setIsCustomCourseModalOpen(false)}
-        onSave={(course, id) => {
-          setIsCustomCourseModalOpen(false);
-          // Check when to save to courses and when to change existing
-          if (!doesCourseExist(courses, id)) {
-            addToSavedCourses(course);
-          } else if (id) {
-            editCourse(id, course);
-          }
-        }}
-      />
+      {isCustomCourseModalOpen && courseInfo && (
+        <CustomCourseModal
+          courseInfo={courseInfo}
+          isOpen={isCustomCourseModalOpen}
+          onCancel={() => setIsCustomCourseModalOpen(false)}
+          onSave={(course, id) => {
+            setIsCustomCourseModalOpen(false);
+            // Check when to save to courses and when to change existing
+            if (!doesCourseExist(courses, id)) {
+              addToSavedCourses(course);
+            } else if (id) {
+              editCourse(id, course);
+            }
+          }}
+        />
+      )}
+      {isConfirmModalOpen && (
+        <ConfirmationModal
+          text={"Är du säker på att du vill ta bort år " + courses.length + "?"}
+          isOpen={isConfirmModalOpen}
+          onCancel={() => setIsConfirmModalOpen(false)}
+          onConfirm={() => {
+            setActiveYear(courses.length - 2);
+            removeYear();
+            setIsConfirmModalOpen(false);
+          }}
+        />
+      )}
     </div>
   );
 }
 
 const doesCourseExist = (blocks: Year[], id: string | null) => {
-  for (var i = 0; i < blocks.length; i ++) {
+  for (var i = 0; i < blocks.length; i++) {
     const year = blocks[i];
-    if (year.courses.some(block => block.i === id)) {
+    if (year.courses.some((block) => block.i === id)) {
       return true;
     }
   }

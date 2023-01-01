@@ -4,6 +4,7 @@ import {
   courseModalOpenState,
   leftDrawerState
 } from "../../../atoms/atoms";
+import { CardsColors } from "../../../shared/constants";
 import { customCourse } from "../../../shared/data";
 import Block from "./Block";
 
@@ -18,9 +19,7 @@ export default function CustomBlock() {
     <Block
       title="Valfri kurs"
       subtitle="Anpassa kursen själv"
-      background="bg-fuchsia-300"
-      hoverBackground="hover:bg-fuchsia-500"
-      borderColor="border-fuchsia-500"
+      background={CardsColors.custom}
       onAddCourseClick={() => {
         setActiveCustomCourseEdit({ course: customCourse, id: null });
         setIsCustomCourseModalOpen(true);

@@ -5,22 +5,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        pink: "#F55065",
+        pink: "#F55065", 
         onyx: "#1F2937",
-        cream: "#FDF2E7",
-        creamDark: "#FBE5CF",
-        lightGreen: "#E4F9F5",
-        aquamarine: "#30E3CA",
-        midnightGreenEagleGreen: "#13505B",
-        deepBlue: "#11999E",
-        darkMossgreen: "#40514E",
+        midnightGreenEagleGreen: "#60785f",
 
         ashGrey: "#D0D1D0",
         webGrey: "#B2ADA7",
         whiteBackground: "#F2F2F3",
         lightSeaGreen: "#A1C59F",
+        darkSeaGreen: "#60785f",
         boneGrey: "#E6E7E8",
         darkGrey: "#667B86",
+
+        customCourse: "#078863",
+        pauseCourse: "#832161",
+        exchangeCourse: "#2991cb",
+        workCourse: "#388697",
       },
     },
   },

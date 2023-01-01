@@ -10,15 +10,15 @@ export default function Rating({ rating }: RatingProps) {
     const starsHalf = rating - starsFull;
     const emptyStars = Math.floor(maxRating - rating);
   return (
-    <div className="flex space-x-2 text-pink">
+    <div className="flex space-x-2 text-lightSeaGreen">
         {Array.from(Array(starsFull).keys()).map((_, index) => (
-            <BsStarFill size="1.25em" key={index}/>
+            <BsStarFill size="1.5em" key={index}/>
         ))}
         {starsHalf > 0 && (
-            <BsStarHalf size="1.25em" />
+            <BsStarHalf size="1.5em" />
         )}
         {Array.from(Array(emptyStars).keys()).map((_, index) => (
-            <BsStar size="1.25em" key={index}/>
+            <BsStar size="1.5em" key={index}/>
         ))}
     </div>
   )

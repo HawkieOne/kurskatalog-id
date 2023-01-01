@@ -1,10 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Text from "../../components/Text";
 import Title from "../../components/Title";
-import {
-  TextVariants,
-  TitleVariants
-} from "../../shared/constants";
+import { TextVariants, TitleVariants } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
 import ColorSquare from "./ColorSquare";
 
@@ -28,17 +25,20 @@ export default function CourseElement({ course }: CourseProps) {
         <Title size={TitleVariants.small}>{course.name}</Title>
         <Text>{course.code}</Text>
         <div className="w-2/4 flex space-x-4">
-          <Text size={TextVariants.small} color={"text-pink"}>
-            {course.location}
-          </Text>
-          <Text size={TextVariants.small}>/</Text>
+          {course.location && (
+            <Text
+              size={TextVariants.small}
+              color={"text-midnightGreenEagleGreen"}
+            >
+              {course.location}
+            </Text>
+          )}
           <Text size={TextVariants.small}>{course.level}</Text>
         </div>
       </div>
-      <div className="basis-1/5 flex justify-end space-x-4 text-white p-8">
-        {course.points && <ColorSquare value={course.points} color="purple" />}
-        {course.pace && <ColorSquare value={course.pace} color="green" />}
-        {course.rating && <ColorSquare value={course.rating} color="blue" />}
+      <div className="basis-1/5 flex justify-end space-x-4 text-w½hite p-8">
+        {course.points && <ColorSquare value={course.points} text="hp" />}
+        {course.pace && <ColorSquare value={course.pace} text="%" />}
       </div>
     </div>
   );
