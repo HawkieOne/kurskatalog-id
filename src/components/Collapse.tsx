@@ -12,7 +12,7 @@ export default function Collapse({ title, content, open }: CollapseProps) {
   return (
     <div className="flex flex-col items-center">
       <div
-        className="w-full cursor-pointer self-start text-onyx flex justify-between items-center bg-boneGrey p-3"
+        className="w-full cursor-pointer self-start text-onyx flex justify-between items-center bg-ashGrey p-3"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         {title}

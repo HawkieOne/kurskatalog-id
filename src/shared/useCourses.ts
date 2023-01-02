@@ -170,14 +170,12 @@ export default function useCourses() {
   };
 
   const addYear = () => {
-    if (courses.length < 9) {
-      let cpyCourses = courses.slice();
-      cpyCourses.push({
-        year: cpyCourses.length,
-        courses: [],
-      });
-      setCourses(cpyCourses);
-    }
+    let cpyCourses = courses.slice();
+    cpyCourses.push({
+      year: cpyCourses.length,
+      courses: [],
+    });
+    setCourses(cpyCourses);
   };
 
   const removeYear = () => {
