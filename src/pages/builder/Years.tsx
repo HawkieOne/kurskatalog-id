@@ -13,7 +13,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { activeCustomCourseEditState, courseModalOpenState, coursesBuilderState, resizeIsAllowed } from "../../atoms/atoms";
 import Text from "../../components/Text";
 import { Course } from "../../shared/interfaces";
-import { MdOutlineDeleteSweep } from "react-icons/md";
+import { IoMdTrash } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -56,7 +56,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
         onClick={onClearCoursesClick}
         title="Rensa kurser för detta år"
       >
-        <MdOutlineDeleteSweep size="2em" />
+        <IoMdTrash size="2em" />
       </div>
       <div className="w-full flex justify-around">
         {Array.from(Array(4).keys()).map((entry, index) => (

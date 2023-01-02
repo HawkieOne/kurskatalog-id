@@ -57,7 +57,7 @@ export default function DraggableCourse({
                   </div>
                 </div>
               </div>
-              <div className="p-3">
+              <div className="p-3 hover:underline hover:cursor-pointer" onClick={onInfoClick}>
                 <p>{course.content.name}</p>
               </div>
             </div>

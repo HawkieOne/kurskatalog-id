@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineCloseSquare } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import ReactModal from "react-modal";
 import Text from "../../components/Text";
 import Title from "../../components/Title";
@@ -32,20 +32,22 @@ export default function KeyboardShortcutsModal({
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <div className="text-onyx p-8 space-y-8">
-        <Title>Keyboard shortcuts</Title>
-        <div className="grid grid-cols-2 gap-6 mt-2">
-          <Text>Open course drawer</Text>
-          <Text font={FontVariants.bold}>Alt + C</Text>
-          <Text>Open course drawer</Text>
-          <Text font={FontVariants.bold}>Alt + A</Text>
+      <div className="text-onyx px-4 pb-4">
+        <div className="">
+          <Title>Tangentbordsgenvägar</Title>
+          <div className="grid grid-cols-2 gap-6 mt-2">
+            <Text>Öppna sidomeny för kurser</Text>
+            <Text font={FontVariants.bold}>Alt + C</Text>
+            <Text>Öppna sidomeny för mer alternativ</Text>
+            <Text font={FontVariants.bold}>Alt + A</Text>
+          </div>
         </div>
-      </div>
-      <div
-        className="btn btn-ghost absolute right-2 top-2"
-        onClick={onCloseModal}
-      >
-        <AiOutlineCloseSquare size="2em" />
+        <div
+          className="btn btn-ghost absolute right-2 top-2"
+          onClick={onCloseModal}
+        >
+          <AiOutlineCloseCircle size="2em" />
+        </div>
       </div>
     </ReactModal>
   );
