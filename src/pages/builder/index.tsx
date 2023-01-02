@@ -151,8 +151,10 @@ export default function ExamBuilder() {
                   <button
                     className="tab tab-lg btn btn-ghost"
                     onClick={() => {
-                      addYear();
-                      setActiveYear(courses.length);
+                      if (courses.length < 9) {
+                        addYear();
+                        setActiveYear(courses.length);
+                      }
                     }}
                   >
                     <IoIosAddCircleOutline size="1.25em" />
