@@ -6,6 +6,8 @@ import { courses, sortOptions } from "../../shared/data";
 import { Course } from "../../shared/interfaces";
 import CourseElement from "./CourseElement";
 import { motion } from "framer-motion"
+import Text from "../../components/Text";
+import { FontVariants } from "../../shared/constants";
 
 export default function Courses() {
   const originalCourses = courses;
@@ -22,27 +24,31 @@ export default function Courses() {
           setSearchedCourses={setSearchedCourses}
         />
         <div className="w-full flex justify-between">
-          <Filter
-            onAdvancedLevelChange={(checked) => {
-              if (checked) {
-                setSearchedCourses(
-                  searchedCourses.filter((e) => e.level === "Avancerad nivå")
-                );
-              } else {
-                setSearchedCourses(originalCourses);
-              }
-            }}
-            onDistanceChange={(checked) => {
-              if (checked) {
-                setSearchedCourses(
-                  searchedCourses.filter((e) => e.location === "Ortsoberoende")
-                );
-              } else {
-                setSearchedCourses(originalCourses);
-              }
-            }}
-          />
+          <div className="">
+            <Text font={FontVariants.bold}>Filtrera:</Text>
+            <Filter
+              onAdvancedLevelChange={(checked) => {
+                if (checked) {
+                  setSearchedCourses(
+                    searchedCourses.filter((e) => e.level === "Avancerad nivå")
+                  );
+                } else {
+                  setSearchedCourses(originalCourses);
+                }
+              }}
+              onDistanceChange={(checked) => {
+                if (checked) {
+                  setSearchedCourses(
+                    searchedCourses.filter((e) => e.location === "Ortsoberoende")
+                  );
+                } else {
+                  setSearchedCourses(originalCourses);
+                }
+              }}
+            />
+          </div>
           <div className="w-1/4">
+            <Text font={FontVariants.bold}>Sortera:</Text>
             <Dropdown
               options={[
                 sortOptions.nameRising,

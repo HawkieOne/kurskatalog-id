@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AiOutlineCloseSquare } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import Modal from "react-modal";
 import { useRecoilValue } from "recoil";
 import { activeCustomCourseEditState } from "../../atoms/atoms";
@@ -52,7 +52,7 @@ export default function CustomCourseModal({
       style={customStyles}
       appElement={document.getElementById("root") || undefined}
     >
-      <div className="flex p-4 px-1 justify-between items-center">
+      <div className="flex pb-4 px-1 justify-between items-center">
         <Text size={TextVariants.large} font={FontVariants.bold}>
           Valfri kurs
         </Text>
@@ -60,7 +60,7 @@ export default function CustomCourseModal({
           className="p-2 cursor-pointer hover:bg-slate-100 rounded-md"
           onClick={onCancel}
         >
-          <AiOutlineCloseSquare size="1.5em" />
+        <AiOutlineCloseCircle size="1.5em" />
         </div>
       </div>
       <div className="form-control w-full">

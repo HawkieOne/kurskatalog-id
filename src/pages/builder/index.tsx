@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { ChangeEvent, createRef, useState } from "react";
-import { AiFillDelete, AiOutlineCloseCircle } from "react-icons/ai";
-import { IoIosAddCircleOutline } from "react-icons/io";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { IoIosAddCircleOutline, IoMdTrash } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -119,8 +119,8 @@ export default function ExamBuilder() {
     }
   };
 
-  useKeyPress(["a"], () => setIsLeftDrawerOpen(!isLeftDrawerOpen));
-  useKeyPress(["c"], () => setIsRightDrawerOpen(!isRightDrawerOpen));
+  useKeyPress(["c"], () => setIsLeftDrawerOpen(!isLeftDrawerOpen));
+  useKeyPress(["a"], () => setIsRightDrawerOpen(!isRightDrawerOpen));
   return (
     <div className="h-full bg-whiteBackground">
       <div className="h-full relative p-4 py-8">
@@ -163,7 +163,7 @@ export default function ExamBuilder() {
                     className="tab tab-lg hover:text-red-500"
                     onClick={() => setIsConfirmRemoveYearModalOpen(true)}
                   >
-                    <AiFillDelete size="1.25em" />
+                    <IoMdTrash size="1.25em" />
                   </button>
                 </div>
               </div>
@@ -187,7 +187,7 @@ export default function ExamBuilder() {
             <Drawer side="left" refPointer={leftDrawerRef}>
               <div className="flex p-4 px-3 justify-between items-center">
                 <Text size={TextVariants.large} font={FontVariants.bold}>
-                  Kurser
+                  Lägg till kurser
                 </Text>
                 <div
                   className="p-2 cursor-pointer hover:bg-ashGrey rounded-md"
@@ -198,7 +198,7 @@ export default function ExamBuilder() {
               </div>
               <>
                 <Collapse
-                  title="Kursblock"
+                  title="Kurser"
                   open={false}
                   content={
                     <div className="w-full flex flex-col items-center space-y-4 p-3">
@@ -217,7 +217,7 @@ export default function ExamBuilder() {
                   }
                 />
                 <Collapse
-                  title="Övriga block"
+                  title="Övrigt"
                   open={false}
                   content={
                     <div className="flex flex-col items-center space-y-4 p-3">
@@ -236,6 +236,19 @@ export default function ExamBuilder() {
           {isRightDrawerOpen && (
             <Drawer side="right" refPointer={rightDrawerRef}>
               <div className="flex flex-col gap-6 p-4">
+                <div className="flex justify-between items-center">
+                  <Text size={TextVariants.large} font={FontVariants.bold}>Alternativ</Text>
+                  <div
+                    className="btn btn-ghost"
+                    onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
+                  >
+                    <AiOutlineCloseCircle size="1.5em" />
+                  </div>
+                </div>
+                <Button
+                  text="Spara mall"
+                  onClick={() => exportTemplate("template", courses)}
+                />
                 <Divider text="Ladda upp" />
                 <FileInput
                   onUpload={onFileUpload}
@@ -250,12 +263,6 @@ export default function ExamBuilder() {
                       setCourses(activePreset.years);
                     }
                   }}
-                />
-
-                <Divider text="Spara" />
-                <Button
-                  text="Spara mall"
-                  onClick={() => exportTemplate("template", courses)}
                 />
                 <Divider text="Exportera" />
                 <Text size={TextVariants.small}>
