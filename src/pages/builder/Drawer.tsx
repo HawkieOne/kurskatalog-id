@@ -8,6 +8,7 @@ interface DrawerProps {
 }
 
 export default function Drawer({ side, refPointer, children }: DrawerProps) {
+  
   return (
     <motion.div
       key={"drawer" + side}
