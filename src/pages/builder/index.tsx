@@ -219,6 +219,12 @@ export default function ExamBuilder() {
                 <Collapse
                   title="Övrigt"
                   open={false}
+                  onOpen={() => {
+                    if (leftDrawerRef.current) {
+                      leftDrawerRef.current.scrollTop =
+                        leftDrawerRef.current.scrollHeight;
+                    }
+                  }}
                   content={
                     <div className="flex flex-col items-center space-y-4 p-3">
                       <CustomBlock />
@@ -237,7 +243,9 @@ export default function ExamBuilder() {
             <Drawer side="right" refPointer={rightDrawerRef}>
               <div className="flex flex-col gap-6 p-4">
                 <div className="flex justify-between items-center">
-                  <Text size={TextVariants.large} font={FontVariants.bold}>Alternativ</Text>
+                  <Text size={TextVariants.large} font={FontVariants.bold}>
+                    Alternativ
+                  </Text>
                   <div
                     className="btn btn-ghost"
                     onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
