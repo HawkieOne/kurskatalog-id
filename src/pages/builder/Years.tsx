@@ -10,7 +10,12 @@ import DraggableCourse from "./DraggableCourse";
 import { useLocalStorage } from "../../shared/useLocalStorage";
 import { useEffect } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { activeCustomCourseEditState, courseModalOpenState, coursesBuilderState, resizeIsAllowed } from "../../atoms/atoms";
+import {
+  activeCustomCourseEditState,
+  courseModalOpenState,
+  coursesBuilderState,
+  resizeIsAllowed,
+} from "../../atoms/atoms";
 import Text from "../../components/Text";
 import { Course } from "../../shared/interfaces";
 import { IoMdTrash } from "react-icons/io";
@@ -31,7 +36,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
     draggingCourse,
     removeFromSavedCoursesByObject,
     resetChanges,
-    addToSavedCourses
+    addToSavedCourses,
   } = useCourses();
   const setCourses = useSetRecoilState(coursesBuilderState);
   const [isResizeAllowed, setIsResizeAllowed] = useRecoilState(resizeIsAllowed);
@@ -59,11 +64,21 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
         <IoMdTrash size="2em" />
       </div>
       <div className="w-full flex justify-around text-onyx">
+        <div className="absolute top-1/2 -left-5 -rotate-90 z-50">
+          <Text size={TextVariants.small} font={FontVariants.bold}>
+            Start av HT
+          </Text>
+        </div>
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>
             Läsperiod {index + 1}
           </Text>
         ))}
+        <div className="absolute top-1/2 -right-5 rotate-90 z-50">
+          <Text size={TextVariants.small} font={FontVariants.bold}>
+            Slut av VT
+          </Text>
+        </div>
       </div>
       <ResponsiveGridLayout
         className="layout"
