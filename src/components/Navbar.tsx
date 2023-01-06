@@ -1,3 +1,5 @@
+import { BiExport } from "react-icons/bi";
+import { GoGraph } from "react-icons/go";
 import { FiSettings } from "react-icons/fi";
 import { BsFillKeyboardFill, BsInfoLg } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
@@ -5,6 +7,8 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   keyboardShortcutsModalOpenState,
   rightDrawerState,
+  settingsDrawerState,
+  statisticsDrawerState,
   tutorialsModalOpenState,
 } from "../atoms/atoms";
 import Title from "./Title";
@@ -12,12 +16,14 @@ import Title from "./Title";
 export default function Navbar() {
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
     useRecoilState(rightDrawerState);
+  const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] =
+    useRecoilState(settingsDrawerState);
+  const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] =
+    useRecoilState(statisticsDrawerState);
   const setKeyboardShortcutsModalOpen = useSetRecoilState(
     keyboardShortcutsModalOpenState
   );
-  const setIsTutorialModalOpen = useSetRecoilState(
-    tutorialsModalOpenState
-  );
+  const setIsTutorialModalOpen = useSetRecoilState(tutorialsModalOpenState);
   const location = useLocation();
   const pathString = location.pathname.replace("/", "").trim();
 
@@ -56,7 +62,31 @@ export default function Navbar() {
           </div>
           <div
             className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
-            onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
+            onClick={() => {
+              setIsStatisticDrawerOpen(!isStatisticDrawerOpen);
+              setIsRightDrawerOpen(false);
+              setIsSettingsDrawerOpen(false);
+            }}
+          >
+            <GoGraph size="1.5em" />
+          </div>
+          <div
+            className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
+            onClick={() => {
+              setIsRightDrawerOpen(!isRightDrawerOpen);
+              setIsSettingsDrawerOpen(false);
+              setIsStatisticDrawerOpen(false);
+            }}
+          >
+            <BiExport size="1.5em" />
+          </div>
+          <div
+            className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
+            onClick={() => {
+              setIsSettingsDrawerOpen(!isSettingsDrawerOpen);
+              setIsRightDrawerOpen(false);
+              setIsStatisticDrawerOpen(false);
+            }}
           >
             <FiSettings size="1.5em" />
           </div>

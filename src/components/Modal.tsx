@@ -1,4 +1,4 @@
-import { AiOutlineCloseSquare } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import Modal from "react-modal";
 import FileInput from "../pages/builder/FileInput";
 import { validateJSON } from "../shared/functions";
@@ -45,7 +45,7 @@ export default function ModalWindow({
         className="btn btn-ghost absolute right-2 top-2 cursor-pointer hover:bg-slate-100 "
         onClick={onCancel}
       >
-        <AiOutlineCloseSquare size="1.5em" />
+        <AiOutlineCloseCircle size="1.5em" />
       </div>
       <div className="h-full flex flex-col items-start p-4 space-y-8 relative">
         <Title>Ladda upp mall</Title>

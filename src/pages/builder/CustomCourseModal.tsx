@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Modal from "react-modal";
-import { useRecoilValue } from "recoil";
-import { activeCustomCourseEditState } from "../../atoms/atoms";
 import Button from "../../components/Button";
 import OutlineButton from "../../components/OutlineButton";
 import Text from "../../components/Text";
@@ -70,7 +68,7 @@ export default function CustomCourseModal({
         <input
           type="text"
           placeholder="Namn"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full bg-whiteBackground"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -82,7 +80,7 @@ export default function CustomCourseModal({
         <input
           type="text"
           placeholder="Kurskod"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full bg-whiteBackground"
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
@@ -96,7 +94,7 @@ export default function CustomCourseModal({
         <input
           type="number"
           placeholder="Högskolepoäng"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full bg-whiteBackground"
           value={points}
           onChange={(e) => setPoints(parseInt(e.target.value))}
         />
@@ -108,7 +106,7 @@ export default function CustomCourseModal({
         <input
           type="number"
           placeholder="Tempo"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full bg-whiteBackground"
           value={pace}
           onChange={(e) => setPace(parseInt(e.target.value))}
         />
@@ -121,7 +119,7 @@ export default function CustomCourseModal({
           <input
             type="date"
             placeholder="Start date"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs bg-whiteBackground"
             min="2018-01-01"
             max="2018-12-31"
             value={startDate}
@@ -135,7 +133,7 @@ export default function CustomCourseModal({
           <input
             type="date"
             placeholder="End date"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs bg-whiteBackground"
             min="2018-01-01"
             max="2018-12-31"
             value={endDate}
