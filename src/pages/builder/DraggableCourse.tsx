@@ -4,6 +4,7 @@ import {
   AiFillRead,
   AiFillSetting,
   AiOutlineArrowLeft,
+  AiOutlineInfoCircle,
   AiOutlineRollback,
 } from "react-icons/ai";
 import List from "../../components/List/List";
@@ -32,11 +33,9 @@ export default function DraggableCourse({
   onRemoveClick,
 }: DraggableCourseProps) {
   const [flipped, setFlipped] = useState(false);
-
-
   const backgroundColor = getColorByType(course.content?.group);
   return (
-    <div className={`w-full h-full flipCard ${!flipped ? "flipped" : ""} `}>
+    <div className={`w-full h-full flipCard ${!flipped ? "flipped" : ""}`}>
       {/* Front */}
       <div
         className={`h-full w-full ${backgroundColor} flex items-start justify-start text-whiteBackground drop-shadow-lg cursor-grab front`}
@@ -44,21 +43,37 @@ export default function DraggableCourse({
         <div className={`h-full w-full`}>
           {course.content && (
             <div className="h-full w-full flex flex-col text-ellipsis">
-              <div className="flex justify-between p-3">
+              <div className="flex justify-between p-3 items-center">
                 <Text size={TextVariants.small} font={FontVariants.bold}>
                   {course.content.code}
                 </Text>
-                <div
-                  className={`rounded-full cursor-pointer`}
-                  onClick={() => setFlipped(!flipped)}
-                >
-                  <div className="relative p-1 z-10 darkerBg">
-                    <AiFillSetting size="1.5em" />
+                <div className="flex items-center">
+                  {course.content.group === "course" && (
+                    <div
+                      className={`rounded-full cursor-pointer flex`}
+                      onClick={onInfoClick}
+                    >
+                      <div className="relative p-1 z-10 darkerBg">
+                        <AiOutlineInfoCircle size="1.5em" />
+                      </div>
+                    </div>
+                  )}
+                  <div
+                    className={`rounded-full cursor-pointer flex`}
+                    onClick={() => setFlipped(!flipped)}
+                  >
+                    <div className="relative p-1 z-10 darkerBg">
+                      <AiFillSetting size="1.5em" />
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="p-3 hover:underline hover:cursor-pointer" onClick={onInfoClick}>
-                <p>{course.content.name}</p>
+              <div className="h-full p-3 flex flex-col text-clip">
+                <Text font={FontVariants.bold}>{course.content.name}</Text>
+                <div className={`flex w-full ${isBlockWide(course) && "w-1/2"} justify-around mt-auto`}>
+                  {course.content.pace && <p>{course.content.pace}%</p>}
+                  {course.content.points && <p>{course.content.points}hp</p>}
+                </div>
               </div>
             </div>
           )}
@@ -121,6 +136,7 @@ export default function DraggableCourse({
 }
 
 const isBlockBig = (course: BuildingBlock) => course.h > 1 || course.w > 1;
+const isBlockWide = (course: BuildingBlock) => course.w > 2;
 
 const isBlockCustom = (course: BuildingBlock) =>
   course.content.group === "custom";

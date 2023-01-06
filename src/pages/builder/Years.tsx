@@ -1,25 +1,24 @@
+import { useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
+import { IoMdTrash } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
+import {
+  activeCustomCourseEditState,
+  courseModalOpenState,
+  coursesBuilderState,
+} from "../../atoms/atoms";
+import Text from "../../components/Text";
 import {
   FontVariants,
   localStorageLayuotKey,
   TextVariants,
 } from "../../shared/constants";
-import useCourses from "../../shared/useCourses";
-import DraggableCourse from "./DraggableCourse";
-import { useLocalStorage } from "../../shared/useLocalStorage";
-import { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  activeCustomCourseEditState,
-  courseModalOpenState,
-  coursesBuilderState,
-  resizeIsAllowed,
-} from "../../atoms/atoms";
-import Text from "../../components/Text";
 import { Course } from "../../shared/interfaces";
-import { IoMdTrash } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import useCourses from "../../shared/useCourses";
+import { useLocalStorage } from "../../shared/useLocalStorage";
+import DraggableCourse from "./DraggableCourse";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -35,11 +34,9 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
     addCourse,
     draggingCourse,
     removeFromSavedCoursesByObject,
-    resetChanges,
     addToSavedCourses,
   } = useCourses();
   const setCourses = useSetRecoilState(coursesBuilderState);
-  const [isResizeAllowed, setIsResizeAllowed] = useRecoilState(resizeIsAllowed);
   const [coursesLocalStorage, setCoursesLocaStorage] = useLocalStorage(
     localStorageLayuotKey
   );
@@ -97,21 +94,9 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
         rowHeight={180}
         isBounded={true}
         onLayoutChange={(layout) => {
-          if (!draggingCourse && isResizeAllowed) {
+          if (!draggingCourse) {
             const newlayout = saveChanges(layout);
             setCoursesLocaStorage(newlayout);
-          } else {
-            // Not working atm
-            const newlayout = resetChanges();
-            setCoursesLocaStorage(newlayout);
-          }
-          setIsResizeAllowed(true);
-        }}
-        onResize={(layout, oldItem, newItem) => {
-          if (newItem.h > 1) {
-            setIsResizeAllowed(false);
-          } else {
-            setIsResizeAllowed(true);
           }
         }}
         useCSSTransforms={true} // Put this on to increase speed
