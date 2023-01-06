@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { coursesBuilderState, hasStartedEditingState } from "../../atoms/atoms";
 import AppBar from "../../components/AppBar";
+import ConfirmationModal from "../../components/ConfirmationModal";
 import Footer from "../../components/Footer";
 import ModalWindow from "../../components/Modal";
 import RectangleIconButton from "../../components/RectangleIconButton";
@@ -21,6 +22,8 @@ import { useLocalStorage } from "../../shared/useLocalStorage";
 export default function Home() {
   const [uploadedPreset, setUploadedPreset] = useState<Preset>();
   const [isUploadModalOpen, setIsUploadMdalOpen] = useState(false);
+  const [isConfirmNewEmptyTemplateModalOpen, setIsConfirmNewEmptyTemplateModalOpen] = useState(false);
+  const [isConfirmNewIDTemplateModalOpen, setIsConfirmNewIDTemplateModalOpen] = useState(false);
   const setCourses = useSetRecoilState(coursesBuilderState);
   const { setActiveYear } = useCourses();
   const [, setHasStartedEditing] = useRecoilState(hasStartedEditingState);
@@ -64,11 +67,15 @@ export default function Home() {
             icon={<AiOutlineAppstoreAdd size={"2.5em"} />}
             text="Skapa tom mall"
             onClick={() => {
-              setHasStartedEditing(true);
-              setCourses(createEmptyTemplate());
-              setCoursesLocalStorage(createEmptyTemplate());
-              setActiveYear(0);
-              navigate("/byggare");
+              if (coursesLocalStorage) {
+                setIsConfirmNewEmptyTemplateModalOpen(true);
+              } else {
+                setHasStartedEditing(true);
+                setCourses(createEmptyTemplate());
+                setCoursesLocalStorage(createEmptyTemplate());
+                setActiveYear(0);
+                navigate("/byggare");
+              }
             }}
           />
           <div className="h-full flex flex-col justify-around">
@@ -83,10 +90,15 @@ export default function Home() {
               icon={<AiOutlineAppstoreAdd size={"2.5em"} />}
               text="Ladda Interaktion & Design mall"
               onClick={() => {
-                setCourses(createIDTemplate());
-                setCoursesLocalStorage(createIDTemplate());
-                setActiveYear(0);
-                navigate("/byggare");
+                if (coursesLocalStorage) {
+                  setIsConfirmNewIDTemplateModalOpen(true);
+                } else {
+                  setHasStartedEditing(true);
+                  setCourses(createIDTemplate());
+                  setCoursesLocalStorage(createIDTemplate());
+                  setActiveYear(0);
+                  navigate("/byggare");
+                }
               }}
             />
             <RectangleIconButton
@@ -113,12 +125,40 @@ export default function Home() {
         onCancel={() => setIsUploadMdalOpen(false)}
         onFileUpload={onFileUpload}
         onSuccess={() => {
+          setHasStartedEditing(true);
           setActiveYear(0);
           navigate("/byggare", {
             state: uploadedPreset,
           });
         }}
         value={uploadedPreset}
+      />
+      <ConfirmationModal
+        isOpen={isConfirmNewEmptyTemplateModalOpen}
+        onCancel={() => setIsConfirmNewEmptyTemplateModalOpen(false)}
+        text="Är du säker på att du vill skapa en ny tom mall?"
+        subtext="All data kopplad till den nuvarande mallen kommer försvinna"
+        onConfirm={() => {
+          setIsConfirmNewEmptyTemplateModalOpen(false);
+          setHasStartedEditing(true);
+          setCourses(createEmptyTemplate());
+          setCoursesLocalStorage(createEmptyTemplate());
+          setActiveYear(0);
+          navigate("/byggare");
+        }}
+      />
+      <ConfirmationModal
+        isOpen={isConfirmNewIDTemplateModalOpen}
+        onCancel={() => setIsConfirmNewIDTemplateModalOpen(false)}
+        text="Är du säker på att du vill skapa en ny ID mall?"
+        subtext="All data kopplad till den nuvarande mallen kommer försvinna"
+        onConfirm={() => {
+          setHasStartedEditing(true);
+          setCourses(createIDTemplate());
+          setCoursesLocalStorage(createIDTemplate());
+          setActiveYear(0);
+          navigate("/byggare");
+        }}
       />
     </main>
   );
