@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import { FontVariants, TextVariants } from "../shared/constants";
+import { TextVariants } from "../shared/constants";
 import Button from "./Button";
 import OutlineButton from "./OutlineButton";
 import Text from "./Text";

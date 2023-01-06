@@ -1,4 +1,3 @@
-import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { BsPlusSquare } from "react-icons/bs";
 import Text from "../../components/Text";
 import {
