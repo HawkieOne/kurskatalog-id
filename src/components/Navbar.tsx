@@ -36,7 +36,7 @@ export default function Navbar() {
         Kurskatalog
       </Link>
       {location.pathname !== "/" && !location.pathname.includes("/kurser/") && (
-        <div className="w-3/4 flex justify-center items-center">
+        <div className="w-3/4 flex justify-center items-center text-onyx">
           <Title>{capitalizedPathname}</Title>
         </div>
       )}

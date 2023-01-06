@@ -160,7 +160,7 @@ export default function ExamBuilder() {
                     <IoIosAddCircleOutline size="1.25em" />
                   </button>
                   <button
-                    className="tab tab-lg hover:text-red-500"
+                    className="tab tab-lg text-onyx hover:text-red-500"
                     onClick={() => setIsConfirmRemoveYearModalOpen(true)}
                   >
                     <IoMdTrash size="1.25em" />
@@ -185,7 +185,7 @@ export default function ExamBuilder() {
         <AnimatePresence>
           {isLeftDrawerOpen && (
             <Drawer side="left" refPointer={leftDrawerRef}>
-              <div className="flex p-4 px-3 justify-between items-center">
+              <div className="flex p-4 px-3 justify-between items-center text-onyx">
                 <Text size={TextVariants.large} font={FontVariants.bold}>
                   Lägg till kurser
                 </Text>
@@ -241,7 +241,7 @@ export default function ExamBuilder() {
         <AnimatePresence>
           {isRightDrawerOpen && (
             <Drawer side="right" refPointer={rightDrawerRef}>
-              <div className="flex flex-col gap-6 p-4">
+              <div className="flex flex-col gap-6 p-4 text-onyx">
                 <div className="flex justify-between items-center">
                   <Text size={TextVariants.large} font={FontVariants.bold}>
                     Alternativ

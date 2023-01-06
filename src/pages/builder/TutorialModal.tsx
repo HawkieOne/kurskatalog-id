@@ -33,7 +33,7 @@ export default function TutorialModal({
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <div className="flex flex-col p-4 px-1 justify-center items-center space-y-4">
+      <div className="flex flex-col p-4 px-1 justify-center items-center space-y-4 text-onyx">
         <Text size={TextVariants.large} font={FontVariants.bold}>
           Information
         </Text>

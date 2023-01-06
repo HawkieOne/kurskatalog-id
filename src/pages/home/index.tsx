@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <main className="h-full flex flex-col justify-between bg-whiteBackground">
       <div className="h-full flex flex-col justify-evenly items-center">
-        <div className="w-3/5 flex flex-col items-center space-y-4 px-4">
+        <div className="w-3/5 flex flex-col items-center space-y-4 px-4 dark text-onyx">
           <Title>Kurskatalog</Title>
           <Text size={TextVariants.medium}>
             Vi på Interaktion & Design har ett stort urval av kurser att välja
