@@ -31,7 +31,7 @@ export default function Navbar() {
   const pathName = pathNameSplited[pathNameSplited.length - 1];
   const capitalizedPathname =
     pathString === "byggare"
-      ? "Egen kursplan"
+      ? "Egen plan"
       : decodeURI(pathName.charAt(0).toUpperCase() + pathName.slice(1));
   return (
     <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center z-50 print:hidden">

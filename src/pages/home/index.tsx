@@ -65,7 +65,7 @@ export default function Home() {
           )}
           <SquareIconButton
             icon={<AiOutlineAppstoreAdd size={"2.5em"} />}
-            text="Skapa tom mall"
+            text="Skapa tom plan"
             onClick={() => {
               if (coursesLocalStorage) {
                 setIsConfirmNewEmptyTemplateModalOpen(true);
@@ -81,14 +81,14 @@ export default function Home() {
           <div className="h-full flex flex-col justify-around">
             <RectangleIconButton
               icon={<AiOutlineCloudUpload size={"2.5em"} />}
-              text="Ladda upp mall"
+              text="Ladda upp plan"
               onClick={() => {
                 setIsUploadMdalOpen(true);
               }}
             />
             <RectangleIconButton
               icon={<AiOutlineAppstoreAdd size={"2.5em"} />}
-              text="Ladda Interaktion & Design mall"
+              text="Ladda Interaktion & Design plan"
               onClick={() => {
                 if (coursesLocalStorage) {
                   setIsConfirmNewIDTemplateModalOpen(true);
@@ -136,7 +136,7 @@ export default function Home() {
       <ConfirmationModal
         isOpen={isConfirmNewEmptyTemplateModalOpen}
         onCancel={() => setIsConfirmNewEmptyTemplateModalOpen(false)}
-        text="Är du säker på att du vill skapa en ny tom mall?"
+        text="Är du säker på att du vill skapa en ny tom plan?"
         subtext="All data kopplad till den nuvarande mallen kommer försvinna"
         onConfirm={() => {
           setIsConfirmNewEmptyTemplateModalOpen(false);
@@ -150,7 +150,7 @@ export default function Home() {
       <ConfirmationModal
         isOpen={isConfirmNewIDTemplateModalOpen}
         onCancel={() => setIsConfirmNewIDTemplateModalOpen(false)}
-        text="Är du säker på att du vill skapa en ny ID mall?"
+        text="Är du säker på att du vill skapa en ny ID plan?"
         subtext="All data kopplad till den nuvarande mallen kommer försvinna"
         onConfirm={() => {
           setHasStartedEditing(true);

@@ -50,7 +50,7 @@ export default function ModalWindow({
         <AiOutlineCloseCircle size="1.5em" />
       </div>
       <div className="h-full flex flex-col items-start p-4 space-y-8 relative">
-        <Title>Ladda upp mall</Title>
+        <Title>Ladda upp plan</Title>
         <Text size={TextVariants.small}>Detta kommer ersätta den nuvarnade mallen</Text>
         <FileInput
           onUpload={onFileUpload}
@@ -65,7 +65,7 @@ export default function ModalWindow({
             Cancel
           </button>
           <Button
-            text="Välj mall"
+            text="Välj plan"
             onClick={onSuccess}
             disabled={!value || (value && !value.name.endsWith(".json"))}
           />
