@@ -287,6 +287,19 @@ export const courses: Course[] = [
     group: "course",
   },
   {
+    name: "Forsk",
+    description:
+      "Kursen behandlar metoder för att lagra och bearbeta data samt tekniker för att utveckla databasdrivna, webbaserade system. Kursen baserar sig på ASP.NET MVC, ENTITY FRAMEWORK,  C-Sharp, Visual Studio och SQL SERVER. Under kursens senare del bedrivs ett verklighetsnära projekt.",
+    prerequisite:
+      "För tillträde till kursen krävs en kurs i Grundläggande programmering, 7.5 hp samt någon av kurserna Webbutveckling, 7.5hp (5EL107) eller Datakommunikation I, 7.5 hp (5EL144) eller motsvarande.",
+    points: 7.5,
+    link: "https://www.umu.se/utbildning/kurser/databasteknik-och-webbaserade-system/",
+    level: "Grundnivå",
+    code: "5TF048",
+    rating: 0,
+    group: "course",
+  },
+  {
     name: "Grundläggande signalbehandling av media",
     points: 7.5,
     pace: 50,
@@ -463,7 +476,7 @@ export const templateID = [
       createLayoutBlock(2, 0, 2, 1, getCourse("5TF048")),
       createLayoutBlock(4, 0, 2, 1, getCourse("5EL266")),
       createLayoutBlock(4, 1, 2, 1, getCourse("5EL265")),
-      createLayoutBlock(3, 2, 3, 1, getCourse("5TF073")),
+      createLayoutBlock(4, 2, 4, 1, getCourse("5TF073")),
       createLayoutBlock(6, 0, 2, 1, getCourse("5TF042")),
     ],
   },
