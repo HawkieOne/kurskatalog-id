@@ -1,11 +1,11 @@
-import React, { Ref } from "react";
+import { createRef } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  pointForExamState,
-  showYearState,
-  startYearState,
-  statisticsDrawerState,
+    pointForExamState,
+    showYearState,
+    startYearState,
+    statisticsDrawerState
 } from "../../../atoms/atoms";
 import Divider from "../../../components/Divider";
 import Text from "../../../components/Text";
@@ -14,13 +14,7 @@ import { countCourses, countPoints } from "../../../shared/functions";
 import useCourses from "../../../shared/useCourses";
 import Drawer from "../Drawer";
 
-interface StatisticsDrawerProps {
-  refPointer: Ref<HTMLDivElement>;
-}
-
-export default function StatisticsDrawer({
-  refPointer,
-}: StatisticsDrawerProps) {
+export default function StatisticsDrawer() {
   const { courses } = useCourses();
   const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
     statisticsDrawerState
@@ -28,9 +22,9 @@ export default function StatisticsDrawer({
   const pointsForExamSetting = useRecoilValue(pointForExamState);
   const startYearSetting = useRecoilValue(startYearState);
   const showYearSetting = useRecoilValue(showYearState);
-
+  const statisticsDrawerRef = createRef<HTMLDivElement>();
   return (
-    <Drawer side="right" refPointer={refPointer}>
+    <Drawer side="right" refPointer={statisticsDrawerRef}>
       <div className="flex flex-col gap-6 p-4 text-onyx">
         <div className="flex justify-between items-center">
           <Text size={TextVariants.large} font={FontVariants.bold}>

@@ -1,27 +1,24 @@
-import React, { Ref } from "react";
-import Divider from "../../../components/Divider";
-import Text from "../../../components/Text";
-import Toggle from "react-toggle";
-import { FontVariants, TextVariants } from "../../../shared/constants";
-import Drawer from "../Drawer";
+import { createRef } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import Toggle from "react-toggle";
 import { useRecoilState } from "recoil";
 import {
-  pointForExamState,
-  settingsDrawerState,
-  shortcutCoursesState,
-  shortcutExportState,
-  shortcutSettingsState,
-  shortcutStatisticsState,
-  showYearState,
-  startYearState,
+    pointForExamState,
+    settingsDrawerState,
+    shortcutCoursesState,
+    shortcutExportState,
+    shortcutSettingsState,
+    shortcutStatisticsState,
+    showYearState,
+    startYearState
 } from "../../../atoms/atoms";
+import Divider from "../../../components/Divider";
+import Text from "../../../components/Text";
+import { FontVariants, TextVariants } from "../../../shared/constants";
+import Drawer from "../Drawer";
 
-interface SettingsDrawerProps {
-  refPointer: Ref<HTMLDivElement>;
-}
 
-export default function SettingsDrawer({ refPointer }: SettingsDrawerProps) {
+export default function SettingsDrawer() {
   const [pointsForExamSetting, setPointsForExamSetting] =
     useRecoilState(pointForExamState);
   const [startYearSetting, setStartYearSetting] =
@@ -40,9 +37,10 @@ export default function SettingsDrawer({ refPointer }: SettingsDrawerProps) {
   const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] = useRecoilState(
     settingsDrawerState
   );
+  const setttingsDrawerRef = createRef<HTMLDivElement>();
 
   return (
-    <Drawer side="right" refPointer={refPointer}>
+    <Drawer side="right" refPointer={setttingsDrawerRef}>
       <div className="flex flex-col gap-6 p-4 text-onyx max-w-xs">
         <div className="flex justify-between items-center">
           <Text size={TextVariants.large} font={FontVariants.bold}>

@@ -1,6 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { createRef, useState } from "react";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { useState } from "react";
 import { IoIosAddCircleOutline, IoMdTrash } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -8,7 +7,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import {
   activeCustomCourseEditState,
   courseModalOpenState,
-  leftDrawerState, rightDrawerState,
+  coursesDrawerState,
+  exportDrawerState,
   settingsDrawerState,
   shortcutCoursesState,
   shortcutExportState,
@@ -16,35 +16,18 @@ import {
   shortcutStatisticsState,
   showYearState,
   startYearState,
-  statisticsDrawerState,
-  tutorialsModalOpenState
+  statisticsDrawerState
 } from "../../atoms/atoms";
-import Collapse from "../../components/Collapse";
 import ConfirmationModal from "../../components/ConfirmationModal";
-import Search from "../../components/Search";
-import Text from "../../components/Text";
-import {
-  FontVariants,
-  localStorageTutorialModalKey,
-  TextVariants
-} from "../../shared/constants";
-import { courses as allCourses } from "../../shared/data";
-import { Course, Preset, Year } from "../../shared/interfaces";
+import { Preset, Year } from "../../shared/interfaces";
 import useCourses from "../../shared/useCourses";
 import { useKeyPress } from "../../shared/useKeyPress";
-import { useLocalStorage } from "../../shared/useLocalStorage";
-import CourseBlock from "./blocks/CourseBlock";
-import CustomBlock from "./blocks/CustomBlock";
-import ExchangeBlock from "./blocks/ExchangeBlock";
-import WorkingBlock from "./blocks/WorkingBlock";
-import YearOffBlock from "./blocks/YearOffBlock";
 import CoursesContainer from "./CoursesContainer";
 import CustomCourseModal from "./CustomCourseModal";
-import Drawer from "./Drawer";
+import CoursesDrawer from "./drawers/CoursesDrawer";
 import ExportDrawer from "./drawers/ExportDrawer";
 import SettingsDrawer from "./drawers/SettingsDrawer";
 import StatisticsDrawer from "./drawers/StatisticsDrawer";
-import TutorialModal from "./TutorialModal";
 import YearButton from "./YearButton";
 import Years from "./Years";
 
@@ -68,15 +51,14 @@ export default function ExamBuilder() {
     const preset = params as Preset;
     setCourses(preset.years);
   }
-  const [searchedCourses, setSearchedCourses] = useState<Course[]>(allCourses);
   const [isConfirmRemoveYearModalOpen, setIsConfirmRemoveYearModalOpen] =
     useState(false);
   const [isConfirmClearCoursesModalOpen, setIsConfirmClearCoursesModalOpen] =
     useState(false);
-  const [isLeftDrawerOpen, setIsLeftDrawerOpen] =
-    useRecoilState(leftDrawerState);
-  const [isRightDrawerOpen, setIsRightDrawerOpen] =
-    useRecoilState(rightDrawerState);
+  const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] =
+    useRecoilState(coursesDrawerState);
+  const [isExportDrawerOpen, setIsExportDrawerOpen] =
+    useRecoilState(exportDrawerState);
   const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] =
     useRecoilState(settingsDrawerState);
   const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
@@ -84,9 +66,6 @@ export default function ExamBuilder() {
   );
   const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] =
     useRecoilState(courseModalOpenState);
-  const [isTutorialModalOpen, setIsTutorialModalOpen] = useRecoilState(
-    tutorialsModalOpenState
-  );
   const startYearSetting = useRecoilValue(startYearState);
   const showYearSetting = useRecoilValue(showYearState);
   const shortcutCourses = useRecoilValue(shortcutCoursesState);
@@ -95,34 +74,22 @@ export default function ExamBuilder() {
   const shortcutExport = useRecoilValue(shortcutExportState);
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
 
-  const leftDrawerRef = createRef<HTMLDivElement>();
-  const rightDrawerRef = createRef<HTMLDivElement>();
-  const settingsDrawerRef = createRef<HTMLDivElement>();
-  const statisticsDrawerRef = createRef<HTMLDivElement>();
-
-  const [isTutorialShown, setIsTutorialShown] = useLocalStorage(
-    localStorageTutorialModalKey,
-    false
+  useKeyPress([shortcutCourses], () =>
+    setIsCoursesDrawerOpen(!isCoursesDrawerOpen)
   );
-
-  if (!isTutorialShown) {
-    setIsTutorialModalOpen(true);
-  }
-
-  useKeyPress([shortcutCourses], () => setIsLeftDrawerOpen(!isLeftDrawerOpen));
   useKeyPress([shortcutExport], () => {
-    setIsRightDrawerOpen(!isRightDrawerOpen);
+    setIsExportDrawerOpen(!isExportDrawerOpen);
     setIsSettingsDrawerOpen(false);
     setIsStatisticDrawerOpen(false);
   });
   useKeyPress([shortcutSettings], () => {
     setIsSettingsDrawerOpen(!isSettingsDrawerOpen);
-    setIsRightDrawerOpen(false);
+    setIsExportDrawerOpen(false);
     setIsStatisticDrawerOpen(false);
   });
   useKeyPress([shortcutStatistics], () => {
     setIsStatisticDrawerOpen(!isStatisticDrawerOpen);
-    setIsRightDrawerOpen(false);
+    setIsExportDrawerOpen(false);
     setIsSettingsDrawerOpen(false);
   });
   return (
@@ -184,81 +151,28 @@ export default function ExamBuilder() {
             <div className="basis-1/3 flex space-x-4">
               <div className="basis-20" />
               <CoursesContainer
-                onAddCoursesClick={() => setIsLeftDrawerOpen((prev) => !prev)}
+                onAddCoursesClick={() =>
+                  setIsCoursesDrawerOpen((prev) => !prev)
+                }
                 courses={getSavedCourses()}
               />
             </div>
           </div>
         </div>
         <AnimatePresence>
-          {isLeftDrawerOpen && (
-            <Drawer side="left" refPointer={leftDrawerRef}>
-              <div className="flex p-4 px-3 justify-between items-center text-onyx">
-                <Text size={TextVariants.large} font={FontVariants.bold}>
-                  Lägg till kurser
-                </Text>
-                <div
-                  className="p-2 cursor-pointer hover:bg-ashGrey rounded-md"
-                  onClick={() => setIsLeftDrawerOpen(!isLeftDrawerOpen)}
-                >
-                  <AiOutlineCloseCircle size="1.5em" />
-                </div>
-              </div>
-              <>
-                <Collapse
-                  title="Kurser"
-                  open={false}
-                  content={
-                    <div className="w-full flex flex-col items-center space-y-4 p-3">
-                      <Search
-                        allCourses={allCourses}
-                        setSearchedCourses={setSearchedCourses}
-                      />
-
-                      {searchedCourses.map((course, index) => (
-                        <CourseBlock key={index} course={course} />
-                      ))}
-                      {searchedCourses.length === 0 && (
-                        <p className="text-center">Inga kurser hittade</p>
-                      )}
-                    </div>
-                  }
-                />
-                <Collapse
-                  title="Övrigt"
-                  open={false}
-                  onOpen={() => {
-                    if (leftDrawerRef.current) {
-                      leftDrawerRef.current.scrollTop =
-                        leftDrawerRef.current.scrollHeight;
-                    }
-                  }}
-                  content={
-                    <div className="flex flex-col items-center space-y-4 p-3">
-                      <CustomBlock />
-                      <YearOffBlock />
-                      <WorkingBlock />
-                      <ExchangeBlock />
-                    </div>
-                  }
-                />
-              </>
-            </Drawer>
-          )}
+          {isCoursesDrawerOpen && <CoursesDrawer/>}
         </AnimatePresence>
         <AnimatePresence>
-          {isRightDrawerOpen && <ExportDrawer refPointer={rightDrawerRef} />}
+          {isExportDrawerOpen && <ExportDrawer/>}
         </AnimatePresence>
         <AnimatePresence>
           {isSettingsDrawerOpen && (
-            <SettingsDrawer refPointer={settingsDrawerRef} />
+            <SettingsDrawer/>
           )}
         </AnimatePresence>
         <AnimatePresence>
           {isStatisticDrawerOpen && (
-            <StatisticsDrawer 
-              refPointer={statisticsDrawerRef}
-            />
+            <StatisticsDrawer/>
           )}
         </AnimatePresence>
       </div>
@@ -306,15 +220,6 @@ export default function ExamBuilder() {
           onConfirm={() => {
             removeAllCoursesInYear();
             setIsConfirmClearCoursesModalOpen(false);
-          }}
-        />
-      )}
-      {isTutorialModalOpen && (
-        <TutorialModal
-          isOpen={isTutorialModalOpen}
-          onCloseModal={() => {
-            setIsTutorialModalOpen(false);
-            setIsTutorialShown(true);
           }}
         />
       )}

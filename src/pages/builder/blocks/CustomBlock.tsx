@@ -2,7 +2,7 @@ import { useSetRecoilState } from "recoil";
 import {
   activeCustomCourseEditState,
   courseModalOpenState,
-  leftDrawerState
+  coursesDrawerState
 } from "../../../atoms/atoms";
 import { CardsColors } from "../../../shared/constants";
 import { customCourse } from "../../../shared/data";
@@ -10,7 +10,7 @@ import Block from "./Block";
 
 export default function CustomBlock() {
   const setIsCustomCourseModalOpen = useSetRecoilState(courseModalOpenState);
-  const setLeftDrawerOpen = useSetRecoilState(leftDrawerState);
+  const setLeftDrawerOpen = useSetRecoilState(coursesDrawerState);
   const setActiveCustomCourseEdit = useSetRecoilState(
     activeCustomCourseEditState
   );

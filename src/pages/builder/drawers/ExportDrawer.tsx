@@ -1,16 +1,16 @@
-import React, { ChangeEvent, Ref, useState } from "react";
+import { ChangeEvent, createRef, useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useRecoilState } from "recoil";
-import { rightDrawerState } from "../../../atoms/atoms";
+import { exportDrawerState } from "../../../atoms/atoms";
 import Button from "../../../components/Button";
 import Divider from "../../../components/Divider";
 import Text from "../../../components/Text";
 import { FontVariants, TextVariants } from "../../../shared/constants";
 import {
-  exportTemplate,
-  saveToImage,
-  saveToPDF,
-  validateJSON,
+    exportTemplate,
+    saveToImage,
+    saveToPDF,
+    validateJSON
 } from "../../../shared/functions";
 import { Preset } from "../../../shared/interfaces";
 import useCourses from "../../../shared/useCourses";
@@ -18,16 +18,13 @@ import Drawer from "../Drawer";
 import FileInput from "../FileInput";
 import PresetChooser from "../PresetChooser";
 
-interface ExportDrawerProps {
-  refPointer: Ref<HTMLDivElement>;
-}
-
-export default function ExportDrawer({ refPointer }: ExportDrawerProps) {
+export default function ExportDrawer() {
   const { courses, setCourses } = useCourses();
-  const [isRightDrawerOpen, setIsRightDrawerOpen] =
-    useRecoilState(rightDrawerState);
+  const [isExportDrawerOpen, setIsExportDrawerOpen] =
+    useRecoilState(exportDrawerState);
   const [presets, setPresets] = useState<Preset[]>([]);
   const [activePreset, setActivePreset] = useState<Preset | null>(null);
+  const exportDrawerRef = createRef<HTMLDivElement>();
 
   const onFileUpload = (preset: Preset) => {
     if (!presets.find((e) => e.name === preset.name)) {
@@ -46,7 +43,7 @@ export default function ExportDrawer({ refPointer }: ExportDrawerProps) {
   };
 
   return (
-    <Drawer side="right" refPointer={refPointer}>
+    <Drawer side="right" refPointer={exportDrawerRef}>
       <div className="flex flex-col gap-6 p-4 text-onyx">
         <div className="flex justify-between items-center">
           <Text size={TextVariants.large} font={FontVariants.bold}>
@@ -54,7 +51,7 @@ export default function ExportDrawer({ refPointer }: ExportDrawerProps) {
           </Text>
           <div
             className="btn btn-ghost"
-            onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
+            onClick={() => setIsExportDrawerOpen(!isExportDrawerOpen)}
           >
             <AiOutlineCloseCircle size="1.5em" />
           </div>

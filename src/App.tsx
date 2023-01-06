@@ -1,14 +1,9 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import "react-toggle/style.css";
 import { RecoilRoot } from "recoil";
-import Navbar from "./components/Navbar";
-import CoursePage from "./pages/course";
-import Courses from "./pages/courses";
-import ExamBuilder from "./pages/builder";
-import Home from "./pages/home";
-import MandatoryCourses from "./pages/mandatory";
-import 'react-toastify/dist/ReactToastify.css';
-import "react-toggle/style.css"
+import Main from "./Main";
 
 function App() {
   return (
@@ -20,20 +15,7 @@ function App() {
           <link rel="icon" type="image/png" href="icon.ico" sizes="32x32" />
         </Helmet>
         <RecoilRoot>
-          <div className="h-full flex flex-col">
-            <Navbar />
-            <div className="grow">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/kurser" element={<Courses />}>
-                  {/* <Route path=":id" element={<Course />} /> */}
-                </Route>
-                <Route path="/byggare" element={<ExamBuilder />} />
-                <Route path="/kursplan" element={<MandatoryCourses />} />
-                <Route path="/kurser/:name" element={<CoursePage />} />
-              </Routes>
-            </div>
-          </div>
+          <Main />
         </RecoilRoot>
       </BrowserRouter>
     </HelmetProvider>
