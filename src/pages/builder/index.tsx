@@ -14,6 +14,10 @@ import {
   pointForExamState,
   rightDrawerState,
   settingsDrawerState,
+  shortcutCoursesState,
+  shortcutExportState,
+  shortcutSettingsState,
+  shortcutStatisticsState,
   showYearState,
   startYearState,
   statisticsDrawerState,
@@ -103,6 +107,16 @@ export default function ExamBuilder() {
   const [startYearSetting, setStartYearSetting] =
     useRecoilState(startYearState);
   const [showYearSetting, setShowYearSetting] = useRecoilState(showYearState);
+  const [shortcutCourses, setShortcutCourses] =
+    useRecoilState(shortcutCoursesState);
+  const [shortcutSettings, setShortcutSettings] = useRecoilState(
+    shortcutSettingsState
+  );
+  const [shortcutStatistics, setShortcutStatistics] = useRecoilState(
+    shortcutStatisticsState
+  );
+  const [shortcutExport, setShortcutExport] =
+    useRecoilState(shortcutExportState);
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
   const [isKeyboardShortcutsModalOpen, setKeyboardShortcutsModalOpen] =
     useRecoilState(keyboardShortcutsModalOpenState);
@@ -136,18 +150,18 @@ export default function ExamBuilder() {
     }
   };
 
-  useKeyPress(["c"], () => setIsLeftDrawerOpen(!isLeftDrawerOpen));
-  useKeyPress(["a"], () => {
+  useKeyPress([shortcutCourses], () => setIsLeftDrawerOpen(!isLeftDrawerOpen));
+  useKeyPress([shortcutExport], () => {
     setIsRightDrawerOpen(!isRightDrawerOpen);
     setIsSettingsDrawerOpen(false);
     setIsStatisticDrawerOpen(false);
   });
-  useKeyPress(["p"], () => {
+  useKeyPress([shortcutSettings], () => {
     setIsSettingsDrawerOpen(!isSettingsDrawerOpen);
     setIsRightDrawerOpen(false);
     setIsStatisticDrawerOpen(false);
   });
-  useKeyPress(["g"], () => {
+  useKeyPress([shortcutStatistics], () => {
     setIsStatisticDrawerOpen(!isStatisticDrawerOpen);
     setIsRightDrawerOpen(false);
     setIsSettingsDrawerOpen(false);
@@ -326,7 +340,7 @@ export default function ExamBuilder() {
         <AnimatePresence>
           {isSettingsDrawerOpen && (
             <Drawer side="right" refPointer={settingsDrawerRef}>
-              <div className="flex flex-col gap-6 p-4 text-onyx">
+              <div className="flex flex-col gap-6 p-4 text-onyx max-w-xs">
                 <div className="flex justify-between items-center">
                   <Text size={TextVariants.large} font={FontVariants.bold}>
                     Inställningar
@@ -393,6 +407,66 @@ export default function ExamBuilder() {
                     }}
                   />
                 </div>
+                <Divider text="Tangenbord" />
+                <Text size={TextVariants.small}>
+                  Ställ in tangentbordsgenvägar
+                </Text>
+                <div className="flex justify-between items-center text-onyx">
+                  <Text size={TextVariants.large}>Kurser</Text>
+                  <div className="flex space-x-6">
+                    <kbd className="kbd bg-whiteBackground">alt</kbd>
+                    <Text size={TextVariants.large}>+</Text>
+                    <input
+                      type="text"
+                      className="kbd bg-white text-onyx w-12"
+                      value={shortcutCourses}
+                      maxLength={1}
+                      onChange={(e) => setShortcutCourses(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-between items-center text-onyx">
+                  <Text size={TextVariants.large}>Exportera</Text>
+                  <div className="flex space-x-6">
+                    <kbd className="kbd bg-whiteBackground">alt</kbd>
+                    <Text size={TextVariants.large}>+</Text>
+                    <input
+                      type="text"
+                      className="kbd bg-white text-onyx w-12"
+                      value={shortcutExport}
+                      maxLength={1}
+                      onChange={(e) => setShortcutExport(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-between items-center text-onyx">
+                  <Text size={TextVariants.large}>Inställningar</Text>
+                  <div className="flex space-x-6">
+                    <kbd className="kbd bg-whiteBackground">alt</kbd>
+                    <Text size={TextVariants.large}>+</Text>
+                    <input
+                      type="text"
+                      className="kbd bg-white text-onyx w-12"
+                      value={shortcutSettings}
+                      maxLength={1}
+                      onChange={(e) => setShortcutSettings(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-between items-center text-onyx">
+                  <Text size={TextVariants.large}>Statistik</Text>
+                  <div className="flex space-x-6">
+                    <kbd className="kbd bg-whiteBackground">alt</kbd>
+                    <Text size={TextVariants.large}>+</Text>
+                    <input
+                      type="text"
+                      className="kbd bg-white text-onyx w-12"
+                      value={shortcutStatistics}
+                      maxLength={1}
+                      onChange={(e) => setShortcutStatistics(e.target.value)}
+                    />
+                  </div>
+                </div>
               </div>
             </Drawer>
           )}
@@ -427,7 +501,9 @@ export default function ExamBuilder() {
                 <Divider text="Kurser" />
                 <div className="stats shadow bg-white text-onyx">
                   <div className="stat">
-                    <div className="stat-title">Antal tillagda kurser totalt</div>
+                    <div className="stat-title">
+                      Antal tillagda kurser totalt
+                    </div>
                     <div className="stat-value">{countCourses(courses)}</div>
                   </div>
                 </div>
@@ -436,11 +512,11 @@ export default function ExamBuilder() {
                     <div className="stat">
                       <div className="stat-title">
                         Antal tillagda kurser år{" "}
-                        {showYearSetting
-                          ? startYearSetting + index
-                          : index + 1}
+                        {showYearSetting ? startYearSetting + index : index + 1}
                       </div>
-                      <div className="stat-value">{courses[index].courses.length}</div>
+                      <div className="stat-value">
+                        {courses[index].courses.length}
+                      </div>
                     </div>
                   </div>
                 ))}

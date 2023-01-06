@@ -82,6 +82,23 @@ export const showYearState = atom({
   default: false,
 });
 
+export const shortcutCoursesState = atom({
+  key: "shortcutCoursesState",
+  default: "c",
+});
+export const shortcutSettingsState = atom({
+  key: "shortcutSettingsState",
+  default: "p",
+});
+export const shortcutExportState = atom({
+  key: "shortcutExportState",
+  default: "a",
+});
+export const shortcutStatisticsState = atom({
+  key: "shortcutStatisticsState",
+  default: "g",
+});
+
 
 export const tutorialsModalOpenState = atom({
   key: "tutorialsModalOpenState",
