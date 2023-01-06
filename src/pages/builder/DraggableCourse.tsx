@@ -68,7 +68,7 @@ export default function DraggableCourse({
                   </div>
                 </div>
               </div>
-              <div className="h-full p-3 flex flex-col text-clip">
+              <div className="h-full p-3 flex flex-col overflow-wrap">
                 <Text font={FontVariants.bold}>{course.content.name}</Text>
                 <div className={`flex w-full ${isBlockWide(course) && "w-1/2"} justify-around mt-auto`}>
                   {course.content.pace && <p>{course.content.pace}%</p>}
