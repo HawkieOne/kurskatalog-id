@@ -1,18 +1,14 @@
 import { AnimatePresence } from "framer-motion";
-import { ChangeEvent, createRef, useState } from "react";
+import { createRef, useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IoIosAddCircleOutline, IoMdTrash } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Toggle from "react-toggle";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   activeCustomCourseEditState,
   courseModalOpenState,
-  keyboardShortcutsModalOpenState,
-  leftDrawerState,
-  pointForExamState,
-  rightDrawerState,
+  leftDrawerState, rightDrawerState,
   settingsDrawerState,
   shortcutCoursesState,
   shortcutExportState,
@@ -21,28 +17,18 @@ import {
   showYearState,
   startYearState,
   statisticsDrawerState,
-  tutorialsModalOpenState,
+  tutorialsModalOpenState
 } from "../../atoms/atoms";
-import Button from "../../components/Button";
 import Collapse from "../../components/Collapse";
 import ConfirmationModal from "../../components/ConfirmationModal";
-import Divider from "../../components/Divider";
 import Search from "../../components/Search";
 import Text from "../../components/Text";
 import {
   FontVariants,
   localStorageTutorialModalKey,
-  TextVariants,
+  TextVariants
 } from "../../shared/constants";
 import { courses as allCourses } from "../../shared/data";
-import {
-  countCourses,
-  countPoints,
-  exportTemplate,
-  saveToImage,
-  saveToPDF,
-  validateJSON,
-} from "../../shared/functions";
 import { Course, Preset, Year } from "../../shared/interfaces";
 import useCourses from "../../shared/useCourses";
 import { useKeyPress } from "../../shared/useKeyPress";
@@ -55,17 +41,16 @@ import YearOffBlock from "./blocks/YearOffBlock";
 import CoursesContainer from "./CoursesContainer";
 import CustomCourseModal from "./CustomCourseModal";
 import Drawer from "./Drawer";
-import FileInput from "./FileInput";
-import KeyboardShortcutsModal from "./KeyboardShortcutsModal";
-import PresetChooser from "./PresetChooser";
+import ExportDrawer from "./drawers/ExportDrawer";
+import SettingsDrawer from "./drawers/SettingsDrawer";
+import StatisticsDrawer from "./drawers/StatisticsDrawer";
 import TutorialModal from "./TutorialModal";
 import YearButton from "./YearButton";
 import Years from "./Years";
 
 export default function ExamBuilder() {
   const location = useLocation();
-  const [presets, setPresets] = useState<Preset[]>([]);
-  const [activePreset, setActivePreset] = useState<Preset | null>(null);
+
   const {
     courses,
     setCourses,
@@ -102,28 +87,18 @@ export default function ExamBuilder() {
   const [isTutorialModalOpen, setIsTutorialModalOpen] = useRecoilState(
     tutorialsModalOpenState
   );
-  const [pointsForExamSetting, setPointsForExamSetting] =
-    useRecoilState(pointForExamState);
-  const [startYearSetting, setStartYearSetting] =
-    useRecoilState(startYearState);
-  const [showYearSetting, setShowYearSetting] = useRecoilState(showYearState);
-  const [shortcutCourses, setShortcutCourses] =
-    useRecoilState(shortcutCoursesState);
-  const [shortcutSettings, setShortcutSettings] = useRecoilState(
-    shortcutSettingsState
-  );
-  const [shortcutStatistics, setShortcutStatistics] = useRecoilState(
-    shortcutStatisticsState
-  );
-  const [shortcutExport, setShortcutExport] =
-    useRecoilState(shortcutExportState);
+  const startYearSetting = useRecoilValue(startYearState);
+  const showYearSetting = useRecoilValue(showYearState);
+  const shortcutCourses = useRecoilValue(shortcutCoursesState);
+  const shortcutSettings = useRecoilValue(shortcutSettingsState);
+  const shortcutStatistics = useRecoilValue(shortcutStatisticsState);
+  const shortcutExport = useRecoilValue(shortcutExportState);
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
-  const [isKeyboardShortcutsModalOpen, setKeyboardShortcutsModalOpen] =
-    useRecoilState(keyboardShortcutsModalOpenState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
   const rightDrawerRef = createRef<HTMLDivElement>();
   const settingsDrawerRef = createRef<HTMLDivElement>();
+  const statisticsDrawerRef = createRef<HTMLDivElement>();
 
   const [isTutorialShown, setIsTutorialShown] = useLocalStorage(
     localStorageTutorialModalKey,
@@ -133,22 +108,6 @@ export default function ExamBuilder() {
   if (!isTutorialShown) {
     setIsTutorialModalOpen(true);
   }
-
-  const onFileUpload = (preset: Preset) => {
-    if (!presets.find((e) => e.name === preset.name)) {
-      setActivePreset(preset);
-      const newPresets = presets.slice();
-      newPresets.push(preset);
-      setPresets(newPresets);
-    }
-  };
-
-  const onPresetChosen = (e: ChangeEvent<HTMLSelectElement>) => {
-    const preset = presets.find((preset) => preset.name === e.target.value);
-    if (preset) {
-      setActivePreset(preset);
-    }
-  };
 
   useKeyPress([shortcutCourses], () => setIsLeftDrawerOpen(!isLeftDrawerOpen));
   useKeyPress([shortcutExport], () => {
@@ -288,240 +247,18 @@ export default function ExamBuilder() {
           )}
         </AnimatePresence>
         <AnimatePresence>
-          {isRightDrawerOpen && (
-            <Drawer side="right" refPointer={rightDrawerRef}>
-              <div className="flex flex-col gap-6 p-4 text-onyx">
-                <div className="flex justify-between items-center">
-                  <Text size={TextVariants.large} font={FontVariants.bold}>
-                    Exportera och importera
-                  </Text>
-                  <div
-                    className="btn btn-ghost"
-                    onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
-                  >
-                    <AiOutlineCloseCircle size="1.5em" />
-                  </div>
-                </div>
-                <Button
-                  text="Spara plan"
-                  onClick={() => exportTemplate("template", courses)}
-                />
-                <Divider text="Ladda upp" />
-                <FileInput
-                  onUpload={onFileUpload}
-                  validFormat=".json"
-                  validateFunction={validateJSON}
-                />
-                <PresetChooser
-                  onChange={onPresetChosen}
-                  presets={presets}
-                  onUsePreset={() => {
-                    if (activePreset) {
-                      setCourses(activePreset.years);
-                    }
-                  }}
-                />
-                <Divider text="Exportera" />
-                <Text size={TextVariants.small}>
-                  Endast innehåll på det aktiva året exporteras
-                </Text>
-                <div className="btn-group btn-group-vertical">
-                  <Button
-                    text="Spara bild"
-                    onClick={() => saveToImage("pdf")}
-                  />
-                  <Button text="Spara PDF" onClick={() => saveToPDF("pdf")} />
-                  <Button text="Skriv ut" onClick={window.print} />
-                </div>
-              </div>
-            </Drawer>
-          )}
+          {isRightDrawerOpen && <ExportDrawer refPointer={rightDrawerRef} />}
         </AnimatePresence>
         <AnimatePresence>
           {isSettingsDrawerOpen && (
-            <Drawer side="right" refPointer={settingsDrawerRef}>
-              <div className="flex flex-col gap-6 p-4 text-onyx max-w-xs">
-                <div className="flex justify-between items-center">
-                  <Text size={TextVariants.large} font={FontVariants.bold}>
-                    Inställningar
-                  </Text>
-                  <div
-                    className="btn btn-ghost"
-                    onClick={() =>
-                      setIsSettingsDrawerOpen(!isSettingsDrawerOpen)
-                    }
-                  >
-                    <AiOutlineCloseCircle size="1.5em" />
-                  </div>
-                </div>
-                <Divider text="Startår" />
-                <Text size={TextVariants.small}>
-                  Vilket år börjar du studera?
-                </Text>
-                <div className="form-control w-full">
-                  <input
-                    type="number"
-                    placeholder="Startår"
-                    className="input input-bordered w-full bg-whiteBackground"
-                    value={startYearSetting}
-                    min={1}
-                    max={9990}
-                    onChange={(e) => {
-                      if (e.target.value) {
-                        setStartYearSetting(parseInt(e.target.value));
-                      }
-                    }}
-                  />
-                </div>
-                <Divider text="År" />
-                <Text size={TextVariants.small}>
-                  Välj hur åren ska visas i verktyget
-                </Text>
-                <div className="form-control">
-                  <label className="label cursor-pointer">
-                    <span className="label-text text-onyx">År 1</span>
-                    <Toggle
-                      checked={showYearSetting}
-                      icons={false}
-                      onChange={() => setShowYearSetting(!showYearSetting)}
-                    />
-                    <span className="label-text text-onyx">År 2023</span>
-                  </label>
-                </div>
-                <Divider text="Poäng för examen" />
-                <Text size={TextVariants.small}>
-                  Ange hur många poäng som behövs för din exmamen
-                </Text>
-                <div className="form-control w-full">
-                  <input
-                    type="number"
-                    placeholder="Poäng"
-                    min={1}
-                    max={990}
-                    className="input input-bordered w-full bg-whiteBackground"
-                    value={pointsForExamSetting}
-                    onChange={(e) => {
-                      if (e.target.value) {
-                        setPointsForExamSetting(parseInt(e.target.value));
-                      }
-                    }}
-                  />
-                </div>
-                <Divider text="Tangenbord" />
-                <Text size={TextVariants.small}>
-                  Ställ in tangentbordsgenvägar
-                </Text>
-                <div className="flex justify-between items-center text-onyx">
-                  <Text size={TextVariants.large}>Kurser</Text>
-                  <div className="flex space-x-6">
-                    <kbd className="kbd bg-whiteBackground">alt</kbd>
-                    <Text size={TextVariants.large}>+</Text>
-                    <input
-                      type="text"
-                      className="kbd bg-white text-onyx w-12"
-                      value={shortcutCourses}
-                      maxLength={1}
-                      onChange={(e) => setShortcutCourses(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-between items-center text-onyx">
-                  <Text size={TextVariants.large}>Exportera</Text>
-                  <div className="flex space-x-6">
-                    <kbd className="kbd bg-whiteBackground">alt</kbd>
-                    <Text size={TextVariants.large}>+</Text>
-                    <input
-                      type="text"
-                      className="kbd bg-white text-onyx w-12"
-                      value={shortcutExport}
-                      maxLength={1}
-                      onChange={(e) => setShortcutExport(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-between items-center text-onyx">
-                  <Text size={TextVariants.large}>Inställningar</Text>
-                  <div className="flex space-x-6">
-                    <kbd className="kbd bg-whiteBackground">alt</kbd>
-                    <Text size={TextVariants.large}>+</Text>
-                    <input
-                      type="text"
-                      className="kbd bg-white text-onyx w-12"
-                      value={shortcutSettings}
-                      maxLength={1}
-                      onChange={(e) => setShortcutSettings(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-between items-center text-onyx">
-                  <Text size={TextVariants.large}>Statistik</Text>
-                  <div className="flex space-x-6">
-                    <kbd className="kbd bg-whiteBackground">alt</kbd>
-                    <Text size={TextVariants.large}>+</Text>
-                    <input
-                      type="text"
-                      className="kbd bg-white text-onyx w-12"
-                      value={shortcutStatistics}
-                      maxLength={1}
-                      onChange={(e) => setShortcutStatistics(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </Drawer>
+            <SettingsDrawer refPointer={settingsDrawerRef} />
           )}
         </AnimatePresence>
         <AnimatePresence>
           {isStatisticDrawerOpen && (
-            <Drawer side="right" refPointer={settingsDrawerRef}>
-              <div className="flex flex-col gap-6 p-4 text-onyx">
-                <div className="flex justify-between items-center">
-                  <Text size={TextVariants.large} font={FontVariants.bold}>
-                    Statistik
-                  </Text>
-                  <div
-                    className="btn btn-ghost"
-                    onClick={() =>
-                      setIsStatisticDrawerOpen(!isStatisticDrawerOpen)
-                    }
-                  >
-                    <AiOutlineCloseCircle size="1.5em" />
-                  </div>
-                </div>
-                <Divider text="Examen" />
-                <Text size={TextVariants.small}>
-                  Poäng mot examen ({countPoints(courses)} /{" "}
-                  {pointsForExamSetting})
-                </Text>
-                <progress
-                  className="progress progress-accent w-56"
-                  value={100}
-                  max={pointsForExamSetting}
-                />
-                <Divider text="Kurser" />
-                <div className="stats shadow bg-white text-onyx">
-                  <div className="stat">
-                    <div className="stat-title">
-                      Antal tillagda kurser totalt
-                    </div>
-                    <div className="stat-value">{countCourses(courses)}</div>
-                  </div>
-                </div>
-                {courses.map((year, index) => (
-                  <div className="stats shadow bg-white text-onyx">
-                    <div className="stat">
-                      <div className="stat-title">
-                        Antal tillagda kurser år{" "}
-                        {showYearSetting ? startYearSetting + index : index + 1}
-                      </div>
-                      <div className="stat-value">
-                        {courses[index].courses.length}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Drawer>
+            <StatisticsDrawer 
+              refPointer={statisticsDrawerRef}
+            />
           )}
         </AnimatePresence>
       </div>
@@ -570,12 +307,6 @@ export default function ExamBuilder() {
             removeAllCoursesInYear();
             setIsConfirmClearCoursesModalOpen(false);
           }}
-        />
-      )}
-      {isKeyboardShortcutsModalOpen && (
-        <KeyboardShortcutsModal
-          isOpen={isKeyboardShortcutsModalOpen}
-          onCloseModal={() => setKeyboardShortcutsModalOpen(false)}
         />
       )}
       {isTutorialModalOpen && (

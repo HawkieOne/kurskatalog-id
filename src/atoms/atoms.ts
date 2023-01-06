@@ -105,11 +105,6 @@ export const tutorialsModalOpenState = atom({
   default: false,
 });
 
-export const keyboardShortcutsModalOpenState = atom({
-  key: "keyboardShortcutsModalOpenState",
-  default: false,
-});
-
 export const courseModalOpenState = atom({
   key: "courseModalOpenState",
   default: false,

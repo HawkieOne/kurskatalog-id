@@ -1,17 +1,17 @@
+import { AiFillCalendar, AiOutlineLink } from "react-icons/ai";
 import { IoMdArrowBack, IoMdSchool } from "react-icons/io";
 import { useLocation, useNavigate } from "react-router-dom";
+import Rating from "../../components/Rating";
 import SquareIconButton from "../../components/SquareIconButton";
-import Text from "../../components/Text";
-import Title from "../../components/Title";
 import { ReactComponent as Datavetenskap } from "../../components/svg/Datavetenskap.svg";
 import { ReactComponent as Elektrisk } from "../../components/svg/Elektrisk.svg";
 import { ReactComponent as Matematik } from "../../components/svg/Matematik.svg";
 import { ReactComponent as Psykologi } from "../../components/svg/Psykologi.svg";
 import { ReactComponent as TekniskFysik } from "../../components/svg/TekniskFysik.svg";
-import { Course } from "../../shared/interfaces";
-import Rating from "../../components/Rating";
-import { AiFillCalendar, AiOutlineLink } from "react-icons/ai";
+import Text from "../../components/Text";
+import Title from "../../components/Title";
 import { TitleVariants } from "../../shared/constants";
+import { Course } from "../../shared/interfaces";
 import CourseInfoIcon from "./CourseInfoIcon";
 
 export default function CoursePage() {

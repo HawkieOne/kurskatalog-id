@@ -1,15 +1,14 @@
 import { BiExport } from "react-icons/bi";
-import { GoGraph } from "react-icons/go";
+import { BsInfoLg } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
-import { BsFillKeyboardFill, BsInfoLg } from "react-icons/bs";
+import { GoGraph } from "react-icons/go";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
-  keyboardShortcutsModalOpenState,
   rightDrawerState,
   settingsDrawerState,
   statisticsDrawerState,
-  tutorialsModalOpenState,
+  tutorialsModalOpenState
 } from "../atoms/atoms";
 import Title from "./Title";
 
@@ -20,9 +19,6 @@ export default function Navbar() {
     useRecoilState(settingsDrawerState);
   const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
     statisticsDrawerState
-  );
-  const setKeyboardShortcutsModalOpen = useSetRecoilState(
-    keyboardShortcutsModalOpenState
   );
   const setIsTutorialModalOpen = useSetRecoilState(tutorialsModalOpenState);
   const location = useLocation();
@@ -54,12 +50,6 @@ export default function Navbar() {
             onClick={() => setIsTutorialModalOpen(true)}
           >
             <BsInfoLg size="1.5em" />
-          </div>
-          <div
-            className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
-            onClick={() => setKeyboardShortcutsModalOpen(true)}
-          >
-            <BsFillKeyboardFill size="1.5em" />
           </div>
           <div
             className={`h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx ${

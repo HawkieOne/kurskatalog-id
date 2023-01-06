@@ -1,10 +1,9 @@
-import { hover } from "@testing-library/user-event/dist/hover";
 import { useState } from "react";
 import { AiOutlineInfoCircle, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Text from "../../../components/Text";
 import { FontVariants, TextVariants } from "../../../shared/constants";
 import { Course } from "../../../shared/interfaces";
-import Text from "../../../components/Text";
 
 interface BlockProps {
   title: string;
