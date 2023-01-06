@@ -22,6 +22,7 @@ export default function KeyboardShortcutsModal({
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+      padding: "2%",
     },
   };
 
@@ -32,15 +33,13 @@ export default function KeyboardShortcutsModal({
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <div className="text-onyx px-4 pb-4">
-        <div className="">
-          <Title>Tangentbordsgenvägar</Title>
-          <div className="grid grid-cols-2 gap-6 mt-2">
-            <Text>Öppna sidomeny för kurser</Text>
-            <Text font={FontVariants.bold}>Alt + C</Text>
-            <Text>Öppna sidomeny för mer alternativ</Text>
-            <Text font={FontVariants.bold}>Alt + A</Text>
-          </div>
+      <div className="text-onyx space-y-6">
+        <Title>Tangentbordsgenvägar</Title>
+        <div className="grid grid-cols-2 gap-6 mt-2">
+          <Text>Öppna sidomeny för kurser</Text>
+          <Text font={FontVariants.bold}>Alt + C</Text>
+          <Text>Öppna sidomeny för mer alternativ</Text>
+          <Text font={FontVariants.bold}>Alt + A</Text>
         </div>
         <div
           className="btn btn-ghost absolute right-2 top-2"
