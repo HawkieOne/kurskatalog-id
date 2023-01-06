@@ -64,7 +64,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
         <IoMdTrash size="2em" />
       </div>
       <div className="w-full flex justify-around text-onyx">
-        <div className="absolute top-1/2 -left-5 -rotate-90 z-50">
+        <div className="absolute top-1/2 -left-5 -rotate-90 z-20">
           <Text size={TextVariants.small} font={FontVariants.bold}>
             Start av HT
           </Text>
@@ -74,7 +74,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
             Läsperiod {index + 1}
           </Text>
         ))}
-        <div className="absolute top-1/2 -right-5 rotate-90 z-50">
+        <div className="absolute top-1/2 -right-5 rotate-90 z-20">
           <Text size={TextVariants.small} font={FontVariants.bold}>
             Slut av VT
           </Text>

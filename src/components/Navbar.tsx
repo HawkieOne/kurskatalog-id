@@ -18,8 +18,9 @@ export default function Navbar() {
     useRecoilState(rightDrawerState);
   const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] =
     useRecoilState(settingsDrawerState);
-  const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] =
-    useRecoilState(statisticsDrawerState);
+  const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
+    statisticsDrawerState
+  );
   const setKeyboardShortcutsModalOpen = useSetRecoilState(
     keyboardShortcutsModalOpenState
   );
@@ -61,7 +62,9 @@ export default function Navbar() {
             <BsFillKeyboardFill size="1.5em" />
           </div>
           <div
-            className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
+            className={`h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx ${
+              isStatisticDrawerOpen && "border-b-2"
+            }`}
             onClick={() => {
               setIsStatisticDrawerOpen(!isStatisticDrawerOpen);
               setIsRightDrawerOpen(false);
@@ -71,7 +74,9 @@ export default function Navbar() {
             <GoGraph size="1.5em" />
           </div>
           <div
-            className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
+            className={`h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx ${
+              isRightDrawerOpen && "border-b-2"
+            }`}
             onClick={() => {
               setIsRightDrawerOpen(!isRightDrawerOpen);
               setIsSettingsDrawerOpen(false);
@@ -81,7 +86,9 @@ export default function Navbar() {
             <BiExport size="1.5em" />
           </div>
           <div
-            className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
+            className={`h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx ${
+              isSettingsDrawerOpen && "border-b-2"
+            }`}
             onClick={() => {
               setIsSettingsDrawerOpen(!isSettingsDrawerOpen);
               setIsRightDrawerOpen(false);
