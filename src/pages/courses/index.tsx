@@ -17,7 +17,7 @@ export default function Courses() {
   );
 
   return (
-    <div className="h-full w-full bg-whiteBackground flex flex-col items-center py-12 space-y-8">
+    <div className="h-full w-full bg-whiteBackground flex flex-col items-center py-12 space-y-8 text-onyx">
       <div className="w-3/4 flex flex-col items-center relative space-y-4">
         <Search
           allCourses={originalCourses}

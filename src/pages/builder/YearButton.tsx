@@ -13,7 +13,7 @@ export default function YearButton({
 }: YearButtonProps) {
   return (
     <button
-      className={`tab tab-lg ${
+      className={`tab tab-lg text-onyx ${
         active ? "tab-active border-y border-darkGrey" : ""
       }`}
       onClick={onClick}

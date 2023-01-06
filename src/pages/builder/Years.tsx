@@ -52,13 +52,13 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
   return (
     <div className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 relative">
       <div
-        className="absolute top-2 right-2 btn btn-ghost"
+        className="absolute top-2 right-2 btn btn-ghost text-onyx"
         onClick={onClearCoursesClick}
         title="Rensa kurser för detta år"
       >
         <IoMdTrash size="2em" />
       </div>
-      <div className="w-full flex justify-around">
+      <div className="w-full flex justify-around text-onyx">
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>
             Läsperiod {index + 1}
