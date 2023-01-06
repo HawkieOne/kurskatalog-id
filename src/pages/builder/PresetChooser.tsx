@@ -15,7 +15,7 @@ export default function PresetChooser({
   return (
     <div className="w-full form-control text-onyx">
       <label className="label">
-        <span className="label-text text-onyx">Välj mall</span>
+        <span className="label-text text-onyx">Välj plan</span>
       </label>
       <div className="w-full input-group">
         <select
@@ -26,7 +26,7 @@ export default function PresetChooser({
           {presets.length > 0 ? (
             presets.map((preset, index) => <option key={index}>{preset.name}</option>)
           ) : (
-            <option disabled className="text-onyx">Ingen mall uppladdad</option>
+            <option disabled className="text-onyx">Ingen plan uppladdad</option>
           )}
         </select>
         <button

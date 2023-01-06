@@ -32,9 +32,9 @@ export const maxRating = 5;
 
 export const Templates = {
     id: "Interaktion & Design",
-    custom: "Anpassad mall",
-    empty: "Tom mall",
-    upload: "Ladda upp mall"
+    custom: "Anpassad plan",
+    empty: "Tom plan",
+    upload: "Ladda upp plan"
 }
 
 

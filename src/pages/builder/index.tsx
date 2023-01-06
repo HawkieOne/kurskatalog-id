@@ -289,7 +289,7 @@ export default function ExamBuilder() {
                   </div>
                 </div>
                 <Button
-                  text="Spara mall"
+                  text="Spara plan"
                   onClick={() => exportTemplate("template", courses)}
                 />
                 <Divider text="Ladda upp" />

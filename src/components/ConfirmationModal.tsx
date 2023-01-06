@@ -41,7 +41,7 @@ export default function ConfirmationModal({
       style={customStyles}
       appElement={document.getElementById("root") || undefined}
     >
-      <div className="flex flex-col space-y-6">
+      <div className="flex flex-col space-y-6 text-onyx">
         <div className="flex flex-col space-y-2">
           <Text size={TextVariants.large}>{text}</Text>
           <Text size={TextVariants.small}>{subtext}</Text>

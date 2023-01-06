@@ -28,7 +28,7 @@ export const saveToPDF = (idTargetElement: string) => {
       const imgProps = doc.getImageProperties(imgData);
       const width = doc.internal.pageSize.getWidth();
       const height = (imgProps.height * width) / imgProps.width;
-      const fileName = "kursplan.pdf";
+      const fileName = "plan.pdf";
       doc.addImage(
         imgData,
         "PNG",
@@ -44,7 +44,7 @@ export const saveToPDF = (idTargetElement: string) => {
 };
 
 export const saveToImage = (idTargetElement: string) => {
-  const fileName = "kursplan.img";
+  const fileName = "plan.img";
   const pdfData = document.getElementById(idTargetElement);
   if (pdfData) {
     html2canvas(pdfData).then((canvas) => {
@@ -158,5 +158,11 @@ export const countCourses = (courses: Year[]) => {
   courses.forEach((year) => {
     year.courses.forEach((course) => amountOfCourses++);
   });
+  return amountOfCourses;
+};
+
+export const countCoursesYear = (courses: Course[]) => {
+  let amountOfCourses = 0;
+  courses.forEach(() => amountOfCourses++);
   return amountOfCourses;
 };

@@ -6,7 +6,7 @@ interface ButtonProps {
 export default function OutlineButton({ text, onClick }: ButtonProps) {
   return (
     <button
-      className="btn btn-outline text-pink border-pink hover:bg-pink 
+      className="btn btn-outline text-pink border-pink hover:bg-pink hover:text-white
                  outline-none hover:border-none"
       onClick={onClick}
     >

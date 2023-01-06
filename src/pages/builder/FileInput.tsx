@@ -44,7 +44,7 @@ export default function FileInput({
               className="absolute flex items-center justify-center w-full h-full text-whiteBackground bg-darkGrey
                        transition-all duration-500 transform group-hover:translate-x-full ease"
             >
-              Ladda upp mall
+              Ladda upp plan
             </span>
             <span className="relative invisible">Send</span>
           </button>
