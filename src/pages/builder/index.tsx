@@ -474,6 +474,7 @@ export default function ExamBuilder() {
               : courses.length) +
             "?"
           }
+          subtext=" All data kopplad till detta år kommer försvinna"
           isOpen={isConfirmRemoveYearModalOpen}
           onCancel={() => setIsConfirmRemoveYearModalOpen(false)}
           onConfirm={() => {
@@ -486,6 +487,7 @@ export default function ExamBuilder() {
       {isConfirmClearCoursesModalOpen && (
         <ConfirmationModal
           text={"Är du säker på att du vill ta bort alla kurser för detta år?"}
+          subtext="All data kopplad till detta år kommer försvinna"
           isOpen={isConfirmClearCoursesModalOpen}
           onCancel={() => setIsConfirmClearCoursesModalOpen(false)}
           onConfirm={() => {

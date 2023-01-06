@@ -6,6 +6,7 @@ import Text from "./Text";
 
 interface ModalProps {
   text: string;
+  subtext: string;
   isOpen: boolean;
   onOpen?: () => void;
   onCancel: () => void;
@@ -14,6 +15,7 @@ interface ModalProps {
 
 export default function ConfirmationModal({
   text,
+  subtext,
   isOpen,
   onOpen,
   onCancel,
@@ -42,7 +44,7 @@ export default function ConfirmationModal({
       <div className="flex flex-col space-y-6">
         <div className="flex flex-col space-y-2">
           <Text size={TextVariants.large}>{text}</Text>
-          <Text size={TextVariants.small}>All data kopplad till detta år kommer försvinna</Text>
+          <Text size={TextVariants.small}>{subtext}</Text>
         </div>
         <div className="flex justify-between">
           <OutlineButton text="Avbryt" onClick={onCancel} />

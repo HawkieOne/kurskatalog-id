@@ -1,9 +1,11 @@
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Modal from "react-modal";
 import FileInput from "../pages/builder/FileInput";
+import { TextVariants } from "../shared/constants";
 import { validateJSON } from "../shared/functions";
 import { Preset } from "../shared/interfaces";
 import Button from "./Button";
+import Text from "./Text";
 import Title from "./Title";
 
 interface ModalProps {
@@ -49,6 +51,7 @@ export default function ModalWindow({
       </div>
       <div className="h-full flex flex-col items-start p-4 space-y-8 relative">
         <Title>Ladda upp mall</Title>
+        <Text size={TextVariants.small}>Detta kommer ersätta den nuvarnade mallen</Text>
         <FileInput
           onUpload={onFileUpload}
           validFormat=".json"
@@ -61,7 +64,7 @@ export default function ModalWindow({
           >
             Cancel
           </button>
-          <Button 
+          <Button
             text="Välj mall"
             onClick={onSuccess}
             disabled={!value || (value && !value.name.endsWith(".json"))}
