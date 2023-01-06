@@ -57,10 +57,31 @@ export const leftDrawerState = atom({
   default: false,
 });
 
-export const courseRightDrawerState = atom<Course | null>({
-  key: "courseRightDrawerState",
-  default: null,
+export const statisticsDrawerState = atom({
+  key: "statisticsDrawerState",
+  default: false,
 });
+
+export const settingsDrawerState = atom({
+  key: "settingsDrawerState",
+  default: false,
+});
+
+export const pointForExamState = atom({
+  key: "pointForExamState",
+  default: 360,
+});
+
+export const startYearState = atom({
+  key: "startYearState",
+  default: 2023,
+});
+
+export const showYearState = atom({
+  key: "showYearState",
+  default: false,
+});
+
 
 export const tutorialsModalOpenState = atom({
   key: "tutorialsModalOpenState",

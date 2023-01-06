@@ -18,7 +18,7 @@ export default function YearButton({
       }`}
       onClick={onClick}
     >
-      År {number + 1}
+      År {number}
     </button>
   );
 }

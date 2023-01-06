@@ -29,21 +29,28 @@ export const saveToPDF = (idTargetElement: string) => {
       const width = doc.internal.pageSize.getWidth();
       const height = (imgProps.height * width) / imgProps.width;
       const fileName = "kursplan.pdf";
-      doc.addImage(imgData, "PNG", 0, doc.internal.pageSize.getHeight() * 0.25, width, height);
+      doc.addImage(
+        imgData,
+        "PNG",
+        0,
+        doc.internal.pageSize.getHeight() * 0.25,
+        width,
+        height
+      );
       doc.save(fileName);
-      toast.success(fileName + " is downloaded")
+      toast.success(fileName + " is downloaded");
     });
   }
 };
 
 export const saveToImage = (idTargetElement: string) => {
-  const fileName = "kursplan.img"
+  const fileName = "kursplan.img";
   const pdfData = document.getElementById(idTargetElement);
   if (pdfData) {
     html2canvas(pdfData).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       FileSaver.saveAs(imgData, fileName);
-      toast.success(fileName + " is downloaded")
+      toast.success(fileName + " is downloaded");
     });
   }
 };
@@ -57,7 +64,7 @@ export const exportTemplate = (name: string, courses: Year[]) => {
   element.download = name;
   document.body.appendChild(element);
   element.click();
-  toast.success("Template is downloaded")
+  toast.success("Template is downloaded");
 };
 
 export const prepareUploadedFile = (file: File) => {
@@ -90,9 +97,11 @@ export const onSearch = (searchTerm: string, allCourses: Course[]) => {
 };
 
 export const validateJSON = (preset: Preset) => {
-  const ajv = new Ajv({ schemas: [presetSchema, buildingBlockSchema, courseSchema]});
+  const ajv = new Ajv({
+    schemas: [presetSchema, buildingBlockSchema, courseSchema],
+  });
   const validate = ajv.getSchema("http://schema.com/schemas/presetSchema.json");
-  if(validate) {
+  if (validate) {
     if (validate(preset)) {
       return preset;
     } else {
@@ -134,4 +143,20 @@ export const generateCustomCourse = (name: string, code: string) => {
     endDate: "2018-07-22",
     group: "custom",
   } as Course;
-}
+};
+
+export const countPoints = (courses: Year[]) => {
+  let points = 0;
+  courses.forEach((year) => {
+    year.courses.forEach((course) => (points += course.content.points));
+  });
+  return points;
+};
+
+export const countCourses = (courses: Year[]) => {
+  let amountOfCourses = 0;
+  courses.forEach((year) => {
+    year.courses.forEach((course) => amountOfCourses++);
+  });
+  return amountOfCourses;
+};

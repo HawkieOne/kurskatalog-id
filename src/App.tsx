@@ -8,6 +8,7 @@ import ExamBuilder from "./pages/builder";
 import Home from "./pages/home";
 import MandatoryCourses from "./pages/mandatory";
 import 'react-toastify/dist/ReactToastify.css';
+import "react-toggle/style.css"
 
 function App() {
   return (

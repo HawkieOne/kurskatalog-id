@@ -3,14 +3,20 @@ import { ChangeEvent, createRef, useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IoIosAddCircleOutline, IoMdTrash } from "react-icons/io";
 import { useLocation } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import Toggle from "react-toggle";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   activeCustomCourseEditState,
   courseModalOpenState,
   keyboardShortcutsModalOpenState,
   leftDrawerState,
+  pointForExamState,
   rightDrawerState,
+  settingsDrawerState,
+  showYearState,
+  startYearState,
+  statisticsDrawerState,
   tutorialsModalOpenState,
 } from "../../atoms/atoms";
 import Button from "../../components/Button";
@@ -26,6 +32,8 @@ import {
 } from "../../shared/constants";
 import { courses as allCourses } from "../../shared/data";
 import {
+  countCourses,
+  countPoints,
   exportTemplate,
   saveToImage,
   saveToPDF,
@@ -80,19 +88,28 @@ export default function ExamBuilder() {
     useRecoilState(leftDrawerState);
   const [isRightDrawerOpen, setIsRightDrawerOpen] =
     useRecoilState(rightDrawerState);
+  const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] =
+    useRecoilState(settingsDrawerState);
+  const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
+    statisticsDrawerState
+  );
   const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] =
     useRecoilState(courseModalOpenState);
   const [isTutorialModalOpen, setIsTutorialModalOpen] = useRecoilState(
     tutorialsModalOpenState
   );
+  const [pointsForExamSetting, setPointsForExamSetting] =
+    useRecoilState(pointForExamState);
+  const [startYearSetting, setStartYearSetting] =
+    useRecoilState(startYearState);
+  const [showYearSetting, setShowYearSetting] = useRecoilState(showYearState);
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
   const [isKeyboardShortcutsModalOpen, setKeyboardShortcutsModalOpen] =
     useRecoilState(keyboardShortcutsModalOpenState);
 
   const leftDrawerRef = createRef<HTMLDivElement>();
-  // useOnClickOutside(leftDrawerRef, () => setIsLeftDrawerOpen(false));
   const rightDrawerRef = createRef<HTMLDivElement>();
-  // useOnClickOutside(rightDrawerRef, () => setIsRightDrawerOpen(false));
+  const settingsDrawerRef = createRef<HTMLDivElement>();
 
   const [isTutorialShown, setIsTutorialShown] = useLocalStorage(
     localStorageTutorialModalKey,
@@ -120,7 +137,21 @@ export default function ExamBuilder() {
   };
 
   useKeyPress(["c"], () => setIsLeftDrawerOpen(!isLeftDrawerOpen));
-  useKeyPress(["a"], () => setIsRightDrawerOpen(!isRightDrawerOpen));
+  useKeyPress(["a"], () => {
+    setIsRightDrawerOpen(!isRightDrawerOpen);
+    setIsSettingsDrawerOpen(false);
+    setIsStatisticDrawerOpen(false);
+  });
+  useKeyPress(["p"], () => {
+    setIsSettingsDrawerOpen(!isSettingsDrawerOpen);
+    setIsRightDrawerOpen(false);
+    setIsStatisticDrawerOpen(false);
+  });
+  useKeyPress(["g"], () => {
+    setIsStatisticDrawerOpen(!isStatisticDrawerOpen);
+    setIsRightDrawerOpen(false);
+    setIsSettingsDrawerOpen(false);
+  });
   return (
     <div className="h-full bg-whiteBackground">
       <div className="h-full relative p-4 py-8">
@@ -135,13 +166,17 @@ export default function ExamBuilder() {
                   index === activeYear() ? (
                     <YearButton
                       active
-                      number={index}
+                      number={
+                        showYearSetting ? startYearSetting + index : index + 1
+                      }
                       key={index}
                       onClick={() => setActiveYear(index)}
                     />
                   ) : (
                     <YearButton
-                      number={index}
+                      number={
+                        showYearSetting ? startYearSetting + index : index + 1
+                      }
                       key={index}
                       onClick={() => setActiveYear(index)}
                     />
@@ -244,7 +279,7 @@ export default function ExamBuilder() {
               <div className="flex flex-col gap-6 p-4 text-onyx">
                 <div className="flex justify-between items-center">
                   <Text size={TextVariants.large} font={FontVariants.bold}>
-                    Alternativ
+                    Exportera och importera
                   </Text>
                   <div
                     className="btn btn-ghost"
@@ -288,6 +323,131 @@ export default function ExamBuilder() {
             </Drawer>
           )}
         </AnimatePresence>
+        <AnimatePresence>
+          {isSettingsDrawerOpen && (
+            <Drawer side="right" refPointer={settingsDrawerRef}>
+              <div className="flex flex-col gap-6 p-4 text-onyx">
+                <div className="flex justify-between items-center">
+                  <Text size={TextVariants.large} font={FontVariants.bold}>
+                    Inställningar
+                  </Text>
+                  <div
+                    className="btn btn-ghost"
+                    onClick={() =>
+                      setIsSettingsDrawerOpen(!isSettingsDrawerOpen)
+                    }
+                  >
+                    <AiOutlineCloseCircle size="1.5em" />
+                  </div>
+                </div>
+                <Divider text="Startår" />
+                <Text size={TextVariants.small}>
+                  Vilket år börjar du studera?
+                </Text>
+                <div className="form-control w-full">
+                  <input
+                    type="number"
+                    placeholder="Startår"
+                    className="input input-bordered w-full bg-whiteBackground"
+                    value={startYearSetting}
+                    min={1}
+                    max={9990}
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        setStartYearSetting(parseInt(e.target.value));
+                      }
+                    }}
+                  />
+                </div>
+                <Divider text="År" />
+                <Text size={TextVariants.small}>
+                  Välj hur åren ska visas i verktyget
+                </Text>
+                <div className="form-control">
+                  <label className="label cursor-pointer">
+                    <span className="label-text text-onyx">År 1</span>
+                    <Toggle
+                      checked={showYearSetting}
+                      icons={false}
+                      onChange={() => setShowYearSetting(!showYearSetting)}
+                    />
+                    <span className="label-text text-onyx">År 2023</span>
+                  </label>
+                </div>
+                <Divider text="Poäng för examen" />
+                <Text size={TextVariants.small}>
+                  Ange hur många poäng som behövs för din exmamen
+                </Text>
+                <div className="form-control w-full">
+                  <input
+                    type="number"
+                    placeholder="Poäng"
+                    min={1}
+                    max={990}
+                    className="input input-bordered w-full bg-whiteBackground"
+                    value={pointsForExamSetting}
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        setPointsForExamSetting(parseInt(e.target.value));
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+            </Drawer>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isStatisticDrawerOpen && (
+            <Drawer side="right" refPointer={settingsDrawerRef}>
+              <div className="flex flex-col gap-6 p-4 text-onyx">
+                <div className="flex justify-between items-center">
+                  <Text size={TextVariants.large} font={FontVariants.bold}>
+                    Statistik
+                  </Text>
+                  <div
+                    className="btn btn-ghost"
+                    onClick={() =>
+                      setIsStatisticDrawerOpen(!isStatisticDrawerOpen)
+                    }
+                  >
+                    <AiOutlineCloseCircle size="1.5em" />
+                  </div>
+                </div>
+                <Divider text="Examen" />
+                <Text size={TextVariants.small}>
+                  Poäng mot examen ({countPoints(courses)} /{" "}
+                  {pointsForExamSetting})
+                </Text>
+                <progress
+                  className="progress progress-accent w-56"
+                  value={100}
+                  max={pointsForExamSetting}
+                />
+                <Divider text="Kurser" />
+                <div className="stats shadow bg-white text-onyx">
+                  <div className="stat">
+                    <div className="stat-title">Antal tillagda kurser totalt</div>
+                    <div className="stat-value">{countCourses(courses)}</div>
+                  </div>
+                </div>
+                {courses.map((year, index) => (
+                  <div className="stats shadow bg-white text-onyx">
+                    <div className="stat">
+                      <div className="stat-title">
+                        Antal tillagda kurser år{" "}
+                        {showYearSetting
+                          ? startYearSetting + index
+                          : index + 1}
+                      </div>
+                      <div className="stat-value">{courses[index].courses.length}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Drawer>
+          )}
+        </AnimatePresence>
       </div>
       {isCustomCourseModalOpen && courseInfo && (
         <CustomCourseModal
@@ -307,7 +467,13 @@ export default function ExamBuilder() {
       )}
       {isConfirmRemoveYearModalOpen && (
         <ConfirmationModal
-          text={"Är du säker på att du vill ta bort år " + courses.length + "?"}
+          text={
+            "Är du säker på att du vill ta bort år " +
+            (showYearSetting
+              ? startYearSetting + courses.length - 1
+              : courses.length) +
+            "?"
+          }
           isOpen={isConfirmRemoveYearModalOpen}
           onCancel={() => setIsConfirmRemoveYearModalOpen(false)}
           onConfirm={() => {
