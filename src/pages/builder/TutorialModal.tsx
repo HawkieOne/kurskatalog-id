@@ -23,6 +23,7 @@ export default function TutorialModal({
       bottom: "auto",
       marginRight: "-30%",
       transform: "translate(-50%, -50%)",
+      zIndex: 100,
     },
   };
 

@@ -47,13 +47,13 @@ export const draggingSavedCourseState = atom<Course | null>({
   default: null,
 });
 
-export const rightDrawerState = atom({
-  key: "rightDrawerState",
+export const exportDrawerState = atom({
+  key: "exportDrawerState",
   default: false,
 });
 
-export const leftDrawerState = atom({
-  key: "leftDrawerState",
+export const coursesDrawerState = atom({
+  key: "coursesDrawerState",
   default: false,
 });
 

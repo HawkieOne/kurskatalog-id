@@ -5,7 +5,7 @@ import { GoGraph } from "react-icons/go";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
-  rightDrawerState,
+  exportDrawerState,
   settingsDrawerState,
   statisticsDrawerState,
   tutorialsModalOpenState
@@ -13,14 +13,15 @@ import {
 import Title from "./Title";
 
 export default function Navbar() {
-  const [isRightDrawerOpen, setIsRightDrawerOpen] =
-    useRecoilState(rightDrawerState);
+  const [isExportDrawerOpen, setIsExportDrawerOpen] =
+    useRecoilState(exportDrawerState);
   const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] =
     useRecoilState(settingsDrawerState);
   const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
     statisticsDrawerState
   );
   const setIsTutorialModalOpen = useSetRecoilState(tutorialsModalOpenState);
+  
   const location = useLocation();
   const pathString = location.pathname.replace("/", "").trim();
 
@@ -31,7 +32,7 @@ export default function Navbar() {
       ? "Egen plan"
       : decodeURI(pathName.charAt(0).toUpperCase() + pathName.slice(1));
   return (
-    <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center z-50 print:hidden">
+    <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center print:hidden">
       <Link
         to="/"
         className="normal-case text-xl text-onyx absolute inset-y-0 left-10 h-full flex flex-col justify-center border-b-onyx hover:border-b-2"
@@ -47,7 +48,12 @@ export default function Navbar() {
         <div className="absolute flex gap-5 h-full inset-y-0 right-10">
           <div
             className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
-            onClick={() => setIsTutorialModalOpen(true)}
+            onClick={() => {
+              setIsTutorialModalOpen(true);
+              setIsExportDrawerOpen(false);
+              setIsSettingsDrawerOpen(false);
+              setIsStatisticDrawerOpen(false);
+            }}
           >
             <BsInfoLg size="1.5em" />
           </div>
@@ -57,7 +63,7 @@ export default function Navbar() {
             }`}
             onClick={() => {
               setIsStatisticDrawerOpen(!isStatisticDrawerOpen);
-              setIsRightDrawerOpen(false);
+              setIsExportDrawerOpen(false);
               setIsSettingsDrawerOpen(false);
             }}
           >
@@ -65,10 +71,10 @@ export default function Navbar() {
           </div>
           <div
             className={`h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx ${
-              isRightDrawerOpen && "border-b-2"
+              isExportDrawerOpen && "border-b-2"
             }`}
             onClick={() => {
-              setIsRightDrawerOpen(!isRightDrawerOpen);
+              setIsExportDrawerOpen(!isExportDrawerOpen);
               setIsSettingsDrawerOpen(false);
               setIsStatisticDrawerOpen(false);
             }}
@@ -81,7 +87,7 @@ export default function Navbar() {
             }`}
             onClick={() => {
               setIsSettingsDrawerOpen(!isSettingsDrawerOpen);
-              setIsRightDrawerOpen(false);
+              setIsExportDrawerOpen(false);
               setIsStatisticDrawerOpen(false);
             }}
           >

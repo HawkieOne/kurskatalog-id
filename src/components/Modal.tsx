@@ -44,7 +44,7 @@ export default function ModalWindow({
       style={customStyles}
     >
       <div
-        className="btn btn-ghost absolute right-2 top-2 cursor-pointer hover:bg-slate-100 "
+        className="btn btn-ghost absolute right-2 top-2 cursor-pointer hover:bg-slate-100 z-50"
         onClick={onCancel}
       >
         <AiOutlineCloseCircle size="1.5em" />
