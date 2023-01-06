@@ -118,8 +118,3 @@ export const activeCustomCourseEditState = atom<{
   default: { course: customCourse, id: null },
 });
 
-export const resizeIsAllowed = atom({
-  key: "resizeIsAllowedState",
-  default: true,
-});
-

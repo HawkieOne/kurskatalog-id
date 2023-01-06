@@ -50,7 +50,7 @@ export default function CustomCourseModal({
       style={customStyles}
       appElement={document.getElementById("root") || undefined}
     >
-      <div className="flex pb-4 px-1 justify-between items-center">
+      <div className="flex pb-4 px-1 justify-between items-center text-onyx">
         <Text size={TextVariants.large} font={FontVariants.bold}>
           Valfri kurs
         </Text>
@@ -63,50 +63,50 @@ export default function CustomCourseModal({
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">Vad är kursens namn?</span>
+          <span className="label-text text-onyx">Vad är kursens namn?</span>
         </label>
         <input
           type="text"
           placeholder="Namn"
-          className="input input-bordered w-full bg-whiteBackground"
+          className="input input-bordered w-full bg-whiteBackground text-onyx"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">Vad är kurskoden?</span>
+          <span className="label-text text-onyx">Vad är kurskoden?</span>
         </label>
         <input
           type="text"
           placeholder="Kurskod"
-          className="input input-bordered w-full bg-whiteBackground"
+          className="input input-bordered w-full bg-whiteBackground text-onyx"
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">
+          <span className="label-text text-onyx">
             Hur många högskolepoäng ger kursen?
           </span>
         </label>
         <input
           type="number"
           placeholder="Högskolepoäng"
-          className="input input-bordered w-full bg-whiteBackground"
+          className="input input-bordered w-full bg-whiteBackground text-onyx"
           value={points}
           onChange={(e) => setPoints(parseInt(e.target.value))}
         />
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">Vad har kursen för tempo?</span>
+          <span className="label-text text-onyx">Vad har kursen för tempo?</span>
         </label>
         <input
           type="number"
           placeholder="Tempo"
-          className="input input-bordered w-full bg-whiteBackground"
+          className="input input-bordered w-full bg-whiteBackground text-onyx"
           value={pace}
           onChange={(e) => setPace(parseInt(e.target.value))}
         />
@@ -114,12 +114,12 @@ export default function CustomCourseModal({
       <div className="flex justify-between">
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Startdatum</span>
+            <span className="label-text text-onyx">Startdatum</span>
           </label>
           <input
             type="date"
             placeholder="Start date"
-            className="input input-bordered w-full max-w-xs bg-whiteBackground"
+            className="input input-bordered w-full max-w-xs bg-whiteBackground text-onyx"
             min="2018-01-01"
             max="2018-12-31"
             value={startDate}
@@ -128,12 +128,12 @@ export default function CustomCourseModal({
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Slutdatum</span>
+            <span className="label-text text-onyx">Slutdatum</span>
           </label>
           <input
             type="date"
             placeholder="End date"
-            className="input input-bordered w-full max-w-xs bg-whiteBackground"
+            className="input input-bordered w-full max-w-xs bg-whiteBackground text-onyx"
             min="2018-01-01"
             max="2018-12-31"
             value={endDate}
