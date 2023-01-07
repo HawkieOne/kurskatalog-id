@@ -8,7 +8,7 @@ import { coursesBuilderState, hasStartedEditingState } from "../../atoms/atoms";
 import AppBar from "../../components/AppBar";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import Footer from "../../components/Footer";
-import ModalWindow from "../../components/Modal";
+import UploadModal from "../../components/UploadModal";
 import RectangleIconButton from "../../components/RectangleIconButton";
 import SquareIconButton from "../../components/SquareIconButton";
 import Text from "../../components/Text";
@@ -120,7 +120,7 @@ export default function Home() {
       <div className="sm:hidden">
         <AppBar />
       </div>
-      <ModalWindow
+      <UploadModal
         isOpen={isUploadModalOpen}
         onCancel={() => setIsUploadMdalOpen(false)}
         onFileUpload={onFileUpload}

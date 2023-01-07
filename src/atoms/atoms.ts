@@ -57,6 +57,11 @@ export const coursesDrawerState = atom({
   default: false,
 });
 
+export const fileSystemDrawerState = atom({
+  key: "fileSystemDrawerState",
+  default: false,
+});
+
 export const statisticsDrawerState = atom({
   key: "statisticsDrawerState",
   default: false,
