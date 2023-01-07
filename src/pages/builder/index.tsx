@@ -21,7 +21,10 @@ import {
 } from "../../atoms/atoms";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import UploadModal from "../../components/UploadModal";
-import { localStorageLayuotKey } from "../../shared/constants";
+import {
+  localStorageLayoutKey,
+  localStorageUploadedPresetsKey,
+} from "../../shared/constants";
 import {
   createEmptyTemplate,
   createIDTemplate,
@@ -69,6 +72,8 @@ export default function ExamBuilder() {
     useState(false);
   const [isConfirmNewIdPlanModalOpen, setIsConfirmNewIdPlanModalOpen] =
     useState(false);
+    const [isConfirmRemovePresetsModalOpen, setIsConfirmRemovePresetsModalOpen] =
+    useState(false);
   const [uploadedPreset, setUploadedPreset] = useState<Preset>();
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] =
@@ -94,7 +99,12 @@ export default function ExamBuilder() {
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
 
   const [coursesLocalStorage, setCoursesLocalStorage] = useLocalStorage(
-    localStorageLayuotKey,
+    localStorageLayoutKey,
+    null
+  );
+
+  const [presetsLocalStorage, setPresetsLocalStorage] = useLocalStorage(
+    localStorageUploadedPresetsKey,
     null
   );
 
@@ -205,7 +215,17 @@ export default function ExamBuilder() {
           )}
         </AnimatePresence>
         <AnimatePresence>
-          {isExportDrawerOpen && <ExportDrawer />}
+          {isExportDrawerOpen && (
+            <ExportDrawer
+              presets={presetsLocalStorage ? presetsLocalStorage : []}
+              onPresetUpload={(preset) => {
+                if (presetsLocalStorage && presetsLocalStorage.length < 11) {
+                  setPresetsLocalStorage([...presetsLocalStorage, preset]);
+                } else setPresetsLocalStorage([preset]);
+              }}
+              onEmptyUploadedPresets={() => setIsConfirmRemovePresetsModalOpen(true)}
+            />
+          )}
         </AnimatePresence>
         <AnimatePresence>
           {isSettingsDrawerOpen && <SettingsDrawer />}
@@ -288,6 +308,18 @@ export default function ExamBuilder() {
             setCoursesLocalStorage(createIDTemplate());
             setIsFileSystemDrawerOpen(false);
             setActiveYear(0);
+          }}
+        />
+      )}
+      {isConfirmRemovePresetsModalOpen && (
+        <ConfirmationModal
+          text={"Är du säker på att du vill ta bort alla uppladdade planer"}
+          subtext="All uppladdade planer kommer att försvinna."
+          isOpen={isConfirmRemovePresetsModalOpen}
+          onCancel={() => setIsConfirmRemovePresetsModalOpen(false)}
+          onConfirm={() => {
+            setIsConfirmRemovePresetsModalOpen(false);
+            setPresetsLocalStorage([])
           }}
         />
       )}

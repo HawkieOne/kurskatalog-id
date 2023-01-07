@@ -1,7 +1,8 @@
-export const localStorageLayuotKey = "layout";
+export const localStorageLayoutKey = "layout";
 export const localStorageSavedCoursesKey = "savedCourses";
 export const localStorageActiveYearKey = "activeYear";
 export const localStorageTutorialModalKey = "tutorial";
+export const localStorageUploadedPresetsKey = "uploadedPresets";
 
 export const TextVariants = {
     small: "text-sm" as const,

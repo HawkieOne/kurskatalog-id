@@ -7,10 +7,10 @@ import Divider from "../../../components/Divider";
 import Text from "../../../components/Text";
 import { FontVariants, TextVariants } from "../../../shared/constants";
 import {
-    exportTemplate,
-    saveToImage,
-    saveToPDF,
-    validateJSON
+  exportTemplate,
+  saveToImage,
+  saveToPDF,
+  validateJSON,
 } from "../../../shared/functions";
 import { Preset } from "../../../shared/interfaces";
 import useCourses from "../../../shared/useCourses";
@@ -18,20 +18,26 @@ import Drawer from "../Drawer";
 import FileInput from "../FileInput";
 import PresetChooser from "../PresetChooser";
 
-export default function ExportDrawer() {
+interface ExportDrawerProps {
+  presets: Preset[];
+  onPresetUpload: (preset: Preset) => void;
+  onEmptyUploadedPresets: () => void;
+}
+
+export default function ExportDrawer({
+  presets,
+  onPresetUpload,
+  onEmptyUploadedPresets,
+}: ExportDrawerProps) {
   const { courses, setCourses } = useCourses();
   const [isExportDrawerOpen, setIsExportDrawerOpen] =
     useRecoilState(exportDrawerState);
-  const [presets, setPresets] = useState<Preset[]>([]);
   const [activePreset, setActivePreset] = useState<Preset | null>(null);
   const exportDrawerRef = createRef<HTMLDivElement>();
-
   const onFileUpload = (preset: Preset) => {
     if (!presets.find((e) => e.name === preset.name)) {
       setActivePreset(preset);
-      const newPresets = presets.slice();
-      newPresets.push(preset);
-      setPresets(newPresets);
+      onPresetUpload(preset);
     }
   };
 
@@ -41,7 +47,7 @@ export default function ExportDrawer() {
       setActivePreset(preset);
     }
   };
-
+  console.log(presets);
   return (
     <Drawer side="right" refPointer={exportDrawerRef}>
       <div className="flex flex-col gap-6 p-4 text-onyx">
@@ -74,6 +80,10 @@ export default function ExportDrawer() {
               setCourses(activePreset.years);
             }
           }}
+        />
+        <Button
+          text="Ta bort uppladdede kurser"
+          onClick={onEmptyUploadedPresets}
         />
         <Divider text="Exportera" />
         <Text size={TextVariants.small}>

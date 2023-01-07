@@ -13,7 +13,7 @@ import RectangleIconButton from "../../components/RectangleIconButton";
 import SquareIconButton from "../../components/SquareIconButton";
 import Text from "../../components/Text";
 import Title from "../../components/Title";
-import { localStorageLayuotKey, TextVariants } from "../../shared/constants";
+import { localStorageLayoutKey, TextVariants } from "../../shared/constants";
 import { createEmptyTemplate, createIDTemplate } from "../../shared/functions";
 import { Preset } from "../../shared/interfaces";
 import useCourses from "../../shared/useCourses";
@@ -29,7 +29,7 @@ export default function Home() {
   const [, setHasStartedEditing] = useRecoilState(hasStartedEditingState);
   const navigate = useNavigate();
   const [coursesLocalStorage, setCoursesLocalStorage] = useLocalStorage(
-    localStorageLayuotKey,
+    localStorageLayoutKey,
     null
   );
   useEffect(() => {
