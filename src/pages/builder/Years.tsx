@@ -12,7 +12,7 @@ import {
 import Text from "../../components/Text";
 import {
   FontVariants,
-  localStorageLayuotKey,
+  localStorageLayoutKey,
   TextVariants,
 } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
@@ -38,7 +38,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
   } = useCourses();
   const setCourses = useSetRecoilState(coursesBuilderState);
   const [coursesLocalStorage, setCoursesLocaStorage] = useLocalStorage(
-    localStorageLayuotKey
+    localStorageLayoutKey
   );
 
   useEffect(() => {
