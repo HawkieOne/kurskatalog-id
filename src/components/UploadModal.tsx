@@ -8,7 +8,7 @@ import Button from "./Button";
 import Text from "./Text";
 import Title from "./Title";
 
-interface ModalProps {
+interface UploadModalProps {
   isOpen: boolean;
   onOpen?: () => void;
   onCancel: () => void;
@@ -16,14 +16,14 @@ interface ModalProps {
   onFileUpload: (preset: Preset) => void;
   value: Preset | undefined;
 }
-export default function ModalWindow({
+export default function UploadModal({
   isOpen,
   onOpen,
   onCancel,
   onSuccess,
   onFileUpload,
   value,
-}: ModalProps) {
+}: UploadModalProps) {
   const customStyles = {
     content: {
       top: "50%",

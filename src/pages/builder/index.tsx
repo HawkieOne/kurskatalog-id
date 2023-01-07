@@ -9,6 +9,7 @@ import {
   courseModalOpenState,
   coursesDrawerState,
   exportDrawerState,
+  fileSystemDrawerState,
   settingsDrawerState,
   shortcutCoursesState,
   shortcutExportState,
@@ -16,16 +17,25 @@ import {
   shortcutStatisticsState,
   showYearState,
   startYearState,
-  statisticsDrawerState
+  statisticsDrawerState,
 } from "../../atoms/atoms";
 import ConfirmationModal from "../../components/ConfirmationModal";
+import UploadModal from "../../components/UploadModal";
+import { localStorageLayuotKey } from "../../shared/constants";
+import {
+  createEmptyTemplate,
+  createIDTemplate,
+  exportTemplate,
+} from "../../shared/functions";
 import { Preset, Year } from "../../shared/interfaces";
 import useCourses from "../../shared/useCourses";
 import { useKeyPress } from "../../shared/useKeyPress";
+import { useLocalStorage } from "../../shared/useLocalStorage";
 import CoursesContainer from "./CoursesContainer";
 import CustomCourseModal from "./CustomCourseModal";
 import CoursesDrawer from "./drawers/CoursesDrawer";
 import ExportDrawer from "./drawers/ExportDrawer";
+import FileSystemDrawer from "./drawers/FileSystemDrawer";
 import SettingsDrawer from "./drawers/SettingsDrawer";
 import StatisticsDrawer from "./drawers/StatisticsDrawer";
 import YearButton from "./YearButton";
@@ -55,6 +65,12 @@ export default function ExamBuilder() {
     useState(false);
   const [isConfirmClearCoursesModalOpen, setIsConfirmClearCoursesModalOpen] =
     useState(false);
+  const [isConfirmNewEmptyPlanModalOpen, setIsConfirmNewEmptyPlanModalOpen] =
+    useState(false);
+  const [isConfirmNewIdPlanModalOpen, setIsConfirmNewIdPlanModalOpen] =
+    useState(false);
+  const [uploadedPreset, setUploadedPreset] = useState<Preset>();
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] =
     useRecoilState(coursesDrawerState);
   const [isExportDrawerOpen, setIsExportDrawerOpen] =
@@ -63,6 +79,9 @@ export default function ExamBuilder() {
     useRecoilState(settingsDrawerState);
   const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
     statisticsDrawerState
+  );
+  const [isFileSystemDrawerOpen, setIsFileSystemDrawerOpen] = useRecoilState(
+    fileSystemDrawerState
   );
   const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] =
     useRecoilState(courseModalOpenState);
@@ -73,6 +92,11 @@ export default function ExamBuilder() {
   const shortcutStatistics = useRecoilValue(shortcutStatisticsState);
   const shortcutExport = useRecoilValue(shortcutExportState);
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
+
+  const [coursesLocalStorage, setCoursesLocalStorage] = useLocalStorage(
+    localStorageLayuotKey,
+    null
+  );
 
   useKeyPress([shortcutCourses], () =>
     setIsCoursesDrawerOpen(!isCoursesDrawerOpen)
@@ -92,6 +116,12 @@ export default function ExamBuilder() {
     setIsExportDrawerOpen(false);
     setIsSettingsDrawerOpen(false);
   });
+
+  const onFileUpload = (preset: Preset) => {
+    setCoursesLocalStorage(preset);
+    setUploadedPreset(preset);
+  };
+
   return (
     <div className="h-full bg-whiteBackground">
       <div className="h-full relative p-4 py-8">
@@ -160,20 +190,28 @@ export default function ExamBuilder() {
           </div>
         </div>
         <AnimatePresence>
-          {isCoursesDrawerOpen && <CoursesDrawer/>}
+          {isCoursesDrawerOpen && <CoursesDrawer />}
         </AnimatePresence>
         <AnimatePresence>
-          {isExportDrawerOpen && <ExportDrawer/>}
-        </AnimatePresence>
-        <AnimatePresence>
-          {isSettingsDrawerOpen && (
-            <SettingsDrawer/>
+          {isFileSystemDrawerOpen && (
+            <FileSystemDrawer
+              onNewEmptyPlanClick={() =>
+                setIsConfirmNewEmptyPlanModalOpen(true)
+              }
+              onNewIDPlanClick={() => setIsConfirmNewIdPlanModalOpen(true)}
+              onUploadPlanClick={() => setIsUploadModalOpen(true)}
+              onSavePlanClick={() => exportTemplate("template", courses)}
+            />
           )}
         </AnimatePresence>
         <AnimatePresence>
-          {isStatisticDrawerOpen && (
-            <StatisticsDrawer/>
-          )}
+          {isExportDrawerOpen && <ExportDrawer />}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isSettingsDrawerOpen && <SettingsDrawer />}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isStatisticDrawerOpen && <StatisticsDrawer />}
         </AnimatePresence>
       </div>
       {isCustomCourseModalOpen && courseInfo && (
@@ -221,6 +259,53 @@ export default function ExamBuilder() {
             removeAllCoursesInYear();
             setIsConfirmClearCoursesModalOpen(false);
           }}
+        />
+      )}
+      {isConfirmNewEmptyPlanModalOpen && (
+        <ConfirmationModal
+          text={"Är du säker på att du vill skapa en ny tom plan?"}
+          subtext="All data kopplad till denna plan kommer försvinna. Spara innan du gör detta."
+          isOpen={isConfirmNewEmptyPlanModalOpen}
+          onCancel={() => setIsConfirmNewEmptyPlanModalOpen(false)}
+          onConfirm={() => {
+            setIsConfirmNewEmptyPlanModalOpen(false);
+            setCourses(createEmptyTemplate());
+            setCoursesLocalStorage(createEmptyTemplate());
+            setIsFileSystemDrawerOpen(false);
+            setActiveYear(0);
+          }}
+        />
+      )}
+      {isConfirmNewIdPlanModalOpen && (
+        <ConfirmationModal
+          text={"Är du säker på att du vill skapa en ny ID plan?"}
+          subtext="All data kopplad till denna plan kommer försvinna. Spara innan du gör detta."
+          isOpen={isConfirmNewIdPlanModalOpen}
+          onCancel={() => setIsConfirmNewIdPlanModalOpen(false)}
+          onConfirm={() => {
+            setIsConfirmNewIdPlanModalOpen(false);
+            setCourses(createIDTemplate());
+            setCoursesLocalStorage(createIDTemplate());
+            setIsFileSystemDrawerOpen(false);
+            setActiveYear(0);
+          }}
+        />
+      )}
+      {isUploadModalOpen && (
+        <UploadModal
+          isOpen={isUploadModalOpen}
+          onCancel={() => setIsUploadModalOpen(false)}
+          onFileUpload={onFileUpload}
+          onSuccess={() => {
+            if (uploadedPreset) {
+              setIsUploadModalOpen(false);
+              setCourses(uploadedPreset.years);
+              setCoursesLocalStorage(uploadedPreset);
+              setIsFileSystemDrawerOpen(false);
+              setActiveYear(0);
+            }
+          }}
+          value={uploadedPreset}
         />
       )}
       <ToastContainer

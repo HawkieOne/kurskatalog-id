@@ -1,14 +1,17 @@
+import { AiOutlineDesktop, AiOutlineHome } from "react-icons/ai";
 import { BiExport } from "react-icons/bi";
-import { BsInfoSquare } from "react-icons/bs";
+import { BsBook, BsInfoSquare } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import { GoGraph } from "react-icons/go";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
+  coursesDrawerState,
   exportDrawerState,
+  fileSystemDrawerState,
   settingsDrawerState,
   statisticsDrawerState,
-  tutorialsModalOpenState
+  tutorialsModalOpenState,
 } from "../atoms/atoms";
 import Title from "./Title";
 
@@ -20,9 +23,16 @@ export default function Navbar() {
   const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
     statisticsDrawerState
   );
+  const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] = useRecoilState(
+    coursesDrawerState
+  );
+  const [isFileSystemDrawerOpen, setIsFileSystemDrawerOpen] = useRecoilState(
+    fileSystemDrawerState
+  );
   const setIsTutorialModalOpen = useSetRecoilState(tutorialsModalOpenState);
-  
+
   const location = useLocation();
+  const navigate = useNavigate();
   const pathString = location.pathname.replace("/", "").trim();
 
   const pathNameSplited = pathString.split("/");
@@ -33,12 +43,43 @@ export default function Navbar() {
       : decodeURI(pathName.charAt(0).toUpperCase() + pathName.slice(1));
   return (
     <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center print:hidden">
-      <Link
-        to="/"
-        className="normal-case text-xl text-onyx absolute inset-y-0 left-10 h-full flex flex-col justify-center border-b-onyx hover:border-b-2"
-      >
-        Kurskatalog
-      </Link>
+      <div className="absolute flex gap-5 h-full inset-y-0 left-10">
+        {location.pathname !== "/" && (
+          <div
+            className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
+            onClick={() => navigate("/")}
+          >
+            <AiOutlineHome size="1.5em" />
+          </div>
+        )}
+
+        {pathName === "byggare" && (
+          <>
+            <div
+              className={`h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx ${
+                isFileSystemDrawerOpen && "border-b-2"
+              }`}
+              onClick={() => {
+                setIsFileSystemDrawerOpen(!isFileSystemDrawerOpen)
+                setIsCoursesDrawerOpen(false);
+              }}
+            >
+              <AiOutlineDesktop size="1.5em" />
+            </div>
+            <div
+              className={`h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx ${
+                isCoursesDrawerOpen && "border-b-2"
+              }`}
+              onClick={() => {
+                setIsCoursesDrawerOpen(!isCoursesDrawerOpen);
+                setIsFileSystemDrawerOpen(false);
+              }}
+            >
+              <BsBook size="1.5em" />
+            </div>
+          </>
+        )}
+      </div>
       {location.pathname !== "/" && !location.pathname.includes("/kurser/") && (
         <div className="w-3/4 flex justify-center items-center text-onyx">
           <Title>{capitalizedPathname}</Title>
