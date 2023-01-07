@@ -492,7 +492,7 @@ export const templateID = [
 
 export const emptyCourse: Course = {
   name: "",
-  points: -1,
+  points: 0,
   link: "",
   level: "", // CAN ONLY BE SOME VALUES
   code: "",
@@ -513,15 +513,16 @@ export const customCourse: Course = {
   registerCode: "",
   description: "",
   prerequisite: "",
+  location: "",
   rating: -1,
-  startDate: "2018-07-22",
-  endDate: "2018-07-22",
+  startDate: new Date().toLocaleDateString(),
+  endDate: new Date().toLocaleDateString(),
   group: "custom",
 };
 
 export const exchangeCourse: Course = {
   name: "Utbyte",
-  points: -1,
+  points: 0,
   link: "",
   level: "", // CAN ONLY BE SOME VALUES
   code: "",
@@ -534,7 +535,7 @@ export const exchangeCourse: Course = {
 
 export const workingCourse: Course = {
   name: "Arbete",
-  points: -1,
+  points: 0,
   link: "",
   level: "", // CAN ONLY BE SOME VALUES
   code: "",
@@ -547,7 +548,7 @@ export const workingCourse: Course = {
 
 export const yearOffCourse: Course = {
   name: "Övrigt",
-  points: -1,
+  points: 0,
   link: "",
   level: "", // CAN ONLY BE SOME VALUES
   code: "",

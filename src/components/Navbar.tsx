@@ -1,5 +1,5 @@
 import { BiExport } from "react-icons/bi";
-import { BsInfoLg } from "react-icons/bs";
+import { BsInfoSquare } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import { GoGraph } from "react-icons/go";
 import { Link, useLocation } from "react-router-dom";
@@ -55,7 +55,7 @@ export default function Navbar() {
               setIsStatisticDrawerOpen(false);
             }}
           >
-            <BsInfoLg size="1.5em" />
+            <BsInfoSquare size="1.5em" />
           </div>
           <div
             className={`h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx ${

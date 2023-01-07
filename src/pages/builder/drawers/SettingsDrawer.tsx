@@ -64,7 +64,7 @@ export default function SettingsDrawer() {
             min={1}
             max={9990}
             onChange={(e) => {
-              if (e.target.value) {
+              if (e.target.value && parseInt(e.target.value) <= 9990) {
                 setStartYearSetting(parseInt(e.target.value));
               }
             }}
@@ -82,7 +82,7 @@ export default function SettingsDrawer() {
               icons={false}
               onChange={() => setShowYearSetting(!showYearSetting)}
             />
-            <span className="label-text text-onyx">År 2023</span>
+            <span className="label-text text-onyx">{startYearSetting}</span>
           </label>
         </div>
         <Divider text="Poäng för examen" />
@@ -94,11 +94,11 @@ export default function SettingsDrawer() {
             type="number"
             placeholder="Poäng"
             min={1}
-            max={990}
+            max={1000}
             className="input input-bordered w-full bg-whiteBackground"
             value={pointsForExamSetting}
             onChange={(e) => {
-              if (e.target.value) {
+              if (e.target.value && parseInt(e.target.value) <= 1000) {
                 setPointsForExamSetting(parseInt(e.target.value));
               }
             }}

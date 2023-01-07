@@ -1,7 +1,6 @@
 import { AiFillCalendar, AiOutlineLink } from "react-icons/ai";
 import { IoMdArrowBack, IoMdSchool } from "react-icons/io";
 import { useLocation, useNavigate } from "react-router-dom";
-import Rating from "../../components/Rating";
 import SquareIconButton from "../../components/SquareIconButton";
 import { ReactComponent as Datavetenskap } from "../../components/svg/Datavetenskap.svg";
 import { ReactComponent as Elektrisk } from "../../components/svg/Elektrisk.svg";
@@ -33,8 +32,6 @@ export default function CoursePage() {
       >
         <div className="basis-1/3 flex flex-col items-center">
           {getInstituitonImage(course.code)}
-          {/* Change this to {course.rating} later */}
-          <Rating rating={2.5} />
           {/* <Text>Se recensioner i botten</Text> */}
         </div>
         <div className="flex flex-col justify-around">
@@ -80,7 +77,7 @@ export default function CoursePage() {
           </div>
         </div>
       </div>
-      <div className="text-onyx px-40 py-32 leading-8">
+      <div className="text-onyx px-40 py-32 leading-8 bg-whiteBackground">
         <Text>{course.description}</Text>
       </div>
     </div>
