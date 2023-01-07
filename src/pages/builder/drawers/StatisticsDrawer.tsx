@@ -43,7 +43,7 @@ export default function StatisticsDrawer() {
         </Text>
         <progress
           className="progress progress-accent w-56"
-          value={100}
+          value={countPoints(courses)}
           max={pointsForExamSetting}
         />
         <Divider text="Kurser" />
@@ -54,7 +54,7 @@ export default function StatisticsDrawer() {
           </div>
         </div>
         {courses.map((year, index) => (
-          <div className="stats shadow bg-white text-onyx">
+          <div className="stats shadow bg-white text-onyx" key={index}>
             <div className="stat">
               <div className="stat-title">
                 Antal tillagda kurser år{" "}

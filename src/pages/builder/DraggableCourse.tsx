@@ -4,7 +4,6 @@ import {
   AiFillRead,
   AiFillSetting,
   AiOutlineArrowLeft,
-  AiOutlineInfoCircle,
   AiOutlineRollback,
 } from "react-icons/ai";
 import List from "../../components/List/List";
@@ -54,7 +53,7 @@ export default function DraggableCourse({
                       onClick={onInfoClick}
                     >
                       <div className="relative p-1 z-10 darkerBg">
-                        <AiOutlineInfoCircle size="1.5em" />
+                        <AiFillRead size="1.5em" />
                       </div>
                     </div>
                   )}
