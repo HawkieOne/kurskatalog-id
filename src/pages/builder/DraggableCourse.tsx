@@ -72,7 +72,7 @@ export default function DraggableCourse({
                 <Text font={FontVariants.bold}>{course.content.name}</Text>
                 <div className={`flex w-full ${isBlockWide(course) && "w-1/2"} justify-around mt-auto`}>
                   {course.content.pace && <p>{course.content.pace}%</p>}
-                  {course.content.points && <p>{course.content.points}hp</p>}
+                  {course.content.points > 0 && <p>{course.content.points}hp</p>}
                 </div>
               </div>
             </div>
@@ -109,8 +109,8 @@ export default function DraggableCourse({
           {isBlockCustom(course) && (
             <ListItem
               icon={<AiFillSetting />}
-              text="Inställningar"
-              title={"Inställningar"}
+              text="Redigera"
+              title={"Redigera"}
               onClick={onSettingsClick}
             />
           )}

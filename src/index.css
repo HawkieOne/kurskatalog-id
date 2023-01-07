@@ -60,3 +60,18 @@ body,
 .overflow-wrap {
   overflow-wrap: break-word;
 }
+
+.react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #F55065;
+  border-bottom: 2px solid #F55065;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background-color: #1F2937;
+}
