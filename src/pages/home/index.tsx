@@ -114,9 +114,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="hidden sm:block">
-        <Footer />
-      </div>
       <div className="sm:hidden">
         <AppBar />
       </div>
