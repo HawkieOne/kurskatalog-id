@@ -55,9 +55,9 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
   );
 
   return (
-    <div className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 relative">
+    <div id="pdf" className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 relative">
       <div
-        className="absolute top-2 right-2 btn btn-ghost text-onyx"
+        className="absolute top-2 right-2 btn btn-ghost text-onyx print:hidden"
         onClick={onClearCoursesClick}
         title="Rensa kurser för detta år"
       >

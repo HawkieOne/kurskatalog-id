@@ -172,11 +172,10 @@ export default function ExamBuilder() {
   };
 
   return (
-    <div className="h-full bg-whiteBackground">
+    <div className="h-full bg-whiteBackground print:bg-white">
       <div className="h-full relative p-4 py-8">
         <div className="h-full flex flex-row justify-between">
           <div
-            id="pdf"
             className="w-full flex flex-col justify-evenly space-y-8"
           >
             <div className="basis-2/3 flex space-x-4">
