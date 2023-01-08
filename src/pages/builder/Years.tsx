@@ -9,6 +9,7 @@ import {
   courseModalOpenState,
   coursesBuilderState,
 } from "../../atoms/atoms";
+import Divider from "../../components/Divider";
 import Text from "../../components/Text";
 import {
   FontVariants,
@@ -61,19 +62,18 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
         <IoMdTrash size="2em" />
       </div>
       <div className="w-full flex justify-around text-onyx">
-        <div className="absolute top-1/2 -left-5 -rotate-90 z-20">
-          <Text size={TextVariants.small} font={FontVariants.bold}>
-            Start av HT
-          </Text>
-        </div>
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>
             Läsperiod {index + 1}
           </Text>
         ))}
-        <div className="absolute top-1/2 -right-5 rotate-90 z-20">
+        <div className="absolute bottom-1 inset-x-0 flex justify-between items-center px-3 space-x-2">
           <Text size={TextVariants.small} font={FontVariants.bold}>
-            Slut av VT
+            Start
+          </Text>
+          <div className="w-full h-0.5 bg-onyx" />
+          <Text size={TextVariants.small} font={FontVariants.bold}>
+            Slut
           </Text>
         </div>
       </div>
