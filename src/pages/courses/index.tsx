@@ -5,17 +5,18 @@ import Search from "../../components/Search";
 import { courses, sortOptions } from "../../shared/data";
 import { Course } from "../../shared/interfaces";
 import CourseElement from "./CourseElement";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import Text from "../../components/Text";
 import { FontVariants } from "../../shared/constants";
 
 export default function Courses() {
   const originalCourses = courses;
+  const [advancedLevel, setAdvancedLevel] = useState(false);
+  const [distance, setDistance] = useState(false);
   const [sortOption, setSortOption] = useState(sortOptions.nameRising);
   const [searchedCourses, setSearchedCourses] = useState(
     sortArray(courses, sortOption)
   );
-
   return (
     <div className="h-full w-full bg-whiteBackground flex flex-col items-center py-12 space-y-8 text-onyx">
       <div className="w-3/4 flex flex-col items-center relative space-y-4">
@@ -27,19 +28,35 @@ export default function Courses() {
           <div className="">
             <Text font={FontVariants.bold}>Filtrera:</Text>
             <Filter
+              advancedLevelValue={advancedLevel}
               onAdvancedLevelChange={(checked) => {
+                setAdvancedLevel(!advancedLevel);
                 if (checked) {
                   setSearchedCourses(
                     searchedCourses.filter((e) => e.level === "Avancerad nivå")
+                  );
+                } else if (distance) {
+                  setSearchedCourses(
+                    originalCourses.filter(
+                      (e) => e.location === "Ortsoberoende"
+                    )
                   );
                 } else {
                   setSearchedCourses(originalCourses);
                 }
               }}
+              distanceValue={distance}
               onDistanceChange={(checked) => {
+                setDistance(!distance);
                 if (checked) {
                   setSearchedCourses(
-                    searchedCourses.filter((e) => e.location === "Ortsoberoende")
+                    searchedCourses.filter(
+                      (e) => e.location === "Ortsoberoende"
+                    )
+                  );
+                } else if (advancedLevel) {
+                  setSearchedCourses(
+                    originalCourses.filter((e) => e.level === "Avancerad nivå")
                   );
                 } else {
                   setSearchedCourses(originalCourses);
@@ -67,7 +84,7 @@ export default function Courses() {
           </div>
         </div>
       </div>
-      
+
       <motion.div layout className="w-3/4 flex flex-col items-center space-y-6">
         {searchedCourses.map((course, index) => (
           <CourseElement course={course} key={index} />
