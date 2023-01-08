@@ -87,21 +87,25 @@ export const showYearState = atom({
   default: false,
 });
 
-export const shortcutCoursesState = atom({
-  key: "shortcutCoursesState",
+export const shortcutNewCourseState = atom({
+  key: "shortcutNewCourseState",
   default: "c",
 });
-export const shortcutSettingsState = atom({
-  key: "shortcutSettingsState",
-  default: "p",
+export const shortcutEmptyPlanState = atom({
+  key: "shortcutEmptyPlanState",
+  default: "n",
 });
-export const shortcutExportState = atom({
-  key: "shortcutExportState",
-  default: "a",
+export const shortcutIdPlanState = atom({
+  key: "shortcutIdPlanState",
+  default: "i",
 });
-export const shortcutStatisticsState = atom({
-  key: "shortcutStatisticsState",
-  default: "g",
+export const shortcutSavePlanState = atom({
+  key: "shortcutSavePlanState",
+  default: "s",
+});
+export const shortcutUploadPlanState = atom({
+  key: "shortcutUploadPlanState",
+  default: "u",
 });
 
 

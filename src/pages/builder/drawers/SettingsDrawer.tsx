@@ -3,20 +3,20 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import Toggle from "react-toggle";
 import { useRecoilState } from "recoil";
 import {
-    pointForExamState,
-    settingsDrawerState,
-    shortcutCoursesState,
-    shortcutExportState,
-    shortcutSettingsState,
-    shortcutStatisticsState,
-    showYearState,
-    startYearState
+  pointForExamState,
+  settingsDrawerState,
+  shortcutNewCourseState,
+  shortcutIdPlanState,
+  shortcutEmptyPlanState,
+  shortcutSavePlanState,
+  showYearState,
+  startYearState,
+  shortcutUploadPlanState,
 } from "../../../atoms/atoms";
 import Divider from "../../../components/Divider";
 import Text from "../../../components/Text";
 import { FontVariants, TextVariants } from "../../../shared/constants";
 import Drawer from "../Drawer";
-
 
 export default function SettingsDrawer() {
   const [pointsForExamSetting, setPointsForExamSetting] =
@@ -24,19 +24,21 @@ export default function SettingsDrawer() {
   const [startYearSetting, setStartYearSetting] =
     useRecoilState(startYearState);
   const [showYearSetting, setShowYearSetting] = useRecoilState(showYearState);
-  const [shortcutCourses, setShortcutCourses] =
-    useRecoilState(shortcutCoursesState);
-  const [shortcutSettings, setShortcutSettings] = useRecoilState(
-    shortcutSettingsState
+  const [shortcutNewCourse, setShortcutNewCourse] =
+    useRecoilState(shortcutNewCourseState);
+  const [shortcutEmptyPlan, setShortcutEmptyPlan] = useRecoilState(
+    shortcutEmptyPlanState
   );
-  const [shortcutStatistics, setShortcutStatistics] = useRecoilState(
-    shortcutStatisticsState
+  const [shortcutIdPlan, setShortcutIdPlan] =
+  useRecoilState(shortcutIdPlanState);
+  const [shortcutSavePlan, setShortcutSavePlan] = useRecoilState(
+    shortcutSavePlanState
   );
-  const [shortcutExport, setShortcutExport] =
-    useRecoilState(shortcutExportState);
-  const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] = useRecoilState(
-    settingsDrawerState
+  const [shortcutUploadPlan, setShortcutUploadPlan] = useRecoilState(
+    shortcutUploadPlanState
   );
+  const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] =
+    useRecoilState(settingsDrawerState);
   const setttingsDrawerRef = createRef<HTMLDivElement>();
 
   return (
@@ -107,59 +109,88 @@ export default function SettingsDrawer() {
         <Divider text="Tangenbord" />
         <Text size={TextVariants.small}>Ställ in tangentbordsgenvägar</Text>
         <div className="flex justify-between items-center text-onyx">
-          <Text size={TextVariants.large}>Kurser</Text>
-          <div className="flex space-x-6">
-            <kbd className="kbd bg-whiteBackground">alt</kbd>
-            <Text size={TextVariants.large}>+</Text>
-            <input
-              type="text"
-              className="kbd bg-white text-onyx w-12"
-              value={shortcutCourses}
-              maxLength={1}
-              onChange={(e) => setShortcutCourses(e.target.value)}
-            />
+          <Text size={TextVariants.medium}>Ny valfri kurs</Text>
+          <div className="flex justify-between">
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <Text size={TextVariants.large}>+</Text>
+              <input
+                type="text"
+                className="kbd bg-white text-onyx w-12 border border-onyx"
+                value={shortcutNewCourse}
+                maxLength={1}
+                onChange={(e) => setShortcutNewCourse(e.target.value)}
+              />
+            </div>
           </div>
         </div>
         <div className="flex justify-between items-center text-onyx">
-          <Text size={TextVariants.large}>Exportera</Text>
-          <div className="flex space-x-6">
-            <kbd className="kbd bg-whiteBackground">alt</kbd>
-            <Text size={TextVariants.large}>+</Text>
-            <input
-              type="text"
-              className="kbd bg-white text-onyx w-12"
-              value={shortcutExport}
-              maxLength={1}
-              onChange={(e) => setShortcutExport(e.target.value)}
-            />
+          <Text size={TextVariants.medium}>Ny tom plan</Text>
+          <div className="flex justify-between">
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <Text size={TextVariants.large}>+</Text>
+              <input
+                type="text"
+                className="kbd bg-white text-onyx w-12 border border-onyx"
+                value={shortcutEmptyPlan}
+                maxLength={1}
+                onChange={(e) => setShortcutEmptyPlan(e.target.value)}
+              />
+            </div>
           </div>
         </div>
         <div className="flex justify-between items-center text-onyx">
-          <Text size={TextVariants.large}>Inställningar</Text>
-          <div className="flex space-x-6">
-            <kbd className="kbd bg-whiteBackground">alt</kbd>
-            <Text size={TextVariants.large}>+</Text>
-            <input
-              type="text"
-              className="kbd bg-white text-onyx w-12"
-              value={shortcutSettings}
-              maxLength={1}
-              onChange={(e) => setShortcutSettings(e.target.value)}
-            />
+          <Text size={TextVariants.medium}>Ny ID plan</Text>
+          <div className="flex justify-between">
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <Text size={TextVariants.large}>+</Text>
+              <input
+                type="text"
+                className="kbd bg-white text-onyx w-12 border border-onyx"
+                value={shortcutIdPlan}
+                maxLength={1}
+                onChange={(e) => setShortcutIdPlan(e.target.value)}
+              />
+            </div>
           </div>
         </div>
         <div className="flex justify-between items-center text-onyx">
-          <Text size={TextVariants.large}>Statistik</Text>
-          <div className="flex space-x-6">
-            <kbd className="kbd bg-whiteBackground">alt</kbd>
-            <Text size={TextVariants.large}>+</Text>
-            <input
-              type="text"
-              className="kbd bg-white text-onyx w-12"
-              value={shortcutStatistics}
-              maxLength={1}
-              onChange={(e) => setShortcutStatistics(e.target.value)}
-            />
+          <Text size={TextVariants.medium}>Spara plan</Text>
+          <div className="flex justify-between">
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <Text size={TextVariants.large}>+</Text>
+              <input
+                type="text"
+                className="kbd bg-white text-onyx w-12 border border-onyx"
+                value={shortcutSavePlan}
+                maxLength={1}
+                onChange={(e) => setShortcutSavePlan(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between items-center text-onyx">
+          <Text size={TextVariants.medium}>Ladda upp plan</Text>
+          <div className="flex justify-between">
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <Text size={TextVariants.large}>+</Text>
+              <input
+                type="text"
+                className="kbd bg-white text-onyx w-12 border border-onyx"
+                value={shortcutUploadPlan}
+                maxLength={1}
+                onChange={(e) => setShortcutUploadPlan(e.target.value)}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -1,19 +1,20 @@
 import { createRef } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  activeCustomCourseEditState,
-  courseModalOpenState,
   fileSystemDrawerState,
+  shortcutEmptyPlanState,
+  shortcutIdPlanState,
+  shortcutNewCourseState,
+  shortcutSavePlanState,
+  shortcutUploadPlanState,
 } from "../../../atoms/atoms";
 import Text from "../../../components/Text";
 import { FontVariants, TextVariants } from "../../../shared/constants";
-import { customCourse } from "../../../shared/data";
-import { exportTemplate } from "../../../shared/functions";
-import useCourses from "../../../shared/useCourses";
 import Drawer from "../Drawer";
 
 interface FileSystemDrawerProps {
+  oneNewCourseClick: () => void;
   onNewEmptyPlanClick: () => void;
   onNewIDPlanClick: () => void;
   onUploadPlanClick: () => void;
@@ -21,6 +22,7 @@ interface FileSystemDrawerProps {
 }
 
 export default function FileSystemDrawer({
+  oneNewCourseClick,
   onNewEmptyPlanClick,
   onNewIDPlanClick,
   onSavePlanClick,
@@ -29,11 +31,11 @@ export default function FileSystemDrawer({
   const [isFileSystemDrawerOpen, setIsFileSystemOpen] = useRecoilState(
     fileSystemDrawerState
   );
-  const setIsCustomCourseModalOpen = useSetRecoilState(courseModalOpenState);
-  const setActiveCustomCourseEdit = useSetRecoilState(
-    activeCustomCourseEditState
-  );
-  const { courses } = useCourses();
+  const shortcutNewCourse = useRecoilValue(shortcutNewCourseState);
+  const shortcutEmptyPlan = useRecoilValue(shortcutEmptyPlanState);
+  const shortcutSavePlan = useRecoilValue(shortcutSavePlanState);
+  const shortcutIdPlan = useRecoilValue(shortcutIdPlanState);
+  const shortcutUpload = useRecoilValue(shortcutUploadPlanState);
   const fileSystemDrawerRef = createRef<HTMLDivElement>();
 
   return (
@@ -54,38 +56,59 @@ export default function FileSystemDrawer({
         </div>
         <div className="w-full">
           <div
-            className="p-3 bg-whiteBackground hover:bg-boneGrey cursor-pointer"
-            onClick={() => {
-              setActiveCustomCourseEdit({ course: customCourse, id: null });
-              setIsCustomCourseModalOpen(true);
-              setIsFileSystemOpen(false);
-            }}
+            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
+            onClick={oneNewCourseClick}
           >
             <Text>Ny valfri kurs</Text>
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <kbd className="kbd bg-whiteBackground">{shortcutNewCourse}</kbd>
+            </div>
           </div>
           <div
-            className="p-3 bg-whiteBackground hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
             onClick={onNewEmptyPlanClick}
           >
             <Text>Ny tom plan</Text>
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <kbd className="kbd bg-whiteBackground">{shortcutEmptyPlan}</kbd>
+            </div>
           </div>
           <div
-            className="p-3 bg-whiteBackground hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
             onClick={onNewIDPlanClick}
           >
             <Text>Ny ID plan</Text>
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <kbd className="kbd bg-whiteBackground">{shortcutIdPlan}</kbd>
+            </div>
           </div>
           <div
-            className="p-3 bg-whiteBackground hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
             onClick={onSavePlanClick}
           >
             <Text>Spara plan</Text>
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <kbd className="kbd bg-whiteBackground">{shortcutSavePlan}</kbd>
+            </div>
           </div>
           <div
-            className="p-3 bg-whiteBackground hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
             onClick={onUploadPlanClick}
           >
             <Text>Ladda upp plan</Text>
+            <div className="flex space-x-2">
+              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground">alt</kbd>
+              <kbd className="kbd bg-whiteBackground">{shortcutUpload}</kbd>
+            </div>
           </div>
         </div>
       </div>
