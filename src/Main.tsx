@@ -1,5 +1,4 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { tutorialsModalOpenState } from "./atoms/atoms";
 import Navbar from "./components/Navbar";
@@ -13,6 +12,9 @@ import { localStorageTutorialModalKey } from "./shared/constants";
 import { useLocalStorage } from "./shared/useLocalStorage";
 
 export default function Main() {
+
+  const location = useLocation();
+
   const [isTutorialModalOpen, setIsTutorialModalOpen] = useRecoilState(
     tutorialsModalOpenState
   );
@@ -38,7 +40,7 @@ export default function Main() {
           <Route path="/kurser/:name" element={<CoursePage />} />
         </Routes>
       </div>
-      {isTutorialModalOpen && (
+      {isTutorialModalOpen && location.pathname.includes("byggare") && (
         <TutorialModal
           isOpen={isTutorialModalOpen}
           onCloseModal={() => {
