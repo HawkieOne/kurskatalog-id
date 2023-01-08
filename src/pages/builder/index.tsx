@@ -3,7 +3,7 @@ import { useState } from "react";
 import { IoIosAddCircleOutline, IoMdTrash } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   activeCustomCourseEditState,
   courseModalOpenState,
@@ -11,13 +11,14 @@ import {
   exportDrawerState,
   fileSystemDrawerState,
   settingsDrawerState,
-  shortcutCoursesState,
-  shortcutExportState,
-  shortcutSettingsState,
-  shortcutStatisticsState,
+  shortcutNewCourseState,
+  shortcutIdPlanState,
+  shortcutEmptyPlanState,
+  shortcutSavePlanState,
   showYearState,
   startYearState,
   statisticsDrawerState,
+  shortcutUploadPlanState,
 } from "../../atoms/atoms";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import UploadModal from "../../components/UploadModal";
@@ -25,6 +26,7 @@ import {
   localStorageLayoutKey,
   localStorageUploadedPresetsKey,
 } from "../../shared/constants";
+import { customCourse } from "../../shared/data";
 import {
   createEmptyTemplate,
   createIDTemplate,
@@ -72,7 +74,7 @@ export default function ExamBuilder() {
     useState(false);
   const [isConfirmNewIdPlanModalOpen, setIsConfirmNewIdPlanModalOpen] =
     useState(false);
-    const [isConfirmRemovePresetsModalOpen, setIsConfirmRemovePresetsModalOpen] =
+  const [isConfirmRemovePresetsModalOpen, setIsConfirmRemovePresetsModalOpen] =
     useState(false);
   const [uploadedPreset, setUploadedPreset] = useState<Preset>();
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
@@ -92,12 +94,16 @@ export default function ExamBuilder() {
     useRecoilState(courseModalOpenState);
   const startYearSetting = useRecoilValue(startYearState);
   const showYearSetting = useRecoilValue(showYearState);
-  const shortcutCourses = useRecoilValue(shortcutCoursesState);
-  const shortcutSettings = useRecoilValue(shortcutSettingsState);
-  const shortcutStatistics = useRecoilValue(shortcutStatisticsState);
-  const shortcutExport = useRecoilValue(shortcutExportState);
+  const shortcutNewCourse = useRecoilValue(shortcutNewCourseState);
+  const shortcutEmptyPlan = useRecoilValue(shortcutEmptyPlanState);
+  const shortcutSavePlan = useRecoilValue(shortcutSavePlanState);
+  const shortcutIdPlan = useRecoilValue(shortcutIdPlanState);
+  const shortcutUpload = useRecoilValue(shortcutUploadPlanState);
   const courseInfo = useRecoilValue(activeCustomCourseEditState);
 
+  const setActiveCustomCourseEdit = useSetRecoilState(
+    activeCustomCourseEditState
+  );
   const [coursesLocalStorage, setCoursesLocalStorage] = useLocalStorage(
     localStorageLayoutKey,
     null
@@ -108,23 +114,22 @@ export default function ExamBuilder() {
     null
   );
 
-  useKeyPress([shortcutCourses], () =>
-    setIsCoursesDrawerOpen(!isCoursesDrawerOpen)
-  );
-  useKeyPress([shortcutExport], () => {
-    setIsExportDrawerOpen(!isExportDrawerOpen);
-    setIsSettingsDrawerOpen(false);
-    setIsStatisticDrawerOpen(false);
+  useKeyPress([shortcutNewCourse], () => {
+    setActiveCustomCourseEdit({ course: customCourse, id: null });
+    setIsCustomCourseModalOpen(true);
+    setIsFileSystemDrawerOpen(false);
   });
-  useKeyPress([shortcutSettings], () => {
-    setIsSettingsDrawerOpen(!isSettingsDrawerOpen);
-    setIsExportDrawerOpen(false);
-    setIsStatisticDrawerOpen(false);
+  useKeyPress([shortcutIdPlan], () => {
+    setIsConfirmNewIdPlanModalOpen(true);
   });
-  useKeyPress([shortcutStatistics], () => {
-    setIsStatisticDrawerOpen(!isStatisticDrawerOpen);
-    setIsExportDrawerOpen(false);
-    setIsSettingsDrawerOpen(false);
+  useKeyPress([shortcutEmptyPlan], () => {
+    setIsConfirmNewEmptyPlanModalOpen(true);
+  });
+  useKeyPress([shortcutSavePlan], () => {
+    exportTemplate("template", courses);
+  });
+  useKeyPress([shortcutUpload], () => {
+    setIsUploadModalOpen(true);
   });
 
   const onFileUpload = (preset: Preset) => {
@@ -205,6 +210,11 @@ export default function ExamBuilder() {
         <AnimatePresence>
           {isFileSystemDrawerOpen && (
             <FileSystemDrawer
+              oneNewCourseClick={() => {
+                setActiveCustomCourseEdit({ course: customCourse, id: null });
+                setIsCustomCourseModalOpen(true);
+                setIsFileSystemDrawerOpen(false);
+              }}
               onNewEmptyPlanClick={() =>
                 setIsConfirmNewEmptyPlanModalOpen(true)
               }
@@ -223,7 +233,9 @@ export default function ExamBuilder() {
                   setPresetsLocalStorage([...presetsLocalStorage, preset]);
                 } else setPresetsLocalStorage([preset]);
               }}
-              onEmptyUploadedPresets={() => setIsConfirmRemovePresetsModalOpen(true)}
+              onEmptyUploadedPresets={() =>
+                setIsConfirmRemovePresetsModalOpen(true)
+              }
             />
           )}
         </AnimatePresence>
@@ -319,7 +331,7 @@ export default function ExamBuilder() {
           onCancel={() => setIsConfirmRemovePresetsModalOpen(false)}
           onConfirm={() => {
             setIsConfirmRemovePresetsModalOpen(false);
-            setPresetsLocalStorage([])
+            setPresetsLocalStorage([]);
           }}
         />
       )}

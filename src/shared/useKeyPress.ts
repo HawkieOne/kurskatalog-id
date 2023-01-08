@@ -7,7 +7,7 @@ export const useKeyPress = (keys: string[], callback: (event: KeyboardEvent) => 
   });
 
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
-      if(event.altKey === true) {
+      if(event.altKey === true && event.ctrlKey) {
           if (keys.some((key) => event.key === key)) {
             callbackRef.current(event);
           }
