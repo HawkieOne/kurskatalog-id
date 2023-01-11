@@ -23,9 +23,8 @@ export default function Navbar() {
   const [isStatisticDrawerOpen, setIsStatisticDrawerOpen] = useRecoilState(
     statisticsDrawerState
   );
-  const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] = useRecoilState(
-    coursesDrawerState
-  );
+  const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] =
+    useRecoilState(coursesDrawerState);
   const [isFileSystemDrawerOpen, setIsFileSystemDrawerOpen] = useRecoilState(
     fileSystemDrawerState
   );
@@ -41,6 +40,16 @@ export default function Navbar() {
     pathString === "byggare"
       ? "Egen plan"
       : decodeURI(pathName.charAt(0).toUpperCase() + pathName.slice(1));
+
+  const closeAllDrawers = () => {
+    setIsTutorialModalOpen(true);
+    setIsFileSystemDrawerOpen(false);
+    setIsCoursesDrawerOpen(false);
+    setIsExportDrawerOpen(false);
+    setIsSettingsDrawerOpen(false);
+    setIsStatisticDrawerOpen(false);
+  };
+
   return (
     <div className="navbar bg-lightSeaGreen p-2 shadow-md relative flex justify-center items-center print:hidden">
       <div className="absolute flex gap-5 h-full inset-y-0 left-10">
@@ -60,7 +69,7 @@ export default function Navbar() {
                 isFileSystemDrawerOpen && "border-b-2"
               }`}
               onClick={() => {
-                setIsFileSystemDrawerOpen(!isFileSystemDrawerOpen)
+                setIsFileSystemDrawerOpen(!isFileSystemDrawerOpen);
                 setIsCoursesDrawerOpen(false);
               }}
             >
@@ -91,9 +100,7 @@ export default function Navbar() {
             className="h-full flex flex-col justify-center border-onyx cursor-pointer text-onyx hover:border-b-2 hover:text-onyx"
             onClick={() => {
               setIsTutorialModalOpen(true);
-              setIsExportDrawerOpen(false);
-              setIsSettingsDrawerOpen(false);
-              setIsStatisticDrawerOpen(false);
+              closeAllDrawers();
             }}
           >
             <BsInfoSquare size="1.5em" />
