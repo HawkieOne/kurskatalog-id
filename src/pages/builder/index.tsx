@@ -21,6 +21,7 @@ import {
   shortcutUploadPlanState,
   presetRemoveState,
   removeCourseState,
+  tutorialsModalOpenState,
 } from "../../atoms/atoms";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import UploadModal from "../../components/UploadModal";
@@ -77,6 +78,9 @@ export default function ExamBuilder() {
     useState(false);
   const [isConfirmNewIdPlanModalOpen, setIsConfirmNewIdPlanModalOpen] =
     useState(false);
+  const [isConfirmRemovePresetsModalOpen, setIsConfirmRemovePresetsModalOpen] =
+    useState(false);
+  const isTutorialModalOpen = useRecoilValue(tutorialsModalOpenState);
   const [uploadedPreset, setUploadedPreset] = useState<Preset>();
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] =
@@ -117,22 +121,49 @@ export default function ExamBuilder() {
     null
   );
 
+  const isModalsOpen = () => {
+    if (
+      isUploadModalOpen ||
+      isCustomCourseModalOpen ||
+      isConfirmNewIdPlanModalOpen ||
+      isConfirmClearCoursesModalOpen ||
+      isConfirmNewEmptyPlanModalOpen ||
+      isConfirmRemovePresetsModalOpen ||
+      isConfirmRemoveYearModalOpen ||
+      isTutorialModalOpen
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   useKeyPress([shortcutNewCourse], () => {
-    setActiveCustomCourseEdit({ course: customCourse, id: null });
-    setIsCustomCourseModalOpen(true);
-    setIsFileSystemDrawerOpen(false);
+    console.log(isModalsOpen());
+    if (!isModalsOpen()) {
+      setActiveCustomCourseEdit({ course: customCourse, id: null });
+      setIsCustomCourseModalOpen(true);
+      setIsFileSystemDrawerOpen(false);
+    }
   });
   useKeyPress([shortcutIdPlan], () => {
-    setIsConfirmNewIdPlanModalOpen(true);
+    if (!isModalsOpen()) {
+      setIsConfirmNewIdPlanModalOpen(true);
+    }
   });
   useKeyPress([shortcutEmptyPlan], () => {
-    setIsConfirmNewEmptyPlanModalOpen(true);
+    if (!isModalsOpen()) {
+      setIsConfirmNewEmptyPlanModalOpen(true);
+    }
   });
   useKeyPress([shortcutSavePlan], () => {
-    exportTemplate("template", courses);
+    if (!isModalsOpen()) {
+      exportTemplate("template", courses);
+    }
   });
   useKeyPress([shortcutUpload], () => {
-    setIsUploadModalOpen(true);
+    if (!isModalsOpen()) {
+      setIsUploadModalOpen(true);
+    }
   });
 
   const onFileUpload = (preset: Preset) => {
