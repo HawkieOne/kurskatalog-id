@@ -8,6 +8,7 @@ import {
   activeCustomCourseEditState,
   courseModalOpenState,
   coursesBuilderState,
+  removeCourseState,
 } from "../../atoms/atoms";
 import Divider from "../../components/Divider";
 import Text from "../../components/Text";
@@ -31,13 +32,14 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
   const {
     coursesActiveYear,
     saveChanges,
-    removeCourse,
     addCourse,
     draggingCourse,
     removeFromSavedCoursesByObject,
     addToSavedCourses,
+    removeCourse
   } = useCourses();
   const setCourses = useSetRecoilState(coursesBuilderState);
+  const setCourseToRemove = useSetRecoilState(removeCourseState);
   const [coursesLocalStorage, setCoursesLocaStorage] = useLocalStorage(
     localStorageLayoutKey
   );
@@ -147,7 +149,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
                 addToSavedCourses(course.content);
                 removeCourse(course.i);
               }}
-              onRemoveClick={removeCourse}
+              onRemoveClick={() => setCourseToRemove(course)}
             />
           </div>
         ))}

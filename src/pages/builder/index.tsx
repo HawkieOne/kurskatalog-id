@@ -20,6 +20,7 @@ import {
   statisticsDrawerState,
   shortcutUploadPlanState,
   presetRemoveState,
+  removeCourseState,
 } from "../../atoms/atoms";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import UploadModal from "../../components/UploadModal";
@@ -58,6 +59,7 @@ export default function ExamBuilder() {
     setActiveYear,
     addYear,
     removeYear,
+    removeCourse,
     getSavedCourses,
     addToSavedCourses,
     removeAllCoursesInYear,
@@ -79,6 +81,7 @@ export default function ExamBuilder() {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] =
     useRecoilState(coursesDrawerState);
+  const [courseToRemove, setCourseToRemove] = useRecoilState(removeCourseState);
   const [isExportDrawerOpen, setIsExportDrawerOpen] =
     useRecoilState(exportDrawerState);
   const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] =
@@ -280,6 +283,22 @@ export default function ExamBuilder() {
             setActiveYear(courses.length - 2);
             removeYear();
             setIsConfirmRemoveYearModalOpen(false);
+          }}
+        />
+      )}
+      {courseToRemove && (
+        <ConfirmationModal
+          text={
+            "Är du säker på att du vill ta bort " +
+            courseToRemove.content.name +
+            "?"
+          }
+          subtext="Kursen kommer försvinna ur den nuvarande planen"
+          isOpen={courseToRemove !== null}
+          onCancel={() => setCourseToRemove(null)}
+          onConfirm={() => {
+            removeCourse(courseToRemove.i);
+            setCourseToRemove(null);
           }}
         />
       )}
