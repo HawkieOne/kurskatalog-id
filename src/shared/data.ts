@@ -1,5 +1,5 @@
 import { Templates } from "./constants";
-import { Course } from "./interfaces";
+import { BuildingBlock, Course } from "./interfaces";
 import { v4 as uuidv4 } from "uuid";
 
 const createLayoutBlock = (
@@ -14,9 +14,10 @@ const createLayoutBlock = (
     y,
     w,
     h,
+    maxH: 2,
     i: uuidv4(),
     content,
-  };
+  } as BuildingBlock;
 };
 
 export const getCourse = (code: string) => {

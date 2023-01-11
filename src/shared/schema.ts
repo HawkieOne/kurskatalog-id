@@ -33,8 +33,9 @@ export const buildingBlockSchema: JSONSchemaType<BuildingBlock> = {
     w: { type: "integer" },
     h: { type: "integer" },
     i: { type: "string" },
+    maxH: { type: "integer" },
     content: { $ref: "cSchema.json" },
-    isResizable: {type: "boolean", nullable: true}
+    isResizable: { type: "boolean", nullable: true },
   },
   required: ["x", "y", "w", "h", "i", "content"],
 };
@@ -58,15 +59,7 @@ export const courseSchema: JSONSchemaType<Course> = {
     endDate: { type: "string", nullable: true },
     location: { type: "string", nullable: true },
     registerCode: { type: "string", nullable: true },
-    group: { type: "string" }
+    group: { type: "string" },
   },
-  required: [
-    "name",
-    "points",
-    "link",
-    "level",
-    "code",
-    "rating",
-    "group",
-  ],
+  required: ["name", "points", "link", "level", "code", "rating", "group"],
 };

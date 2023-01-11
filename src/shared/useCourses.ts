@@ -96,6 +96,7 @@ export default function useCourses() {
     let cpyCourses = courses.slice();
     const newLayout: BuildingBlock[] = changedLayout.map((block, index) => ({
       ...block,
+      maxH: 2,
       content: findCourse(cpyCourses, block) as Course,
     }));
 

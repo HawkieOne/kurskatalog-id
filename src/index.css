@@ -75,3 +75,12 @@ body,
 .react-grid-item.react-grid-placeholder {
   background-color: #1F2937;
 }
+
+.test2 {
+  display: relative;
+  z-index: -1;
+}
+.test2:hover {
+  display: relative;
+  z-index: -1;
+}
