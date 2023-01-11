@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import Button from "../../components/Button";
 import OutlineButton from "../../components/OutlineButton";
 import Text from "../../components/Text";
+import TextInput from "../../components/TextInput";
 import { FontVariants, TextVariants } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
 
@@ -67,32 +68,28 @@ export default function CustomCourseModal({
         <label className="label">
           <span className="label-text text-onyx">Kursnamn</span>
         </label>
-        <input
-          type="text"
-          placeholder="Namn"
-          className="input input-bordered w-full bg-whiteBackground text-onyx"
+        <TextInput
           value={name}
-          onChange={(e) => {
-            if (e.target.value.length < 100) {
-              setName(e.target.value);
+          onChange={(newValue) => {
+            if (newValue.length < 100) {
+              setName(newValue);
             }
           }}
+          placeholder="Kursnamn"
         />
       </div>
       <div className="form-control w-full">
         <label className="label">
           <span className="label-text text-onyx">Länk till kursen</span>
         </label>
-        <input
-          type="text"
-          placeholder="Namn"
-          className="input input-bordered w-full bg-whiteBackground text-onyx"
+        <TextInput
           value={link}
-          onChange={(e) => {
-            if (e.target.value.length < 100) {
-              setLink(e.target.value);
+          onChange={(newValue) => {
+            if (newValue.length < 100) {
+              setLink(newValue);
             }
           }}
+          placeholder="Länk"
         />
       </div>
       <div className="flex justify-between">
@@ -100,16 +97,14 @@ export default function CustomCourseModal({
           <label className="label">
             <span className="label-text text-onyx">Kurskod</span>
           </label>
-          <input
-            type="text"
-            placeholder="Kurskod"
-            className="input input-bordered w-full bg-whiteBackground text-onyx"
+          <TextInput
             value={code}
-            onChange={(e) => {
-              if (e.target.value.length < 100) {
-                setCode(e.target.value);
+            onChange={(newValue) => {
+              if (newValue.length < 100) {
+                setCode(newValue);
               }
             }}
+            placeholder="Kurskod"
           />
         </div>
         <div className="form-control w-full max-w-xs">
@@ -162,32 +157,28 @@ export default function CustomCourseModal({
           <label className="label">
             <span className="label-text text-onyx">Ort</span>
           </label>
-          <input
-            type="text"
-            placeholder="Ort"
-            className="input input-bordered w-full bg-whiteBackground text-onyx"
-            value={location}
-            onChange={(e) => {
-              if (e.target.value.length < 100) {
-                setLocation(e.target.value);
+          <TextInput
+            value={code}
+            onChange={(newValue) => {
+              if (newValue.length < 100) {
+                setLocation(newValue);
               }
             }}
+            placeholder="Ort"
           />
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
             <span className="label-text text-onyx">Nivå</span>
           </label>
-          <input
-            type="text"
-            placeholder="Nivå"
-            className="input input-bordered w-full bg-whiteBackground text-onyx"
+          <TextInput
             value={level}
-            onChange={(e) => {
-              if (e.target.value.length < 100) {
-                setLevel(e.target.value);
+            onChange={(newValue) => {
+              if (newValue.length < 100) {
+                setLevel(newValue);
               }
             }}
+            placeholder="Nivå"
           />
         </div>
       </div>
