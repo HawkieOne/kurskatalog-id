@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Modal from "react-modal";
 import Button from "../../components/Button";
+import NumberInput from "../../components/NumberInput";
 import OutlineButton from "../../components/OutlineButton";
 import Text from "../../components/Text";
 import { FontVariants, TextVariants } from "../../shared/constants";
@@ -116,22 +117,16 @@ export default function CustomCourseModal({
           <label className="label">
             <span className="label-text text-onyx">Högskolepoäng</span>
           </label>
-          <input
-            type="number"
-            placeholder="Högskolepoäng"
-            className="input input-bordered w-full bg-whiteBackground text-onyx"
+          <NumberInput
             value={points}
-            min={0}
-            max={999}
-            onChange={(e) => {
-              if (
-                e.target.value &&
-                parseInt(e.target.value) < 1000 &&
-                parseInt(e.target.value) >= 0
-              ) {
-                setPoints(parseInt(e.target.value));
+            onChange={(newValue) => {
+              if (newValue && newValue < 1000 && newValue >= 0) {
+                setPoints(newValue);
               }
             }}
+            placeholder="Högskolepoäng"
+            min={0}
+            max={999}
           />
         </div>
       </div>
@@ -139,22 +134,16 @@ export default function CustomCourseModal({
         <label className="label">
           <span className="label-text text-onyx">Studietakt</span>
         </label>
-        <input
-          type="number"
-          placeholder="Tempo"
-          className="input input-bordered w-full bg-whiteBackground text-onyx"
+        <NumberInput
           value={pace}
-          min={0}
-          max={100}
-          onChange={(e) => {
-            if (
-              e.target.value &&
-              parseInt(e.target.value) <= 100 &&
-              parseInt(e.target.value) > 0
-            ) {
-              setPace(parseInt(e.target.value));
+          onChange={(newValue) => {
+            if (newValue && newValue < 100 && newValue >= 0) {
+              setPoints(newValue);
             }
           }}
+          placeholder="Tempo"
+          min={0}
+          max={100}
         />
       </div>
       <div className="flex justify-between">
