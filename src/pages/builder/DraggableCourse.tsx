@@ -34,7 +34,7 @@ export default function DraggableCourse({
   const [flipped, setFlipped] = useState(false);
   const backgroundColor = getColorByType(course.content?.group);
   return (
-    <div className={`w-full h-full flipCard ${!flipped ? "flipped" : ""}`}>
+    <div className={`w-full h-full flipCard ${!flipped ? "flipped" : ""} test2`}>
       {/* Front */}
       <div
         className={`h-full w-full ${backgroundColor} flex items-start justify-start text-whiteBackground drop-shadow-lg cursor-grab front`}

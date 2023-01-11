@@ -87,4 +87,5 @@ export interface BuildingBlock {
   i: string;
   content: Course;
   isResizable?: boolean;
+  maxH: number;
 }

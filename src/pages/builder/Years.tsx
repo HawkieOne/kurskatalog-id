@@ -108,6 +108,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
             y: layoutItem.y,
             w: 2,
             h: 1,
+            maxH: 2,
             i: uuidv4(),
             content: {
               name: "",
@@ -125,7 +126,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
           }
         }}
       >
-        {coursesActiveYear.courses.map((course, index) => (
+        {coursesActiveYear.courses.map((course, index) => (        
           <div key={course.i} className="">
             <DraggableCourse
               key={course.i}
