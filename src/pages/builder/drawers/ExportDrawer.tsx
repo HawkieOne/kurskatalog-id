@@ -1,5 +1,5 @@
 import { ChangeEvent, createRef, useState } from "react";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiFillDelete, AiOutlineCloseCircle } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { exportDrawerState } from "../../../atoms/atoms";
 import Button from "../../../components/Button";
@@ -21,13 +21,13 @@ import PresetChooser from "../PresetChooser";
 interface ExportDrawerProps {
   presets: Preset[];
   onPresetUpload: (preset: Preset) => void;
-  onEmptyUploadedPresets: () => void;
+  onPresetRemove: (preset:Preset) => void;
 }
 
 export default function ExportDrawer({
   presets,
   onPresetUpload,
-  onEmptyUploadedPresets,
+  onPresetRemove,
 }: ExportDrawerProps) {
   const { courses, setCourses } = useCourses();
   const [isExportDrawerOpen, setIsExportDrawerOpen] =
@@ -47,7 +47,7 @@ export default function ExportDrawer({
       setActivePreset(preset);
     }
   };
-  console.log(presets);
+  
   return (
     <Drawer side="right" refPointer={exportDrawerRef}>
       <div className="flex flex-col gap-6 p-4 text-onyx">
@@ -81,10 +81,18 @@ export default function ExportDrawer({
             }
           }}
         />
-        <Button
-          text="Ta bort uppladdede kurser"
-          onClick={onEmptyUploadedPresets}
-        />
+        <Divider text="Inladdade planer" />
+        {presets.map((preset, index) => (
+          <div key={index} className="flex justify-between">
+            <Text>{preset.name}</Text>
+            <div
+              className="p-2 cursor-pointer hover:bg-slate-100 rounded-md"
+              onClick={() => onPresetRemove(preset)}
+            >
+              <AiFillDelete size="1.5em" />
+            </div>
+          </div>
+        ))}
         <Divider text="Exportera" />
         <Text size={TextVariants.small}>
           Endast innehåll på det aktiva året exporteras

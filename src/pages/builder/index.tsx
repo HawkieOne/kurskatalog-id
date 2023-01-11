@@ -19,6 +19,7 @@ import {
   startYearState,
   statisticsDrawerState,
   shortcutUploadPlanState,
+  presetRemoveState,
 } from "../../atoms/atoms";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import UploadModal from "../../components/UploadModal";
@@ -74,8 +75,6 @@ export default function ExamBuilder() {
     useState(false);
   const [isConfirmNewIdPlanModalOpen, setIsConfirmNewIdPlanModalOpen] =
     useState(false);
-  const [isConfirmRemovePresetsModalOpen, setIsConfirmRemovePresetsModalOpen] =
-    useState(false);
   const [uploadedPreset, setUploadedPreset] = useState<Preset>();
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isCoursesDrawerOpen, setIsCoursesDrawerOpen] =
@@ -90,6 +89,7 @@ export default function ExamBuilder() {
   const [isFileSystemDrawerOpen, setIsFileSystemDrawerOpen] = useRecoilState(
     fileSystemDrawerState
   );
+  const [presetRemove, setPresetRemove] = useRecoilState(presetRemoveState);
   const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] =
     useRecoilState(courseModalOpenState);
   const startYearSetting = useRecoilValue(startYearState);
@@ -231,11 +231,13 @@ export default function ExamBuilder() {
               onPresetUpload={(preset) => {
                 if (presetsLocalStorage && presetsLocalStorage.length < 11) {
                   setPresetsLocalStorage([...presetsLocalStorage, preset]);
-                } else setPresetsLocalStorage([preset]);
+                } else {
+                  setPresetsLocalStorage([preset]);
+                }
               }}
-              onEmptyUploadedPresets={() =>
-                setIsConfirmRemovePresetsModalOpen(true)
-              }
+              onPresetRemove={(preset) => {
+                setPresetRemove(preset);
+              }}
             />
           )}
         </AnimatePresence>
@@ -323,15 +325,20 @@ export default function ExamBuilder() {
           }}
         />
       )}
-      {isConfirmRemovePresetsModalOpen && (
+      {presetRemove && (
         <ConfirmationModal
-          text={"Är du säker på att du vill ta bort alla uppladdade planer"}
-          subtext="All uppladdade planer kommer att försvinna."
-          isOpen={isConfirmRemovePresetsModalOpen}
-          onCancel={() => setIsConfirmRemovePresetsModalOpen(false)}
+          text={`Är du säker på att du vill ta bort ${presetRemove.name}`}
+          subtext="Denna plan kommer tas bort och du kommer behöva ladda upp den igen om du behöver den."
+          isOpen={presetRemove !== null}
+          onCancel={() => setPresetRemove(null)}
           onConfirm={() => {
-            setIsConfirmRemovePresetsModalOpen(false);
-            setPresetsLocalStorage([]);
+            setPresetRemove(null);
+            const presetsCpy = presetsLocalStorage.slice() as Preset[];
+            const index = presetsCpy.findIndex(preset => preset === presetRemove);
+            if (index > -1) {
+              presetsCpy.splice(index, 1);
+            }
+            setPresetsLocalStorage(presetsCpy);
           }}
         />
       )}

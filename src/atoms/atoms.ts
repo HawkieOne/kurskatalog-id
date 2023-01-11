@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 import { customCourse } from "../shared/data";
 import { createEmptyTemplate } from "../shared/functions";
-import { Course, Year } from "../shared/interfaces";
+import { Course, Preset, Year } from "../shared/interfaces";
 
 export const hasStartedEditingState = atom({
   key: "hasStartedEditingState",
@@ -107,7 +107,10 @@ export const shortcutUploadPlanState = atom({
   key: "shortcutUploadPlanState",
   default: "u",
 });
-
+export const presetRemoveState = atom<Preset | null>({
+  key: "presetRemoveState",
+  default: null,
+});
 
 export const tutorialsModalOpenState = atom({
   key: "tutorialsModalOpenState",
