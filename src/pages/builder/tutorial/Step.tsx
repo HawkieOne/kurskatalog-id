@@ -1,8 +1,4 @@
 import React from "react";
-import { AiOutlineArrowRight, AiOutlineDesktop } from "react-icons/ai";
-import { BsBook } from "react-icons/bs";
-import { useRecoilValue } from "recoil";
-import { shortcutNewCourseState } from "../../../atoms/atoms";
 import Text from "../../../components/Text";
 import { FontVariants, TextVariants } from "../../../shared/constants";
 
@@ -16,7 +12,7 @@ export default function Step({ children, url, title }: StepProps) {
   return (
     <div className="flex flex-col items-center space-y-2">
       <div className="flex justify-start items-start space-x-4">
-        <video autoPlay loop muted className="w-2/3 h-auto border border-onyx">
+        <video autoPlay loop muted className="w-2/3 h-auto shadow">
           <source src={url} type="video/mp4" />
           Sorry, your browser doesn't support videos.
         </video>
