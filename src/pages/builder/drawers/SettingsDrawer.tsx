@@ -14,6 +14,7 @@ import {
   shortcutUploadPlanState,
 } from "../../../atoms/atoms";
 import Divider from "../../../components/Divider";
+import NumberInput from "../../../components/NumberInput";
 import Text from "../../../components/Text";
 import { FontVariants, TextVariants } from "../../../shared/constants";
 import Drawer from "../Drawer";
@@ -24,13 +25,14 @@ export default function SettingsDrawer() {
   const [startYearSetting, setStartYearSetting] =
     useRecoilState(startYearState);
   const [showYearSetting, setShowYearSetting] = useRecoilState(showYearState);
-  const [shortcutNewCourse, setShortcutNewCourse] =
-    useRecoilState(shortcutNewCourseState);
+  const [shortcutNewCourse, setShortcutNewCourse] = useRecoilState(
+    shortcutNewCourseState
+  );
   const [shortcutEmptyPlan, setShortcutEmptyPlan] = useRecoilState(
     shortcutEmptyPlanState
   );
   const [shortcutIdPlan, setShortcutIdPlan] =
-  useRecoilState(shortcutIdPlanState);
+    useRecoilState(shortcutIdPlanState);
   const [shortcutSavePlan, setShortcutSavePlan] = useRecoilState(
     shortcutSavePlanState
   );
@@ -58,18 +60,16 @@ export default function SettingsDrawer() {
         <Divider text="Startår" />
         <Text size={TextVariants.small}>Vilket år börjar du studera?</Text>
         <div className="form-control w-full">
-          <input
-            type="number"
-            placeholder="Startår"
-            className="input input-bordered w-full bg-whiteBackground"
+          <NumberInput
             value={startYearSetting}
-            min={1}
-            max={9990}
-            onChange={(e) => {
-              if (e.target.value && parseInt(e.target.value) <= 9990) {
-                setStartYearSetting(parseInt(e.target.value));
+            onChange={(newValue) => {
+              if (newValue && newValue < 9990 && newValue >= 1) {
+                setStartYearSetting(newValue);
               }
             }}
+            placeholder="Startår"
+            min={1}
+            max={9990}
           />
         </div>
         <Divider text="År" />
@@ -92,18 +92,16 @@ export default function SettingsDrawer() {
           Ange hur många poäng som behövs för din exmamen
         </Text>
         <div className="form-control w-full">
-          <input
-            type="number"
-            placeholder="Poäng"
-            min={1}
-            max={1000}
-            className="input input-bordered w-full bg-whiteBackground"
+          <NumberInput
             value={pointsForExamSetting}
-            onChange={(e) => {
-              if (e.target.value && parseInt(e.target.value) <= 1000) {
-                setPointsForExamSetting(parseInt(e.target.value));
+            onChange={(newValue) => {
+              if (newValue && newValue < 1000 && newValue >= 1) {
+                setPointsForExamSetting(newValue);
               }
             }}
+            placeholder="Poäng"
+            min={1}
+            max={9990}
           />
         </div>
         <Divider text="Tangenbord" />
