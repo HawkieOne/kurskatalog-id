@@ -34,6 +34,7 @@ export default function BlockStep() {
                     w: 1,
                     x: 1,
                     y: 1,
+                    maxH: 2,
                     i: "11",
                   }}
                   onInfoClick={() => {}}
@@ -64,6 +65,7 @@ export default function BlockStep() {
                   w: 1,
                   x: 1,
                   y: 1,
+                  maxH: 2,
                   i: "11", // can be any value - only for tutorial purposes
                 }}
                 onInfoClick={() => {}}
@@ -95,6 +97,7 @@ export default function BlockStep() {
                   w: 1,
                   x: 1,
                   y: 1,
+                  maxH: 2,
                   i: "11",
                 }}
                 onInfoClick={() => {}}

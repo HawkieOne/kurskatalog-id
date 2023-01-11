@@ -1,11 +1,7 @@
 import { atom, selector } from "recoil";
 import { customCourse } from "../shared/data";
 import { createEmptyTemplate } from "../shared/functions";
-<<<<<<< HEAD
-import { Course, Preset, Year } from "../shared/interfaces";
-=======
-import { BuildingBlock, Course, Year } from "../shared/interfaces";
->>>>>>> feat: confirm modal remove course
+import { BuildingBlock, Course, Preset, Year } from "../shared/interfaces";
 
 export const hasStartedEditingState = atom({
   key: "hasStartedEditingState",
