@@ -7,7 +7,7 @@ module.exports = {
       colors: {
         pink: "#F55065", 
         onyx: "#1F2937",
-        midnightGreenEagleGreen: "#60785f",
+          midnightGreenEagleGreen: "#60785f",
 
         ashGrey: "#D0D1D0",
         webGrey: "#B2ADA7",
