@@ -88,4 +88,8 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.ReactModal__Overlay {
+  z-index: 1000;
+}
+
 
