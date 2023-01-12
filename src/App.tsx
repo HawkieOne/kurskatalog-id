@@ -12,7 +12,7 @@ function App() {
         <Helmet>
           <meta charSet="utf-8" />
           <title>Kurskatalog</title>
-          <link rel="icon" type="image/png" href="icon.ico" sizes="32x32" />
+          <link rel="icon" type="image/png" href="kurskatalog.ico" sizes="128x128" />
         </Helmet>
         <RecoilRoot>
           <Main />
