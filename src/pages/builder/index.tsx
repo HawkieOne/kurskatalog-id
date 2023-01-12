@@ -138,7 +138,6 @@ export default function ExamBuilder() {
   };
 
   useKeyPress([shortcutNewCourse], () => {
-    console.log(isModalsOpen());
     if (!isModalsOpen()) {
       setActiveCustomCourseEdit({ course: customCourse, id: null });
       setIsCustomCourseModalOpen(true);
