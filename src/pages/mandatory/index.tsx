@@ -1,7 +1,6 @@
 import Collapse from "../../components/Collapse";
-import coursesJson from "../../data/courses.json";
 import mandatoryCoursesJson from "../../data/mandatoryCourses.json";
-import { subjects } from "../../shared/data";
+import { courses, subjects } from "../../shared/data";
 
 import { Course } from "../../shared/interfaces";
 
@@ -10,7 +9,7 @@ export default function MandatoryCourses() {
     const courseCodes = mandatoryCoursesJson.filter((course) => {
       return course.subject === subject;
     });
-    const allowedCourses = coursesJson.filter((course) =>
+    const allowedCourses = courses.filter((course) =>
       courseCodes.find((e) => e.code === course.code)
     ) as Course[];
     return allowedCourses;
