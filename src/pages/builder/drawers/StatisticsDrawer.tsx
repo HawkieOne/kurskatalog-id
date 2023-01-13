@@ -42,7 +42,7 @@ export default function StatisticsDrawer() {
           Poäng mot examen ({countPoints(courses)} / {pointsForExamSetting})
         </Text>
         <progress
-          className="progress progress-accent w-56"
+          className="progress progress-accent w-full"
           value={countPoints(courses)}
           max={pointsForExamSetting}
         />

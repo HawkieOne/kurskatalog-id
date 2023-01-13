@@ -67,6 +67,7 @@ export default function ExportDrawer({
           onClick={() => exportTemplate("template", courses)}
         />
         <Divider text="Ladda upp" />
+        <Text size={TextVariants.small}>Ladda upp en fil som tidigare sparats genom detta verktyg</Text>
         <FileInput
           onUpload={onFileUpload}
           validFormat=".json"
