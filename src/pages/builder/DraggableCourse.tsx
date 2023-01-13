@@ -4,15 +4,17 @@ import {
   AiFillRead,
   AiFillSetting,
   AiOutlineArrowLeft,
-  AiOutlineRollback,
+  AiOutlineInfoCircle,
+  AiOutlineRollback
 } from "react-icons/ai";
+import { FiSettings } from "react-icons/fi";
 import List from "../../components/List/List";
 import ListItem from "../../components/List/ListItem";
 import Text from "../../components/Text";
 import {
   CardsColors,
   FontVariants,
-  TextVariants,
+  TextVariants
 } from "../../shared/constants";
 import { BuildingBlock, Course } from "../../shared/interfaces";
 
@@ -53,7 +55,7 @@ export default function DraggableCourse({
                       onClick={onInfoClick}
                     >
                       <div className="relative p-1 z-10 darkerBg">
-                        <AiFillRead size="1.5em" />
+                        <AiOutlineInfoCircle size="1.5em" />
                       </div>
                     </div>
                   )}
@@ -62,7 +64,7 @@ export default function DraggableCourse({
                     onClick={() => setFlipped(!flipped)}
                   >
                     <div className="relative p-1 z-10 darkerBg">
-                      <AiFillSetting size="1.5em" />
+                      <FiSettings size="1.5em" />
                     </div>
                   </div>
                 </div>

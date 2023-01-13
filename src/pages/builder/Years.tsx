@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { IoMdTrash } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
@@ -10,7 +9,6 @@ import {
   coursesBuilderState,
   removeCourseState,
 } from "../../atoms/atoms";
-import Divider from "../../components/Divider";
 import Text from "../../components/Text";
 import {
   FontVariants,
@@ -56,13 +54,6 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
 
   return (
     <div id="pdf" className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 relative">
-      <div
-        className="absolute top-2 right-2 btn btn-ghost text-onyx print:hidden"
-        onClick={onClearCoursesClick}
-        title="Rensa kurser för detta år"
-      >
-        <IoMdTrash size="2em" />
-      </div>
       <div className="w-full flex justify-around text-onyx">
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>

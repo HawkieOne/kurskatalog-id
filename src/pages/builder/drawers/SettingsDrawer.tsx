@@ -89,7 +89,7 @@ export default function SettingsDrawer() {
         </div>
         <Divider text="Poäng för examen" />
         <Text size={TextVariants.small}>
-          Ange hur många poäng som behövs för din exmamen
+          Ange hur många poäng som behövs för din examen
         </Text>
         <div className="form-control w-full">
           <NumberInput

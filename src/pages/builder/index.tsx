@@ -23,7 +23,10 @@ import {
   removeCourseState,
   tutorialsModalOpenState,
 } from "../../atoms/atoms";
+import Button from "../../components/Button";
 import ConfirmationModal from "../../components/ConfirmationModal";
+import Divider from "../../components/Divider";
+import RectangleIconButton from "../../components/RectangleIconButton";
 import UploadModal from "../../components/UploadModal";
 import {
   localStorageLayoutKey,
@@ -174,11 +177,9 @@ export default function ExamBuilder() {
     <div className="h-full bg-whiteBackground print:bg-white">
       <div className="h-full relative p-4 py-8">
         <div className="h-full flex flex-row justify-between">
-          <div
-            className="w-full flex flex-col justify-evenly space-y-8"
-          >
+          <div className="w-full flex flex-col justify-evenly space-y-8">
             <div className="basis-2/3 flex space-x-4">
-              <div className="tabs flex-col items-center justify-center basis-20 text-onyx print:hidden">
+              <div className="tabs flex-col items-center justify-center basis-30 text-onyx print:hidden">
                 {courses.map((_, index) =>
                   index === activeYear() ? (
                     <YearButton
@@ -226,7 +227,27 @@ export default function ExamBuilder() {
               />
             </div>
             <div className="basis-1/3 flex space-x-4">
-              <div className="basis-20" />
+              <div className="basis-30 flex flex-col space-y-4">
+                <Divider text="Lägga till kurs"/>
+                <Button
+                  text="Valfri kurs"
+                  onClick={() => {
+                    setActiveCustomCourseEdit({
+                      course: customCourse,
+                      id: null,
+                    });
+                    setIsCustomCourseModalOpen(true);
+                    setIsFileSystemDrawerOpen(false);
+                  }}
+                />
+                <Button
+                  text="Programkurs"
+                  onClick={() => {
+                    setIsCoursesDrawerOpen(!isCoursesDrawerOpen);
+                    setIsFileSystemDrawerOpen(false);
+                  }}
+                />
+              </div>
               <CoursesContainer
                 onAddCoursesClick={() =>
                   setIsCoursesDrawerOpen((prev) => !prev)
@@ -382,7 +403,9 @@ export default function ExamBuilder() {
           onConfirm={() => {
             setPresetRemove(null);
             const presetsCpy = presetsLocalStorage.slice() as Preset[];
-            const index = presetsCpy.findIndex(preset => preset === presetRemove);
+            const index = presetsCpy.findIndex(
+              (preset) => preset === presetRemove
+            );
             if (index > -1) {
               presetsCpy.splice(index, 1);
             }

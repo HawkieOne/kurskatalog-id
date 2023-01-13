@@ -1,12 +1,14 @@
 import { BsPlusSquare } from "react-icons/bs";
 import Text from "../../components/Text";
 import {
-  AlignVariants, FontVariants,
-  TextVariants
+  AlignVariants,
+  FontVariants,
+  TextVariants,
 } from "../../shared/constants";
 import { Course } from "../../shared/interfaces";
 import useCourses from "../../shared/useCourses";
 import CourseCard from "./CourseCard";
+import MockCourseCard from "./MockCourseCard";
 
 interface CoursesContainerProps {
   onAddCoursesClick: () => void;
@@ -28,6 +30,9 @@ export default function CoursesContainer({
         Kurser
       </Text>
       <div className="flex flex-wrap gap-3">
+        {courses.length === 0 && (
+          <MockCourseCard onClick={onAddCoursesClick} />
+        )}
         {courses.map((course, index) => (
           <CourseCard
             key={index}
@@ -35,13 +40,6 @@ export default function CoursesContainer({
             onRemoveClick={() => removeFromSavedCourses(index)}
           />
         ))}
-      </div>
-      <div
-        className="absolute top-0 right-5 btn btn-ghost"
-        onClick={onAddCoursesClick}
-        title="Lägg till kurser"
-      >
-        <BsPlusSquare size="2em" />
       </div>
     </div>
   );
