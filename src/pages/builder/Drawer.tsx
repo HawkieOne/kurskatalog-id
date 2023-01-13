@@ -17,7 +17,7 @@ export default function Drawer({ side, refPointer, children }: DrawerProps) {
       transition={{ ease: "linear" }}
       exit={{ x: side === "left" ? -350 : 350 }}
       layout
-      className={`h-100 overflow-y-auto inset-y-0 absolute bg-white shadow-lg ${side === "left" ? "left-0 w-96" : "right-0"
+      className={`h-100 overflow-y-auto inset-y-0 absolute bg-white shadow-lg ${side === "left" ? "left-0 w-96" : "right-0 w-80"
         } flex flex-col z-30 print:hidden`}
       ref={refPointer}
     >
