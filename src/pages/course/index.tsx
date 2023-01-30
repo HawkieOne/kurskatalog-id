@@ -32,7 +32,6 @@ export default function CoursePage() {
       >
         <div className="basis-1/3 flex flex-col items-center">
           {getInstituitonImage(course.code)}
-          {/* <Text>Se recensioner i botten</Text> */}
         </div>
         <div className="flex flex-col justify-around">
           <div className="text-whiteBackground flex flex-col space-y-4">
@@ -77,7 +76,7 @@ export default function CoursePage() {
           </div>
         </div>
       </div>
-      <div className="text-onyx px-40 py-32 leading-8 bg-whiteBackground">
+      <div className="h-full text-onyx px-40 py-32 leading-8 bg-whiteBackground">
         <Text>{course.description}</Text>
       </div>
     </div>
