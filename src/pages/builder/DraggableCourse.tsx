@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AiFillDelete,
   AiFillRead,
   AiFillSetting,
   AiOutlineArrowLeft,
   AiOutlineInfoCircle,
-  AiOutlineRollback
+  AiOutlineRollback,
 } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import List from "../../components/List/List";
@@ -14,7 +14,7 @@ import Text from "../../components/Text";
 import {
   CardsColors,
   FontVariants,
-  TextVariants
+  TextVariants,
 } from "../../shared/constants";
 import { BuildingBlock, Course } from "../../shared/interfaces";
 
@@ -34,12 +34,23 @@ export default function DraggableCourse({
   onRemoveClick,
 }: DraggableCourseProps) {
   const [flipped, setFlipped] = useState(false);
-  const backgroundColor = getColorByType(course.content?.group);
+  const [backgroundColor, setBackgroundColor] = useState(
+    getBgColorByType(course.content)
+  );
+  const [textColor, setTextColor] = useState(getColorByType(course.content));
+
+/*   useEffect(() => {
+    const t = setContrastText(backgroundColor);
+    setTextColor(t);
+  }, [backgroundColor]); */
+
   return (
-    <div className={`w-full h-full flipCard ${!flipped ? "flipped" : ""} test2`}>
+    <div
+      className={`w-full h-full flipCard ${!flipped ? "flipped" : ""} test2`}
+    >
       {/* Front */}
       <div
-        className={`h-full w-full ${backgroundColor} flex items-start justify-start text-whiteBackground drop-shadow-lg cursor-grab front`}
+        className={`h-full w-full ${backgroundColor} flex items-start justify-start ${textColor} drop-shadow-lg cursor-grab front`}
       >
         <div className={`h-full w-full`}>
           {course.content && (
@@ -71,9 +82,15 @@ export default function DraggableCourse({
               </div>
               <div className="h-full p-3 flex flex-col overflow-wrap">
                 <Text font={FontVariants.bold}>{course.content.name}</Text>
-                <div className={`flex w-full ${isBlockWide(course) && "w-1/2"} justify-around mt-auto`}>
+                <div
+                  className={`flex w-full ${
+                    isBlockWide(course) && "w-1/2"
+                  } justify-around mt-auto`}
+                >
                   {course.content.pace && <p>{course.content.pace}%</p>}
-                  {course.content.points > 0 && <p>{course.content.points}hp</p>}
+                  {course.content.points > 0 && (
+                    <p>{course.content.points}hp</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -142,10 +159,10 @@ const isBlockWide = (course: BuildingBlock) => course.w > 2;
 const isBlockCustom = (course: BuildingBlock) =>
   course.content.group === "custom";
 
-const getColorByType = (group: Course["group"]) => {
-  switch (group) {
+const getBgColorByType = (course: Course) => {
+  switch (course.group) {
     case "course":
-      return CardsColors.course;
+      return getInstitutionBgColor(course.code);
     case "custom":
       return CardsColors.custom;
     case "exchange":
@@ -157,4 +174,67 @@ const getColorByType = (group: Course["group"]) => {
     default:
       return CardsColors.course;
   }
+};
+
+
+const getInstitutionBgColor = (code: string) => {
+  if (code.includes("TF")) return "bg-emerald-300"; // Ljusgrön och mörgrön
+  if (code.includes("DV")) return "bg-slate-400"; // Mörkgrå
+  if (code.includes("MA")) return "bg-sky-300"; // Blå
+  if (code.includes("EL")) return "bg-amber-300"; // Gul
+  if (code.includes("PS")) return "bg-violet-300"; // Rött eller lila
+  return CardsColors.course;
+};
+
+const getColorByType = (course: Course) => {
+  switch (course.group) {
+    case "course":
+      return getInstitutionColor(course.code);
+    case "custom":
+      return "text-whiteBackground";
+    case "exchange":
+      return "text-whiteBackground";
+    case "working":
+      return "text-whiteBackground";
+    case "yearOff":
+      return "text-whiteBackground";
+    default:
+      return "text-onyx";
+  }
+};
+
+const getInstitutionColor = (code: string) => {
+  if (code.includes("TF")) return "text-onyx"; // Ljusgrön och mörgrön
+  if (code.includes("DV")) return "text-onyx"; // Mörkgrå
+  if (code.includes("MA")) return "text-onyx"; // Blå
+  if (code.includes("EL")) return "text-onyx"; // Gul
+  if (code.includes("PS")) return "text-onyx"; // Rött eller lila
+  return "text-white";
+};
+
+const setContrastText = (bgColor: string) => {
+  console.log(bgColor);
+  const rgb = hexToRgb(bgColor);
+  if (rgb) {
+    const brightness = Math.round(
+      (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000
+    );
+    console.log(brightness);
+    return brightness === 0 ? "text-onyx" : "text-white";
+  } else {
+    return "text-onyx";
+  }
+};
+
+const hexToRgb = (hex: string) => {
+  var arrBuff = new ArrayBuffer(4);
+  var vw = new DataView(arrBuff);
+  vw.setUint32(0, parseInt(hex, 16), false);
+  var arrByte = new Uint8Array(arrBuff);
+
+  return {
+    r: arrByte[0],
+    g: arrByte[1],
+    b: arrByte[2],
+  };
 };
