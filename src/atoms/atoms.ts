@@ -74,7 +74,7 @@ export const settingsDrawerState = atom({
 
 export const pointForExamState = atom({
   key: "pointForExamState",
-  default: 360,
+  default: 300,
 });
 
 export const startYearState = atom({

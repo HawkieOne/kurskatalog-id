@@ -34,7 +34,7 @@ export default function CustomCourseModal({
   const [endDate, setEndDate] = useState(courseInfo.course.endDate);
   const [link, setLink] = useState(courseInfo.course.link);
   const [level, setLevel] = useState(courseInfo.course.level);
-  const [location, setLocation] = useState(courseInfo.course.location);
+  const [location, setLocation] = useState(courseInfo.course.location || "");
 
   const customStyles = {
     content: {
@@ -133,7 +133,7 @@ export default function CustomCourseModal({
           value={pace}
           onChange={(newValue) => {
             if (newValue && newValue < 100 && newValue >= 0) {
-              setPoints(newValue);
+              setPace(newValue);
             }
           }}
           placeholder="Tempo"
@@ -147,7 +147,7 @@ export default function CustomCourseModal({
             <span className="label-text text-onyx">Ort</span>
           </label>
           <TextInput
-            value={code}
+            value={location}
             onChange={(newValue) => {
               if (newValue.length < 100) {
                 setLocation(newValue);
