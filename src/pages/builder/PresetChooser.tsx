@@ -13,9 +13,9 @@ export default function PresetChooser({
   onUsePreset,
 }: PresetChooserProps) {
   return (
-    <div className="w-full form-control text-onyx">
+    <div className="w-full form-control">
       <label className="label">
-        <span className="label-text text-onyx">Välj plan</span>
+        <span className="label-text text-onyx dark:text-white">Välj plan</span>
       </label>
       <div className="w-full input-group">
         <select

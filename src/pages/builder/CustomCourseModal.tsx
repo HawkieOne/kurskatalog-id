@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Modal from "react-modal";
+import { useRecoilValue } from "recoil";
+import { darkMode } from "../../atoms/atoms";
 import Button from "../../components/Button";
 import NumberInput from "../../components/NumberInput";
 import OutlineButton from "../../components/OutlineButton";
@@ -26,6 +28,7 @@ export default function CustomCourseModal({
   onSave,
   courseInfo,
 }: ModalProps) {
+  const isDarkModeOn = useRecoilValue(darkMode);
   const [name, setName] = useState(courseInfo.course.name);
   const [code, setCode] = useState(courseInfo.course.code);
   const [points, setPoints] = useState(courseInfo.course.points);
@@ -43,6 +46,7 @@ export default function CustomCourseModal({
       right: "30%",
       bottom: "10%",
       padding: "2%",
+      backgroundColor: isDarkModeOn ? "#374151" : "#FFFFFF",
     },
   };
 
@@ -53,8 +57,9 @@ export default function CustomCourseModal({
       contentLabel="Custom Course Modal"
       style={customStyles}
       appElement={document.getElementById("root") || undefined}
+      portalClassName={`${isDarkModeOn ? "dark" : ""}`}
     >
-      <div className="flex pb-4 px-1 justify-between items-center text-onyx">
+      <div className="flex pb-4 px-1 justify-between items-center bg-white dark:bg-darkMode dark:text-white text-onyx">
         <Text size={TextVariants.large} font={FontVariants.bold}>
           Valfri kurs
         </Text>
@@ -67,7 +72,7 @@ export default function CustomCourseModal({
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text text-onyx">Kursnamn</span>
+          <span className="label-text text-onyx dark:text-white">Kursnamn</span>
         </label>
         <TextInput
           value={name}
@@ -81,7 +86,9 @@ export default function CustomCourseModal({
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text text-onyx">Länk till kursen</span>
+          <span className="label-text text-onyx dark:text-white">
+            Länk till kursen
+          </span>
         </label>
         <TextInput
           value={link}
@@ -96,7 +103,9 @@ export default function CustomCourseModal({
       <div className="flex justify-between">
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text text-onyx">Kurskod</span>
+            <span className="label-text text-onyx dark:text-white">
+              Kurskod
+            </span>
           </label>
           <TextInput
             value={code}
@@ -110,7 +119,9 @@ export default function CustomCourseModal({
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text text-onyx">Högskolepoäng</span>
+            <span className="label-text text-onyx dark:text-white">
+              Högskolepoäng
+            </span>
           </label>
           <NumberInput
             value={points}
@@ -127,7 +138,9 @@ export default function CustomCourseModal({
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text text-onyx">Studietakt</span>
+          <span className="label-text text-onyx dark:text-white">
+            Studietakt
+          </span>
         </label>
         <NumberInput
           value={pace}
@@ -144,7 +157,7 @@ export default function CustomCourseModal({
       <div className="flex justify-between">
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text text-onyx">Ort</span>
+            <span className="label-text text-onyx dark:text-white">Ort</span>
           </label>
           <TextInput
             value={location}
@@ -158,7 +171,7 @@ export default function CustomCourseModal({
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text text-onyx">Nivå</span>
+            <span className="label-text text-onyx dark:text-white">Nivå</span>
           </label>
           <TextInput
             value={level}
@@ -174,12 +187,15 @@ export default function CustomCourseModal({
       <div className="flex justify-between">
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text text-onyx">Startdatum</span>
+            <span className="label-text text-onyx dark:text-white">
+              Startdatum
+            </span>
           </label>
           <input
             type="date"
             placeholder="Start date"
-            className="input input-bordered w-full max-w-xs bg-whiteBackground text-onyx"
+            className="input input-bordered w-full max-w-xs bg-whiteBackground 
+                    text-onyx dark:text-white dark:bg-darkModeLight"
             min="2018-01-01"
             max="2050-12-31"
             value={startDate}
@@ -188,12 +204,15 @@ export default function CustomCourseModal({
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text text-onyx">Slutdatum</span>
+            <span className="label-text text-onyx dark:text-white">
+              Slutdatum
+            </span>
           </label>
           <input
             type="date"
             placeholder="End date"
-            className="input input-bordered w-full max-w-xs bg-whiteBackground text-onyx"
+            className="input input-bordered w-full max-w-xs bg-whiteBackground 
+                    text-onyx dark:text-white dark:bg-darkModeLight"
             min="2018-01-01"
             max="2050-12-31"
             value={endDate}
@@ -202,7 +221,12 @@ export default function CustomCourseModal({
         </div>
       </div>
       <div className="flex justify-between mt-5">
-        <OutlineButton text="Avbryt" onClick={onCancel} />
+        <button
+          onClick={onCancel}
+          className="btn btn-link no-underline text-red-500 dark:text-white"
+        >
+          Avbryt
+        </button>
         <Button
           text="Spara"
           onClick={() => {

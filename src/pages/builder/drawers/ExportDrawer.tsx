@@ -50,7 +50,7 @@ export default function ExportDrawer({
   
   return (
     <Drawer side="right" refPointer={exportDrawerRef}>
-      <div className="flex flex-col gap-6 p-4 text-onyx">
+      <div className="flex flex-col gap-6 p-4">
         <div className="flex justify-between items-center">
           <Text size={TextVariants.large} font={FontVariants.bold}>
             Exportera och importera

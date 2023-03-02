@@ -1,5 +1,7 @@
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Modal from "react-modal";
+import { useRecoilValue } from "recoil";
+import { darkMode } from "../atoms/atoms";
 import FileInput from "../pages/builder/FileInput";
 import { TextVariants } from "../shared/constants";
 import { validateJSON } from "../shared/functions";
@@ -24,6 +26,7 @@ export default function UploadModal({
   onFileUpload,
   value,
 }: UploadModalProps) {
+  const isDarkModeOn = useRecoilValue(darkMode);
   const customStyles = {
     content: {
       top: "50%",
@@ -33,6 +36,7 @@ export default function UploadModal({
       marginRight: "-50%",
       padding: "2%",
       transform: "translate(-50%, -50%)",
+      backgroundColor: isDarkModeOn ? "#374151" : "#FFFFFF"
     },
   };
 
@@ -42,14 +46,17 @@ export default function UploadModal({
       onAfterOpen={onOpen}
       contentLabel="Example Modal"
       style={customStyles}
+      appElement={document.getElementById("root") || undefined}
+      portalClassName={`${isDarkModeOn ? 'dark' : ""}`}
     >
       <div
-        className="btn btn-ghost absolute right-2 top-2 cursor-pointer hover:bg-slate-100 z-50"
+        className="btn btn-ghost absolute right-2 top-2 cursor-pointer z-50
+                bg-white dark:bg-darkMode dark:text-white text-onyx"
         onClick={onCancel}
       >
         <AiOutlineCloseCircle size="1.5em" />
       </div>
-      <div className="h-full flex flex-col items-start p-4 space-y-8 relative">
+      <div className="h-full flex flex-col items-start p-4 space-y-8 relative dark:text-white">
         <Title>Ladda upp plan</Title>
         <Text size={TextVariants.small}>Detta kommer ersätta den nuvarnade mallen</Text>
         <FileInput
@@ -57,12 +64,12 @@ export default function UploadModal({
           validFormat=".json"
           validateFunction={validateJSON}
         />
-        <div className="self-end space-x-4">
+        <div className="w-full flex justify-between items-center">
           <button
             onClick={onCancel}
-            className="btn btn-link no-underline text-red-500"
+            className="btn btn-link no-underline text-red-500 dark:text-white"
           >
-            Cancel
+            Avbryt
           </button>
           <Button
             text="Välj plan"

@@ -10,7 +10,7 @@ export default function Checkbox({ value, label, onChange }: CheckboxProps) {
   return (
     <div className="form-control">
       <label className="cursor-pointer label space-x-2">
-        <span className="label-text text-onyx">{label}</span>
+        <span className="label-text text-onyx dark:text-white">{label}</span>
         <input
           type="checkbox"
           checked={value}

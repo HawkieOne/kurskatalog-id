@@ -21,7 +21,7 @@ export default function CoursesContainer({
 }: CoursesContainerProps) {
   const { removeFromSavedCourses } = useCourses();
   return (
-    <div className="w-full p-5 flex flex-col text-onyx space-y-4 bg-slate-50 relative print:hidden">
+    <div className="w-full p-5 flex flex-col text-onyx space-y-4 bg-lightModeLight dark:bg-darkModeLight dark:text-white relative print:hidden">
       <Text
         size={TextVariants.medium}
         font={FontVariants.bold}

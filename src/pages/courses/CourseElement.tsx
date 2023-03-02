@@ -21,7 +21,7 @@ export default function CourseElement({ course }: CourseProps) {
         initial={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
         exit={{ opacity: 0 }}
-        className="w-full flex justify-between p-3 rounded-md even:hover:bg-ashGrey odd:hover:bg-boneGrey 
+        className="w-full flex justify-between p-3 rounded-md even:hover:bg-ashGrey odd:hover:bg-boneGrey hover:text-onyx
                     cursor-pointer"
         onClick={() =>
           navigate(course.name, {
@@ -34,12 +34,7 @@ export default function CourseElement({ course }: CourseProps) {
           <Text>{course.code}</Text>
           <div className="w-2/4 flex space-x-4">
             {course.location && (
-              <Text
-                size={TextVariants.small}
-                color={"text-midnightGreenEagleGreen"}
-              >
-                {course.location}
-              </Text>
+              <Text size={TextVariants.small}>{course.location}</Text>
             )}
             <Text size={TextVariants.small}>{course.level}</Text>
           </div>

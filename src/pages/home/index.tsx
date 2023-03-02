@@ -44,9 +44,9 @@ export default function Home() {
   };
 
   return (
-    <main className="h-full flex flex-col justify-between bg-whiteBackground">
+    <main className="h-full flex flex-col justify-between bg-whiteBackground text-onyx dark:bg-darkMode dark:text-white">
       <div className="h-full flex flex-col justify-evenly items-center">
-        <div className="w-3/5 flex flex-col items-center space-y-4 px-4 dark text-onyx">
+        <div className="w-3/5 flex flex-col items-center space-y-4 px-4 dark">
           <Title>Kurskatalog</Title>
           <Text size={TextVariants.medium}>
             Vi på Interaktion & Design har ett stort urval av kurser att välja

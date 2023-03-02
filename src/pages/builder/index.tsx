@@ -174,12 +174,12 @@ export default function ExamBuilder() {
   };
 
   return (
-    <div className="h-full bg-whiteBackground print:bg-white">
+    <div className="h-full bg-whiteBackground text-onyx print:bg-white dark:bg-darkMode dark:text-white">
       <div className="h-full relative p-4 py-8">
         <div className="h-full flex flex-row justify-between">
           <div className="w-full flex flex-col justify-evenly space-y-8">
             <div className="basis-2/3 flex space-x-4">
-              <div className="tabs flex-col items-center justify-center basis-30 text-onyx print:hidden">
+              <div className="tabs flex-col items-center justify-center basis-30 print:hidden">
                 {courses.map((_, index) =>
                   index === activeYear() ? (
                     <YearButton
@@ -202,7 +202,7 @@ export default function ExamBuilder() {
                 )}
                 <div className="flex justify-between">
                   <button
-                    className="tab tab-lg btn btn-ghost"
+                    className="tab tab-lg btn btn-ghost text-onyx dark:text-white"
                     onClick={() => {
                       if (courses.length < 9) {
                         addYear();
@@ -213,7 +213,7 @@ export default function ExamBuilder() {
                     <IoIosAddCircleOutline size="1.25em" />
                   </button>
                   <button
-                    className="tab tab-lg text-onyx hover:text-red-500"
+                    className="tab tab-lg hover:text-red-500"
                     onClick={() => setIsConfirmRemoveYearModalOpen(true)}
                   >
                     <IoMdTrash size="1.25em" />

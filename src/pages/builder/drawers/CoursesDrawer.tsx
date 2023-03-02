@@ -22,7 +22,7 @@ export default function CoursesDrawer() {
   const coursesDrawerRef = createRef<HTMLDivElement>();
   return (
     <Drawer side="left" refPointer={coursesDrawerRef}>
-      <div className="flex p-4 px-3 justify-between items-center text-onyx">
+      <div className="flex p-4 px-3 justify-between items-center">
         <Text size={TextVariants.large} font={FontVariants.bold}>
           Lägg till kurser
         </Text>

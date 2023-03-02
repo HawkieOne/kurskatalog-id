@@ -18,7 +18,7 @@ export default function Courses() {
     sortArray(courses, sortOption)
   );
   return (
-    <div className="h-full w-full bg-whiteBackground flex flex-col items-center py-12 space-y-8 text-onyx">
+    <div className="h-full w-full flex flex-col items-center py-12 space-y-8">
       <div className="w-3/4 flex flex-col items-center relative space-y-4">
         <Search
           allCourses={originalCourses}
@@ -26,7 +26,7 @@ export default function Courses() {
         />
         <div className="w-full flex justify-between">
           <div className="">
-            <Text font={FontVariants.bold}>Filtrera:</Text>
+            <Text font={FontVariants.bold}>Filtrera</Text>
             <Filter
               advancedLevelValue={advancedLevel}
               onAdvancedLevelChange={(checked) => {
@@ -64,8 +64,8 @@ export default function Courses() {
               }}
             />
           </div>
-          <div className="w-1/4">
-            <Text font={FontVariants.bold}>Sortera:</Text>
+          <div className="w-1/4 space-y-2"> 
+            <Text font={FontVariants.bold}>Sortera</Text>
             <Dropdown
               options={[
                 sortOptions.nameRising,

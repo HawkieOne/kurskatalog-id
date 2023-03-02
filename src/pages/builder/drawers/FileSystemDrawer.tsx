@@ -40,7 +40,7 @@ export default function FileSystemDrawer({
 
   return (
     <Drawer side="left" refPointer={fileSystemDrawerRef}>
-      <div className="flex flex-col gap-6 text-onyx">
+      <div className="flex flex-col gap-6">
         <div className="flex justify-between p-4 items-center">
           <Text size={TextVariants.large} font={FontVariants.bold}>
             System
@@ -56,58 +56,58 @@ export default function FileSystemDrawer({
         </div>
         <div className="w-full">
           <div
-            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3 hover:bg-boneGrey dark:hover:bg-darkModeLight cursor-pointer"
             onClick={oneNewCourseClick}
           >
             <Text>Ny valfri kurs</Text>
             <div className="flex space-x-2">
-              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
-              <kbd className="kbd bg-whiteBackground">alt</kbd>
-              <kbd className="kbd bg-whiteBackground">{shortcutNewCourse}</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">alt</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">{shortcutNewCourse}</kbd>
             </div>
           </div>
           <div
-            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3 hover:bg-boneGrey dark:hover:bg-darkModeLight cursor-pointer"
             onClick={onNewEmptyPlanClick}
           >
             <Text>Ny tom plan</Text>
             <div className="flex space-x-2">
-              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
-              <kbd className="kbd bg-whiteBackground">alt</kbd>
-              <kbd className="kbd bg-whiteBackground">{shortcutEmptyPlan}</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">alt</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">{shortcutEmptyPlan}</kbd>
             </div>
           </div>
           <div
-            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3  hover:bg-boneGrey dark:hover:bg-darkModeLight cursor-pointer"
             onClick={onNewIDPlanClick}
           >
             <Text>Ny ID plan</Text>
             <div className="flex space-x-2">
-              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
-              <kbd className="kbd bg-whiteBackground">alt</kbd>
-              <kbd className="kbd bg-whiteBackground">{shortcutIdPlan}</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">alt</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">{shortcutIdPlan}</kbd>
             </div>
           </div>
           <div
-            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3 hover:bg-boneGrey dark:hover:bg-darkModeLight cursor-pointer"
             onClick={onSavePlanClick}
           >
             <Text>Spara plan</Text>
             <div className="flex space-x-2">
-              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
-              <kbd className="kbd bg-whiteBackground">alt</kbd>
-              <kbd className="kbd bg-whiteBackground">{shortcutSavePlan}</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">alt</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">{shortcutSavePlan}</kbd>
             </div>
           </div>
           <div
-            className="flex justify-between p-3 bg-white hover:bg-boneGrey cursor-pointer"
+            className="flex justify-between p-3 e hover:bg-boneGrey dark:hover:bg-darkModeLight cursor-pointer"
             onClick={onUploadPlanClick}
           >
             <Text>Ladda upp plan</Text>
             <div className="flex space-x-2">
-              <kbd className="kbd bg-whiteBackground">ctrl</kbd>
-              <kbd className="kbd bg-whiteBackground">alt</kbd>
-              <kbd className="kbd bg-whiteBackground">{shortcutUpload}</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">ctrl</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">alt</kbd>
+              <kbd className="kbd bg-whiteBackground dark:bg-darkGrey">{shortcutUpload}</kbd>
             </div>
           </div>
         </div>

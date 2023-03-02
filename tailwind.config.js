@@ -1,13 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+  darkMode: 'class',
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
         pink: "#F55065", 
         onyx: "#1F2937",
-          midnightGreenEagleGreen: "#60785f",
+        midnightGreenEagleGreen: "#60785f",
 
         ashGrey: "#D0D1D0",
         webGrey: "#B2ADA7",
@@ -21,6 +22,10 @@ module.exports = {
         pauseCourse: "#832161",
         exchangeCourse: "#2991cb",
         workCourse: "#388697",
+
+        lightModeLight: "#F8FAFC",
+        darkMode: "#374151",
+        darkModeLight: "#4B5563",
       },
     },
   },

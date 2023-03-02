@@ -31,7 +31,8 @@ export default function Search({
               type="text"
               placeholder="Sök…"
               value={searchTerm}
-              className="input bg-whiteBackground text-onyx justify-self-end rounded-l-xl rounded-none focus:border-lightSeaGreen focus:border-opacity-50 focus:outline-none border border-darkGrey"
+              className="input bg-whiteBackground text-onyx justify-self-end rounded-l-xl rounded-none focus:border-lightSeaGreen 
+                        focus:border-opacity-50 focus:outline-none border border-darkGrey dark:bg-darkModeLight dark:text-white"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setSearchedCourses(onSearch(e.target.value, allCourses));
                 setSearchTerm(e.target.value);

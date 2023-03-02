@@ -3,6 +3,7 @@ export const localStorageSavedCoursesKey = "savedCourses";
 export const localStorageActiveYearKey = "activeYear";
 export const localStorageTutorialModalKey = "tutorial";
 export const localStorageUploadedPresetsKey = "uploadedPresets";
+export const localStorageDarkModeKey = "darkMode";
 
 export const TextVariants = {
     small: "text-sm" as const,

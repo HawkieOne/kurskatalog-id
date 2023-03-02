@@ -25,7 +25,7 @@ export default function StatisticsDrawer() {
   const statisticsDrawerRef = createRef<HTMLDivElement>();
   return (
     <Drawer side="right" refPointer={statisticsDrawerRef}>
-      <div className="flex flex-col gap-6 p-4 text-onyx">
+      <div className="flex flex-col gap-6 p-4">
         <div className="flex justify-between items-center">
           <Text size={TextVariants.large} font={FontVariants.bold}>
             Statistik
@@ -47,14 +47,14 @@ export default function StatisticsDrawer() {
           max={pointsForExamSetting}
         />
         <Divider text="Kurser" />
-        <div className="stats shadow bg-white text-onyx">
+        <div className="stats shadow bg-lightModeLight dark:bg-darkModeLight text-onyx dark:text-white">
           <div className="stat">
             <div className="stat-title">Antal tillagda kurser totalt</div>
             <div className="stat-value">{countCourses(courses)}</div>
           </div>
         </div>
         {courses.map((year, index) => (
-          <div className="stats shadow bg-white text-onyx" key={index}>
+          <div className="stats shadow bg-lightModeLight dark:bg-darkModeLight text-onyx dark:text-white" key={index}>
             <div className="stat">
               <div className="stat-title">
                 Antal tillagda kurser år{" "}

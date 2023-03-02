@@ -13,7 +13,7 @@ export default function TextInput({
     <input
       type="text"
       placeholder={placeholder ? placeholder : ""}
-      className="input input-bordered w-full bg-whiteBackground text-onyx"
+      className="input input-bordered w-full bg-whiteBackground text-onyx dark:bg-darkModeLight dark:text-white"
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />

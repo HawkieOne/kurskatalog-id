@@ -135,3 +135,8 @@ export const activeCustomCourseEditState = atom<{
   default: { course: customCourse, id: null },
 });
 
+export const darkMode = atom({
+  key: "darkModeState",
+  default: false,
+});
+

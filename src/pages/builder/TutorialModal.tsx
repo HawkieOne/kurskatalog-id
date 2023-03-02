@@ -10,7 +10,7 @@ import {
 } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { MdDoneOutline } from "react-icons/md";
-import { shortcutNewCourseState } from "../../atoms/atoms";
+import { darkMode, shortcutNewCourseState } from "../../atoms/atoms";
 import { useRecoilValue } from "recoil";
 import { BsBook, BsInfoSquare, BsPlusSquare } from "react-icons/bs";
 import Step from "./tutorial/Step";
@@ -27,6 +27,7 @@ export default function TutorialModal({
 }: KeyboardShortcutsModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const shortcutNewCourse = useRecoilValue(shortcutNewCourseState);
+  const isDarkModeOn = useRecoilValue(darkMode);
   const steps = [
     {
       index: "1",
@@ -69,6 +70,7 @@ export default function TutorialModal({
       right: "10%",
       bottom: "5%",
       zIndex: 100,
+      backgroundColor: isDarkModeOn ? "#374151" : "#FFFFFF"
     },
   };
 
@@ -77,15 +79,18 @@ export default function TutorialModal({
       isOpen={isOpen}
       onRequestClose={onCloseModal}
       style={customStyles}
-      contentLabel="Example Modal"
+      contentLabel="Tutorial Modal"
+      appElement={document.getElementById("root") || undefined}
+      portalClassName={`${isDarkModeOn ? 'dark' : ""}`}
     >
-      <div className="h-full flex flex-col p-4 px-1 justify-between items-center space-y-4 text-onyx">
-        <div className="w-full flex pb-4 px-1 justify-between items-center text-onyx">
+      <div className="h-full flex flex-col p-5 px-1 justify-between items-center space-y-4 
+                    bg-white dark:bg-darkMode dark:text-white text-onyx">
+        <div className="w-full flex pb-4 px-1 justify-between items-center">
           <Text size={TextVariants.xxl} font={FontVariants.bold}>
             Handbok
           </Text>
           <div
-            className="p-2 cursor-pointer hover:bg-slate-100 rounded-md"
+            className="p-2 cursor-pointer hover:bg-slate-100 hover:text-onyx rounded-md"
             onClick={onCloseModal}
           >
             <AiOutlineCloseCircle size="1.5em" />
@@ -110,9 +115,9 @@ export default function TutorialModal({
                       <AiOutlineArrowRight /> Valfri kurs
                     </li>
                     <li className="flex space-x-2">
-                      <kbd className="kbd bg-whiteBackground">ctrl</kbd>
-                      <kbd className="kbd bg-whiteBackground">alt</kbd>
-                      <kbd className="kbd bg-whiteBackground">
+                      <kbd className="kbd bg-whiteBackground  dark:bg-darkGrey">ctrl</kbd>
+                      <kbd className="kbd bg-whiteBackground  dark:bg-darkGrey">alt</kbd>
+                      <kbd className="kbd bg-whiteBackground  dark:bg-darkGrey">
                         {shortcutNewCourse}
                       </kbd>
                     </li>
@@ -215,9 +220,7 @@ export default function TutorialModal({
               }
             />
           )}
-          {currentIndex === 6 && (
-            <BlockStep />
-          )}
+          {currentIndex === 6 && <BlockStep />}
           {currentIndex === 7 && (
             <div className="h-full flex flex-col justify-around items-center">
               <div className="w-3/4">
@@ -235,7 +238,12 @@ export default function TutorialModal({
                 animate={{
                   scale: [1, 2, 1],
                 }}
-                transition={{ duration: 3 ,repeat: Infinity, repeatDelay: 3, type: "spring"}}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatDelay: 3,
+                  type: "spring",
+                }}
               >
                 <MdDoneOutline size="6em" className="text-accent" />
               </motion.div>
@@ -248,7 +256,7 @@ export default function TutorialModal({
             <li
               className={`step step-neutral ${
                 index <= currentIndex ? "step-accent" : "step-neutral"
-              } cursor-pointer hover:step-neutral`}
+              } cursor-pointer hover:step-neutral border-red-200`}
               data-content={`${index < currentIndex ? "✓" : ""}`}
               onClick={() => setCurrentIndex(index)}
             >

@@ -6,7 +6,7 @@ export interface DividerProps {
 export default function Divider({ text, vertical } : DividerProps) {
   return (
     <div className="border-opacity-50">
-      <div className={`text-onyx divider ${vertical && "divider-horizontal"} m-0`}>{text}</div>
+      <div className={`text-onyx divider ${vertical && "divider-horizontal"} m-0 text-onyx dark:text-white`}>{text}</div>
     </div>
   )
 }

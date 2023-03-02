@@ -20,7 +20,7 @@ export default function NumberInput({
       <input
         type="number"
         placeholder={placeholder}
-        className="input input-bordered w-full bg-whiteBackground text-onyx absolute inset-0"
+        className="input input-bordered w-full bg-whiteBackground text-onyx absolute inset-0 dark:bg-darkModeLight dark:text-white"
         value={value}
         min={min}
         max={max}
@@ -28,7 +28,8 @@ export default function NumberInput({
       />
       <div
         className=" absolute inset-y-0 right-0 input input-bordered flex flex-col items-stretch 
-                    bg-whiteBackground text-onyx rounded-l-none cursor-pointer p-0"
+                    bg-whiteBackground text-onyx rounded-l-none cursor-pointer p-0 
+                    dark:bg-darkModeLight dark:text-white"
       >
         <div
           className="basis-1/2 flex justify-center items-center hover:bg-darkGrey hover:text-whiteBackground 

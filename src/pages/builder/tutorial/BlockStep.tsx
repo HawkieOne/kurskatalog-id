@@ -18,8 +18,8 @@ export default function BlockStep() {
       <div className="flex flex-col justify-center items-center my-auto space-y-6">
         <div className="tabs">
             {blocks.map((block, mapIndex) => (
-                <div onClick={() => setIndex(mapIndex)} className={`tab tab-lg ${index === mapIndex && "tab-bordered tab-active"}`}>
-                {blocks[mapIndex]}
+                <div onClick={() => setIndex(mapIndex)} className={`tab tab-lg ${index === mapIndex && "tab-bordered tab-active"} text-onyx dark:text-white`}>
+                {block}
               </div>
             ))}
         </div>

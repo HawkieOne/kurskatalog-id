@@ -82,7 +82,7 @@ export default function DraggableCourse({
       </div>
       {/* Back */}
       <div
-        className={`h-full w-full bg-boneGrey flex flex-col items-start justify-start text-darkGrey 
+        className={`h-full w-full bg-boneGrey text-darkGrey flex flex-col items-start justify-start
                     drop-shadow-lg cursor-grab space-y-2 back`}
       >
         <div className={`w-full flex items-center justify-between px-2 py-1`}>

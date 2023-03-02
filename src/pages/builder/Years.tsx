@@ -53,8 +53,8 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
   );
 
   return (
-    <div id="pdf" className="w-full flex flex-col space-around bg-slate-50 rounded-lg p-5 relative">
-      <div className="w-full flex justify-around text-onyx">
+    <div id="pdf" className="w-full flex flex-col space-around bg-lightModeLight dark:bg-darkModeLight rounded-lg p-5 relative">
+      <div className="w-full flex justify-around">
         {Array.from(Array(4).keys()).map((entry, index) => (
           <Text size={TextVariants.medium} font={FontVariants.bold} key={index}>
             Läsperiod {index + 1}
@@ -64,7 +64,7 @@ export default function Years({ onClearCoursesClick }: YearsProps) {
           <Text size={TextVariants.small} font={FontVariants.bold}>
             Start
           </Text>
-          <div className="w-full h-0.5 bg-onyx" />
+          <div className="w-full h-0.5 bg-onyx dark:bg-white" />
           <Text size={TextVariants.small} font={FontVariants.bold}>
             Slut
           </Text>
