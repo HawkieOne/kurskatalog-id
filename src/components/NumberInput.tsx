@@ -47,7 +47,7 @@ export default function NumberInput({
                      px-4 active:bg-lightSeaGreen active:text-onyx"
           onClick={() => {
             if (value) {
-              onChange(value + 1);
+              onChange(value - 1);
             }
           }}
         >
